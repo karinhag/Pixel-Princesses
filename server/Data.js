@@ -7,6 +7,8 @@ function Data() {
   this.polls = {};
 }
 
+/**Hej hej olivia här */
+
 /***********************************************
 For performance reasons, methods are added to the
 prototype of the Data object/class
