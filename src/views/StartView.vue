@@ -11,7 +11,9 @@
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+    
     <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
+    
     <a href="">{{uiLabels.about}}</a>
     <a href="">FAQ</a>
   </ResponsiveNav>
