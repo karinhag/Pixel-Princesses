@@ -8,9 +8,9 @@
               v-on:answer="submitAnswer($event)"/>
               <span>{{submittedAnswers}}</span>
 
-            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="id"> </p> 
-
             <p> {{ uiLabels.userName }}<input type="text" v-model="id"> </p> 
+
+            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="id"> </p> 
 
             <!--här får vi nog lägga in att username och greenflag sparas-->
 
