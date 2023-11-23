@@ -9,5 +9,6 @@
 	"about": "Om oss",
 	"greenFlag": "Skriv in din Green Flag här: ",
 	"hee":"hello",
-	"startGame":"Starta spel"
+	"startGame":"Starta spel",	
+	"userName": "Skriv ditt användarnamn här: "
 }

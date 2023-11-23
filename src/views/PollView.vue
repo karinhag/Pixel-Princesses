@@ -1,16 +1,19 @@
 <template>
   <body>
   <div>
+
    Game ID: {{pollId}}
    
-  <h1> {{ uiLabels.greenFlag }}</h1>
 
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
               <span>{{submittedAnswers}}</span>
 
-            
-            <input type="text" v-model="id">
+            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="id"> </p> 
+
+            <p> {{ uiLabels.userName }}<input type="text" v-model="id"> </p> 
+
+            <!--här får vi nog lägga in att username och greenflag sparas-->
 
   </div>
 </body>
@@ -48,12 +51,20 @@ export default {
     socket.on("dataUpdate", answers =>
       this.submittedAnswers = answers
     )
+    socket.on("init", (labels) => {
+    this.uiLabels = labels
+    })
+
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     }
+    
   }
+
+
+  
 }
 </script>
 
