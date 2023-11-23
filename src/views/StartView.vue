@@ -9,7 +9,7 @@
       <img src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png">
     </div>
   </header>
-  <ResponsiveNav v-bind:hideNav="hideNav">
+  <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
     <a href="">{{uiLabels.about}}</a>
     <a href="">FAQ</a>
@@ -102,7 +102,7 @@ export default {
   }
 
   header {
-    background-color: pink;
+    background: linear-gradient(106.5deg, rgba(253, 141, 196, 0.91) 23%, rgba(245, 81, 125, 0.8) 93%);
     width: 100%;
     display: grid;
     grid-template-columns: 2em auto;
@@ -111,9 +111,8 @@ export default {
     letter-spacing: 0.15em;
     font-weight: bold;
     font-size: 2.8rem;
-    color: deeppink;
+    color: white;
     padding-top:0.2em;
-
     font-family: "Brush Script MT";
   }
   .logo img {
@@ -134,6 +133,9 @@ export default {
     height: 2rem;
     cursor: pointer;
     font-size: 1.5rem;
+  }
+  #nav {
+    background-color: palevioletred;
   }
 
 @media screen and (max-width:50em) {
