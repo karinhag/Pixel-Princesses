@@ -28,6 +28,7 @@
     {{data}} -->
     <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
   </div>
+  <button v-on:click="startGame">{{uiLabels.startGame}}</button>
 </template>
 
 <script>
