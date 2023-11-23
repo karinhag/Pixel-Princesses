@@ -7,5 +7,6 @@
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"about": "About",
-	"greenFlag": "Write your green flag:"
+	"greenFlag": "Add your Green Flag here:",
+	"startGame":"Start game"
 }

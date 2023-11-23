@@ -1,13 +1,17 @@
 <template>
+  <body>
   <div>
     Your Game ID: {{pollId}}
     <p>{{ uiLabels.greenFlag }}</p>
-
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
-
               <span>{{submittedAnswers}}</span>
+
+            
+            <input type="text" v-model="id">
+
   </div>
+</body>
 </template>
 
 <script>
@@ -23,10 +27,12 @@ export default {
   },
   data: function () {
     return {
+      uiLabels: {},
       question: {
         q: "",
         a: []
       },
+
       pollId: "inactive poll",
       submittedAnswers: {},
       uiLabels: {} 
@@ -52,3 +58,14 @@ export default {
   }
 }
 </script>
+
+<style>
+
+body{
+  background: linear-gradient(106.5deg, rgba(255, 215, 185, 0.91) 23%, rgba(223, 159, 247, 0.8) 93%);
+
+}
+
+
+
+</style>

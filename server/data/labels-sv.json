@@ -7,5 +7,7 @@
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"about": "Om oss",
-	"greenFlag":"Skriv in din green flag:"
+	"greenFlag": "Skriv in din Green Flag här: ",
+	"hee":"hello",
+	"startGame":"Starta spel"
 }
