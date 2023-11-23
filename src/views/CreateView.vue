@@ -5,7 +5,7 @@
     <button v-on:click="createPoll">
       Create poll
     </button>
-    <div>
+    <!-- <div>
       {{uiLabels.question}}:
       <input type="text" v-model="question">
       <div>
@@ -17,15 +17,15 @@
           Add answer alternative
         </button>
       </div>
-    </div>
-    <button v-on:click="addQuestion">
+    </div> -->
+    <!-- <button v-on:click="addQuestion">
       Add question
     </button>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
-    {{data}}
+    {{data}} -->
     <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
   </div>
 </template>
