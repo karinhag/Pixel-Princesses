@@ -10,5 +10,6 @@
 	"greenFlag": "Skriv in din Green Flag här: ",
 	"hee":"hello",
 	"startGame":"Starta spel",	
-	"userName": "Skriv ditt användarnamn här: "
+	"userName": "Skriv ditt användarnamn här: ",
+	"theHeader": "Din spellänk:"
 }

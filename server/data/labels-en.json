@@ -9,5 +9,6 @@
 	"about": "About",
 	"greenFlag": "Add your Green Flag here: ",
 	"startGame":"Start game",
-	"userName": "Add your username here: "
+	"userName": "Add your username here: ",
+	"theHeader": "Your Poll Link:"
 }

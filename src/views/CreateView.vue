@@ -1,8 +1,8 @@
 <template>
   
   <div>
-    Your Poll Link: 
-    {{ this.pollId }}
+    <header>{{uiLabels.theHeader }}</header>
+    <div class="thePollId">{{ this.pollId }}</div>
    
     {{console.log(this.pollId)}}
 
@@ -55,7 +55,19 @@ export default {
     },
     getPollId: function(){
       return this.pollId=Math.floor((Math.random()) * 100000);
-    }
+    },
+    // startGame: function(){
+    //   // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang }, "hello") 
+    // }
   }
 }
 </script>
+<style>
+header{
+  font-size: 50px;
+}
+.thePollId{
+  font-size: 30p;
+  color:#1693;
+}
+</style>

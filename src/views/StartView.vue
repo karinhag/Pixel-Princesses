@@ -83,9 +83,23 @@ export default {
 
   .box-a,
   .box-b {
-    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
     width: 48%; /* Adjust the width as needed */
+    height: 200px;
+    background-image: url('https://pngimg.com/d/heart_PNG51183.png');
+    background-size: contain; /* Ensure the entire image fits within the box */
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .box-a router-link,
+  .box-b router-link {
+    display: block;
+    text-align: center;
   }
 
   header {
