@@ -11,17 +11,26 @@
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-    <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
     <a href="">{{uiLabels.about}}</a>
     <a href="">FAQ</a>
   </ResponsiveNav>
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
+
+  <div class="boxes-container">
+  <div class ="box-a">
+  <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
+  </div>
+
+  <div class="box-b">
   <label>
-    Write poll id: 
-    <input type="text" v-model="id">
+    Write poll id: <br>
+    <input type="text" v-model="id"> <br>
   </label>
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+</div>
+</div>
+
 </template>
 
 <script>
@@ -66,6 +75,18 @@ export default {
 }
 </script>
 <style scoped>
+.boxes-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .box-a,
+  .box-b {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 48%; /* Adjust the width as needed */
+  }
+
   header {
     background-color: gray;
     width: 100%;
