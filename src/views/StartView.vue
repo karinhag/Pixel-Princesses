@@ -4,9 +4,9 @@
          v-on:click="toggleNav">
     </div>
     <div class="logo">
-      <img src="/img/logo.png">
+      <img src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png">
       Romance Roulette 
-      <img src="../assets/logo.svg">
+      <img src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png">
     </div>
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
@@ -67,22 +67,25 @@ export default {
 </script>
 <style scoped>
   header {
-    background-color: gray;
+    background-color: pink;
     width: 100%;
     display: grid;
     grid-template-columns: 2em auto;
   }
   .logo {
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 2.5rem;
-    color: white;
+    letter-spacing: 0.15em;
+    font-weight: bold;
+    font-size: 2.8rem;
+    color: deeppink;
     padding-top:0.2em;
+
+    font-family: "Brush Script MT";
   }
   .logo img {
     height:2.5rem;
     vertical-align: bottom;
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
+    margin-bottom: 0.4rem;
   }
   .hamburger {
     color:white;
