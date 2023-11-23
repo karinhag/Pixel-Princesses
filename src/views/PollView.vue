@@ -4,7 +4,6 @@
 
    Game ID: {{pollId}}
    
-
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
               <span>{{submittedAnswers}}</span>
@@ -39,7 +38,8 @@ export default {
       },
 
       pollId: "inactive poll",
-      submittedAnswers: {}
+      submittedAnswers: {},
+      uiLabels: {} 
     }
   },
   created: function () {
@@ -54,7 +54,6 @@ export default {
     socket.on("init", (labels) => {
     this.uiLabels = labels
     })
-
   },
   methods: {
     submitAnswer: function (answer) {
