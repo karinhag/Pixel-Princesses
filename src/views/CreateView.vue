@@ -1,34 +1,11 @@
 <template>
+  
   <div>
     Your Poll Link: 
-    {{ getPollId() }}
-    <div v-bind:pollId = "getPollId()"></div>
+    {{ this.pollId }}
+   
+    {{console.log(this.pollId)}}
 
-    <button v-on:click="createPoll">
-      Create poll
-    </button>
-     <div>
-      {{uiLabels.question}}:
-      <input type="text" v-model="question">
-      <div>
-        Answers:
-        <input v-for="(_, i) in answers" 
-               v-model="answers[i]" 
-               v-bind:key="'answer'+i">
-        <button v-on:click="addAnswer">
-          Add answer alternative
-        </button>
-      </div>
-    </div> 
-  <button v-on:click="addQuestion">
-      Add question
-    </button>
-    <input type="number" v-model="questionNumber">
-    <button v-on:click="runQuestion">
-      Run question
-    </button>
-    {{data}} 
-    <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
   </div>
   <button v-on:click="startGame">{{uiLabels.startGame}}</button>
 </template>
@@ -61,6 +38,7 @@ export default {
     )
     socket.on("pollCreated", (data) =>
       this.data = data)
+    this.getPollId()
   },
   methods: {
     createPoll: function () {
@@ -76,7 +54,7 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
     getPollId: function(){
-      return Math.floor((Math.random()) * 100000);
+      return this.pollId=Math.floor((Math.random()) * 100000);
     }
   }
 }
