@@ -7,5 +7,7 @@
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"about": "About",
-	"startGame":"Start game"
+	"greenFlag": "Add your Green Flag here: ",
+	"startGame":"Start game",
+	"userName": "Add your username here: "
 }
