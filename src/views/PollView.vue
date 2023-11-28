@@ -15,6 +15,9 @@
             <!--här får vi nog lägga in att username och greenflag sparas-->
 
   </div>
+  <button v-on:click="joinDate" type="joinDate">
+    Join date
+  </button>
 </body>
 </template>
 
@@ -58,6 +61,9 @@ export default {
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },
+    joinDate: function () {
+
     }
     
   }
