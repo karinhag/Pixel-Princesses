@@ -8,13 +8,16 @@
               v-on:answer="submitAnswer($event)"/>
               <span>{{submittedAnswers}}</span>
 
-            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="greenFlag"> </p>
+            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="userInfo.greenFlag"> </p>
 
-            <p> {{ uiLabels.userName }}<input type="text" v-model="userName"> </p>
+            <p> {{ uiLabels.userName }}<input type="text" v-model="userInfo.userName"> </p>
 
             <!--här får vi nog lägga in att username och greenflag sparas-->
 
   </div>
+  <button v-on:click="joinDate" type="joinDate">
+    Join date
+  </button>
 </body>
 </template>
 
@@ -32,6 +35,10 @@ export default {
   data: function () {
     return {
       uiLabels: {},
+      userInfo: {
+        userName: "",
+        greenFlag: ""
+      },
       question: {
         q: "",
         a: []
@@ -58,6 +65,9 @@ export default {
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+    },
+    joinDate: function () {
+      console.log(this.userInfo);
     }
     
   }
