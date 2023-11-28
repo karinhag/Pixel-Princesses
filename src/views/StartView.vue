@@ -60,13 +60,14 @@ export default {
   methods: {
     switchLanguage: function() {
       if (this.lang === "en") {
-        this.lang = "sv"
+        this.lang = "sv";
       }
       else {
-        this.lang = "en"
+        this.lang = "en";
       }
       localStorage.setItem("lang", this.lang);
-      socket.emit("switchLanguage", this.lang)
+      socket.emit("switchLanguage", this.lang);
+      socket.emit("init", this.lang);
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
