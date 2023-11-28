@@ -1,5 +1,5 @@
 <template>
-    <header>Välj vilken du vill eliminera</header>
+    <header>{{uiLabels.chooseElimination}}</header>
 
 
 
