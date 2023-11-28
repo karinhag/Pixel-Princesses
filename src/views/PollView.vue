@@ -50,6 +50,9 @@ export default {
     }
   },
   created: function () {
+    socket.on('connect', () => {
+      console.log('Socket connected:', socket.connected);
+    });
     this.pollId = this.$route.params.id;
     socket.emit('joinPoll', this.pollId)
     socket.on("newQuestion", q =>
@@ -67,7 +70,10 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
     joinDate: function () {
-      console.log(this.userInfo);
+      console.log("Before emitting joinDate:", this.userInfo);
+      socket.emit("joinDate", { userInfo: this.userInfo });
+      console.log("After emitting joinDate");
+
     }
     
   }

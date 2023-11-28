@@ -28,7 +28,19 @@ export default {
     }
   },
   created: function () {
+    console.log("CreateView component created");
+    console.log("Socket connected:", socket.connected);
     this.id = this.$route.params.id;
+    console.log("Current pollId:", this.pollId);
+    socket.emit('joinPoll', this.pollId);
+    socket.on("joinedDate", (data) => {
+      console.log("Received joinedDate event in CreateView:", data);
+    });
+    socket.emit("pageLoaded", this.lang);
+    socket.on('connect', () => {
+          console.log("Socket connected:", socket.connected);
+          socket.emit("pageLoaded", this.lang);
+    });
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -39,6 +51,7 @@ export default {
     socket.on("pollCreated", (data) =>
       this.data = data)
     this.getPollId()
+
   },
   methods: {
     createPoll: function () {
@@ -67,7 +80,7 @@ header{
   font-size: 50px;
 }
 .thePollId{
-  font-size: 30p;
+  font-size: 30px;
   color:#1693;
 }
 </style>
