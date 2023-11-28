@@ -68,5 +68,6 @@ header{
 }
 .thePollId{
   font-size: 30p;
+  color:#1693;
 }
 </style>

@@ -66,6 +66,18 @@ export default {
 }
 </script>
 <style scoped>
+.boxes-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .box-a,
+  .box-b {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 48%; /* Adjust the width as needed */
+  }
+
   header {
     background: linear-gradient(106.5deg, rgba(253, 141, 196, 0.91) 23%, rgba(245, 81, 125, 0.8) 93%);
     width: 100%;
