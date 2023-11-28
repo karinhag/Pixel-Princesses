@@ -18,5 +18,6 @@
 	"Q1": "Vilken är din favoritlåt?",
 	"Q2": "Beskriv din drömdejt",
 	"Q3": "Beskriv dig själv med 3 ord",
-	"Q4": "Vad tycker du om tatueringar?"
+	"Q4": "Vad tycker du om tatueringar?",
+	"submitQuestion": "Välj fråga"
 }

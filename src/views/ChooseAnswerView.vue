@@ -1,14 +1,6 @@
 <template>
-    <header>{{uiLabels.writeQuestion}}</header>
-    <div>
-      <textarea v-model="question" rows="4" cols="50"></textarea><br>
-    </div>
-    <div>
-      {{uiLabels.hardtodecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
-    </div>
-    <div>
-      <router-link to="/chooseAnswer/">{{uiLabels.submitQuestion}}</router-link>
-    </div>
+    <header>Välj vilken du vill eliminera</header>
+
 
 
 </template>
