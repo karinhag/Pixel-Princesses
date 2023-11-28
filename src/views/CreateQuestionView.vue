@@ -1,14 +1,18 @@
 <template>
-  
-  <div>
-    <header>{{uiLabels.theHeader }}</header>
-    <div class="thePollId">{{ this.pollId }}</div>
-   
-    {{console.log(this.pollId)}}
+    <header>{{uiLabels.writeQuestion}}</header>
+    <div>
+      <textarea v-model="question" rows="4" cols="50"></textarea><br>
+    </div>
+    <div>
+      {{uiLabels.hardtodecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
+    </div>
+    <div>
+      <router-link to="/chooseAnswer/">{{uiLabels.submitQuestion}}</router-link>
+    </div>
 
-  </div>
-  <router-link to="/createQuestion/">{{uiLabels.startGame}}</router-link>
+
 </template>
+
 
 <script>
 import io from 'socket.io-client';
@@ -24,7 +28,8 @@ export default {
       answers: ["", ""],
       questionNumber: 0,
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+      predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
     }
   },
   created: function () {
@@ -36,13 +41,14 @@ export default {
     socket.on("dataUpdate", (data) =>
       this.data = data
     )
-    socket.on("pollCreated", (data) =>
-      this.data = data)
-    this.getPollId()
   },
   methods: {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+    },
+    generateRandomQuestion() {
+        const randomIndex = Math.floor(Math.random() * this.predefinedQuestions.length);
+      this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
     },
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
@@ -53,21 +59,13 @@ export default {
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
-    getPollId: function(){
-      return this.pollId=Math.floor((Math.random()) * 100000);
-    },
-    // startGame: function(){
-    //   // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang }, "hello") 
-    // }
   }
 }
 </script>
+
 <style>
 header{
-  font-size: 60px;
-}
-.thePollId{
-  font-size: 40px;
-  color: darkmagenta;
+  font-size: 50px;
+  color: black;
 }
 </style>

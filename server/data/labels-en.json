@@ -1,5 +1,5 @@
 {
-	"sales-pitch": "Simply. Great. Polling.",
+	"sales-pitch": "The Online Dating Tool",
 	"subHeading": "A simple polling tool",
 	"invite": "Invite participants with this link:",
 	"createPoll": "Create poll",
@@ -10,5 +10,13 @@
 	"greenFlag": "Add your Green Flag here: ",
 	"startGame":"Start game",
 	"userName": "Add your username here: ",
-	"theHeader": "Your Poll Link:"
+	"theHeader": "Your Poll Link:",
+	"writeQuestion": "Write your question here: ",
+	"randomQuestion": "Create random question",
+	"hardtodecide": "Hard to decide? ",
+	"Q1": "What is your favourite song?",
+	"Q2": "Describe your perfect date night",
+	"Q3": "Describe yourself with 3 words",
+	"Q4": "What is your opinion on tattoos?",
+	"submitQuestion": "Submit question"
 }
