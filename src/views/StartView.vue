@@ -11,17 +11,26 @@
   </header>
   <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-    <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
     <a href="">{{uiLabels.about}}</a>
     <a href="">FAQ</a>
   </ResponsiveNav>
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
+
+  <div class="boxes-container">
+  <div class ="box-a">
+  <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
+  </div>
+
+  <div class="box-b">
   <label>
     Write poll id: <br>
     <input type="text" v-model="id"> <br>
   </label>
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+</div>
+</div>
+
 </template>
 
 <script>
@@ -73,9 +82,23 @@ export default {
 
   .box-a,
   .box-b {
-    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
     width: 48%; /* Adjust the width as needed */
+    height: 200px;
+    background-image: url('https://pngimg.com/d/heart_PNG51183.png');
+    background-size: contain; /* Ensure the entire image fits within the box */
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .box-a router-link,
+  .box-b router-link {
+    display: block;
+    text-align: center;
   }
 
   header {
@@ -90,16 +113,12 @@ export default {
     font-size: 2.8rem;
     color: white;
     padding-top:0.2em;
-
     font-family: "Brush Script MT";
   }
   .logo img {
     height:2.5rem;
     vertical-align: bottom;
     margin-right: 0.5rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.4rem;
-    margin-right: 0.5rem; 
     margin-bottom: 0.4rem;
   }
   .hamburger {
