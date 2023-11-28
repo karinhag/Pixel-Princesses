@@ -64,10 +64,10 @@ export default {
 </script>
 <style>
 header{
-  font-size: 50px;
+  font-size: 60px;
 }
 .thePollId{
-  font-size: 30p;
-  color:#1693;
+  font-size: 40px;
+  color: darkmagenta;
 }
 </style>
