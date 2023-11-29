@@ -21,5 +21,6 @@
 	"Q4": "Vad tycker du om tatueringar?",
 	"submitQuestion": "Välj fråga",
 	"waitingAnswers": "Väntar på svar",
-	"chooseElimination": "Välj vem du vill eliminera:"
+	"chooseElimination": "Välj vem du vill eliminera:",
+	"waitingForGame":"Väntar på spelstart..."
 }

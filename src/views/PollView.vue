@@ -1,5 +1,6 @@
 <template>
-  <div class="pollBody">  <!--förut hade den här en body-tag, men det får den tydligen inte göra men nu blir färgen fel-->
+  <body>
+  <section class="enteringDetails"  v-if = "userCreated === false" >
   <div>
 
    Game ID: {{pollId}}
@@ -16,7 +17,9 @@
   <button v-on:click="joinDate" type="submit">
     Join date
   </button>
-</div>
+</section>
+  <section class="waitingForStart" v-if="this.userCreated"> {{ uiLabels.waitingForGame }}</section>
+</body>
 </template>
 
 <script>
@@ -40,6 +43,7 @@ export default {
         greenFlag: "",
         uniquePlayerId: this.getPlayerId() // playerID
       },
+      userCreated: false,
       question: {
         q: "",
         a: []
@@ -77,15 +81,16 @@ export default {
     },
 
     joinDate: function () {
+
       console.log("Before emitting joinDate:", this.userInfo);
       socket.emit("joinDate", { userInfo: this.userInfo , pollId: this.pollId});
       console.log("After emitting joinDate");
       console.log(this.userInfo);
       socket.emit("joiningDate", this.userInfo) //Hej
+      this.userCreated=true;
     },
-    }
-    
   }
+}
   
 
 </script>
