@@ -1,5 +1,6 @@
 <template>
   <body>
+  <section class="enteringDetails"  v-if = "userCreated === false" >
   <div>
 
    Game ID: {{pollId}}
@@ -13,12 +14,14 @@
             <p> {{ uiLabels.userName }}<input type="text" v-model="userInfo.userName"> </p>
       
 
-            <!--här får vi nog lägga in att username och greenflag sparas-->
+            <!--här får vi nog lägga in att username och green flag sparas-->
 
   </div>
   <button v-on:click="joinDate" type="submit">
     Join date
   </button>
+</section>
+  <section class="waitingForStart" v-if="this.userCreated"> {{ uiLabels.waitingForGame }}</section>
 </body>
 </template>
 
@@ -42,6 +45,7 @@ export default {
         greenFlag: "",
         uniquePlayerId: this.getPlayerId() // playerID
       },
+      userCreated: false,
       question: {
         q: "",
         a: []
@@ -78,7 +82,6 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
     joinDate: function () {
-<<<<<<< HEAD
 
       console.log("Before emitting joinDate:", this.userInfo);
       socket.emit("joinDate", { userInfo: this.userInfo , pollId: this.pollId});
@@ -86,13 +89,8 @@ export default {
 
       console.log(this.userInfo);
       socket.emit("joiningDate", this.userInfo) //Hej
+      this.userCreated=true;
     },
-=======
-      console.log(this.userInfo);
-      socket.emit("joiningDate", this.userInfo) //Hej
-    }
->>>>>>> c051e218d877983213828b67f280ff9854dab83d
-    
   }
 
 

@@ -20,5 +20,6 @@
 	"Q4": "What is your opinion on tattoos?",
 	"submitQuestion": "Submit question",
 	"waitingAnswers": "Waiting for answers",
-	"chooseElimination": "Choose who to eliminate"
+	"chooseElimination": "Choose who to eliminate",
+	"waitingForGame":"Waiting for game to start..."
 }
