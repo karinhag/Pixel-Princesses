@@ -3,6 +3,12 @@
   <div>
     <header>{{uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
+
+    <div class="usersOnScreen">
+      {{ console.log(this.userInfo.userName) }}
+      här ska användarnamnen skrivas ut  
+
+    </div>
    
     {{console.log(this.pollId)}}
 
@@ -24,7 +30,9 @@ export default {
       answers: ["", ""],
       questionNumber: 0,
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+      userName:"",
+      userInfo: {},
     }
   },
   created: function () {
@@ -38,7 +46,13 @@ export default {
     )
     socket.on("pollCreated", (data) =>
       this.data = data)
-    this.getPollId()
+    this.getPollId();
+    
+    socket.on("joinDate", (data) => {
+    this.userName = userName;
+  });
+
+
   },
   methods: {
     createPoll: function () {
@@ -56,10 +70,16 @@ export default {
     getPollId: function(){
       return this.pollId=Math.floor((Math.random()) * 100000);
     },
+    dateJoined: function () {
+      socket.emit("dateJoined", {orderInfo: this.userName});}
+
+
+
     // startGame: function(){
     //   // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang }, "hello") 
     // }
-  }
+
+  },
 }
 </script>
 <style>

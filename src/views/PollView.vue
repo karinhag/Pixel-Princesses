@@ -16,7 +16,7 @@
             <!--här får vi nog lägga in att username och greenflag sparas-->
 
   </div>
-  <button v-on:click="joinDate" type="joinDate">
+  <button v-on:click=joinDate($event) type="joinDate">
     Join date
   </button>
 </body>
@@ -70,6 +70,7 @@ export default {
     },
     joinDate: function () {
       console.log(this.userInfo)
+      socket.emit("joinDate", {userInfo: this.userInfo})
 
     }
   } 
