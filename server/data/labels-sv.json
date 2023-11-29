@@ -1,6 +1,6 @@
 {
-	"sales-pitch": "Svar. Helt. Enkelt.",
-	"subHeading": "Ett enkelt enkätverktyg",
+	"sales-pitch": "Lekfullt dejtande, seriös romans",
+	"subHeading": "Din själsfrände kommer aldrig elimineras",
 	"invite": "Bjud in deltagare med den här länken:",
 	"createPoll": "Skapa röstning",
 	"participatePoll": "Delta i röstning",
@@ -19,5 +19,6 @@
 	"Q2": "Beskriv din drömdejt",
 	"Q3": "Beskriv dig själv med 3 ord",
 	"Q4": "Vad tycker du om tatueringar?",
-	"submitQuestion": "Välj fråga"
+	"submitQuestion": "Välj fråga",
+	"chooseElimination": "Välj vem du vill eliminera"
 }

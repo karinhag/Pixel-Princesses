@@ -1,6 +1,6 @@
 {
-	"sales-pitch": "The Online Dating Tool",
-	"subHeading": "A simple polling tool",
+	"sales-pitch": "Playful dating, serious romance",
+	"subHeading": "Your soulmate will never be eliminated",
 	"invite": "Invite participants with this link:",
 	"createPoll": "Create poll",
 	"participatePoll": "Participate in poll",
@@ -18,5 +18,6 @@
 	"Q2": "Describe your perfect date night",
 	"Q3": "Describe yourself with 3 words",
 	"Q4": "What is your opinion on tattoos?",
-	"submitQuestion": "Submit question"
+	"submitQuestion": "Submit question",
+	"chooseElimination": "Choose who to eliminate"
 }
