@@ -5,9 +5,8 @@
     <div class="thePollId">{{ this.pollId }}</div>
    
     {{console.log(this.pollId)}}
-
   </div>
-  <button v-on:click="startGame">{{uiLabels.startGame}}</button>
+  <router-link to="/createQuestion/">{{uiLabels.startGame}}</router-link>
 </template>
 
 <script>
@@ -24,7 +23,8 @@ export default {
       answers: ["", ""],
       questionNumber: 0,
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+      clients:[]
     }
   },
   created: function () {
@@ -69,18 +69,22 @@ export default {
     getPollId: function(){
       return Math.floor((Math.random()) * 100000);
     },
-    // startGame: function(){
-    //   // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang }, "hello") 
-    // }
+
+
   }
 }
 </script>
 <style>
 header{
-  font-size: 50px;
+  font-size: 60px;
 }
 .thePollId{
+<<<<<<< HEAD
   font-size: 30px;
   color:#1693;
+=======
+  font-size: 40px;
+  color: darkmagenta;
+>>>>>>> 7bc22c85d027b2cb528fb78455d699ce7e01c0c0
 }
 </style>
