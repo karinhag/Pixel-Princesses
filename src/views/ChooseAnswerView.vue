@@ -1,6 +1,6 @@
 <template>
-    <header>{{uiLabels.chooseElimination}}</header>
-
+    <header>{{uiLabels.waitingAnswers}}</header>
+    {{uiLabels.chooseElimination}}
 
 
 </template>

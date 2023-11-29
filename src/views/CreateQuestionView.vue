@@ -7,10 +7,12 @@
       {{uiLabels.hardToDecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
     </div>
     <div>
-      <router-link to="/chooseAnswer/">{{uiLabels.submitQuestion}}</router-link>
+      <router-link to="/chooseAnswer/">
+          <button id="button" >{{uiLabels.submitQuestion}}</button> 
+      </router-link>
     </div>
 
-
+<!--uiLabels.submitQuestion ska skickas med som qId på samma sätt som pollId skickas vidare (se data.json)-->
 </template>
 
 

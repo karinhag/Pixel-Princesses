@@ -55,7 +55,6 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.id = this.$route.params.id;
-    // this.uniquePlayerId=this.getPlayerId() //playerID
 
     socket.emit("pageLoaded", this.lang); //Löser språkinställning
     socket.on("init", (labels) => {
@@ -79,6 +78,7 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
     joinDate: function () {
+<<<<<<< HEAD
 
       console.log("Before emitting joinDate:", this.userInfo);
       socket.emit("joinDate", { userInfo: this.userInfo , pollId: this.pollId});
@@ -87,6 +87,11 @@ export default {
       console.log(this.userInfo);
       socket.emit("joiningDate", this.userInfo) //Hej
     },
+=======
+      console.log(this.userInfo);
+      socket.emit("joiningDate", this.userInfo) //Hej
+    }
+>>>>>>> c051e218d877983213828b67f280ff9854dab83d
     
   }
 

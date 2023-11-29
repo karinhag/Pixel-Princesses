@@ -20,5 +20,6 @@
 	"Q3": "Beskriv dig själv med 3 ord",
 	"Q4": "Vad tycker du om tatueringar?",
 	"submitQuestion": "Välj fråga",
-	"chooseElimination": "Välj vem du vill eliminera"
+	"waitingAnswers": "Väntar på svar",
+	"chooseElimination": "Välj vem du vill eliminera:"
 }
