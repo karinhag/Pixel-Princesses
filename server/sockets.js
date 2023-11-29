@@ -40,11 +40,6 @@ function sockets(io, socket, data) {
     socket.emit("connectingClient","hej" )
   });
 
-  socket.on('joiningDate', function(){ //i pollview skickas "joining"date som ta upp
-    socket.emit('connectingClient',"olivia")
-  
-  })
-
   socket.on('resetAll', () => {
     data = new Data();
     data.initializeData();
