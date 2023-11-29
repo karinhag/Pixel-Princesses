@@ -25,14 +25,14 @@ function sockets(io, socket, data) {
 
   socket.on('joinPoll', function(pollId) {
     console.log('User joined room:', pollId);
-    socket.join(pollId);
+    socket.join(""+ pollId);
     socket.emit('newQuestion', data.getQuestion(pollId))
     socket.emit('dataUpdate', data.getAnswers(pollId));
+  });
 
     socket.on('joinDate', function(userData) {
       console.log('Received joinDate event in server:', userData);
-      io.to(pollId).emit('joinedDate', userData);
-    })
+      io.to(userData.pollId).emit('joinedDate', userData.userInfo);
   });
 
 
