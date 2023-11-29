@@ -79,12 +79,7 @@ header{
   font-size: 60px;
 }
 .thePollId{
-<<<<<<< HEAD
-  font-size: 30px;
-  color:#1693;
-=======
   font-size: 40px;
   color: darkmagenta;
->>>>>>> 7bc22c85d027b2cb528fb78455d699ce7e01c0c0
 }
 </style>
