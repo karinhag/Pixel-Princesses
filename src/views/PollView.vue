@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div class="pollBody"> <!--förut hette den här body men det får den inte göra. Nu är inte färgen rätt dock-->
   <section class="enteringDetails"  v-if = "userCreated === false" >
   <div>
 
@@ -19,7 +19,7 @@
   </button>
 </section>
   <section class="waitingForStart" v-if="this.userCreated"> {{ uiLabels.waitingForGame }}</section>
-</body>
+</div>
 </template>
 
 <script>
