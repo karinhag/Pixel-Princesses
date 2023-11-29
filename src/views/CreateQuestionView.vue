@@ -4,7 +4,7 @@
       <textarea v-model="question" rows="4" cols="50"></textarea><br>
     </div>
     <div>
-      {{uiLabels.hardtodecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
+      {{uiLabels.hardToDecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
     </div>
     <div>
       <router-link to="/chooseAnswer/">{{uiLabels.submitQuestion}}</router-link>

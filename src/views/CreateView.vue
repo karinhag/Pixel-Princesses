@@ -5,7 +5,6 @@
     <div class="thePollId">{{ this.pollId }}</div>
    
     {{console.log(this.pollId)}}
-
   </div>
   <router-link to="/createQuestion/">{{uiLabels.startGame}}</router-link>
 </template>
@@ -24,7 +23,8 @@ export default {
       answers: ["", ""],
       questionNumber: 0,
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+      clients:[]
     }
   },
   created: function () {
@@ -56,6 +56,11 @@ export default {
     getPollId: function(){
       return this.pollId=Math.floor((Math.random()) * 100000);
     },
+
+    listenToClient: function(){
+      socket.on("connectingClient",{clients}) //hej
+      console.log("hello")
+    }
     // startGame: function(){
     //   // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang }, "hello") 
     // }

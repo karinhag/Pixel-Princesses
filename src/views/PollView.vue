@@ -6,11 +6,12 @@
    
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
-              <span>{{submittedAnswers}}</span>
+              <span>{{this.submittedAnswers}}</span>
 
             <p> {{ uiLabels.greenFlag }}<input type="text" v-model="userInfo.greenFlag"> </p>
 
             <p> {{ uiLabels.userName }}<input type="text" v-model="userInfo.userName"> </p>
+      
 
             <!--här får vi nog lägga in att username och greenflag sparas-->
 
@@ -34,6 +35,7 @@ export default {
   },
   data: function () {
     return {
+      lang: localStorage.getItem("lang") || "en", //uiLabel språk inställning
       uiLabels: {},
       userInfo: {
         userName: "",
@@ -51,6 +53,12 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
+    this.id = this.$route.params.id;
+
+    socket.emit("pageLoaded", this.lang); //språkinställning(?)
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
     socket.emit('joinPoll', this.pollId)
     socket.on("newQuestion", q =>
       this.question = q
@@ -63,11 +71,13 @@ export default {
     })
   },
   methods: {
+    
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
     joinDate: function () {
       console.log(this.userInfo);
+      socket.emit("joiningDate", this.userInfo) //Hej
     }
     
   }
