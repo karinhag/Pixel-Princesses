@@ -100,15 +100,17 @@ export default {
         console.log(this.userInfo);
 
         this.userCreated = true;
-      }
-    },
-    abandonDate: function () {
+      },
+      abandonDate: function () {
       this.userCreated = false;
       socket.emit("removePlayer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
       });
     },
+
+    },
+
   };
 </script>
 
