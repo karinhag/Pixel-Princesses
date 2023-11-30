@@ -19,5 +19,7 @@
 	"Q3": "Describe yourself with 3 words",
 	"Q4": "What is your opinion on tattoos?",
 	"submitQuestion": "Submit question",
-	"chooseElimination": "Choose who to eliminate"
+	"waitingAnswers": "Waiting for answers",
+	"chooseElimination": "Choose who to eliminate",
+	"waitingForGame":"Waiting for game to start..."
 }

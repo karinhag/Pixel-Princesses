@@ -32,7 +32,13 @@ function sockets(io, socket, data) {
 
     socket.on('joinDate', function(userData) {
       console.log('Received joinDate event in server:', userData);
-      io.to(userData.pollId).emit('joinedDate', userData.userInfo);
+      
+      const userDataObject = {
+        userId: userData.userInfo.uniquePlayerId,
+        userName: userData.userInfo.userName,
+        greenFlag: userData.userInfo.greenFlag,};
+
+      io.to(userData.pollId).emit('joinedDate', userDataObject);
   });
 
 

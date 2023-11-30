@@ -1,32 +1,26 @@
 <template>
-  <body>
+  <div class="pollBody"> <!--förut hette den här body men det får den inte göra. Nu är inte färgen rätt dock-->
+  <section class="enteringDetails"  v-if = "userCreated === false" >
   <div>
 
    Game ID: {{pollId}}
    
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer($event)"/>
+              <span>{{this.submittedAnswers}}</span>
+
               <span>{{submittedAnswers}}</span>
             <p> {{ uiLabels.userName }}<input type="text" v-model="userInfo.userName"> </p>
             <p> {{ uiLabels.greenFlag }}<input type="text" v-model="userInfo.greenFlag"> </p>
 
-
-=======
-              <span>{{this.submittedAnswers}}</span>
-
-            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="userInfo.greenFlag"> </p>
-
-            <p> {{ uiLabels.userName }}<input type="text" v-model="userInfo.userName"> </p>
       
->>>>>>> 7bc22c85d027b2cb528fb78455d699ce7e01c0c0
-
-            <!--här får vi nog lägga in att username och greenflag sparas-->
-
   </div>
   <button v-on:click="joinDate" type="submit">
     Join date
   </button>
-</body>
+</section>
+  <section class="waitingForStart" v-if="this.userCreated"> {{ uiLabels.waitingForGame }}</section>
+</div>
 </template>
 
 <script>
@@ -42,29 +36,30 @@ export default {
   },
   data: function () {
     return {
-      lang: localStorage.getItem("lang") || "en", //uiLabel språk inställning
+      lang: localStorage.getItem("lang") || "en", //Löser språkinställning
       uiLabels: {},
+      
       userInfo: {
         userName: "",
-        greenFlag: ""
+        greenFlag: "",
+        uniquePlayerId: this.getPlayerId() // playerID
       },
+      userCreated: false,
       question: {
         q: "",
         a: []
       },
+
       pollId: "inactive poll",
       submittedAnswers: {},
 
     }
   },
   created: function () {
-    socket.on('connect', () => {
-      console.log('Socket connected:', socket.connected);
-    });
     this.pollId = this.$route.params.id;
     this.id = this.$route.params.id;
 
-    socket.emit("pageLoaded", this.lang); //språkinställning(?)
+    socket.emit("pageLoaded", this.lang); //Löser språkinställning
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -79,29 +74,31 @@ export default {
     this.uiLabels = labels
     })
   },
-  methods: {
-    
+  methods: { getPlayerId: function(){
+      return Math.floor((Math.random()) * 100000);
+    }, 
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
+
     joinDate: function () {
+
       console.log("Before emitting joinDate:", this.userInfo);
       socket.emit("joinDate", { userInfo: this.userInfo , pollId: this.pollId});
       console.log("After emitting joinDate");
       console.log(this.userInfo);
       socket.emit("joiningDate", this.userInfo) //Hej
-    }
-    
+      this.userCreated=true;
+    },
   }
-
-
-  
 }
+  
+
 </script>
 
 <style>
 
-body{
+.pollBody{
   background: linear-gradient(106.5deg, rgba(255, 215, 185, 0.91) 23%, rgba(223, 159, 247, 0.8) 93%);
 
 }
