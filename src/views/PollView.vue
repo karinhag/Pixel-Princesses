@@ -11,13 +11,13 @@
         <span>{{ this.submittedAnswers }}</span>
 
         <p>
-          {{ uiLabels.greenFlag
-          }}<input type="text" v-model="userInfo.greenFlag" />
+          {{ uiLabels.userName
+          }}<input type="text" v-model="userInfo.userName" />
         </p>
 
         <p>
-          {{ uiLabels.userName
-          }}<input type="text" v-model="userInfo.userName" />
+          {{ uiLabels.greenFlag
+          }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
 
         <!--här får vi nog lägga in att username och green flag sparas-->
