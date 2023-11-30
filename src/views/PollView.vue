@@ -24,11 +24,13 @@
       </div>
       <button v-on:click="joinDate" type="submit">Join date</button>
     </section>
+
     <section class="waitingForStart" v-if="this.userCreated">
       <h1>{{ uiLabels.waitingForGame }}</h1>
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
+
     </section>
   </body>
 </template>
@@ -88,9 +90,6 @@ export default {
     },
 
     joinDate: function () {
-  
-    
-
         console.log("Before emitting joinDate: ", this.userInfo);
         socket.emit("joinDate", {
           userInfo: this.userInfo,
@@ -100,17 +99,15 @@ export default {
         console.log(this.userInfo);
 
         this.userCreated = true;
-      },
-      abandonDate: function () {
+      }
+    },
+    abandonDate: function () {
       this.userCreated = false;
       socket.emit("removePlayer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
       });
     },
-
-    },
-
   };
 </script>
 
