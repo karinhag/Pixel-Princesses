@@ -3,9 +3,11 @@
   <div class="createViewBody">
     <header>{{uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-    {{console.log(this.pollId)}}
-    {{ console.log(this.u) }}
 
+    {{console.log(this.pollId)}}
+    
+
+    {{ this.userDataObject.userName}}
 
   </div>
   <router-link to="/createQuestion/">{{uiLabels.startGame}}</router-link>
@@ -26,8 +28,8 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      clients:{},
-      userObjects:{},
+      clients:[],
+      userDataObject:{},
     }
   },
   created: function () {
@@ -43,7 +45,7 @@ export default {
       this.userDataObject = userDataObject;
 
     });
-    socket.on("addedPlayer", (data) => console.log(data));
+
     socket.emit("pageLoaded", this.lang);
     socket.on('connect', () => {
           console.log("Socket connected:", socket.connected);
@@ -74,7 +76,7 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
     getPollId: function(){
-      return ""+Math.floor((Math.random()) * 100000);
+      return Math.floor((Math.random()) * 100000);
     },
 
 
