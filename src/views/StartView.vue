@@ -11,9 +11,11 @@
   </header>
   <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-    <a href="">{{uiLabels.about}}</a>
-    <a href="">FAQ</a>
+    <button v-on:click="about">{{uiLabels.about}}</button>
+    <button v-on:click="FAQ">FAQ</button>
   </ResponsiveNav>
+  <div v-if="showAbout"  class="aboutText"> {{uiLabels.aboutText}}</div>
+  <div v-if="showFAQ" class="FAQtext"> {{uiLabels.FAQ}}</div>
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
 
@@ -48,7 +50,9 @@ export default {
       uiLabels: {},
       id: "",
       lang: localStorage.getItem("lang") || "en",
-      hideNav: true
+      hideNav: true,
+      showAbout: false,
+      showFAQ: false,
     }
   },
   created: function () {
@@ -71,6 +75,14 @@ export default {
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
+    },
+    about: function() {
+      this.showAbout = !this.showAbout;
+      this.showFAQ = false;
+    },
+    FAQ: function() {
+      this.showFAQ = !this.showFAQ;
+      this.showAbout = false;
     }
   }
 }
@@ -137,6 +149,18 @@ export default {
   }
   #nav {
     background-color: palevioletred;
+  }
+  #nav button{
+    background-color: rgb(240, 188, 196);
+    
+    margin: 0.3rem;
+  
+  }
+  .aboutText, .FAQtext {
+    background-color: lightpink;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
 @media screen and (max-width:50em) {
