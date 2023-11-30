@@ -1,22 +1,26 @@
 <template>
-  
   <div class="createViewBody">
-    <header>{{uiLabels.theHeader }}</header>
+    <header>{{ uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-    {{console.log(this.pollId)}}
-    {{ console.log(this.u) }}
-
-
   </div>
-  <router-link to="/createQuestion/">{{uiLabels.startGame}}</router-link>
+  <section class="activePlayers" >
+  <div class=onePlayer v-for="(player) in playersData">
+    {{ getName(player) }}
+  </div>
+</section><br>
+<button><router-link to="/createQuestion/">{{ uiLabels.startGame }}</router-link></button>
+
+
+
 </template>
 
+
 <script>
-import io from 'socket.io-client';
+import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: 'CreateView',
+  name: "CreateView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -26,79 +30,91 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      clients:{},
-      userObjects:{},
-    }
+      clients: {},
+      playersData: null,
+    };
   },
+
   created: function () {
-    this.pollId = this.getPollId()
+    this.pollId = this.getPollId();
     console.log("CreateView component created");
     console.log("Socket connected:", socket.connected);
     //this.id = this.$route.params.id;
     console.log("Current pollId:", this.pollId);
-    socket.emit('joinPoll', this.pollId);
-    
-    socket.on("joinedDate", (userDataObject) => {
-      console.log("Received joinedDate event in CreateView:", userDataObject);
-      this.userDataObject = userDataObject;
+    socket.emit("joinPoll", this.pollId);
 
-    });
-    socket.on("addedPlayer", (data) => console.log(data));
+    // socket.on("joinedDate", (userDataObject) => {
+    //   console.log("Received joinedDate event in CreateView:", userDataObject);
+    //   this.userDataObject = userDataObject;
+    // });
+
+    socket.on("addedPlayer", (data) => (this.getActivePlayers(data)));
+
     socket.emit("pageLoaded", this.lang);
-    socket.on('connect', () => {
-          console.log("Socket connected:", socket.connected);
-          socket.emit("pageLoaded", this.lang);
+    socket.on("connect", () => {
+      console.log("Socket connected:", socket.connected);
+      socket.emit("pageLoaded", this.lang);
     });
     socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
-    socket.on("dataUpdate", (data) =>
-      this.data = data
-    )
-    socket.on("pollCreated", (data) =>
-      this.data = data)
-
-
+      this.uiLabels = labels;
+    });
+    socket.on("dataUpdate", (data) => (this.data = data));
+    socket.on("pollCreated", (data) => (this.data = data));
   },
   methods: {
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
     },
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      socket.emit("addQuestion", {
+        pollId: this.pollId,
+        q: this.question,
+        a: this.answers,
+      });
     },
     addAnswer: function () {
       this.answers.push("");
     },
     runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+      socket.emit("runQuestion", {
+        pollId: this.pollId,
+        questionNumber: this.questionNumber,
+      });
     },
-    getPollId: function(){
-      return ""+Math.floor((Math.random()) * 100000);
+    getPollId: function () {
+      return "" + Math.floor(Math.random() * 100000);
     },
-
-
-  }
-}
+    getActivePlayers: function(data){
+      this.playersData=data
+    },
+    getName: function (playerData) {
+      return playerData.userName;
+    },
+    getGreenFlag: function (playerData) {
+      return playerData.greenFlag;
+    },
+  },
+};
 </script>
 <style>
-header{
+header {
   font-size: 60px;
 }
-.thePollId{
-
+.thePollId {
   font-size: 30px;
-  color:#1693;
+  color: #1693;
   font-size: 40px;
   color: darkmagenta;
-
 }
 
-.createViewBody{
+.createViewBody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
-
-
-
-
 }
+
+.activePlayers{
+  font-size: 35px;
+  color: hotpink;
+}
+  
 </style>
+
