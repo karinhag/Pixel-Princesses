@@ -48,6 +48,7 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en", //Löser språkinställning
       uiLabels: {},
+      
       userInfo: {
         userName: "",
         greenFlag: "",
@@ -85,6 +86,7 @@ export default {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", { pollId: this.pollId, answer: answer });
     },
+
     joinDate: function () {
   
     

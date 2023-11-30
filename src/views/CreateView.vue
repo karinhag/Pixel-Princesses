@@ -1,6 +1,6 @@
 <template>
   
-  <div>
+  <div class="createViewBody">
     <header>{{uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
     {{console.log(this.pollId)}}
@@ -37,8 +37,11 @@ export default {
     //this.id = this.$route.params.id;
     console.log("Current pollId:", this.pollId);
     socket.emit('joinPoll', this.pollId);
-    socket.on("joinedDate", (data) => {
-      console.log("Received joinedDate event in CreateView:", data);
+    
+    socket.on("joinedDate", (userDataObject) => {
+      console.log("Received joinedDate event in CreateView:", userDataObject);
+      this.userDataObject = userDataObject;
+
     });
     socket.on("addedPlayer", (data) => console.log(data));
     socket.emit("pageLoaded", this.lang);
@@ -88,6 +91,14 @@ header{
   color:#1693;
   font-size: 40px;
   color: darkmagenta;
+
+}
+
+.createViewBody{
+  background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+
+
+
 
 }
 </style>
