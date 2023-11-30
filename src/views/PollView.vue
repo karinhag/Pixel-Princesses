@@ -1,40 +1,48 @@
 <template>
   <body>
-  <section class="enteringDetails"  v-if = "userCreated === false" >
-  <div>
+    <section class="enteringDetails" v-if="userCreated === false">
+      <div>
+        Game ID: {{ pollId }}
 
-   Game ID: {{pollId}}
-   
-    <QuestionComponent v-bind:question="question"
-              v-on:answer="submitAnswer($event)"/>
-              <span>{{this.submittedAnswers}}</span>
+        <QuestionComponent
+          v-bind:question="question"
+          v-on:answer="submitAnswer($event)"
+        />
+        <span>{{ this.submittedAnswers }}</span>
 
-            <p> {{ uiLabels.greenFlag }}<input type="text" v-model="userInfo.greenFlag"> </p>
+        <p>
+          {{ uiLabels.greenFlag
+          }}<input type="text" v-model="userInfo.greenFlag" />
+        </p>
 
-            <p> {{ uiLabels.userName }}<input type="text" v-model="userInfo.userName"> </p>
-      
+        <p>
+          {{ uiLabels.userName
+          }}<input type="text" v-model="userInfo.userName" />
+        </p>
 
-            <!--här får vi nog lägga in att username och green flag sparas-->
-
-  </div>
-  <button v-on:click="joinDate" type="submit">
-    Join date
-  </button>
-</section>
-  <section class="waitingForStart" v-if="this.userCreated"> {{ uiLabels.waitingForGame }}</section>
-</body>
+        <!--här får vi nog lägga in att username och green flag sparas-->
+      </div>
+      <button v-on:click="joinDate" type="submit">Join date</button>
+    </section>
+    <section class="waitingForStart" v-if="this.userCreated">
+      <h1>{{ uiLabels.waitingForGame }}</h1>
+      <button v-on:click="abandonDate" type="submit">
+        {{ uiLabels.abandonDate }}
+      </button>
+    </section>
+  </body>
 </template>
 
 <script>
 // @ is an alias to /src
-import QuestionComponent from '@/components/QuestionComponent.vue';
-import io from 'socket.io-client';
+import QuestionComponent from "@/components/QuestionComponent.vue";
+import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: 'PollView',
+  name: "PollView",
   components: {
-    QuestionComponent
+    QuestionComponent,
   },
   data: function () {
     return {
@@ -43,18 +51,17 @@ export default {
       userInfo: {
         userName: "",
         greenFlag: "",
-        uniquePlayerId: this.getPlayerId() // playerID
+        uniquePlayerId: this.getPlayerId(), // playerID
       },
       userCreated: false,
       question: {
         q: "",
-        a: []
+        a: [],
       },
 
       pollId: "inactive poll",
       submittedAnswers: {},
-
-    }
+    };
   },
   created: function () {
     this.pollId = this.$route.params.id;
@@ -62,49 +69,60 @@ export default {
 
     socket.emit("pageLoaded", this.lang); //Löser språkinställning
     socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
-    socket.emit('joinPoll', this.pollId)
-    socket.on("newQuestion", q =>
-      this.question = q
-    )
-    socket.on("dataUpdate", answers =>
-      this.submittedAnswers = answers
-    )
+      this.uiLabels = labels;
+    });
+    socket.emit("joinPoll", this.pollId);
+    socket.on("newQuestion", (q) => (this.question = q));
+    socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
     socket.on("init", (labels) => {
-    this.uiLabels = labels
-    })
+      this.uiLabels = labels;
+    });
   },
-  methods: { getPlayerId: function(){
-      return Math.floor((Math.random()) * 100000);
-    }, 
+  methods: {
+    getPlayerId: function () {
+      return "" + Math.floor(Math.random() * 100000);
+    },
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      socket.emit("submitAnswer", { pollId: this.pollId, answer: answer });
     },
     joinDate: function () {
-
-      console.log("Before emitting joinDate:", this.userInfo);
-      socket.emit("joinDate", { userInfo: this.userInfo , pollId: this.pollId});
-      console.log("After emitting joinDate");
-
-      console.log(this.userInfo);
-      socket.emit("joiningDate", this.userInfo) //Hej
-      this.userCreated=true;
-    },
-  }
-
-
   
-}
+    
+
+        console.log("Before emitting joinDate: ", this.userInfo);
+        socket.emit("joinDate", {
+          userInfo: this.userInfo,
+          pollId: this.pollId,
+        });
+        console.log("After emitting joinDate");
+        console.log(this.userInfo);
+
+        this.userCreated = true;
+      }
+    },
+    abandonDate: function () {
+      this.userCreated = false;
+      socket.emit("removePlayer", {
+        pollId: this.pollId,
+        userInfo: this.userInfo,
+      });
+    },
+  };
 </script>
 
 <style>
-
-body{
-  background: linear-gradient(106.5deg, rgba(255, 215, 185, 0.91) 23%, rgba(223, 159, 247, 0.8) 93%);
-
+body {
+  background: linear-gradient(
+    106.5deg,
+    rgba(255, 215, 185, 0.91) 23%,
+    rgba(223, 159, 247, 0.8) 93%
+  );
 }
-
-
-
+.enteringDetails {
+  font-size: 20px;
+}
+.waitingForStart {
+  font-size: 40px;
+  font-weight: bold;
+}
 </style>

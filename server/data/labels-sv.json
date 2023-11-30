@@ -22,5 +22,6 @@
 	"submitQuestion": "Välj fråga",
 	"waitingAnswers": "Väntar på svar",
 	"chooseElimination": "Välj vem du vill eliminera:",
-	"waitingForGame":"Väntar på spelstart..."
+	"waitingForGame":"Väntar på spelstart...",
+	"abandonDate":"Gå tillbaka"
 }

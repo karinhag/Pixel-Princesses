@@ -21,5 +21,6 @@
 	"submitQuestion": "Submit question",
 	"waitingAnswers": "Waiting for answers",
 	"chooseElimination": "Choose who to eliminate",
-	"waitingForGame":"Waiting for game to start..."
+	"waitingForGame":"Waiting for game to start...",
+	"abandonDate":"Go back?"
 }
