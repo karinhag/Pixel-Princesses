@@ -1,8 +1,11 @@
 <template>
     <header>{{uiLabels.waitingAnswers}}</header>
     {{uiLabels.chooseElimination}}
-
-
+   
+    <router-link to="/eliminatedPlayer/">
+      <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
+      </router-link>
+ 
 </template>
 
 

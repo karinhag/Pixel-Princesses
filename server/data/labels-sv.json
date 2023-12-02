@@ -25,5 +25,8 @@
 	"waitingAnswers": "Väntar på svar",
 	"chooseElimination": "Välj vem du vill eliminera:",
 	"waitingForGame":"Väntar på spelstart...",
-	"abandonDate":"Gå tillbaka"
+	"abandonDate":"Gå tillbaka",
+	"savePlayer":"Ångrat dig? Du har en livboj!",
+	"theEliminatedPlayer":"Du har eliminerat...",
+	"lifebouySpent":"Du har använt din enda livboj..."
 }
