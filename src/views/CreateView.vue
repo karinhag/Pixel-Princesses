@@ -42,13 +42,8 @@ export default {
     //this.id = this.$route.params.id;
     console.log("Current pollId:", this.pollId);
     socket.emit("joinPoll", this.pollId);
-
-    // socket.on("joinedDate", (userDataObject) => {
-    //   console.log("Received joinedDate event in CreateView:", userDataObject);
-    //   this.userDataObject = userDataObject;
-    // });
-
     socket.on("addedPlayer", (data) => (this.getActivePlayers(data)));
+    socket.on("removedPlayer", (data) => this.getActivePlayers(data));
 
     socket.emit("pageLoaded", this.lang);
     socket.on("connect", () => {

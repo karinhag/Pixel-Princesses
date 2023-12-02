@@ -56,7 +56,7 @@ function sockets(io, socket, data) {
   
   socket.on('removePlayer', function(d){  //lagt till
     socket.join(""+ d.pollId);
-    data.removeUserInfo(d.pollId, d.userInfo)
+    io.to(d.pollId).emit("removedPlayer", data.removeUserInfo(d.pollId, d.userInfo) ) //
     
   });
 }
