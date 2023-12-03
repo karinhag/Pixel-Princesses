@@ -3,17 +3,16 @@
     <header>{{ uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
   </div>
-  <section class="activePlayers" >
-  <div class=onePlayer v-for="(player) in playersData">
-    {{ getName(player) }}
-  </div>
-</section><br>
-<button><router-link to="/createQuestion/">{{ uiLabels.startGame }}</router-link></button>
-
-
-
+  <section class="activePlayers">
+    <div class="onePlayer" v-for="player in playersData">
+      {{ getName(player) }}
+    </div>
+  </section>
+  <br />
+  <button>
+    <router-link to="/createQuestion/">{{ uiLabels.startGame }}</router-link>
+  </button>
 </template>
-
 
 <script>
 import io from "socket.io-client";
@@ -36,26 +35,25 @@ export default {
   },
 
   created: function () {
-    this.pollId = this.getPollId();
-    console.log("CreateView component created");
-    console.log("Socket connected:", socket.connected);
-    //this.id = this.$route.params.id;
-    console.log("Current pollId:", this.pollId);
+    this.pollId = this.getPollId(); //detta är det pollID som ska skickas till alla views för denna!
+    socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.pollId);
-    socket.on("addedPlayer", (data) => (this.getActivePlayers(data)));
+
+    socket.on("addedPlayer", (data) => this.getActivePlayers(data));
     socket.on("removedPlayer", (data) => this.getActivePlayers(data));
 
-    socket.emit("pageLoaded", this.lang);
-    socket.on("connect", () => {
-      console.log("Socket connected:", socket.connected);
-      socket.emit("pageLoaded", this.lang);
-    });
+
+
+//     socket.on("connect", () => { 
+// socket.emit("pageLoaded", this.lang);
+//     });
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("pollCreated", (data) => (this.data = data));
   },
+
   methods: {
     createPoll: function () {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
@@ -79,8 +77,8 @@ export default {
     getPollId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
-    getActivePlayers: function(data){
-      this.playersData=data
+    getActivePlayers: function (data) {
+      this.playersData = data;
     },
     getName: function (playerData) {
       return playerData.userName;
@@ -106,10 +104,8 @@ header {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
 }
 
-.activePlayers{
+.activePlayers {
   font-size: 35px;
   color: hotpink;
 }
-  
 </style>
-

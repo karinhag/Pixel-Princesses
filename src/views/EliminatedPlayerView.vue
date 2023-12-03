@@ -3,7 +3,7 @@
     <header>{{uiLabels.theEliminatedPlayer}}</header>
   </div>
 
-    <!-- {{ namn + greenFlag skicka från choose answerView }} -->
+    <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
 
   <div class="saveButton" v-on:click="savePlayer" v-if="!playerSaved">
     <button>
@@ -11,9 +11,14 @@
       {{ uiLabels.savePlayer }}
     </button>
   </div>
+  <router-link to="/createQuestion/">
+          <button id="button" > {{ uiLabels.nextQuestion }}</button> 
+      </router-link>
+
   <div class="lifeBouyUsed" v-if="playerSaved"> 
     {{ uiLabels.lifebouySpent }}
   </div>
+
 
 
 </template>
@@ -47,11 +52,14 @@ export default {
   methods: {
     savePlayer: function(){
         this.playerSaved=true;
-    }
-
-
+        // socket.emit("lifelineUsed",{pollId: this.pollId} )
+        console.log(this.data, "<- pollID")
+    },
   },
 };
+// createPoll: function () {
+//       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+//     },
 </script>
 <style>
 
