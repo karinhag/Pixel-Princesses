@@ -152,4 +152,8 @@ export default {
   font-weight: bold;
   margin: 0px;
 }
+h1{
+  margin: 0px;
+  padding: 20px;
+}
 </style>

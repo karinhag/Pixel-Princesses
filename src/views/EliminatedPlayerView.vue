@@ -1,4 +1,5 @@
 <template>
+  <section class="EPVbody">
   <div class="topPage">
     <header>{{uiLabels.theEliminatedPlayer}}</header>
   </div>
@@ -20,7 +21,7 @@
   </div>
 
 
-
+</section>
 </template>
 
 <script>
@@ -66,6 +67,12 @@ header{
     font-size: 60px;
 }
 
+.EPVbody{
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
+  min-height: 100vh;
+
+}
+
 button {
   /* The button*/
   
@@ -86,4 +93,5 @@ button:hover{
   cursor: grab;
 
 }
+
 </style>
