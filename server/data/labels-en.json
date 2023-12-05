@@ -29,5 +29,6 @@
 	"theEliminatedPlayer":"You have eliminated...",
 	"lifebouySpent":"You have used your lifebouy...",
 	"nextQuestion": "Next Question",
-	"answer": "Write your answer"
+	"answer": "Write your answer: ",
+	"sendAnswer": "Send answer"
 }
