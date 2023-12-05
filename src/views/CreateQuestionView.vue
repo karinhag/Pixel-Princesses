@@ -9,7 +9,7 @@
     </div>
     <div>
       <router-link to="/chooseAnswer/">
-          <button v-on:click="addQuestion" id="submitButton" >{{uiLabels.submitQuestion}}
+          <button v-on:click="addQuestion" id="submitButton" :disabled="!question">{{uiLabels.submitQuestion}}
           </button> 
       </router-link> 
     </div>
@@ -36,7 +36,6 @@ export default {
       uiLabels: {},
       originalPredefinedQuestions:["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12"],
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12"],
-
     }
   },
   created: function () {

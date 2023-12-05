@@ -42,7 +42,9 @@
     {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
+  <div v-if="id">
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  </div>
 </div>
 </div>
 </section>
