@@ -1,17 +1,18 @@
 <template>
-  <div class="createViewBody">
+  <section class="createViewBody">
     <header>{{ uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-  </div>
+  
   <section class="activePlayers">
     <div class="onePlayer" v-for="player in playersData">
       {{ getName(player) }}
     </div>
   </section>
-  <br />
+
   <button v-on:click="createPoll">
    {{ uiLabels.startGame }}
   </button>
+</section>
 </template>
 
 <script>
