@@ -4,10 +4,7 @@
       <div>
         Game ID: {{ pollId }}
 
-        <QuestionComponent
-          v-bind:question="question"
-          v-on:answer="submitAnswer($event)"
-        />
+        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer($event)" />
         <!--<span>{{ this.submittedAnswers }}</span>-->
         <p>
           {{ uiLabels.userName
@@ -19,20 +16,37 @@
           }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
 
-       
+
         <!--här får vi nog lägga in att username och green flag sparas-->
       </div>
       <button v-on:click="joinDate" type="submit">Join date</button>
     </section>
 
-    <section class="waitingForStart" v-if="this.userCreated">
+    <section class="waitingForStart" v-if="this.userCreated && this.showInputBox === false">
       <h1>{{ uiLabels.waitingForGame }}</h1>
-      {{ this.question }}
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
 
     </section>
+
+    <section class="answerQuestion" v-if="this.showInputBox">
+      
+      {{ this.question}} 
+
+      <p>
+          {{ uiLabels.answer
+          }}<input type="text" v-model="userInfo.answer" />
+        </p>
+
+        <button v-on:click="sendAnswer" type="submit">{{ uiLabels.sendAnswer }}</button>
+
+      <button v-on:click="abandonDate" type="submit">
+        {{ uiLabels.abandonDate }}
+      </button>
+
+    </section>
+
   </body>
 </template>
 
@@ -51,10 +65,11 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en", //Löser språkinställning
       uiLabels: {},
-      
+
       userInfo: {
         userName: "",
         greenFlag: "",
+        answer: "",
         uniquePlayerId: this.getPlayerId(), // playerID
       },
       userCreated: false,
@@ -64,21 +79,28 @@ export default {
       },
 
       pollId: "inactive poll",
+      showInputBox: false,
       submittedAnswers: {},
     };
   },
   created: function () {
     this.pollId = this.$route.params.id;
     this.id = this.$route.params.id;
+    this.showInputBox = false;
 
     socket.emit("pageLoaded", this.lang); //Löser språkinställning
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
     socket.emit("joinPoll", this.pollId);
-    socket.on("newQuestion", (q) => {this.question = q; 
-      console.log(this.question)});
-    
+    socket.on("newQuestion", (q) => {
+      this.question = q;
+      console.log(this.question);
+      if (q.length > 0) {
+    this.showInputBox = true;
+  }
+    });
+
     socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers))
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -93,17 +115,17 @@ export default {
     },
 
     joinDate: function () {
-        console.log("Before emitting joinDate: ", this.userInfo);
-        socket.emit("joinDate", {
-          userInfo: this.userInfo,
-          pollId: this.pollId,
-        });
-        console.log("After emitting joinDate");
-        console.log(this.userInfo);
+      console.log("Before emitting joinDate: ", this.userInfo);
+      socket.emit("joinDate", {
+        userInfo: this.userInfo,
+        pollId: this.pollId,
+      });
+      console.log("After emitting joinDate");
+      console.log(this.userInfo);
 
-        this.userCreated = true;
-      },
-    
+      this.userCreated = true;
+    },
+
     abandonDate: function () {
       this.userCreated = false;
       socket.emit("removePlayer", {
@@ -112,20 +134,20 @@ export default {
       });
     },
   },
-  };
+};
 </script>
 
 <style>
 body {
-  background: linear-gradient(
-    106.5deg,
-    rgba(255, 215, 185, 0.91) 23%,
-    rgba(223, 159, 247, 0.8) 93%
-  );
+  background: linear-gradient(106.5deg,
+      rgba(255, 215, 185, 0.91) 23%,
+      rgba(223, 159, 247, 0.8) 93%);
 }
+
 .enteringDetails {
   font-size: 20px;
 }
+
 .waitingForStart {
   font-size: 40px;
   font-weight: bold;
