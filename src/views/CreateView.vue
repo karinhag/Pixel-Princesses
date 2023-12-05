@@ -9,8 +9,8 @@
     </div>
   </section>
   <br />
-  <button>
-    <router-link to="/createQuestion/">{{ uiLabels.startGame }}</router-link>
+  <button v-on:click="createPoll">
+   {{ uiLabels.startGame }}
   </button>
 </template>
 
@@ -54,6 +54,7 @@ export default {
   methods: {
     createPoll: function () {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
+      this.$router.push('/createQuestion/'+this.pollId)
     },
     addQuestion: function () {
       socket.emit("addQuestion", {
