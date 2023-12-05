@@ -54,6 +54,7 @@ Data.prototype.getQuestion = function (pollId, qId = null) {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
+    console.log(poll.questions)
     return poll.questions;
   }
   console.log("poll not found", pollId)

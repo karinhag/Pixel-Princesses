@@ -14,20 +14,20 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a});
+    data.addQuestion(d.pollId, d.q); //, a: d.a}
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
     io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId));     
   });
 
   socket.on('editQuestion', function(d) {
-    data.editQuestion(d.pollId, d.index, {q: d.q, a: d.a});
+    data.editQuestion(d.pollId, d.index, {q: d.q}); //, a: d.a}
     socket.emit('questionEdited', data.getAllQuestions(d.pollId));
   });
 
   socket.on('joinPoll', function(pollId) {
     console.log('User joined room:', pollId);
     socket.join(""+ pollId);
-   socket.emit('newQuestion', data.getQuestion(pollId));
+    socket.emit('newQuestion', data.getQuestion(pollId));
     socket.emit('dataUpdate', data.getAnswers(pollId));
   });
 

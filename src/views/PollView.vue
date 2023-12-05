@@ -31,9 +31,7 @@
     </section>
 
     <section class="answerQuestion" v-if="this.showInputBox">
-      
-      {{ this.question}} 
-
+      {{this.question[0]}}
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
@@ -65,10 +63,7 @@ export default {
         uniquePlayerId: this.getPlayerId(), // playerID
       },
       userCreated: false,
-      question: {
-        q: "",
-        a: [],
-      },
+      question:"",
 
       pollId: "inactive poll",
       showInputBox: false,
@@ -85,10 +80,11 @@ export default {
       this.uiLabels = labels;
     });
     socket.emit("joinPoll", this.pollId);
+
     socket.on("newQuestion", (q) => {
       this.question = q;
       console.log(this.question);
-      if (q.length > 0) {
+      if (this.question.length > 0) {
     this.showInputBox = true;
   }
     });
@@ -117,7 +113,7 @@ export default {
 
       this.userCreated = true;
     },
-
+  
     abandonDate: function () {
       this.userCreated = false;
       socket.emit("removePlayer", {
