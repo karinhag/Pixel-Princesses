@@ -27,6 +27,7 @@
 
     <section class="waitingForStart" v-if="this.userCreated">
       <h1>{{ uiLabels.waitingForGame }}</h1>
+      {{ this.question }}
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
@@ -75,8 +76,10 @@ export default {
       this.uiLabels = labels;
     });
     socket.emit("joinPoll", this.pollId);
-    socket.on("newQuestion", (q) => (this.question = q));
-    socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
+    socket.on("newQuestion", (q) => {this.question = q; 
+      console.log(this.question)});
+    
+    socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers))
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });

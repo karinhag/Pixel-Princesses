@@ -8,7 +8,8 @@
     </div>
     <div>
       <router-link to="/chooseAnswer/">
-          <button id="submitButton" >{{uiLabels.submitQuestion}}</button> 
+          <button v-on:click="addQuestion" id="submitButton" >{{uiLabels.submitQuestion}}
+          </button> 
       </router-link> 
     </div>
 
@@ -36,7 +37,7 @@ export default {
     }
   },
   created: function () {
-    this.id = this.$route.params.id;
+    this.pollId = this.$route.params.pollId;
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
