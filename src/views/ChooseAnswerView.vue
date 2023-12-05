@@ -1,4 +1,6 @@
 <template>
+    <section class="CAVbody">
+
     <header>{{uiLabels.waitingAnswers}}</header>
     {{uiLabels.chooseElimination}}
 
@@ -10,6 +12,8 @@
     <router-link to="/eliminatedPlayer/">
       <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
       </router-link>
+      </section>
+    
  
 </template>
 
@@ -72,4 +76,10 @@ header{
   font-size: 50px;
   color: black;
 }
+
+.CAVbody{
+  background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  min-height: 100vh;
+}
+
 </style>
