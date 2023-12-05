@@ -37,7 +37,11 @@
           }}<input type="text" v-model="userInfo.answer" />
         </p>
 
+<<<<<<< HEAD
         <button v-on:click="submitAnswer" type="submit">{{ uiLabels.sendAnswer }}</button>
+=======
+        <button v-on:click="joinDate" type="submit">{{ uiLabels.sendAnswer }}</button>
+>>>>>>> e930ceebd2cb8b03d4c2b1c904278094e48c64e5
 
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
@@ -121,6 +125,10 @@ export default {
 
       this.userCreated = true;
     },
+<<<<<<< HEAD
+=======
+
+>>>>>>> e930ceebd2cb8b03d4c2b1c904278094e48c64e5
   
     abandonDate: function () {
       this.userCreated = false;
