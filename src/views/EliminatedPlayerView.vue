@@ -53,7 +53,6 @@ export default {
     savePlayer: function(){
         this.playerSaved=true;
         // socket.emit("lifelineUsed",{pollId: this.pollId} )
-        console.log(this.data, "<- pollID")
     },
   },
 };
