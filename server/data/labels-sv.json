@@ -16,7 +16,7 @@
 	"theHeader": "Din spellänk:",
 	"writeQuestion": "Skriv din fråga här: ",
 	"randomQuestion": "Slumpa fråga",
-	"hardToDecide": "Svårt att bestämma dig? ",
+	"hardToDecide": "Svårt att bestämma dig? ⇨",
 	"Q1": "Vilken är din favoritlåt?",
 	"Q2": "Beskriv din drömdejt",
 	"Q3": "Beskriv dig själv med 3 ord",
@@ -25,5 +25,9 @@
 	"waitingAnswers": "Väntar på svar",
 	"chooseElimination": "Välj vem du vill eliminera:",
 	"waitingForGame":"Väntar på spelstart...",
-	"abandonDate":"Gå tillbaka"
+	"abandonDate":"Gå tillbaka",
+	"savePlayer":"Ångrat dig? Du har en livboj!",
+	"theEliminatedPlayer":"Du har eliminerat...",
+	"lifebouySpent":"Du har använt din enda livboj...",
+	"nextQuestion": "Nästa fråga"
 }

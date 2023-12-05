@@ -9,17 +9,17 @@
           v-on:answer="submitAnswer($event)"
         />
         <span>{{ this.submittedAnswers }}</span>
+        <p>
+          {{ uiLabels.userName
+          }}<input type="text" v-model="userInfo.userName" />
+        </p>
 
         <p>
           {{ uiLabels.greenFlag
           }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
 
-        <p>
-          {{ uiLabels.userName
-          }}<input type="text" v-model="userInfo.userName" />
-        </p>
-
+       
         <!--här får vi nog lägga in att username och green flag sparas-->
       </div>
       <button v-on:click="joinDate" type="submit">Join date</button>

@@ -96,6 +96,7 @@ Data.prototype.removeUserInfo = function (pollId, userInfo) {
     console.log("User not found in the array");
   }
   console.log("removeUser ger:", this.players[pollId])
+  return this.players[pollId]
 };
 
 Data.prototype.addPlayer = function (pollId, userInfo) {

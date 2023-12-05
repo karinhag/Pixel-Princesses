@@ -15,7 +15,7 @@
 	"theHeader": "Your Poll Link:",
 	"writeQuestion": "Write your question here: ",
 	"randomQuestion": "Create random question",
-	"hardToDecide": "Hard to decide? ",
+	"hardToDecide": "Hard to decide? ⇨",
 	"Q1": "What is your favourite song?",
 	"Q2": "Describe your perfect date night",
 	"Q3": "Describe yourself with 3 words",
@@ -24,5 +24,9 @@
 	"waitingAnswers": "Waiting for answers",
 	"chooseElimination": "Choose who to eliminate",
 	"waitingForGame":"Waiting for game to start...",
-	"abandonDate":"Go back?"
+	"abandonDate":"Go back?",
+	"savePlayer":"Changed your mind? You have one lifebouy!",
+	"theEliminatedPlayer":"You have eliminated...",
+	"lifebouySpent":"You have used your lifebouy...",
+	"nextQuestion": "Next Question"
 }
