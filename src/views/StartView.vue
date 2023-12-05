@@ -98,6 +98,8 @@ export default {
 }
 </script>
 <style scoped>
+
+
 .boxes-container {
     display: flex;
     justify-content: space-between;
