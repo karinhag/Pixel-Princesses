@@ -43,13 +43,10 @@ export default {
     socket.on("removedPlayer", (data) => this.getActivePlayers(data));
 
 
-
-//     socket.on("connect", () => { 
-// socket.emit("pageLoaded", this.lang);
-//     });
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
+    
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("pollCreated", (data) => (this.data = data));
   },
