@@ -20,6 +20,14 @@
 	"Q2": "Describe your perfect date night",
 	"Q3": "Describe yourself with 3 words",
 	"Q4": "What is your opinion on tattoos?",
+	"Q5": "What are three things you would bring to a desert island?", 
+	"Q6": "If you had a superpower, what would it be?",
+	"Q7": "Which country do you want to visist?",
+	"Q8": "Which app is you most used?",
+	"Q9": "How is you relationship with your mother?",
+	"Q10": "How tall are you?",
+	"Q11": "If you only could eat one type of food for the rest of your life, what would it be?",
+	"Q12": "What person, dead or alive, would you want to eat dinner with?",
 	"submitQuestion": "Submit question",
 	"waitingAnswers": "Waiting for answers",
 	"chooseElimination": "Choose who to eliminate",
@@ -29,5 +37,6 @@
 	"theEliminatedPlayer":"You have eliminated...",
 	"lifebouySpent":"You have used your lifebouy...",
 	"nextQuestion": "Next Question",
-	"answer": "Write your answer"
+	"answer": "Write your answer: ",
+	"sendAnswer": "Send answer"
 }

@@ -30,5 +30,6 @@
 	"theEliminatedPlayer":"Du har eliminerat...",
 	"lifebouySpent":"Du har använt din enda livboj...",
 	"nextQuestion": "Nästa fråga",
-	"answer": "Skriv ditt svar här"
+	"answer": "Skriv ditt svar här: ",
+	"sendAnswer": "Skicka svar"
 }

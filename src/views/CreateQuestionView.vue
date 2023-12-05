@@ -32,6 +32,7 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
+      originalPredefinedQuestions:["Q1", "Q2", "Q3", "Q4"],
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
 
     }
@@ -51,9 +52,15 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
     generateRandomQuestion() {
-        const randomIndex = Math.floor(Math.random() * this.predefinedQuestions.length);
+      const randomIndex = Math.floor(Math.random() * this.predefinedQuestions.length);
       this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
+      this.predefinedQuestions.splice(randomIndex, 1);
+      if(this.predefinedQuestions.length === 0){
+        this.predefinedQuestions = originalPredefinedQuestions
+      }
+      
     },
+   
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
@@ -63,8 +70,8 @@ export default {
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
-  }
-}
+  }}
+
 </script>
 
 <style>

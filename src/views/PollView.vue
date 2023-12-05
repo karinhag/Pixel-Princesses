@@ -32,6 +32,13 @@
 
     <section class="answerQuestion" v-if="this.showInputBox">
       {{this.question[0]}}
+      <p>
+          {{ uiLabels.answer
+          }}<input type="text" v-model="userInfo.answer" />
+        </p>
+
+        <button v-on:click="submitAnswer" type="submit">{{ uiLabels.sendAnswer }}</button>
+
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
@@ -60,6 +67,7 @@ export default {
       userInfo: {
         userName: "",
         greenFlag: "",
+        answer: "",
         uniquePlayerId: this.getPlayerId(), // playerID
       },
       userCreated: false,
@@ -99,7 +107,7 @@ export default {
       return "" + Math.floor(Math.random() * 100000);
     },
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", { pollId: this.pollId, answer: answer });
+      socket.emit("submitAnswer", { pollId: this.pollId, userInfo: this.userInfo });
     },
 
     joinDate: function () {
@@ -121,6 +129,7 @@ export default {
         userInfo: this.userInfo,
       });
     },
+
   },
 };
 </script>
