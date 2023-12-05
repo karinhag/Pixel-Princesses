@@ -28,5 +28,6 @@
 	"savePlayer":"Changed your mind? You have one lifebouy!",
 	"theEliminatedPlayer":"You have eliminated...",
 	"lifebouySpent":"You have used your lifebouy...",
-	"nextQuestion": "Next Question"
+	"nextQuestion": "Next Question",
+	"answer": "Write your answer"
 }
