@@ -34,6 +34,13 @@
       
       {{ this.question}} 
 
+      <p>
+          {{ uiLabels.answer
+          }}<input type="text" v-model="userInfo.answer" />
+        </p>
+
+        <button v-on:click="sendAnswer" type="submit">{{ uiLabels.sendAnswer }}</button>
+
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
@@ -62,6 +69,7 @@ export default {
       userInfo: {
         userName: "",
         greenFlag: "",
+        answer: "",
         uniquePlayerId: this.getPlayerId(), // playerID
       },
       userCreated: false,
