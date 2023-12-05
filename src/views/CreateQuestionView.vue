@@ -58,7 +58,6 @@ export default {
       if(this.predefinedQuestions.length === 0){
         this.predefinedQuestions = this.originalPredefinedQuestions
       }
-      
     },
    
     addQuestion: function () {

@@ -37,7 +37,7 @@
           }}<input type="text" v-model="userInfo.answer" />
         </p>
 
-        <button v-on:click="sendAnswer" type="submit">{{ uiLabels.sendAnswer }}</button>
+        <button v-on:click="joinDate" type="submit">{{ uiLabels.sendAnswer }}</button>
 
       <button v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
@@ -124,6 +124,7 @@ export default {
       this.userCreated = true;
     },
 
+  
     abandonDate: function () {
       this.userCreated = false;
       socket.emit("removePlayer", {
