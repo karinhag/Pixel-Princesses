@@ -1,6 +1,11 @@
 <template>
     <header>{{uiLabels.waitingAnswers}}</header>
     {{uiLabels.chooseElimination}}
+
+
+    <div class="onePlayer" v-for="player in playersData">
+      {{ getAnswer(player) }}
+    </div>
    
     <router-link to="/eliminatedPlayer/">
       <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
@@ -25,6 +30,7 @@ export default {
       data: {},
       uiLabels: {},
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
+      playersData: null,
     }
   },
   created: function () {
@@ -53,6 +59,9 @@ export default {
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },
+    getAnswer: function (playerData) {
+      return playerData.answer;
     },
   }
 }
