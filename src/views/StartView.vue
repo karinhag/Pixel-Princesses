@@ -14,8 +14,18 @@
     <button v-on:click="about">{{uiLabels.about}}</button>
     <button v-on:click="FAQ">FAQ</button>
   </ResponsiveNav>
-  <div v-if="showAbout"  class="aboutText"> {{uiLabels.aboutText}}</div>
-  <div v-if="showFAQ" class="FAQtext"> {{uiLabels.FAQ}}</div>
+  <div v-if="showAbout"  class="aboutText"> 
+    <b>{{uiLabels.aboutText}}</b>
+    <br>{{uiLabels.aboutText1}}
+    <br>{{uiLabels.aboutText2}}
+  </div>
+  <div v-if="showFAQ" class="FAQtext"> 
+    <b> {{uiLabels.FAQ}} </b>
+    <br>{{uiLabels.FAQ1}}
+    <br>{{uiLabels.FAQ2}}
+    <br>{{uiLabels.FAQ3}}
+
+  </div>
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
 
@@ -26,7 +36,7 @@
 
   <div class="box-b">
   <label>
-    Write poll id: <br>
+    {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
@@ -161,6 +171,8 @@ export default {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    
   }
 
 @media screen and (max-width:50em) {
