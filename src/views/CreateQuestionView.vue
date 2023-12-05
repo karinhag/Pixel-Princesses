@@ -54,14 +54,9 @@ export default {
       const randomIndex = Math.floor(Math.random() * this.predefinedQuestions.length);
       this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
       this.predefinedQuestions.splice(randomIndex, 1);
-      console.log("vald fråga bör va borta:",this.predefinedQuestions )
       if(this.predefinedQuestions.length === 0){
-        this.predefinedQuestions = originalPredefinedQuestions
-        console.log("frågorna nollställs",this.predefinedQuestions )
-
+        this.predefinedQuestions = this.originalPredefinedQuestions
       }
-
-      
     },
    
     addQuestion: function () {
