@@ -19,7 +19,7 @@
 
         <!--här får vi nog lägga in att username och green flag sparas-->
       </div>
-      <button v-on:click="joinDate" type="submit">Join date</button>
+      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">Join date</button>
     </section>
 
     <section class="waitingForStart" v-if="this.userCreated && this.showInputBox === false">

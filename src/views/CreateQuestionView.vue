@@ -8,7 +8,7 @@
     </div>
     <div>
       <router-link to="/chooseAnswer/">
-          <button v-on:click="addQuestion" id="submitButton" >{{uiLabels.submitQuestion}}
+          <button v-on:click="addQuestion" id="submitButton" :disabled="!question">{{uiLabels.submitQuestion}}
           </button> 
       </router-link> 
     </div>
@@ -34,7 +34,6 @@ export default {
       uiLabels: {},
       originalPredefinedQuestions:["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12"],
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12"],
-
     }
   },
   created: function () {
@@ -55,9 +54,13 @@ export default {
       const randomIndex = Math.floor(Math.random() * this.predefinedQuestions.length);
       this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
       this.predefinedQuestions.splice(randomIndex, 1);
+      console.log("vald fråga bör va borta:",this.predefinedQuestions )
       if(this.predefinedQuestions.length === 0){
         this.predefinedQuestions = originalPredefinedQuestions
+        console.log("frågorna nollställs",this.predefinedQuestions )
+
       }
+
       
     },
    
