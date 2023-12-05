@@ -8,7 +8,7 @@
           v-bind:question="question"
           v-on:answer="submitAnswer($event)"
         />
-        <span>{{ this.submittedAnswers }}</span>
+        <!--<span>{{ this.submittedAnswers }}</span>-->
         <p>
           {{ uiLabels.userName
           }}<input type="text" v-model="userInfo.userName" />
