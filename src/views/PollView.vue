@@ -2,6 +2,7 @@
   <section class="pollBody">
     <section class="enteringDetails" v-if="userCreated === false">
       <div>
+
         Game ID: {{ pollId }}
 
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer($event)" />
@@ -139,9 +140,7 @@ export default {
 <style>
 .pollBody {
   background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
-
   min-height: 100vh;
-
 }
 
 .enteringDetails {
@@ -151,5 +150,10 @@ export default {
 .waitingForStart {
   font-size: 40px;
   font-weight: bold;
+  margin: 0px;
+}
+h1{
+  margin: 0px;
+  padding: 20px;
 }
 </style>
