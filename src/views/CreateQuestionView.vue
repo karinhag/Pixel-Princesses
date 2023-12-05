@@ -32,6 +32,7 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
+      originalPredefinedQuestions:["Q1", "Q2", "Q3", "Q4"],
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
 
     }
@@ -55,7 +56,7 @@ export default {
       this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
       this.predefinedQuestions.splice(randomIndex, 1);
       if(this.predefinedQuestions.length === 0){
-        this.predefinedQuestions=["Q1", "Q2", "Q3", "Q4"]
+        this.predefinedQuestions = originalPredefinedQuestions
       }
       
     },
