@@ -21,7 +21,7 @@
 	"Q3": "Describe yourself with 3 words",
 	"Q4": "What is your opinion on tattoos?",
 	"Q5": "What are three things you would bring to a desert island?", 
-	"Q6": "If you had a superpower, what would it be?",
+	"Q6": "If you had a super power, what would it be?",
 	"Q7": "Which country do you want to visist?",
 	"Q8": "Which app is you most used?",
 	"Q9": "How is you relationship with your mother?",
@@ -37,6 +37,5 @@
 	"theEliminatedPlayer":"You have eliminated...",
 	"lifebouySpent":"You have used your lifebouy...",
 	"nextQuestion": "Next Question",
-	"answer": "Write your answer: ",
-	"sendAnswer": "Send answer"
+	"answer": "Write your answer"
 }
