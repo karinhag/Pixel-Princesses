@@ -7,13 +7,15 @@
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"about": "About",
+	"aboutText": "Romance Roulette is a fun blind dating game!",
+	"FAQ": "Frequently asked questions: How many players can we be?",
 	"greenFlag": "Add your Green Flag here: ",
 	"startGame":"Start game",
 	"userName": "Add your username here: ",
 	"theHeader": "Your Poll Link:",
 	"writeQuestion": "Write your question here: ",
 	"randomQuestion": "Create random question",
-	"hardToDecide": "Hard to decide? ",
+	"hardToDecide": "Hard to decide? ⇨",
 	"Q1": "What is your favourite song?",
 	"Q2": "Describe your perfect date night",
 	"Q3": "Describe yourself with 3 words",
@@ -22,5 +24,10 @@
 	"waitingAnswers": "Waiting for answers",
 	"chooseElimination": "Choose who to eliminate",
 	"waitingForGame":"Waiting for game to start...",
-	"abandonDate":"Go back?"
+	"abandonDate":"Go back?",
+	"savePlayer":"Changed your mind? You have one lifebouy!",
+	"theEliminatedPlayer":"You have eliminated...",
+	"lifebouySpent":"You have used your lifebouy...",
+	"nextQuestion": "Next Question",
+	"answer": "Write your answer"
 }

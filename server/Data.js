@@ -49,13 +49,14 @@ Data.prototype.editQuestion = function (pollId, index, newQuestion) {
 
 Data.prototype.getQuestion = function (pollId, qId = null) {
   const poll = this.polls[pollId];
-  console.log("question requested for ", pollId, qId);
+  console.log("question requested for", pollId, qId);
   if (typeof poll !== "undefined") {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
-    return poll.questions[poll.currentQuestion];
+    return poll.questions;
   }
+  console.log("poll not found", pollId)
   return [];
 };
 
@@ -96,6 +97,7 @@ Data.prototype.removeUserInfo = function (pollId, userInfo) {
     console.log("User not found in the array");
   }
   console.log("removeUser ger:", this.players[pollId])
+  return this.players[pollId]
 };
 
 Data.prototype.addPlayer = function (pollId, userInfo) {

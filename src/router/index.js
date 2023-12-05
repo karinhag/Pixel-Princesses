@@ -20,7 +20,7 @@ const router = createRouter({
       component: () => import('../views/CreateView.vue')
     },
     {
-      path: '/createQuestion/',
+      path: '/createQuestion/:pollId',
       name: 'CreateQuestionView',
       component: () => import('@/views/CreateQuestionView.vue')
     },
@@ -33,7 +33,18 @@ const router = createRouter({
       path: '/chooseAnswer/',
       name: 'chooseAnswerView',
       component: () => import('@/views/chooseAnswerView.vue')
+    },
+    {
+      path: '/chooseAnswer/',
+      name: 'chooseAnswerView',
+      component: () => import('@/views/chooseAnswerView.vue')
+    },
+    {
+      path: '/eliminatedPlayer/',
+      name: 'eliminatedPlayer',
+      component:() =>import('@/views/EliminatedPlayerView.vue')
     }
+
   ]
 })
 

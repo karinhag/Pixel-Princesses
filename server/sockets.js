@@ -16,6 +16,7 @@ function sockets(io, socket, data) {
   socket.on('addQuestion', function(d) {
     data.addQuestion(d.pollId, {q: d.q, a: d.a});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
+    io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId));     
   });
 
   socket.on('editQuestion', function(d) {
@@ -56,7 +57,7 @@ function sockets(io, socket, data) {
   
   socket.on('removePlayer', function(d){  //lagt till
     socket.join(""+ d.pollId);
-    data.removeUserInfo(d.pollId, d.userInfo)
+    io.to(d.pollId).emit("removedPlayer", data.removeUserInfo(d.pollId, d.userInfo) ) //
     
   });
 }
