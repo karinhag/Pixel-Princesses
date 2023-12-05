@@ -26,6 +26,9 @@
     <br>{{uiLabels.FAQ3}}
 
   </div>
+
+  <section class="bodywrapper">
+
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
 
@@ -39,9 +42,12 @@
     {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
+  <div v-if="id">
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  </div>
 </div>
 </div>
+</section>
 
 </template>
 
@@ -99,10 +105,19 @@ export default {
 </script>
 <style scoped>
 
-
+h1{
+  margin: 0px;
+  padding: 20px;
+}
 .boxes-container {
     display: flex;
     justify-content: space-between;
+
+  }
+
+  .bodywrapper{
+    min-height: 100vh;
+    background: linear-gradient(179.4deg, rgb(253, 240, 233) 2.2%, rgb(255, 194, 203) 96.2%);
   }
 
   .box-a,

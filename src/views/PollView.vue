@@ -1,7 +1,8 @@
 <template>
-  <body>
+  <section class="pollBody">
     <section class="enteringDetails" v-if="userCreated === false">
       <div>
+
         Game ID: {{ pollId }}
 
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer($event)" />
@@ -16,10 +17,8 @@
           }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
 
-
-        <!--här får vi nog lägga in att username och green flag sparas-->
       </div>
-      <button v-on:click="joinDate" type="submit">Join date</button>
+      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">Join date</button>
     </section>
 
     <section class="waitingForStart" v-if="this.userCreated && this.showInputBox === false">
@@ -47,7 +46,7 @@
 
     </section>
 
-  </body>
+  </section>
 </template>
 
 <script>
@@ -139,10 +138,9 @@ export default {
 </script>
 
 <style>
-body {
-  background: linear-gradient(106.5deg,
-      rgba(255, 215, 185, 0.91) 23%,
-      rgba(223, 159, 247, 0.8) 93%);
+.pollBody {
+  background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+  min-height: 100vh;
 }
 
 .enteringDetails {
@@ -152,5 +150,6 @@ body {
 .waitingForStart {
   font-size: 40px;
   font-weight: bold;
+  margin: 0px;
 }
 </style>

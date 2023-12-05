@@ -1,4 +1,5 @@
 <template>
+  <section class="CQVbody">
     <header>{{uiLabels.writeQuestion}} {{ this.numberedQuestion }}</header>
     <div>
       <textarea v-model="question" rows="4" cols="50"></textarea><br>
@@ -8,12 +9,13 @@
     </div>
     <div>
       <router-link to="/chooseAnswer/">
-          <button v-on:click="addQuestion" id="submitButton" >{{uiLabels.submitQuestion}}
+          <button v-on:click="addQuestion" id="submitButton" :disabled="!question">{{uiLabels.submitQuestion}}
           </button> 
       </router-link> 
     </div>
 
 <!--uiLabels.submitQuestion ska skickas med som qId på samma sätt som pollId skickas vidare (se data.json)-->
+</section>
 </template>
 
 
@@ -34,7 +36,6 @@ export default {
       uiLabels: {},
       originalPredefinedQuestions:["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12"],
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11", "Q12"],
-
     }
   },
   created: function () {
@@ -77,5 +78,10 @@ export default {
 header{
   font-size: 50px;
   color: black;
+}
+
+.CQVbody{
+  background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  min-height: 100vh;
 }
 </style>

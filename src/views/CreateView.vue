@@ -1,17 +1,18 @@
 <template>
-  <div class="createViewBody">
+  <section class="createViewBody">
     <header>{{ uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-  </div>
+  
   <section class="activePlayers">
     <div class="onePlayer" v-for="player in playersData">
       {{ getName(player) }}
     </div>
   </section>
-  <br />
+
   <button v-on:click="createPoll">
    {{ uiLabels.startGame }}
   </button>
+</section>
 </template>
 
 <script>
@@ -100,6 +101,8 @@ header {
 
 .createViewBody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  min-height: 100vh;
+
 }
 
 .activePlayers {
