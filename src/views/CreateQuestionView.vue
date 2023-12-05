@@ -56,7 +56,7 @@ export default {
       this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
       this.predefinedQuestions.splice(randomIndex, 1);
       if(this.predefinedQuestions.length === 0){
-        this.predefinedQuestions = originalPredefinedQuestions
+        this.predefinedQuestions = this.originalPredefinedQuestions
       }
       
     },

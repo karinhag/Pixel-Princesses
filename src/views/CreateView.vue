@@ -100,6 +100,8 @@ header {
 
 .createViewBody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  min-height: 100vh;
+
 }
 
 .activePlayers {

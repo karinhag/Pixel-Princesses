@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <section class="pollBody">
     <section class="enteringDetails" v-if="userCreated === false">
       <div>
         Game ID: {{ pollId }}
@@ -16,8 +16,6 @@
           }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
 
-
-        <!--här får vi nog lägga in att username och green flag sparas-->
       </div>
       <button v-on:click="joinDate" type="submit">Join date</button>
     </section>
@@ -47,7 +45,7 @@
 
     </section>
 
-  </body>
+  </section>
 </template>
 
 <script>
@@ -138,10 +136,11 @@ export default {
 </script>
 
 <style>
-body {
-  background: linear-gradient(106.5deg,
-      rgba(255, 215, 185, 0.91) 23%,
-      rgba(223, 159, 247, 0.8) 93%);
+.pollBody {
+  background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+
+  min-height: 100vh;
+
 }
 
 .enteringDetails {
