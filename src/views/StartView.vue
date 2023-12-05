@@ -26,7 +26,7 @@
 
   <div class="box-b">
   <label>
-    Write poll id: <br>
+    {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
