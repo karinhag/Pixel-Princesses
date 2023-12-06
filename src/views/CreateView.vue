@@ -107,6 +107,6 @@ header {
 
 .activePlayers {
   font-size: 35px;
-  color: hotpink;
+  color: rgb(156, 10, 83);
 }
 </style>
