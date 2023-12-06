@@ -45,7 +45,9 @@
   <div v-if="id">
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
   </div>
+
 </div>
+
 </div>
 </section>
 
@@ -191,6 +193,8 @@ h1{
     text-align: left;
     
   }
+
+  
 
 @media screen and (max-width:50em) {
   .logo {

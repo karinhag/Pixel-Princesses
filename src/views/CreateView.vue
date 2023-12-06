@@ -9,9 +9,12 @@
     </div>
   </section>
 
+  <div class="startGameButton">
   <button v-on:click="createPoll">
    {{ uiLabels.startGame }}
   </button>
+  </div>
+
 </section>
 </template>
 
@@ -91,12 +94,14 @@ export default {
 <style>
 header {
   font-size: 60px;
+  padding: 40px;
 }
 .thePollId {
   font-size: 30px;
   color: #1693;
   font-size: 40px;
   color: darkmagenta;
+
 }
 
 .createViewBody {
@@ -109,4 +114,28 @@ header {
   font-size: 35px;
   color: rgb(156, 10, 83);
 }
+
+.startGameButton{
+margin: 20px;
+}
+
+button {
+  background-color: rgba(246, 0, 41, 0.431);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 25px;
+  margin: 7px 5px;
+  border-radius: 50px;
+
+}
+
+button:hover {
+    color: #a4102c; 
+    cursor: pointer;    
+ }
+
+ 
 </style>

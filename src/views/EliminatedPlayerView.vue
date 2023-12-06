@@ -80,6 +80,7 @@ button {
   font-size: 20pt;
   color: black;
   width:20%;
+  background-color: lightcoral;
 }
 button > img, /*this part selects the img as a direct child of the button*/
       button > span {

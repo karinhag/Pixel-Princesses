@@ -81,5 +81,22 @@ header{
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
   min-height: 100vh;
 }
+button {
+  background-color: rgba(246, 0, 41, 0.431);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 25px;
+  margin: 7px 5px;
+  border-radius: 50px;
+
+}
+
+button:hover {
+    color: #a4102c; 
+    cursor: pointer;    
+ }
 
 </style>

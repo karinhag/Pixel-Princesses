@@ -18,7 +18,7 @@
         </p>
 
       </div>
-      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">Join date</button>
+      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.joinDate}}</button>
     </section>
 
     <section class="waitingForStart" v-if="this.userCreated && this.showInputBox === false">
@@ -156,4 +156,21 @@ h1{
   margin: 0px;
   padding: 20px;
 }
+button {
+  background-color: rgba(246, 0, 41, 0.431);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  margin: 7px 5px;
+  border-radius: 50px;
+
+}
+
+button:hover {
+    color: rgb(77, 5, 59); 
+    cursor: pointer;    
+ }
 </style>
