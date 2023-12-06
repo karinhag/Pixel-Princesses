@@ -1,5 +1,7 @@
 <template>
     <header>{{uiLabels.writeQuestion}} {{ this.numberedQuestion }}</header>
+
+    pOLLid; {{ this.pollId }}
     <div>
       <textarea v-model="question" rows="4" cols="50"></textarea><br>
     </div>
@@ -7,13 +9,11 @@
       {{uiLabels.hardToDecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
     </div>
     <div>
-      <router-link to="/chooseAnswer/">
+
           <button v-on:click="addQuestion" id="submitButton" >{{uiLabels.submitQuestion}}
           </button> 
-      </router-link> 
-    </div>
 
-<!--uiLabels.submitQuestion ska skickas med som qId på samma sätt som pollId skickas vidare (se data.json)-->
+    </div>
 </template>
 
 
@@ -39,6 +39,8 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
+    this.id = this.$route.params.id;
+
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -62,7 +64,8 @@ export default {
     },
    
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      this.$router.push('/chooseAnswer/'+this.pollId)
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question} )
     },
     addAnswer: function () {
       this.answers.push("");

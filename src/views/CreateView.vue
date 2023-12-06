@@ -49,6 +49,7 @@ export default {
     
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("pollCreated", (data) => (this.data = data));
+    console.log('Socket connection established:', socket.connected);
   },
 
   methods: {

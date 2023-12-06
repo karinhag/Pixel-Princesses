@@ -1,74 +1,84 @@
 <template>
-    <header>{{uiLabels.waitingAnswers}}</header>
-    {{uiLabels.chooseElimination}}
+  <header>{{ uiLabels.waitingAnswers }}</header>
+  {{ uiLabels.chooseElimination }}
 
+  <div v-for="answer in userAnswers" :key="answer">{{ answer }}</div>
 
-    <div class="onePlayer" v-for="player in playersData">
-      {{ getAnswer(player) }}
-    </div>
-   
-    <router-link to="/eliminatedPlayer/">
-      <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
-      </router-link>
- 
+  <router-link to="/eliminatedPlayer/">
+    <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
+  </router-link>
 </template>
 
-
 <script>
-import io from 'socket.io-client';
+import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: 'CreateView',
+  name: "CreateView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       question: "",
-      answers: ["", ""],
+      answers:"",
       questionNumber: 0,
       data: {},
       uiLabels: {},
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
       playersData: null,
-    }
+      userAnswers: [],
+    };
   },
   created: function () {
-    this.id = this.$route.params.id;
+    this.pollId = this.$route.params.pollId;
     socket.emit("pageLoaded", this.lang);
+    socket.emit("joinPoll", this.pollId);
+
     socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
-    socket.on("dataUpdate", (data) =>
-      this.data = data
-    )
+      this.uiLabels = labels;
+    });
+    socket.on("dataUpdate", (data) => (this.data = data));
+    socket.on("incomingAnswers", (data) => (this.getAnswer(data)));
   },
   methods: {
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
     },
     generateRandomQuestion() {
-        const randomIndex = Math.floor(Math.random() * this.predefinedQuestions.length);
+      const randomIndex = Math.floor(
+        Math.random() * this.predefinedQuestions.length
+      );
       this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
     },
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      socket.emit("addQuestion", {
+        pollId: this.pollId,
+        q: this.question,
+        a: this.answers,
+      });
     },
     addAnswer: function () {
       this.answers.push("");
     },
     runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+      socket.emit("runQuestion", {
+        pollId: this.pollId,
+        questionNumber: this.questionNumber,
+      });
     },
-    getAnswer: function (playerData) {
-      return playerData.answer;
-    },
-  }
-}
+    getAnswer: function (d) {
+ 
+    //  for (let i = 0; i < d.length; i++) {
+    // const currentAnswer = d[i].answer;
+
+    this.userAnswers.push(d.pop().answer)
+    console.log(this.userAnswers);}
+  },
+};
 </script>
 
 <style>
-header{
+header {
   font-size: 50px;
   color: black;
 }

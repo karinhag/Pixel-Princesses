@@ -30,12 +30,7 @@ const router = createRouter({
       component: () => import('../views/ResultView.vue')
     },
     {
-      path: '/chooseAnswer/',
-      name: 'chooseAnswerView',
-      component: () => import('@/views/chooseAnswerView.vue')
-    },
-    {
-      path: '/chooseAnswer/',
+      path: '/chooseAnswer/:pollId',
       name: 'chooseAnswerView',
       component: () => import('@/views/chooseAnswerView.vue')
     },

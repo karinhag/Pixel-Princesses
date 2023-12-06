@@ -6,6 +6,7 @@ import { readFileSync } from "fs";
 function Data() {
   this.polls = {};
   this.players = [];
+  this.answers=[];
 }
 
 /***********************************************
@@ -34,7 +35,6 @@ Data.prototype.createPoll = function (pollId, lang = "en") {
 
 Data.prototype.addQuestion = function (pollId, q) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q);
   if (typeof poll !== "undefined") {
     poll.questions.push(q);
   }
@@ -49,7 +49,6 @@ Data.prototype.editQuestion = function (pollId, index, newQuestion) {
 
 Data.prototype.getQuestion = function (pollId, qId = null) {
   const poll = this.polls[pollId];
-  console.log("question requested for", pollId, qId);
   if (typeof poll !== "undefined") {
     if (qId !== null) {
       poll.currentQuestion = qId;
@@ -57,24 +56,19 @@ Data.prototype.getQuestion = function (pollId, qId = null) {
     console.log(poll.questions)
     return poll.questions;
   }
-  console.log("poll not found", pollId)
   return [];
 };
 
-Data.prototype.submitAnswer = function (pollId, answer) {
-  const poll = this.polls[pollId];
-  console.log("answer submitted for ", pollId, answer);
-  if (typeof poll !== "undefined") {
-    let answers = poll.answers[poll.currentQuestion];
-    if (typeof answers !== "object") {
-      answers = {};
-      answers[answer] = 1;
-      poll.answers.push(answers);
-    } else if (typeof answers[answer] === "undefined") answers[answer] = 1;
-    else answers[answer] += 1;
-    console.log("answers looks like ", answers, typeof answers);
-  }
-};
+
+Data.prototype.storeAnswer = function(pollId, answer, playerID){
+let playerInfo = {answer, playerID}
+if (!this.answers[pollId]) {
+  this.answers[pollId] = [];
+}
+this.answers[pollId].push(playerInfo);
+return this.answers[pollId]
+}
+
 
 Data.prototype.getAnswers = function (pollId) {
   const poll = this.polls[pollId];
@@ -108,9 +102,9 @@ Data.prototype.addPlayer = function (pollId, userInfo) {
     this.players[pollId] = [];
   }
   this.players[pollId].push(userInfo);
-  // console.log("detta kommer från Data.js!", this.players);
-  console.log("addedPlayer ger;", this.players[pollId])
   return this.players[pollId]
 };
+
+
 
 export { Data };

@@ -13,7 +13,7 @@ function sockets(io, socket, data) {
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang), d.message);
   });
 
-  socket.on('addQuestion', function(d) {
+  socket.on('addQuestion', function(d) { 
     data.addQuestion(d.pollId, d.q); //, a: d.a}
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
     io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId));     
@@ -33,7 +33,6 @@ function sockets(io, socket, data) {
 
     socket.on('joinDate', function(userData) {
       socket.join(""+ userData.pollId);
-      console.log('Received joinDate event in server:', userData);
       io.to(userData.pollId).emit('joinedDate', userData.userInfo);     
       io.to(userData.pollId).emit("addedPlayer", data.addPlayer(userData.pollId, userData.userInfo) ) //
   });
@@ -45,9 +44,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('submitAnswer', function(d) {
-    data.submitAnswer(d.pollId, d.answer);
-    io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
-    socket.emit("connectingClient","hej" )
+    io.to(d.pollId).emit("incomingAnswers", data.storeAnswer(d.pollId, d.userInfo.answer, d.userInfo.uniquePlayerId));
   });
 
   socket.on('resetAll', () => {
