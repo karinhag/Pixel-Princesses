@@ -18,12 +18,12 @@
         </p>
 
       </div>
-      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.joinDate}}</button>
+      <button class="purpleButton" v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.participatePoll}}</button>
     </section>
 
     <section class="waitingForStart" v-if="this.userCreated && this.showInputBox === false">
       <h1>{{ uiLabels.waitingForGame }}</h1>
-      <button v-on:click="abandonDate" type="submit">
+      <button class="purpleButton" v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
 
@@ -38,9 +38,9 @@
           }}<input type="text" v-model="userInfo.answer" />
         </p>
 
-        <button v-on:click="joinDate" type="submit">{{ uiLabels.sendAnswer }}</button>
+        <button class="purpleButton" v-on:click="joinDate" type="submit">{{ uiLabels.sendAnswer }}</button>
 
-      <button v-on:click="abandonDate" type="submit">
+      <button class="purpleButton" v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
 
@@ -156,16 +156,16 @@ h1{
   margin: 0px;
   padding: 20px;
 }
-button {
-  background-color: rgba(246, 0, 41, 0.431);
+.purpleButton {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   border: solid;
   border-color: rgb(94, 13, 87);
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   margin: 7px 5px;
-  border-radius: 50px;
+  border-radius: 15px;
 
 }
 

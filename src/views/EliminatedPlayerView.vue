@@ -12,9 +12,9 @@
       {{ uiLabels.savePlayer }}
     </button>
   </div>
-  <router-link to="/createQuestion/">
-          <button id="button" > {{ uiLabels.nextQuestion }}</button> 
-      </router-link>
+  <button v-on:click="createQuestion">
+{{ uiLabels.nextQuestion }}
+</button>
 
   <div class="lifeBouyUsed" v-if="playerSaved"> 
     {{ uiLabels.lifebouySpent }}
@@ -44,6 +44,7 @@ export default {
   },
   created: function () {
     this.id = this.$route.params.id;
+
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -55,6 +56,11 @@ export default {
         this.playerSaved=true;
         // socket.emit("lifelineUsed",{pollId: this.pollId} )
     },
+    createQuestion: function () {
+    socket.emit("createQuestion", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/createQuestion/'+this.id)
+    },
+
   },
 };
 // createPoll: function () {
@@ -80,8 +86,8 @@ button {
   font-size: 20pt;
   color: black;
   width:20%;
-  background-color: lightcoral;
 }
+
 button > img, /*this part selects the img as a direct child of the button*/
       button > span {
   /*this part selects the span as a direct child of the button*/

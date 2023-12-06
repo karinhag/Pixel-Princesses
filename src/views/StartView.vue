@@ -34,7 +34,11 @@
 
   <div class="boxes-container">
   <div class ="box-a">
-  <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
+
+  <button v-on:click="beginGame">
+  {{ uiLabels.createPoll }}
+  </button>
+  
   </div>
 
   <div class="box-b">
@@ -42,9 +46,13 @@
     {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
+    <button v-on:click="joinDate" :disabled="!id">
+    {{ uiLabels.participatePoll }}
+    </button>
+  <!--
   <div v-if="id">
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
-  </div>
+  </div>-->
 
 </div>
 
@@ -101,7 +109,17 @@ export default {
     FAQ: function() {
       this.showFAQ = !this.showFAQ;
       this.showAbout = false;
-    }
+    },
+    beginGame: function () {
+    socket.emit("beginGame", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/create/')
+    },
+    joinDate: function () {
+    socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/poll/'+this.id)
+    },
+
+
   }
 }
 </script>

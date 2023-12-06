@@ -9,11 +9,9 @@
     </div>
   </section>
 
-  <div class="startGameButton">
-  <button v-on:click="createPoll">
+  <button class="purpleButton" v-on:click="createPoll">
    {{ uiLabels.startGame }}
   </button>
-  </div>
 
 </section>
 </template>
@@ -119,21 +117,21 @@ header {
 margin: 20px;
 }
 
-button {
-  background-color: rgba(246, 0, 41, 0.431);
+.purpleButton {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   border: solid;
   border-color: rgb(94, 13, 87);
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 25px;
+  font-size: 15px;
   margin: 7px 5px;
-  border-radius: 50px;
+  border-radius: 15px;
 
 }
 
 button:hover {
-    color: #a4102c; 
+    color: #a41069; 
     cursor: pointer;    
  }
 

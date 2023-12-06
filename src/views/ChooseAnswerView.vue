@@ -8,11 +8,13 @@
     <div class="onePlayer" v-for="player in playersData">
       {{ getAnswer(player) }}
     </div>
-   
-    <router-link to="/eliminatedPlayer/">
-      <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
-      </router-link>
+
+    <button class="eliminateButton" v-on:click="eliminatePlayer">
+    {{ uiLabels.eliminate }}
+    </button>
+
       </section>
+
     
  
 </template>
@@ -67,6 +69,11 @@ export default {
     getAnswer: function (playerData) {
       return playerData.answer;
     },
+    eliminatePlayer: function () {
+    socket.emit("eliminatePlayer", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/eliminatedPlayer/'+this.id)
+    },
+
   }
 }
 </script>
@@ -81,21 +88,22 @@ header{
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
   min-height: 100vh;
 }
-button {
-  background-color: rgba(246, 0, 41, 0.431);
+
+.eliminateButton {
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
   border: solid;
-  border-color: rgb(94, 13, 87);
+  border-color:  black;
   padding: 15px;
+  color: lightgoldenrodyellow;
   text-align: center;
   display: inline-block;
-  font-size: 25px;
+  font-size: 15px;
   margin: 7px 5px;
-  border-radius: 50px;
-
+  border-radius: 15px;
 }
 
 button:hover {
-    color: #a4102c; 
+    color: #4a292f; 
     cursor: pointer;    
  }
 
