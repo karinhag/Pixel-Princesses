@@ -8,10 +8,14 @@
       {{uiLabels.hardToDecide}}<button @click="generateRandomQuestion">{{ uiLabels.randomQuestion }}</button>
     </div>
     <div>
-      <router-link to="/chooseAnswer/">
+      <button v-on:click="addQuestion" id="submitButton" :disabled="!question">
+      {{ uiLabels.submitQuestion }}
+      </button>
+
+      <!--<router-link to="/chooseAnswer/">
           <button v-on:click="addQuestion" id="submitButton" :disabled="!question">{{uiLabels.submitQuestion}}
           </button> 
-      </router-link> 
+      </router-link> -->
     </div>
 
 <!--uiLabels.submitQuestion ska skickas med som qId på samma sätt som pollId skickas vidare (se data.json)-->
@@ -63,6 +67,9 @@ export default {
    
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      this.$router.push('/chooseAnswer/'+this.pollId)
+      },
+
     },
     addAnswer: function () {
       this.answers.push("");
@@ -70,7 +77,7 @@ export default {
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
-  }}
+  }
 
 </script>
 

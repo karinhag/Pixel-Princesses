@@ -8,11 +8,13 @@
     <div class="onePlayer" v-for="player in playersData">
       {{ getAnswer(player) }}
     </div>
-   
-    <router-link to="/eliminatedPlayer/">
-      <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
-      </router-link>
+
+    <button v-on:click="eliminatePlayer">
+    {{ uiLabels.eliminate }}
+    </button>
+
       </section>
+
     
  
 </template>
@@ -67,6 +69,11 @@ export default {
     getAnswer: function (playerData) {
       return playerData.answer;
     },
+    eliminatePlayer: function () {
+    socket.emit("eliminatePlayer", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/eliminatedPlayer/'+this.id)
+    },
+
   }
 }
 </script>

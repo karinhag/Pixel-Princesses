@@ -3,7 +3,7 @@
 	"subHeading": "Your soulmate will never be eliminated",
 	"invite": "Invite participants with this link:",
 	"createPoll": "Create date",
-	"participatePoll": "Participate in date",
+	"participatePoll": "Join date",
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"writePollId": "Write poll id:",
@@ -44,5 +44,5 @@
 	"lifebouySpent":"You have used your lifebouy...",
 	"nextQuestion": "Next Question",
 	"answer": "Write your answer",
-	"joinDate": "Join Date"
+	"eliminate": "Eliminate"
 }

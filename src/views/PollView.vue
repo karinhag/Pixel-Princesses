@@ -18,7 +18,7 @@
         </p>
 
       </div>
-      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.joinDate}}</button>
+      <button v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.participatePoll}}</button>
     </section>
 
     <section class="waitingForStart" v-if="this.userCreated && this.showInputBox === false">
