@@ -1,17 +1,19 @@
 <template>
-  <div class="createViewBody">
+  <section class="createViewBody">
     <header>{{ uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-  </div>
+  
   <section class="activePlayers">
     <div class="onePlayer" v-for="player in playersData">
       {{ getName(player) }}
     </div>
   </section>
-  <br />
-  <button v-on:click="createPoll">
+
+  <button class="purpleButton" v-on:click="createPoll">
    {{ uiLabels.startGame }}
   </button>
+
+</section>
 </template>
 
 <script>
@@ -91,20 +93,48 @@ export default {
 <style>
 header {
   font-size: 60px;
+  padding: 40px;
 }
 .thePollId {
   font-size: 30px;
   color: #1693;
   font-size: 40px;
   color: darkmagenta;
+
 }
 
 .createViewBody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  min-height: 100vh;
+
 }
 
 .activePlayers {
   font-size: 35px;
-  color: hotpink;
+  color: rgb(156, 10, 83);
 }
+
+.startGameButton{
+margin: 20px;
+}
+
+.purpleButton {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  margin: 7px 5px;
+  border-radius: 15px;
+
+}
+
+button:hover {
+    color: #a41069; 
+    cursor: pointer;    
+ }
+
+ 
 </style>

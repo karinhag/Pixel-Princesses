@@ -44,6 +44,7 @@ export default {
   created: function () {
     this.id = this.$route.params.id;
     socket.emit("pageLoaded", this.lang);
+    socket.emit("joinPoll", this.pollId);
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });

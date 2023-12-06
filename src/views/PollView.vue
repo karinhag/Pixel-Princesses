@@ -1,8 +1,12 @@
 <template>
-  <body>
+  <section class="pollBody">
     <section class="enteringDetails" v-if="userCreated === false">
       <div>
         Game ID: {{ this.pollId }}
+
+        Game ID: {{ pollId }}
+
+        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer($event)" />
         <!--<span>{{ this.submittedAnswers }}</span>-->
         <p>
           {{ uiLabels.userName
@@ -13,8 +17,9 @@
           {{ uiLabels.greenFlag
           }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
+
       </div>
-      <button v-on:click="joinDate" type="submit">Join date</button>
+      <button class="purpleButton" v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.participatePoll}}</button>
     </section>
 
     <section
@@ -23,7 +28,8 @@
     >
       <h1>{{ uiLabels.waitingForGame }}</h1>
       pollId: {{ this.pollId }}
-      <button v-on:click="abandonDate" type="submit">
+      <button class="purpleButton" v-on:click="abandonDate" type="submit">
+
         {{ uiLabels.abandonDate }}
       </button>
     </section>
@@ -35,15 +41,15 @@
         {{ uiLabels.answer }}<input type="text" v-model="userInfo.answer" />
       </p>
 
-      <button class="sendButton" v-on:click="sendAnswer" type="submit"> <!--Detta är knappen som ska trigga!!!-->
+      <button class="purpleButton"  v-on:click="sendAnswer" type="submit"> <!--Detta är knappen som ska trigga!!!-->
         {{ uiLabels.sendAnswer }}
       </button>
 
-      <button v-on:click="abandonDate" type="submit">
+      <button class="purpleButton" v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
     </section>
-  </body>
+  </section>
 </template>
 
 <script>
@@ -104,12 +110,8 @@ export default {
     getPlayerId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
-    
-    sendAnswer: function () {
-      socket.emit("submitAnswer", {
-        pollId: this.pollId,
-        userInfo: this.userInfo,
-      });
+    submitAnswer: function (answer) {
+      socket.emit("submitAnswer", { pollId: this.pollId, answer: answer });
     },
 
     joinDate: function () {
@@ -133,12 +135,10 @@ export default {
 </script>
 
 <style>
-body {
-  background: linear-gradient(
-    106.5deg,
-    rgba(255, 215, 185, 0.91) 23%,
-    rgba(223, 159, 247, 0.8) 93%
-  );
+
+.pollBody {
+  background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+  min-height: 100vh;
 }
 
 .enteringDetails {
@@ -148,5 +148,28 @@ body {
 .waitingForStart {
   font-size: 40px;
   font-weight: bold;
+  margin: 0px;
 }
+h1{
+  margin: 0px;
+  padding: 20px;
+}
+.purpleButton {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  margin: 7px 5px;
+  border-radius: 15px;
+
+}
+
+button:hover {
+    color: rgb(77, 5, 59); 
+    cursor: pointer;    
+ }
+
 </style>

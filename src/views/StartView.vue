@@ -26,12 +26,19 @@
     <br>{{uiLabels.FAQ3}}
 
   </div>
+
+  <section class="bodywrapper">
+
   <h1>{{ uiLabels["sales-pitch"] }}</h1>
   <h2>{{ uiLabels.subHeading }}</h2>
 
   <div class="boxes-container">
   <div class ="box-a">
-  <router-link to="/create/">{{uiLabels.createPoll}}</router-link>
+
+  <button v-on:click="beginGame">
+  {{ uiLabels.createPoll }}
+  </button>
+  
   </div>
 
   <div class="box-b">
@@ -39,9 +46,18 @@
     {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
+    <button v-on:click="joinDate" :disabled="!id">
+    {{ uiLabels.participatePoll }}
+    </button>
+  <!--
+  <div v-if="id">
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  </div>-->
+
 </div>
+
 </div>
+</section>
 
 </template>
 
@@ -93,14 +109,35 @@ export default {
     FAQ: function() {
       this.showFAQ = !this.showFAQ;
       this.showAbout = false;
-    }
+    },
+    beginGame: function () {
+    socket.emit("beginGame", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/create/')
+    },
+    joinDate: function () {
+    socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
+    this.$router.push('/poll/'+this.id)
+    },
+
+
   }
 }
 </script>
 <style scoped>
+
+h1{
+  margin: 0px;
+  padding: 20px;
+}
 .boxes-container {
     display: flex;
     justify-content: space-between;
+
+  }
+
+  .bodywrapper{
+    min-height: 100vh;
+    background: linear-gradient(179.4deg, rgb(253, 240, 233) 2.2%, rgb(255, 194, 203) 96.2%);
   }
 
   .box-a,
@@ -174,6 +211,8 @@ export default {
     text-align: left;
     
   }
+
+  
 
 @media screen and (max-width:50em) {
   .logo {

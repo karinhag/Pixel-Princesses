@@ -1,7 +1,9 @@
 <template>
-  <header>{{ uiLabels.waitingAnswers }}</header>
-  {{ uiLabels.chooseElimination }}
+    <section class="CAVbody">
 
+    <header>{{uiLabels.waitingAnswers}}</header>
+    {{uiLabels.chooseElimination}}
+    </section>
   <div v-for="answer in userAnswers" :key="answer">{{ answer }}</div>
 
   <router-link to="/eliminatedPlayer/">
@@ -82,4 +84,28 @@ header {
   font-size: 50px;
   color: black;
 }
+
+.CAVbody{
+  background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  min-height: 100vh;
+}
+
+.eliminateButton {
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
+  border: solid;
+  border-color:  black;
+  padding: 15px;
+  color: lightgoldenrodyellow;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  margin: 7px 5px;
+  border-radius: 15px;
+}
+
+button:hover {
+    color: #4a292f; 
+    cursor: pointer;    
+ }
+
 </style>
