@@ -7,12 +7,12 @@
     <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
 
   <div class="saveButton" v-on:click="savePlayer" v-if="!playerSaved">
-    <button>
+    <button class="lifebouyButton">
         <img class="theLifebouy" src="/lifebouy1.png" />
       {{ uiLabels.savePlayer }}
     </button>
   </div>
-  <button v-on:click="createQuestion">
+  <button class="nextQButton" v-on:click="createQuestion">
 {{ uiLabels.nextQuestion }}
 </button>
 
@@ -79,13 +79,20 @@ header{
 
 }
 
-button {
-  /* The button*/
-  
-  font-family: "Bungee Inline", sans-serif;
+.lifebouyButton{
+  background: radial-gradient(circle at 10% 20%, rgb(255, 200, 124) 0%, rgb(252, 251, 121) 90%);
   font-size: 20pt;
   color: black;
   width:20%;
+  border-radius: 15px;
+}
+
+.nextQButton {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  font-size: 20pt;
+  color: black;
+  width:20%;
+  border-radius: 15px;
 }
 
 button > img, /*this part selects the img as a direct child of the button*/
@@ -94,10 +101,16 @@ button > img, /*this part selects the img as a direct child of the button*/
    vertical-align: middle; 
   width:25%;
 }
-button:hover:enabled{
-    background: rgb(243, 204, 221);
-   
-  cursor: grab;
+
+.lifebouyButton:hover:enabled{
+  background: linear-gradient(109.6deg, rgb(255, 207, 84) 11.2%, rgb(255, 158, 27) 91.1%);
+  cursor: pointer;
+}
+
+
+.nextQButton:hover:enabled{
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+  cursor: pointer;
 
 }
 

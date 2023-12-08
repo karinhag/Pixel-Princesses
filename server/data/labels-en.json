@@ -39,9 +39,9 @@
 	"chooseElimination": "Choose who to eliminate",
 	"waitingForGame":"Waiting for game to start...",
 	"abandonDate":"Go back?",
-	"savePlayer":"Changed your mind? You have one lifebouy!",
+	"savePlayer":"Changed your mind? You have one lifeline!",
 	"theEliminatedPlayer":"You have eliminated...",
-	"lifebouySpent":"You have used your lifebouy...",
+	"lifebouySpent":"You have used your lifeline...",
 	"nextQuestion": "Next Question",
 	"answer": "Write your answer",
 	"eliminate": "Eliminate"

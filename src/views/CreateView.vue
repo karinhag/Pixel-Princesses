@@ -131,8 +131,8 @@ margin: 20px;
 }
 
 .purpleButton:hover:enabled {
-    color: hotpink; 
-    cursor: pointer;    
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+    cursor: pointer;   
  }
 
  

@@ -90,11 +90,11 @@ header{
 }
 
 .eliminateButton {
-  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
-  border: solid;
-  border-color:  black;
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(249, 70, 115) 0%,rgb(231, 8, 64) 90%);
   padding: 15px;
-  color: lightgoldenrodyellow;
+  color: white;
+  border: solid;
+  border-color: black;
   text-align: center;
   display: inline-block;
   font-size: 15px;
@@ -103,7 +103,7 @@ header{
 }
 
 button:hover:enabled {
-    color: #4a292f; 
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
     cursor: pointer;    
  }
 
