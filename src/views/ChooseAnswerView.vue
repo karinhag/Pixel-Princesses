@@ -85,7 +85,7 @@ header{
 }
 
 .CAVbody{
-  background: linear-gradient(to right, rgb(236, 133, 167), rgb(247, 156, 128));
+  background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
   min-height: 100vh;
 }
 
