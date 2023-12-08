@@ -117,8 +117,8 @@ header{
 }
 
 
-button:hover {
-    color: rgb(77, 5, 59); 
-    cursor:rgb(64, 4, 49) }
+button:hover:enabled {
+    color: hotpink;
+    cursor: pointer;}
 
 </style>

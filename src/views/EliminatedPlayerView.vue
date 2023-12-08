@@ -94,7 +94,7 @@ button > img, /*this part selects the img as a direct child of the button*/
    vertical-align: middle; 
   width:25%;
 }
-button:hover{
+button:hover:enabled{
     background: rgb(243, 204, 221);
    
   cursor: grab;

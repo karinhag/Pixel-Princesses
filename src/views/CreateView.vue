@@ -130,8 +130,8 @@ margin: 20px;
 
 }
 
-button:hover {
-    color: #a41069; 
+.purpleButton:hover:enabled {
+    color: hotpink; 
     cursor: pointer;    
  }
 

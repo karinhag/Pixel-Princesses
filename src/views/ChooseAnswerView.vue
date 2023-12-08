@@ -102,7 +102,7 @@ header{
   border-radius: 15px;
 }
 
-button:hover {
+button:hover:enabled {
     color: #4a292f; 
     cursor: pointer;    
  }
