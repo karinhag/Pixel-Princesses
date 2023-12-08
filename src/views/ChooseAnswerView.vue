@@ -85,12 +85,12 @@ header{
 }
 
 .CAVbody{
-  background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+  background: linear-gradient(to right, rgb(236, 133, 167), rgb(247, 156, 128));
   min-height: 100vh;
 }
 
 .eliminateButton {
-  background: radial-gradient(circle at 50.4% 50.5%, rgb(249, 70, 115) 0%,rgb(231, 8, 64) 90%);
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(248, 76, 119) 0%,rgb(228, 19, 71) 90%);
   padding: 15px;
   color: white;
   border: solid;
@@ -102,9 +102,9 @@ header{
   border-radius: 15px;
 }
 
-button:hover:enabled {
-  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
-    cursor: pointer;    
+.eliminateButton:hover:enabled {
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(249, 70, 115) 0%,rgb(148, 2, 39)90%);    
+  cursor: pointer;    
  }
 
 </style>
