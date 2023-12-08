@@ -11,7 +11,7 @@
       </button>
     </div>
     <div>
-      <button v-on:click="addQuestion" id="submitButton">
+      <button class="purpleButton" v-on:click="addQuestion" id="submitButton" :disabled="!question">
         {{ uiLabels.submitQuestion }}
       </button>
     </div>

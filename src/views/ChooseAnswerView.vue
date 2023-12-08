@@ -6,7 +6,7 @@
   <div v-for="answer in this.userAnswers" :key="answer">{{ answer }}</div>
 
   <router-link to="/eliminatedPlayer/">
-    <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
+    <button class="eliminateButton" v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
   </router-link>
 </section>
 </template>
