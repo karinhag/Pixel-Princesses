@@ -94,24 +94,16 @@ header {
 }
 
 .eliminateButton {
-  background: radial-gradient(
-    circle at 50.4% 50.5%,
-    rgb(251, 32, 86) 0%,
-    rgb(135, 2, 35) 90%
-  );
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(248, 76, 119) 0%,rgb(228, 19, 71) 90%);
+  padding: 15px;
+  color: white;
   border: solid;
   border-color: black;
-  padding: 15px;
-  color: lightgoldenrodyellow;
-  text-align: center;
-  display: inline-block;
-  font-size: 15px;
-  margin: 7px 5px;
   border-radius: 15px;
 }
 
-button:hover {
-  color: #4a292f;
-  cursor: pointer;
-}
+.eliminateButton:hover:enabled {
+  background: radial-gradient(circle at 50.4% 50.5%, rgb(249, 70, 115) 0%,rgb(148, 2, 39)90%);    
+  cursor: pointer;    
+ }
 </style>
