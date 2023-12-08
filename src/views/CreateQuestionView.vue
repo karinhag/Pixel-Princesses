@@ -151,8 +151,12 @@ header {
   border-radius: 15px;
 }
 
-button:hover {
-  color: rgb(77, 5, 59);
-  cursor: rgb(64, 4, 49);
-}
+.purpleButton:hover:enabled {
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+  cursor: pointer;}
+
+  .randomQuestionButton:hover:enabled {
+    background: radial-gradient(290px at 8.6% 46.4%, rgb(250, 112, 112) 7.8%, rgb(252, 208, 115) 32.2%, rgb(231, 252, 129) 48.1%, rgb(188, 249, 127) 61%, rgb(104, 232, 228) 75.3%);
+  cursor: pointer;}
+
 </style>

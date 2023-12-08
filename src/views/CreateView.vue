@@ -126,8 +126,10 @@ header {
   border-radius: 15px;
 }
 
-button:hover {
-  color: #a41069;
-  cursor: pointer;
-}
+.purpleButton:hover:enabled {
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+    cursor: pointer;   
+ }
+
+ 
 </style>

@@ -169,8 +169,8 @@ h1 {
   border-radius: 15px;
 }
 
-button:hover {
-  color: rgb(77, 5, 59);
-  cursor: pointer;
-}
+button:hover:enabled {
+    background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+    cursor: pointer;    
+ }
 </style>
