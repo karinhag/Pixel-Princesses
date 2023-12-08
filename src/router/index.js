@@ -1,46 +1,45 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import StartView from '../views/StartView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import StartView from "../views/StartView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'Start',
-      component: StartView
-    },
-      {
-      path: '/poll/:id',
-      name: 'PollView',
-      component: () => import('../views/PollView.vue')
+      path: "/",
+      name: "Start",
+      component: StartView,
     },
     {
-      path: '/create/',
-      name: 'CreateView',
-      component: () => import('../views/CreateView.vue')
+      path: "/poll/:id",
+      name: "PollView",
+      component: () => import("../views/PollView.vue"),
     },
     {
-      path: '/createQuestion/:pollId',
-      name: 'CreateQuestionView',
-      component: () => import('@/views/CreateQuestionView.vue')
+      path: "/create/",
+      name: "CreateView",
+      component: () => import("../views/CreateView.vue"),
     },
     {
-      path: '/result/:id',
-      name: 'ResultView',
-      component: () => import('../views/ResultView.vue')
+      path: "/createQuestion/:pollId",
+      name: "CreateQuestionView",
+      component: () => import("@/views/CreateQuestionView.vue"),
     },
     {
-      path: '/chooseAnswer/:pollId',
-      name: 'chooseAnswerView',
-      component: () => import('@/views/chooseAnswerView.vue')
+      path: "/result/:id",
+      name: "ResultView",
+      component: () => import("../views/ResultView.vue"),
     },
     {
-      path: '/eliminatedPlayer/:id',
-      name: 'eliminatedPlayer',
-      component:() =>import('@/views/EliminatedPlayerView.vue')
-    }
+      path: "/chooseAnswer/:pollId",
+      name: "chooseAnswerView",
+      component: () => import("@/views/chooseAnswerView.vue"),
+    },
+    {
+      path: "/eliminatedPlayer/:id",
+      name: "eliminatedPlayer",
+      component: () => import("@/views/EliminatedPlayerView.vue"),
+    },
+  ],
+});
 
-  ]
-})
-
-export default router
+export default router;

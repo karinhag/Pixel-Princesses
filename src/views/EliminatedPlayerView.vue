@@ -1,26 +1,23 @@
 <template>
   <div class="topPage">
-    <header>{{uiLabels.theEliminatedPlayer}}</header>
+    <header>{{ uiLabels.theEliminatedPlayer }}</header>
   </div>
 
-    <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
+  <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
 
   <div class="saveButton" v-on:click="savePlayer" v-if="!playerSaved">
     <button>
-        <img class="theLifebouy" src="/lifebouy1.png" />
+      <img class="theLifebouy" src="/lifebouy1.png" />
       {{ uiLabels.savePlayer }}
     </button>
   </div>
   <router-link to="/createQuestion/">
-          <button id="button" > {{ uiLabels.nextQuestion }}</button> 
-      </router-link>
+    <button id="button">{{ uiLabels.nextQuestion }}</button>
+  </router-link>
 
-  <div class="lifeBouyUsed" v-if="playerSaved"> 
+  <div class="lifeBouyUsed" v-if="playerSaved">
     {{ uiLabels.lifebouySpent }}
   </div>
-
-
-
 </template>
 
 <script>
@@ -51,9 +48,9 @@ export default {
     socket.on("dataUpdate", (data) => (this.data = data));
   },
   methods: {
-    savePlayer: function(){
-        this.playerSaved=true;
-        // socket.emit("lifelineUsed",{pollId: this.pollId} )
+    savePlayer: function () {
+      this.playerSaved = true;
+      // socket.emit("lifelineUsed",{pollId: this.pollId} )
     },
   },
 };
@@ -62,29 +59,27 @@ export default {
 //     },
 </script>
 <style>
-
-header{
-    font-size: 60px;
+header {
+  font-size: 60px;
 }
 
 button {
   /* The button*/
-  
+
   font-family: "Bungee Inline", sans-serif;
   font-size: 20pt;
   color: black;
-  width:20%;
+  width: 20%;
 }
 button > img, /*this part selects the img as a direct child of the button*/
       button > span {
   /*this part selects the span as a direct child of the button*/
-   vertical-align: middle; 
-  width:25%;
+  vertical-align: middle;
+  width: 25%;
 }
-button:hover{
-    background: rgb(243, 204, 221);
-   
-  cursor: grab;
+button:hover {
+  background: rgb(243, 204, 221);
 
+  cursor: grab;
 }
 </style>

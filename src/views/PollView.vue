@@ -4,10 +4,9 @@
       <div>
         Game ID: {{ this.pollId }}
 
-        Game ID: {{ pollId }}
-
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer($event)" />
-        <!--<span>{{ this.submittedAnswers }}</span>-->
+        <QuestionComponent
+          v-bind:question="question"
+        />
         <p>
           {{ uiLabels.userName
           }}<input type="text" v-model="userInfo.userName" />
@@ -17,9 +16,15 @@
           {{ uiLabels.greenFlag
           }}<input type="text" v-model="userInfo.greenFlag" />
         </p>
-
       </div>
-      <button class="purpleButton" v-on:click="joinDate" type="submit" :disabled="!userInfo.userName || !userInfo.greenFlag">{{uiLabels.participatePoll}}</button>
+      <button
+        class="purpleButton"
+        v-on:click="joinDate"
+        type="submit"
+        :disabled="!userInfo.userName || !userInfo.greenFlag"
+      >
+        {{ uiLabels.participatePoll }}
+      </button>
     </section>
 
     <section
@@ -29,7 +34,6 @@
       <h1>{{ uiLabels.waitingForGame }}</h1>
       pollId: {{ this.pollId }}
       <button class="purpleButton" v-on:click="abandonDate" type="submit">
-
         {{ uiLabels.abandonDate }}
       </button>
     </section>
@@ -41,7 +45,8 @@
         {{ uiLabels.answer }}<input type="text" v-model="userInfo.answer" />
       </p>
 
-      <button class="purpleButton"  v-on:click="sendAnswer" type="submit"> <!--Detta är knappen som ska trigga!!!-->
+      <button class="purpleButton" v-on:click="submitAnswer" type="submit">
+  
         {{ uiLabels.sendAnswer }}
       </button>
 
@@ -95,7 +100,6 @@ export default {
 
     socket.on("newQuestion", (q) => {
       this.question = q;
-      console.log("Här borde inte komma förrän frågan");
       if (this.question.length > 0) {
         this.showInputBox = true;
       }
@@ -110,8 +114,8 @@ export default {
     getPlayerId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
-    submitAnswer: function (answer) {
-      socket.emit("submitAnswer", { pollId: this.pollId, answer: answer });
+    submitAnswer: function () {
+      socket.emit("submitAnswer", { pollId: this.pollId, userInfo: this.userInfo });
     },
 
     joinDate: function () {
@@ -135,7 +139,6 @@ export default {
 </script>
 
 <style>
-
 .pollBody {
   background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
   min-height: 100vh;
@@ -150,7 +153,7 @@ export default {
   font-weight: bold;
   margin: 0px;
 }
-h1{
+h1 {
   margin: 0px;
   padding: 20px;
 }
@@ -164,12 +167,10 @@ h1{
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
-
 }
 
 button:hover {
-    color: rgb(77, 5, 59); 
-    cursor: pointer;    
- }
-
+  color: rgb(77, 5, 59);
+  cursor: pointer;
+}
 </style>

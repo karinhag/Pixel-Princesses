@@ -2,18 +2,17 @@
   <section class="createViewBody">
     <header>{{ uiLabels.theHeader }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-  
-  <section class="activePlayers">
-    <div class="onePlayer" v-for="player in playersData">
-      {{ getName(player) }}
-    </div>
+
+    <section class="activePlayers">
+      <div class="onePlayer" v-for="player in playersData">
+        {{ getName(player) }}
+      </div>
+    </section>
+
+    <button class="purpleButton" v-on:click="createPoll">
+      {{ uiLabels.startGame }}
+    </button>
   </section>
-
-  <button class="purpleButton" v-on:click="createPoll">
-   {{ uiLabels.startGame }}
-  </button>
-
-</section>
 </template>
 
 <script>
@@ -44,20 +43,19 @@ export default {
     socket.on("addedPlayer", (data) => this.getActivePlayers(data));
     socket.on("removedPlayer", (data) => this.getActivePlayers(data));
 
-
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
-    
+
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("pollCreated", (data) => (this.data = data));
-    console.log('Socket connection established:', socket.connected);
+    console.log("Socket connection established:", socket.connected);
   },
 
   methods: {
     createPoll: function () {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
-      this.$router.push('/createQuestion/'+this.pollId)
+      this.$router.push("/createQuestion/" + this.pollId);
     },
     addQuestion: function () {
       socket.emit("addQuestion", {
@@ -100,13 +98,11 @@ header {
   color: #1693;
   font-size: 40px;
   color: darkmagenta;
-
 }
 
 .createViewBody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
   min-height: 100vh;
-
 }
 
 .activePlayers {
@@ -114,8 +110,8 @@ header {
   color: rgb(156, 10, 83);
 }
 
-.startGameButton{
-margin: 20px;
+.startGameButton {
+  margin: 20px;
 }
 
 .purpleButton {
@@ -128,13 +124,10 @@ margin: 20px;
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
-
 }
 
 button:hover {
-    color: #a41069; 
-    cursor: pointer;    
- }
-
- 
+  color: #a41069;
+  cursor: pointer;
+}
 </style>

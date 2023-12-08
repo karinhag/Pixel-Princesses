@@ -6,7 +6,7 @@ import { readFileSync } from "fs";
 function Data() {
   this.polls = {};
   this.players = [];
-  this.answers=[];
+  this.answers = [];
 }
 
 /***********************************************
@@ -53,46 +53,44 @@ Data.prototype.getQuestion = function (pollId, qId = null) {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
-    console.log(poll.questions)
     return poll.questions;
   }
   return [];
 };
 
-
-Data.prototype.storeAnswer = function(pollId, answer, playerID){
-let playerInfo = {answer, playerID}
-if (!this.answers[pollId]) {
-  this.answers[pollId] = [];
-}
-this.answers[pollId].push(playerInfo);
-return this.answers[pollId]
-}
-
+Data.prototype.storeAnswer = function (pollId, answer, playerID) {
+  let playerInfo = { answer, playerID };
+  if (!this.answers[pollId]) {
+    this.answers[pollId] = [];
+  }
+  this.answers[pollId].push(playerInfo);
+  return this.answers[pollId];
+  
+};
 
 Data.prototype.getAnswers = function (pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== "undefined") {
     const answers = poll.answers[poll.currentQuestion];
     if (typeof poll.questions[poll.currentQuestion] !== "undefined") {
-      return { q: poll.questions[poll.currentQuestion].q, a: answers };
+      return { q: poll.questions[poll.currentQuestion].q };
     }
   }
   return {};
 };
 
 Data.prototype.removeUserInfo = function (pollId, userInfo) {
-//this function is chatgpt
-  const userIndex = this.players[pollId].findIndex(user => (
-    user.uniquePlayerId === userInfo.uniquePlayerId
-  ));
+
+  const userIndex = this.players[pollId].findIndex(
+    (user) => user.uniquePlayerId === userInfo.uniquePlayerId
+  );
   if (userIndex !== -1) {
     this.players[pollId].splice(userIndex, 1);
   } else {
     console.log("User not found in the array");
   }
-  console.log("removeUser ger:", this.players[pollId])
-  return this.players[pollId]
+  console.log("removeUser ger:", this.players[pollId]);
+  return this.players[pollId];
 };
 
 Data.prototype.addPlayer = function (pollId, userInfo) {
@@ -102,9 +100,7 @@ Data.prototype.addPlayer = function (pollId, userInfo) {
     this.players[pollId] = [];
   }
   this.players[pollId].push(userInfo);
-  return this.players[pollId]
+  return this.players[pollId];
 };
-
-
 
 export { Data };

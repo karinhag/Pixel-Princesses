@@ -1,14 +1,14 @@
 <template>
-    <section class="CAVbody">
+  <section class="CAVbody">
+    <header>{{ uiLabels.waitingAnswers }}</header>
+    {{ uiLabels.chooseElimination }}
 
-    <header>{{uiLabels.waitingAnswers}}</header>
-    {{uiLabels.chooseElimination}}
-    </section>
-  <div v-for="answer in userAnswers" :key="answer">{{ answer }}</div>
+  <div v-for="answer in this.userAnswers" :key="answer">{{ answer }}</div>
 
   <router-link to="/eliminatedPlayer/">
     <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
   </router-link>
+</section>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       question: "",
-      answers:"",
+      answers: "",
       questionNumber: 0,
       data: {},
       uiLabels: {},
@@ -40,7 +40,7 @@ export default {
       this.uiLabels = labels;
     });
     socket.on("dataUpdate", (data) => (this.data = data));
-    socket.on("incomingAnswers", (data) => (this.getAnswer(data)));
+    socket.on("incomingAnswers", (data) => this.getAnswer(data));
   },
   methods: {
     createPoll: function () {
@@ -69,12 +69,15 @@ export default {
       });
     },
     getAnswer: function (d) {
- 
-    //  for (let i = 0; i < d.length; i++) {
-    // const currentAnswer = d[i].answer;
+      //  for (let i = 0; i < d.length; i++) {
+      // const currentAnswer = d[i].answer;
 
-    this.userAnswers.push(d.pop().answer)
-    console.log(this.userAnswers);}
+      this.userAnswers.push(d.pop().answer); //skriv om!!!
+      console.log(this.userAnswers);
+    },
+    eliminatePlayer: function(){
+      this.$router.push("/eliminatedPlayer/" + this.id);
+    }
   },
 };
 </script>
@@ -85,15 +88,19 @@ header {
   color: black;
 }
 
-.CAVbody{
+.CAVbody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
   min-height: 100vh;
 }
 
 .eliminateButton {
-  background: radial-gradient(circle at 50.4% 50.5%, rgb(251, 32, 86) 0%, rgb(135, 2, 35) 90%);
+  background: radial-gradient(
+    circle at 50.4% 50.5%,
+    rgb(251, 32, 86) 0%,
+    rgb(135, 2, 35) 90%
+  );
   border: solid;
-  border-color:  black;
+  border-color: black;
   padding: 15px;
   color: lightgoldenrodyellow;
   text-align: center;
@@ -104,8 +111,7 @@ header {
 }
 
 button:hover {
-    color: #4a292f; 
-    cursor: pointer;    
- }
-
+  color: #4a292f;
+  cursor: pointer;
+}
 </style>
