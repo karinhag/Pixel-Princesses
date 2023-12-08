@@ -18,7 +18,9 @@
       </button>
       <button class="eliminatingButton" v-on:click="eliminatePlayer" :disabled="chosenAnswer.length === 0">
         {{ uiLabels.eliminate }}     
-        {{ this.chosenAnswer.length > 0 ? this.chosenAnswer[0] : "" }}
+        {{ this.chosenAnswer.length > 0 ? this.chosenAnswer[0] : "..." }}
+        <img src="/black_broken_heart1.png" />
+
       </button>
     </div>
   </section>
