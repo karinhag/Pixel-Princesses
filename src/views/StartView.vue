@@ -198,10 +198,14 @@ h1{
   }
   #nav button{
     background-color: rgb(240, 188, 196);
-    
     margin: 0.3rem;
-  
   }
+
+  #nav button:hover{
+    cursor: pointer;
+    background-color: rgb(236, 159, 170);
+  }
+  
   .aboutText, .FAQtext {
     background-color: lightpink;
     padding: 20px;
@@ -225,6 +229,7 @@ h1{
     cursor: pointer;
     background: linear-gradient(0deg, rgb(239, 209, 209) 23.8%, rgb(252, 175, 175) 92%);
   }
+
 
 @media screen and (max-width:50em) {
   .logo {
