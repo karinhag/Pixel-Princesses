@@ -3,12 +3,25 @@
     <header>{{ uiLabels.waitingAnswers }}</header>
     {{ uiLabels.chooseElimination }}
 
-  <div v-for="answer in this.userAnswers" :key="answer">{{ answer }}</div>
+    <div class="button_container">
+      <button
+        class="playerAnswerB"
+        type="submit"
+        v-for="answer in this.userAnswers"
+        :key="answer"
+        v-on:click="choosePlayer(answer)"
+      >
+        <img v-if="!chosenAnswer.includes(answer)" src="/pink_heart1.png" />
+        <img v-else src="/black_broken_heart1.png" />
 
-  <router-link to="/eliminatedPlayer/">
-    <button v-on:click="eliminatePlayer" type="submit">ELIMINATE</button>
-  </router-link>
-</section>
+        {{ answer }}
+      </button>
+      <button class="eliminatingButton" v-on:click="eliminatePlayer" :disabled="chosenAnswer.length === 0">
+        {{ uiLabels.eliminate }}     
+        {{ this.chosenAnswer.length > 0 ? this.chosenAnswer[0] : "" }}
+      </button>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -29,6 +42,7 @@ export default {
       predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
       playersData: null,
       userAnswers: [],
+      chosenAnswer: [],
     };
   },
   created: function () {
@@ -59,9 +73,7 @@ export default {
         a: this.answers,
       });
     },
-    addAnswer: function () {
-      this.answers.push("");
-    },
+
     runQuestion: function () {
       socket.emit("runQuestion", {
         pollId: this.pollId,
@@ -75,9 +87,14 @@ export default {
       this.userAnswers.push(d.pop().answer); //skriv om!!!
       console.log(this.userAnswers);
     },
-    eliminatePlayer: function(){
-      this.$router.push("/eliminatedPlayer/" + this.id);
-    }
+    choosePlayer: function (answer) {
+      if (!this.chosenAnswer.includes(answer)) {
+        this.chosenAnswer.pop();
+        this.chosenAnswer.push(answer);
+      }
+      this.chosenAnswer;
+    },
+    eliminatePlayer:function(){ this.$router.push("/eliminatedPlayer/" + this.pollId);}
   },
 };
 </script>
@@ -110,8 +127,42 @@ header {
   border-radius: 15px;
 }
 
-button:hover {
-  color: #4a292f;
+.playerAnswerB {
+  font-size: 45px;
+  display: block;
+  margin: 10px;
+  text-align: center;
+  min-width: 35%;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 12px;
+  height: 70px;
+}
+button:hover:not([disabled]) {
+  color: rgb(244, 103, 139);
   cursor: pointer;
+}
+.button_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button > img {
+  /*this part selects the img as a direct child of the button*/
+
+  /*this part selects the span as a direct child of the button*/
+
+  width: 35px;
+  vertical-align: middle;
+}
+.eliminatingButton {
+  margin-top: 20%;
+  font-size: 45px;
+  min-width: 35%;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 12px;
+  height: 70px;
 }
 </style>
