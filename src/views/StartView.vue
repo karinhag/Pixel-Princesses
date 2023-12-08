@@ -35,7 +35,7 @@
   <div class="boxes-container">
   <div class ="box-a">
 
-  <button v-on:click="beginGame">
+  <button class="startGameButton" v-on:click="beginGame">
   {{ uiLabels.createPoll }}
   </button>
   
@@ -46,7 +46,7 @@
     {{uiLabels.writePollId}}<br>
     <input type="text" v-model="id"> <br>
   </label>
-    <button v-on:click="joinDate" :disabled="!id">
+    <button class="joinDateButton" v-on:click="joinDate" :disabled="!id">
     {{ uiLabels.participatePoll }}
     </button>
   <!--
@@ -134,7 +134,6 @@ h1{
     justify-content: space-between;
 
   }
-
   .bodywrapper{
     min-height: 100vh;
     background: linear-gradient(179.4deg, rgb(253, 240, 233) 2.2%, rgb(255, 194, 203) 96.2%);
@@ -212,7 +211,20 @@ h1{
     
   }
 
-  
+  .startGameButton, .joinDateButton{
+    background: linear-gradient(0deg, rgb(247, 247, 247) 23.8%, rgb(252, 221, 221) 92%);
+    padding: 6px;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    margin: 7px 5px;
+    border-radius: 10px;
+  }
+
+  .startGameButton:hover:enabled, .joinDateButton:hover:enabled{
+    cursor: pointer;
+    background: linear-gradient(0deg, rgb(239, 209, 209) 23.8%, rgb(252, 175, 175) 92%);
+  }
 
 @media screen and (max-width:50em) {
   .logo {
