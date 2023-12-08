@@ -64,8 +64,25 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit(
       "removedPlayer",
       data.removeUserInfo(d.pollId, d.userInfo)
-    ); //
+    ); 
   });
+
+  socket.on("eliminatedPlayer", function (id){  
+  io.to(id.pollId).emit("hejKomOKyssMig", data.eliminateAPlayer(id.pollId, id.uniquePlayerId))// tar endast bort en spelare 
+  })
+
+  socket.on("getEliminatedPlayer", function(pollId){
+    socket.join("" + pollId);
+    io.to(pollId).emit("hejKomOKyssMig", data.retrieveEliminatedPlayer(pollId))
+   })
+
+  
+
+  
+
+
+
 }
+
 
 export { sockets };

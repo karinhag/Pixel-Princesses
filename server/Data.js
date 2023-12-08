@@ -7,6 +7,7 @@ function Data() {
   this.polls = {};
   this.players = [];
   this.answers = [];
+  this.eliminatedPlayer = [];
 }
 
 /***********************************************
@@ -65,7 +66,7 @@ Data.prototype.storeAnswer = function (pollId, answer, playerID) {
   }
   this.answers[pollId].push(playerInfo);
   return this.answers[pollId];
-  
+
 };
 
 Data.prototype.getAnswers = function (pollId) {
@@ -84,23 +85,45 @@ Data.prototype.removeUserInfo = function (pollId, userInfo) {
   const userIndex = this.players[pollId].findIndex(
     (user) => user.uniquePlayerId === userInfo.uniquePlayerId
   );
+ 
   if (userIndex !== -1) {
-    this.players[pollId].splice(userIndex, 1);
-  } else {
-    console.log("User not found in the array");
+    this.players[pollId].splice(userIndex, 1)
+  
   }
   console.log("removeUser ger:", this.players[pollId]);
   return this.players[pollId];
 };
 
 Data.prototype.addPlayer = function (pollId, userInfo) {
-  // lagt till
   if (!this.players[pollId]) {
-    //chatgpt
     this.players[pollId] = [];
   }
   this.players[pollId].push(userInfo);
   return this.players[pollId];
+};
+
+Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
+  const userIndex = this.players[pollId].findIndex(
+    (user) => user.uniquePlayerId === uniquePlayerId
+  );
+  if (!this.eliminatedPlayer[pollId]) {
+    this.eliminatedPlayer[pollId] = [];
+  }
+  if (userIndex !== -1) {
+      this.eliminatedPlayer[pollId].push(
+      this.players[pollId].splice(userIndex, 1)
+    );
+  }
+  console.log("EliminatePlayer ger", this.eliminatedPlayer[pollId]);
+  return this.eliminatedPlayer[pollId];
+};
+
+Data.prototype.retrieveEliminatedPlayer = function (pollId) {
+  console.log("inuti data funk", this.eliminatedPlayer[pollId]); //ger undefined???!!!!
+  console.log("pollId i retrive elimi är", pollId);
+  if (this.eliminatedPlayer[pollId]) {
+    return this.eliminatedPlayer[pollId];
+  } else return [];
 };
 
 export { Data };

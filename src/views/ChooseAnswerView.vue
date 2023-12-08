@@ -7,20 +7,23 @@
       <button
         class="playerAnswerB"
         type="submit"
-        v-for="answer in this.userAnswers"
-        :key="answer"
-        v-on:click="choosePlayer(answer)"
+        v-for="answerObject in this.userAnswers"
+        :key="answerObject.playerID"
+        v-on:click="choosePlayer(answerObject)"
       >
-        <img v-if="!chosenAnswer.includes(answer)" src="/pink_heart1.png" />
+        <img
+          v-if="!chosenAnswer.includes(answerObject)"
+          src="/pink_heart1.png"
+        />
         <img v-else src="/black_broken_heart1.png" />
 
-        {{ answer }}
+        {{ answerObject.answer }}
+  
       </button>
-      <button class="eliminatingButton" v-on:click="eliminatePlayer" :disabled="chosenAnswer.length === 0">
-        {{ uiLabels.eliminate }}     
-        {{ this.chosenAnswer.length > 0 ? this.chosenAnswer[0] : "..." }}
-        <img src="/black_broken_heart1.png" />
 
+      <button class="eliminatingButton" v-on:click="eliminatePlayer" :disabled="chosenAnswer.length === 0" >
+        {{ uiLabels.eliminate }}  {{chosenAnswer.length > 0 ? chosenAnswer[0].answer : "..."}} 
+        <img src="/black_broken_heart1.png" />
       </button>
     </div>
   </section>
@@ -49,19 +52,20 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
-    socket.emit("pageLoaded", this.lang);
-    socket.emit("joinPoll", this.pollId);
+    socket.emit("pageLoaded", this.lang, console.log("Hello 1"));
+    socket.emit("joinPoll", this.pollId,console.log("Hello 2"));
+
 
     socket.on("init", (labels) => {
-      this.uiLabels = labels;
+      this.uiLabels = labels; console.log("Hello 3")
     });
-    socket.on("dataUpdate", (data) => (this.data = data));
+    socket.on("dataUpdate", (data) => (this.data = data), console.log("Hello 4"));
     socket.on("incomingAnswers", (data) => this.getAnswer(data));
   },
   methods: {
-    createPoll: function () {
-      socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
-    },
+    // createPoll: function () {
+    //   socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
+    // },
     generateRandomQuestion() {
       const randomIndex = Math.floor(
         Math.random() * this.predefinedQuestions.length
@@ -83,20 +87,20 @@ export default {
       });
     },
     getAnswer: function (d) {
-      //  for (let i = 0; i < d.length; i++) {
-      // const currentAnswer = d[i].answer;
-
-      this.userAnswers.push(d.pop().answer); //skriv om!!!
-      console.log(this.userAnswers);
+      this.userAnswers.push(d.pop()); 
     },
+
     choosePlayer: function (answer) {
       if (!this.chosenAnswer.includes(answer)) {
         this.chosenAnswer.pop();
-        this.chosenAnswer.push(answer);
+        this.chosenAnswer.push(answer); //answer är både svaret och idt
       }
       this.chosenAnswer;
     },
-    eliminatePlayer:function(){ this.$router.push("/eliminatedPlayer/" + this.pollId);}
+    eliminatePlayer: function () {
+      this.$router.push("/eliminatedPlayer/" + this.pollId);
+      socket.emit("eliminatedPlayer", {pollId: this.pollId, uniquePlayerId: this.chosenAnswer[0].playerID}) 
+    },
   },
 };
 </script>
@@ -112,21 +116,38 @@ header {
   min-height: 100vh;
 }
 
-.eliminateButton {
+.eliminatingButton {
+  text-align: center;
+  display: inline-block;
+
+  margin-top: 20%;
+  font-size: 45px;
+  min-width: 45%;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 12px;
+  height: 70px;
+}
+.eliminatingButton:hover:not([disabled]) {
   background: radial-gradient(
     circle at 50.4% 50.5%,
     rgb(251, 32, 86) 0%,
-    rgb(135, 2, 35) 90%
+    rgb(155, 6, 43) 90%
   );
   border: solid;
   border-color: black;
-  padding: 15px;
-  color: lightgoldenrodyellow;
+
+  color: rgb(253, 252, 253);
   text-align: center;
   display: inline-block;
-  font-size: 15px;
-  margin: 7px 5px;
-  border-radius: 15px;
+
+  margin-top: 20%;
+  font-size: 45px;
+  min-width: 45%;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 12px;
+  height: 70px;
 }
 
 .playerAnswerB {
@@ -134,7 +155,7 @@ header {
   display: block;
   margin: 10px;
   text-align: center;
-  min-width: 35%;
+  min-width: 25%;
   padding-right: 20px;
   padding-left: 20px;
   border-radius: 12px;
@@ -157,14 +178,5 @@ button > img {
 
   width: 35px;
   vertical-align: middle;
-}
-.eliminatingButton {
-  margin-top: 20%;
-  font-size: 45px;
-  min-width: 35%;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-radius: 12px;
-  height: 70px;
 }
 </style>

@@ -19,7 +19,7 @@
 	"hee":"hello",
 	"startGame":"Starta spel",	
 	"userName": "Skriv ditt användarnamn här: ",
-	"theHeader": "Din spellänk:",
+	"theHeader": "SKRIV DIN DATINGPROFIL",
 	"writeQuestion": "Skriv din fråga här: ",
 	"randomQuestion": "Slumpa fråga",
 	"hardToDecide": "Svårt att bestämma dig? ⇨",
@@ -46,6 +46,8 @@
 	"nextQuestion": "Nästa fråga",
 	"answer": "Skriv ditt svar här: ",
 	"sendAnswer": "Skicka svar",
-	"eliminate": "Eliminera"
+	"eliminate": "Eliminera",
+	"hasGreenFlag":"Som har den fantastiska gröna flaggan...",
+	"joinedRoom":"Din spellänk:"
 
 }

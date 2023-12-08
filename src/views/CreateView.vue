@@ -1,6 +1,6 @@
 <template>
   <section class="createViewBody">
-    <header>{{ uiLabels.theHeader }}</header>
+    <header>{{ uiLabels.joinedRoom }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
 
     <section class="activePlayers">
@@ -49,7 +49,6 @@ export default {
 
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("pollCreated", (data) => (this.data = data));
-    console.log("Socket connection established:", socket.connected);
   },
 
   methods: {
@@ -78,6 +77,7 @@ export default {
     },
     getActivePlayers: function (data) {
       this.playersData = data;
+  
     },
     getName: function (playerData) {
       return playerData.userName;
@@ -128,7 +128,9 @@ header {
 
 .purpleButton:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
-    cursor: pointer;   
+  cursor: pointer;   
+  vertical-align: middle;
+  cursor: pointer;
  }
 
  

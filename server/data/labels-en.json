@@ -18,7 +18,7 @@
 	"greenFlag": "Add your Green Flag here: ",
 	"startGame":"Start game",
 	"userName": "Add your username here: ",
-	"theHeader": "Your Poll Link:",
+	"theHeader": "ENTER YOUR DATING INFO",
 	"writeQuestion": "Write your question here: ",
 	"randomQuestion": "Create random question",
 	"hardToDecide": "Hard to decide? ⇨",
@@ -44,5 +44,8 @@
 	"lifebouySpent":"You have used your lifeline...",
 	"nextQuestion": "Next Question",
 	"answer": "Write your answer",
-	"eliminate": "Eliminate"
+	"eliminate": "Eliminate",
+	"sendAnswer":"Send Answer",
+	"hasGreenFlag":"Whom has the amazing greenflag...",
+	"joinedRoom":"Your Poll Link:"
 }

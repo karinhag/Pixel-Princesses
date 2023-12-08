@@ -1,8 +1,6 @@
 <template>
   <section class="CQVbody">
-    <header>{{ uiLabels.writeQuestion }} {{ this.numberedQuestion }}</header>
-
-    pOLLid; {{ this.pollId }}
+    <header>{{ uiLabels.writeQuestion }}</header>
     <div><textarea v-model="question" rows="4" cols="50"></textarea><br /></div>
     <div>
       {{ uiLabels.hardToDecide
@@ -72,9 +70,6 @@ export default {
     socket.on("dataUpdate", (data) => (this.data = data));
   },
   methods: {
-    createPoll: function () {
-      socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
-    },
     generateRandomQuestion() {
       const randomIndex = Math.floor(
         Math.random() * this.predefinedQuestions.length
@@ -110,6 +105,13 @@ export default {
 </script>
 
 <style>
+
+textarea{
+  caret-color: #f06af0;
+  font-size: 20px;
+  color:#f040cd
+}
+
 header {
   font-size: 50px;
   color: black;

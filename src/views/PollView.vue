@@ -2,7 +2,9 @@
   <section class="pollBody">
     <section class="enteringDetails" v-if="userCreated === false">
       <div>
-        Game ID: {{ this.pollId }}
+        <p id="roomId">{{uiLabels.joinedRoom}}{{ this.pollId }}</p>
+        <header>{{ uiLabels.theHeader }}</header>
+
 
         <QuestionComponent
           v-bind:question="question"
@@ -76,7 +78,6 @@ export default {
       userInfo: {
         userName: "",
         greenFlag: "",
-        answer: "",
         uniquePlayerId: this.getPlayerId(), // playerID
       },
       userCreated: false,
@@ -139,6 +140,18 @@ export default {
 </script>
 
 <style>
+
+#roomId{
+padding:0%;
+margin:0%;
+padding:20px;
+text-align: left;
+padding-top: 20px;
+}
+header{
+  margin:50px;
+  font-size:40px;
+}
 .pollBody {
   background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
   min-height: 100vh;

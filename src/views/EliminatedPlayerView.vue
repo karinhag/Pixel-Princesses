@@ -1,19 +1,23 @@
 <template>
   <div class="topPage">
-    <header>{{ uiLabels.theEliminatedPlayer }}</header>
+    <h1>{{ uiLabels.theEliminatedPlayer }}{{ this.userName }}</h1>
+  
+    <h3>{{ uiLabels.hasGreenFlag }}{{ this.greenFlag }}</h3>
   </div>
 
   <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
 
+
+
   <div class="saveButton" v-on:click="savePlayer" v-if="!playerSaved">
     <button class="lifebouyButton">
-        <img class="theLifebouy" src="/lifebouy1.png" />
+      <img class="theLifebouy" src="/lifebouy1.png" />
       {{ uiLabels.savePlayer }}
     </button>
   </div>
   <button class="nextQButton" v-on:click="createQuestion">
-{{ uiLabels.nextQuestion }}
-</button>
+    {{ uiLabels.nextQuestion }}
+  </button>
 
   <div class="lifeBouyUsed" v-if="playerSaved">
     {{ uiLabels.lifebouySpent }}
@@ -36,38 +40,56 @@ export default {
       data: {},
       uiLabels: {},
       playerSaved: false,
+      eliminatedPlayer: {},
+      userName:"",
+      greenFlag:""
     };
   },
   created: function () {
-    this.id = this.$route.params.id;
-    socket.emit("pageLoaded", this.lang);
-    socket.emit("joinPoll", this.pollId);
+    this.pollId = this.$route.params.pollId;
+    socket.emit("pageLoaded", this.lang, console.log("Hello 6"));
+    socket.emit("joinPoll", this.pollId, console.log("Hello 7"));
+    socket.emit("getEliminatedPlayer", this.pollId, console.log("ELLA ELLA"))
+    socket.on("hejKomOKyssMig", (data) => (this.getPlayer(data), console.log("Hello 8")))
+
     socket.on("init", (labels) => {
-      this.uiLabels = labels;
+      
+      this.uiLabels = labels; console.log("Hello 9")
     });
-    socket.on("dataUpdate", (data) => (this.data = data));
+    socket.on("dataUpdate", (data) => (this.data = data), console.log("Hello 10"));
+
   },
   methods: {
     savePlayer: function () {
       this.playerSaved = true;
       // socket.emit("lifelineUsed",{pollId: this.pollId} )
     },
+    getPlayer: function (data) {
+      this.eliminatedPlayer=(data.pop());
+      this.userName=this.eliminatedPlayer[0].userName;
+      this.greenFlag=this.eliminatedPlayer[0].greenFlag;
+    },
+    createQuestion: function (){
+      this.$router.push("/createQuestion/" + this.pollId);
+    }
   },
 };
-// createPoll: function () {
-//       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-//     },
+
 </script>
 <style>
 header {
   font-size: 60px;
 }
 
-.lifebouyButton{
-  background: radial-gradient(circle at 10% 20%, rgb(255, 200, 124) 0%, rgb(252, 251, 121) 90%);
+.lifebouyButton {
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(255, 200, 124) 0%,
+    rgb(252, 251, 121) 90%
+  );
   font-size: 20pt;
   color: black;
-  width:20%;
+  width: 20%;
   border-radius: 15px;
 }
 
@@ -75,25 +97,29 @@ header {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   font-size: 20pt;
   color: black;
-  width:20%;
+  width: 20%;
   border-radius: 15px;
 }
-button > img, /*this part selects the img as a direct child of the button*/
-      button > span {
+
+lifebouyButton>img,
+/*this part selects the img as a direct child of the button*/
+lifebouyButton>span {
   /*this part selects the span as a direct child of the button*/
   vertical-align: middle;
   width: 25%;
 }
 
-.lifebouyButton:hover:enabled{
-  background: linear-gradient(109.6deg, rgb(255, 207, 84) 11.2%, rgb(255, 158, 27) 91.1%);
+.lifebouyButton:hover:enabled {
+  background: linear-gradient(
+    109.6deg,
+    rgb(255, 207, 84) 11.2%,
+    rgb(255, 158, 27) 91.1%
+  );
   cursor: pointer;
 }
 
-
-.nextQButton:hover:enabled{
+.nextQButton:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
-
 }
 </style>
