@@ -61,14 +61,15 @@
     <section v-if="this.answerSubmitted" class="waitingForChoice">
       <h1>{{ uiLabels.waitingForChoice }}</h1>
       <div class="infinity">
-        <l-infinity
+        <!-- <l-infinity
           size="400"
           stroke="20"
           stroke-length="0.15"
           bg-opacity="0.3"
           speed="1.8"
           color="#f5f5f5; ;"
-        ></l-infinity>
+        ></l-infinity> --> 
+        <!-- Lägg till sen -->
       </div>
     </section>
   </section>
@@ -76,7 +77,7 @@
 
 <script>
 // @ is an alias to /src
-import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
+// import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
 
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
