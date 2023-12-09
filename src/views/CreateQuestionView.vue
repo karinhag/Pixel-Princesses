@@ -1,7 +1,7 @@
 <template>
   <section class="CQVbody">
     <header>{{ uiLabels.writeQuestion }}</header>
-    <div><textarea v-model="question" rows="4" cols="50"></textarea><br /></div>
+    <div><textarea v-model="question" rows="3" cols="40"></textarea><br /></div>
     <div>
       {{ uiLabels.hardToDecide
       }}<button class="randomQuestionButton" @click="generateRandomQuestion">
@@ -9,7 +9,12 @@
       </button>
     </div>
     <div>
-      <button class="purpleButton" v-on:click="addQuestion" id="submitButton" :disabled="!question">
+      <button
+        class="purpleButton"
+        v-on:click="addQuestion"
+        id="submitButton"
+        :disabled="!question"
+      >
         {{ uiLabels.submitQuestion }}
       </button>
     </div>
@@ -105,11 +110,15 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-textarea{
+textarea {
+  padding:18px;
+  margin:25px;
+  font-family: "Lilita One", sans-serif;
   caret-color: #f06af0;
-  font-size: 20px;
-  color:#f040cd
+  font-size: 30px;
+  color:#ff81bee8;
 }
 
 header {
@@ -120,6 +129,7 @@ header {
 .CQVbody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
   min-height: 100vh;
+  font-family: "Lilita One", sans-serif;
 }
 
 .randomQuestionButton {
@@ -136,7 +146,7 @@ header {
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 15px;
+  /* font-size: 15px; */
   margin: 7px 5px;
   border-radius: 15px;
 }
@@ -148,17 +158,30 @@ header {
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 15px;
+  /* font-size: 15px; */
   margin: 7px 5px;
   border-radius: 15px;
 }
 
 .purpleButton:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
-  cursor: pointer;}
+  cursor: pointer;
+}
 
-  .randomQuestionButton:hover:enabled {
-    background: radial-gradient(290px at 8.6% 46.4%, rgb(250, 112, 112) 7.8%, rgb(252, 208, 115) 32.2%, rgb(231, 252, 129) 48.1%, rgb(188, 249, 127) 61%, rgb(104, 232, 228) 75.3%);
-  cursor: pointer;}
-
+.randomQuestionButton:hover:enabled {
+  background: radial-gradient(
+    290px at 8.6% 46.4%,
+    rgb(250, 112, 112) 7.8%,
+    rgb(252, 208, 115) 32.2%,
+    rgb(231, 252, 129) 48.1%,
+    rgb(188, 249, 127) 61%,
+    rgb(104, 232, 228) 75.3%
+  );
+  cursor: pointer;
+}
+button{
+  font-family: "Lilita One", sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
+}
 </style>

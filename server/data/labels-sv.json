@@ -48,6 +48,8 @@
 	"sendAnswer": "Skicka svar",
 	"eliminate": "Eliminera",
 	"hasGreenFlag":"Som har den fantastiska gröna flaggan...",
-	"joinedRoom":"Din spellänk:"
+	"joinedRoom":"Din spellänk:",
+	"waitingForChoice":"Vänta på ditt öde...",
+	"eliminated":"Du har blivit eliminerad"
 
 }

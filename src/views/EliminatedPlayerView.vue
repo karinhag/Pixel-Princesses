@@ -1,13 +1,11 @@
 <template>
   <div class="topPage">
     <h1>{{ uiLabels.theEliminatedPlayer }}{{ this.userName }}</h1>
-  
+
     <h3>{{ uiLabels.hasGreenFlag }}{{ this.greenFlag }}</h3>
   </div>
 
   <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
-
-
 
   <div class="saveButton" v-on:click="savePlayer" v-if="!playerSaved">
     <button class="lifebouyButton">
@@ -41,23 +39,29 @@ export default {
       uiLabels: {},
       playerSaved: false,
       eliminatedPlayer: {},
-      userName:"",
-      greenFlag:""
+      userName: "",
+      greenFlag: "",
     };
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
     socket.emit("pageLoaded", this.lang, console.log("Hello 6"));
     socket.emit("joinPoll", this.pollId, console.log("Hello 7"));
-    socket.emit("getEliminatedPlayer", this.pollId, console.log("ELLA ELLA"))
-    socket.on("hejKomOKyssMig", (data) => (this.getPlayer(data), console.log("Hello 8")))
+    socket.emit("getEliminatedPlayer", this.pollId, console.log("ELLA ELLA"));
+    socket.on(
+      "hejKomOKyssMig",
+      (data) => (this.getPlayer(data), console.log("Hello 8"))
+    );
 
     socket.on("init", (labels) => {
-      
-      this.uiLabels = labels; console.log("Hello 9")
+      this.uiLabels = labels;
+      console.log("Hello 9");
     });
-    socket.on("dataUpdate", (data) => (this.data = data), console.log("Hello 10"));
-
+    socket.on(
+      "dataUpdate",
+      (data) => (this.data = data),
+      console.log("Hello 10")
+    );
   },
   methods: {
     savePlayer: function () {
@@ -65,20 +69,24 @@ export default {
       // socket.emit("lifelineUsed",{pollId: this.pollId} )
     },
     getPlayer: function (data) {
-      this.eliminatedPlayer=(data.pop());
-      this.userName=this.eliminatedPlayer[0].userName;
-      this.greenFlag=this.eliminatedPlayer[0].greenFlag;
+      this.eliminatedPlayer = data.pop();
+      this.userName = this.eliminatedPlayer[0].userName;
+      this.greenFlag = this.eliminatedPlayer[0].greenFlag;
     },
-    createQuestion: function (){
+    createQuestion: function () {
       this.$router.push("/createQuestion/" + this.pollId);
-    }
+    },
   },
 };
-
 </script>
 <style>
 header {
   font-size: 60px;
+  font-family: "Lilita One", sans-serif;
+}
+h1 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 20px;
 }
 
 .lifebouyButton {
@@ -106,7 +114,7 @@ lifebouyButton>img,
 lifebouyButton>span {
   /*this part selects the span as a direct child of the button*/
   vertical-align: middle;
-  width: 25%;
+  width: 25px;
 }
 
 .lifebouyButton:hover:enabled {

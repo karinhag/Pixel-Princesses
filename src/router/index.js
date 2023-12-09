@@ -39,6 +39,11 @@ const router = createRouter({
       name: "eliminatedPlayer",
       component: () => import("@/views/EliminatedPlayerView.vue"),
     },
+    {
+      path: "/youAreEliminated/:pollId",
+      name: "YouHaveBeenEliminatedView",
+      component: () => import("@/views/YouHaveBeenEliminatedView.vue"),
+    },
   ],
 });
 

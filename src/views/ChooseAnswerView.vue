@@ -1,7 +1,7 @@
 <template>
   <section class="CAVbody">
     <header>{{ uiLabels.waitingAnswers }}</header>
-    {{ uiLabels.chooseElimination }}
+   <h1> {{ uiLabels.chooseElimination }}</h1>
 
     <div class="button_container">
       <button
@@ -110,6 +110,11 @@ header {
   font-size: 50px;
   color: black;
 }
+header,h1{
+  font-family: "Lilita One", sans-serif;
+  letter-spacing: 2px;
+}
+h1{font-size:30px}
 
 .CAVbody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
@@ -117,6 +122,7 @@ header {
 }
 
 .eliminatingButton {
+  font-family: "Lilita One", sans-serif;
   text-align: center;
   display: inline-block;
 

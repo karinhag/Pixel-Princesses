@@ -8,7 +8,7 @@
       <div class="logo">
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
-        />
+        /> 
         Romance Roulette
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
@@ -16,7 +16,7 @@
       </div>
     </header>
     <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
-      <button v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
+      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
       <button v-on:click="about">{{ uiLabels.about }}</button>
       <button v-on:click="FAQ">FAQ</button>
     </ResponsiveNav>
@@ -127,7 +127,7 @@ body {
   font-weight: lighter;
   font-family: "Lilita One", sans-serif;
   letter-spacing: 2.5px;
-  background-color: #FF17DC;
+ 
 
 
 
@@ -137,7 +137,7 @@ input {
   font-family: "Lilita One", sans-serif;
   caret-color: #f06af0;
   font-size: 20px;
-  color: #f040cd;
+  color: #fd8dc4e8
 }
 
 h1,
@@ -150,8 +150,9 @@ div {
   font-family: "Lilita One", sans-serif;
   font-size: 38px;
   margin: 0px;
-  padding: 20px;
+  padding: 5px;
 }
+h1{padding-top: 25px;}
 .boxes-container {
   display: flex;
   justify-content: space-between;
@@ -241,6 +242,8 @@ header {
   cursor: pointer;
   background-color: rgb(236, 159, 170);
 }
+
+.langButton:hover
 
 .aboutText,
 .FAQtext {

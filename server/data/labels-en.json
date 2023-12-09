@@ -47,5 +47,7 @@
 	"eliminate": "Eliminate",
 	"sendAnswer":"Send Answer",
 	"hasGreenFlag":"Whom has the amazing greenflag...",
-	"joinedRoom":"Your Poll Link:"
+	"joinedRoom":"Your Poll Link:",
+	"waitingForChoice":"Awaiting your destiny...",
+	"eliminated":"You have been eliminated!"
 }
