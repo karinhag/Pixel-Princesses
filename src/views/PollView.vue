@@ -60,7 +60,7 @@
     </section>
     <section v-if="this.answerSubmitted" class="waitingForChoice">
       <h1>{{ uiLabels.waitingForChoice }}</h1>
-      <div class="infinity">
+      <!-- <div class="infinity"> -->
         <!-- <l-infinity
           size="400"
           stroke="20"
@@ -70,7 +70,7 @@
           color="#f5f5f5; ;"
         ></l-infinity> --> 
         <!-- Lägg till sen -->
-      </div>
+      <!-- </div> -->
     </section>
   </section>
 </template>
@@ -82,7 +82,7 @@
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io("localhost:3000");
-infinity.register();
+// infinity.register();
 export default {
   name: "PollView",
   components: {
@@ -184,10 +184,10 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-.infinity{
+/* .infinity{
   padding-top:10%;
 
-}
+} */
 #roomId {
   padding: 0%;
   margin: 0%;
@@ -216,7 +216,7 @@ input {
   caret-color: #f06af0;
   font-size: 40px;
   color: #ff81bee8;
-  padding:10px; 
+  /* padding:10px;  */
 }
 
 .waitingForStart {

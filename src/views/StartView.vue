@@ -127,9 +127,6 @@ body {
   font-weight: lighter;
   font-family: "Lilita One", sans-serif;
   letter-spacing: 2.5px;
- 
-
-
 
 }
 
@@ -137,7 +134,7 @@ input {
   font-family: "Lilita One", sans-serif;
   caret-color: #f06af0;
   font-size: 20px;
-  color: #fd8dc4e8
+  color: #fd8dc4e8;
 }
 
 h1,
@@ -271,10 +268,7 @@ header {
   padding: 10px;
   font-size: 25px;
 }
-button{
-  font-family: "Lilita One", sans-serif;
-  font-size: 20px;
-}
+
 .startGameButton:hover:enabled,
 .joinDateButton:hover:enabled {
   cursor: pointer;
