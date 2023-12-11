@@ -68,31 +68,12 @@ export default {
     socket.on("incomingAnswers", (data) => this.getAnswer(data));
   },
   methods: {
-    // createPoll: function () {
-    //   socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
-    // },
-    generateRandomQuestion() {
-      const randomIndex = Math.floor(
-        Math.random() * this.predefinedQuestions.length
-      );
-      this.question = this.uiLabels[this.predefinedQuestions[randomIndex]];
-    },
-    addQuestion: function () {
-      socket.emit("addQuestion", {
-        pollId: this.pollId,
-        q: this.question,
-        a: this.answers,
-      });
-    },
 
-    runQuestion: function () {
-      socket.emit("runQuestion", {
-        pollId: this.pollId,
-        questionNumber: this.questionNumber,
-      });
-    },
     getAnswer: function (d) {
-      this.userAnswers.push(d.pop());
+      // \this.userAnswers.push(d.pop());
+      const answersCopy = [...d]; // Create a shallow copy of the array
+  this.userAnswers.push(answersCopy.pop());
+      console.log("data i getAnswer;", d)
     },
 
     choosePlayer: function (answer) {
@@ -111,12 +92,12 @@ export default {
       this.resetPage();
     },
     resetPage: function () {
-      console.log("OLIVIA WAS HERE");
+      console.log("hello chosen answer", this.chosenAnswer)
       this.userAnswers = [];
       this.chosenAnswer = [];
+      console.log("hello 2 chosen answer", this.chosenAnswer)
       this.answers = "";
       this.playersData= null;
-      console.log("userinfo;", this.userInfo)
     },
   },
 };

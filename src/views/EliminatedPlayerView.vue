@@ -41,6 +41,7 @@ export default {
       eliminatedPlayer: {},
       userName: "",
       greenFlag: "",
+      uniquePlayerId:""
     };
   },
   created: function () {
@@ -66,13 +67,15 @@ export default {
   methods: {
     savePlayer: function () {
       this.playerSaved = true;
-  
-      socket.emit("lifelineUsed", {pollId: this.pollId, uniquePlayerId: this.eliminatedPlayer.uniquePlayerId, userInfo:this.eliminatedPlayer[0]})
+  console.log( this.uniquePlayerId)
+      socket.emit("lifelineUsed", {pollId: this.pollId, uniquePlayerId: this.uniquePlayerId, userInfo:this.eliminatedPlayer[0]})
     }, 
     getPlayer: function (data) {
       this.eliminatedPlayer = data.pop();
       this.userName = this.eliminatedPlayer[0].userName;
       this.greenFlag = this.eliminatedPlayer[0].greenFlag;
+      this.uniquePlayerId= this.eliminatedPlayer[0].uniquePlayerId
+
     },
     createQuestion: function () {
       this.$router.push("/createQuestion/" + this.pollId);
