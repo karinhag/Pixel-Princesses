@@ -57,17 +57,16 @@ export default {
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
-      console.log("Hello 9");
     });
     socket.on(
       "dataUpdate",
       (data) => (this.data = data),
-      console.log("Hello 10")
     );
   },
   methods: {
     savePlayer: function () {
       this.playerSaved = true;
+  
       socket.emit("lifelineUsed", {pollId: this.pollId, uniquePlayerId: this.eliminatedPlayer[0].uniquePlayerId, userInfo:this.eliminatedPlayer[0]})
     },
     getPlayer: function (data) {

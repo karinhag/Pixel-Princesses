@@ -36,17 +36,16 @@ export default {
   created: function () {
     this.pollId = this.$route.params.pollId;
     this.uniquePlayerId = this.$route.query.uniquePlayerId;
-    socket.emit("pageLoaded", this.lang, console.log("Hello 1"));
-    socket.emit("joinPoll", this.uniquePlayerId, console.log("Hello 2"));
+    socket.emit("pageLoaded", this.lang);
+    socket.emit("joinPoll", this.uniquePlayerId);
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
-      console.log("Hello 3");
     });
     socket.on(
       "dataUpdate",
       (data) => (this.data = data),
-      console.log("Hello 4")
+  
     );
     socket.on("youHaveBeenSaved", () => this.savedPlayer());
   },
