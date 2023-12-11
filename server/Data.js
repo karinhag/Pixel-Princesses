@@ -8,6 +8,7 @@ function Data() {
   this.players = [];
   this.answers = [];
   this.eliminatedPlayer = [];
+  this.availableLifeline= Boolean;
 }
 
 /***********************************************
@@ -119,11 +120,24 @@ Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
 };
 
 Data.prototype.retrieveEliminatedPlayer = function (pollId) {
-  console.log("inuti data funk", this.eliminatedPlayer[pollId]); //ger undefined???!!!!
-  console.log("pollId i retrive elimi är", pollId);
+  console.log("inuti data funk", this.eliminatedPlayer[pollId]);
   if (this.eliminatedPlayer[pollId]) {
     return this.eliminatedPlayer[pollId];
   } else return [];
 };
+
+Data.prototype.checkLifeline=function(pollId){
+if(this.availableLifeline[pollId] === undefined || this.availableLifeline[pollId] === null){
+  this.availableLifeline[pollId]=true;
+}
+
+  return this.availableLifeline[pollId]
+}
+
+Data.prototype.useLifeLine=function(pollId){
+  this.availableLifeline[pollId]=false;
+  console.log(this.availableLifeline[pollId])
+}
+
 
 export { Data };

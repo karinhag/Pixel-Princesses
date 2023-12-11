@@ -50,6 +50,6 @@
 	"hasGreenFlag":"Som har den fantastiska gröna flaggan...",
 	"joinedRoom":"Din spellänk:",
 	"waitingForChoice":"Vänta på ditt öde...",
-	"eliminated":"Du har blivit eliminerad"
-
+	"eliminated":"Du har blivit eliminerad",
+	"saved":"Du har blivit räddad"
 }

@@ -50,7 +50,8 @@ function sockets(io, socket, data) {
 
   socket.on("submitAnswer", function (d) {
     io.to(d.pollId).emit(
-      "incomingAnswers", data.storeAnswer(d.pollId, d.userInfo.answer, d.userInfo.uniquePlayerId)
+      "incomingAnswers",
+      data.storeAnswer(d.pollId, d.userInfo.answer, d.userInfo.uniquePlayerId)
     );
   });
 
@@ -65,26 +66,34 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit(
       "removedPlayer",
       data.removeUserInfo(d.pollId, d.userInfo)
-    ); 
+    );
   });
 
-  socket.on("eliminatedPlayer", function (id){  
-  io.to(id.pollId).emit("hejKomOKyssMig", data.eliminateAPlayer(id.pollId, id.uniquePlayerId)),// tar endast bort en spelare 
-  io.to(id.pollId).emit("pollsId", id.pollId);
-});
+  socket.on("eliminatedPlayer", function (id) {
+    io.to(id.pollId).emit(
+      "hejKomOKyssMig",
+      data.eliminateAPlayer(id.pollId, id.uniquePlayerId)
+    ); // tar endast bort en spelare
+  });
 
-  socket.on("getEliminatedPlayer", function(pollId){
+  socket.on("getEliminatedPlayer", function (pollId) {
     socket.join("" + pollId);
-    io.to(pollId).emit("hejKomOKyssMig", data.retrieveEliminatedPlayer(pollId))
-   })
+    io.to(pollId).emit("hejKomOKyssMig", data.retrieveEliminatedPlayer(pollId));
+  });
 
+  socket.on("lifelineUsed", function (d) {
+    data.useLifeLine(d.pollId)
+    data.addPlayer(d.pollId, d.userInfo);
+    io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId))
+    io.to(d.uniquePlayerId).emit("youHaveBeenSaved");
+  });
+
+socket.on("checkIfLifelineUsed", function(pollId){
+  console.log("i socket; lifeline;", data.checkLifeline(pollId))
+  io.to(pollId).emit("statusLifeline", data.checkLifeline(pollId))
   
-
-  
-
-
+})
 
 }
-
 
 export { sockets };

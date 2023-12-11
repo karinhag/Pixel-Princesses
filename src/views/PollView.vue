@@ -60,29 +60,28 @@
     </section>
     <section v-if="this.answerSubmitted" class="waitingForChoice">
       <h1>{{ uiLabels.waitingForChoice }}</h1>
-      <!-- <div class="infinity"> -->
-        <!-- <l-infinity
+      <div class="infinity"> 
+        <l-infinity
           size="400"
           stroke="20"
           stroke-length="0.15"
           bg-opacity="0.3"
           speed="1.8"
           color="#f5f5f5; ;"
-        ></l-infinity> --> 
-        <!-- Lägg till sen -->
-      <!-- </div> -->
+        ></l-infinity> 
+       </div> 
     </section>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
-// import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
+ import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
 
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io("localhost:3000");
-// infinity.register();
+infinity.register();
 export default {
   name: "PollView",
   components: {
@@ -176,13 +175,10 @@ export default {
         this.userInfo.uniquePlayerId == this.eliminatedPlayer[0].uniquePlayerId
       ) {
         console.log("eliminated");
-        this.$router.push("/youAreEliminated/" + this.pollId);
+        this.$router.push({path:"/youAreEliminated/" + this.pollId, query: {uniquePlayerId:this.userInfo.uniquePlayerId}});
       } else {
         console.log("not eliminated"), window.location.reload(); // fel FIXA!!!
-      } // men ändå inte!!
-
-      // this.userName=this.eliminatedPlayer[0].userName;
-      // this.greenFlag=this.eliminatedPlayer[0].greenFlag;
+      } 
     },
   },
 };
@@ -191,10 +187,10 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-/* .infinity{
+ .infinity{
   padding-top:10%;
 
-} */
+} 
 #roomId {
   padding: 0%;
   margin: 0%;
