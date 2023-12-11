@@ -37,6 +37,7 @@ function sockets(io, socket, data) {
       "addedPlayer",
       data.addPlayer(userData.pollId, userData.userInfo)
     ); //
+    io.to(userData.pollId).emit("pollsID", userData.pollId);
   });
 
   socket.on("runQuestion", function (d) {
@@ -68,8 +69,9 @@ function sockets(io, socket, data) {
   });
 
   socket.on("eliminatedPlayer", function (id){  
-  io.to(id.pollId).emit("hejKomOKyssMig", data.eliminateAPlayer(id.pollId, id.uniquePlayerId))// tar endast bort en spelare 
-  })
+  io.to(id.pollId).emit("hejKomOKyssMig", data.eliminateAPlayer(id.pollId, id.uniquePlayerId)),// tar endast bort en spelare 
+  io.to(id.pollId).emit("pollsId", id.pollId);
+});
 
   socket.on("getEliminatedPlayer", function(pollId){
     socket.join("" + pollId);

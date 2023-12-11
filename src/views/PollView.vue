@@ -109,6 +109,7 @@ export default {
     };
   },
   created: function () {
+    
     this.pollId = this.$route.params.id;
     this.id = this.$route.params.id;
     this.showInputBox = false;
@@ -134,6 +135,11 @@ export default {
       "hejKomOKyssMig",
       (data) => (this.getPlayer(data), console.log("Hello 8"))
     );
+    socket.on("pollsId", (pollId) => {
+      this.pollId = pollId;
+      console.log(this.pollId)
+    })
+    console.log(this.pollId)
   },
   methods: {
     getPlayerId: function () {
@@ -152,8 +158,9 @@ export default {
         userInfo: this.userInfo,
         pollId: this.pollId,
       });
-
       this.userCreated = true;
+      this.$router.push({path:"/answerQuestion/" + this.pollId, query: {userName: this.userInfo.userName, greenFlag: this.userInfo.greenFlag, uniquePlayerId: this.userInfo.uniquePlayerId}});
+      console.log(this.userInfo.userName)
     },
 
     abandonDate: function () {
