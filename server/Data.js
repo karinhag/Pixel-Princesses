@@ -8,6 +8,7 @@ function Data() {
   this.players = [];
   this.answers = [];
   this.eliminatedPlayer = [];
+  this.availableLifeline= Boolean;
 }
 
 /***********************************************
@@ -124,5 +125,19 @@ Data.prototype.retrieveEliminatedPlayer = function (pollId) {
     return this.eliminatedPlayer[pollId];
   } else return [];
 };
+
+Data.prototype.checkLifeline=function(pollId){
+if(this.availableLifeline[pollId] === undefined || this.availableLifeline[pollId] === null){
+  this.availableLifeline[pollId]=true;
+}
+
+  return this.availableLifeline[pollId]
+}
+
+Data.prototype.useLifeLine=function(pollId){
+  this.availableLifeline[pollId]=false;
+  console.log(this.availableLifeline[pollId])
+}
+
 
 export { Data };

@@ -81,13 +81,18 @@ function sockets(io, socket, data) {
   });
 
   socket.on("lifelineUsed", function (d) {
-    console.log("HEJ")
+    data.useLifeLine(d.pollId)
     data.addPlayer(d.pollId, d.userInfo);
-    console.log("the user info; ", d.uniquePlayerId)
+    io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId))
     io.to(d.uniquePlayerId).emit("youHaveBeenSaved");
-    console.log("someone has been saved, i sockst.JS", d.userInfo.userName)
   });
-  // {pollId: this.pollId, uniquePlayerId: this.eliminatedPlayer[0].uniquePlayerId})
+
+socket.on("checkIfLifelineUsed", function(pollId){
+  console.log("i socket; lifeline;", data.checkLifeline(pollId))
+  io.to(pollId).emit("statusLifeline", data.checkLifeline(pollId))
+  
+})
+
 }
 
 export { sockets };

@@ -7,7 +7,7 @@
 
   <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
 
-  <div class="saveButton" v-on:click="savePlayer" v-if="!playerSaved">
+  <div class="saveButton" v-on:click="savePlayer" v-if="availableLifeline">
     <button class="lifebouyButton">
       <img class="theLifebouy" src="/lifebouy1.png" />
       {{ uiLabels.savePlayer }}
@@ -17,7 +17,7 @@
     {{ uiLabels.nextQuestion }}
   </button>
 
-  <div class="lifeBouyUsed" v-if="playerSaved">
+  <div class="lifeBouyUsed" v-if="!availableLifeline">
     {{ uiLabels.lifebouySpent }}
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      playerSaved: false,
+      availableLifeline:Boolean,
       eliminatedPlayer: {},
       userName: "",
       greenFlag: "",
@@ -45,13 +45,15 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
-    socket.emit("pageLoaded", this.lang, console.log("Hello 6"));
-    socket.emit("joinPoll", this.pollId, console.log("Hello 7"));
-    socket.emit("getEliminatedPlayer", this.pollId, console.log("ELLA ELLA"));
+    socket.emit("pageLoaded", this.lang);
+    socket.emit("joinPoll", this.pollId);
+    socket.emit("getEliminatedPlayer", this.pollId);
     socket.on(
       "hejKomOKyssMig",
-      (data) => (this.getPlayer(data), console.log("Hello 8"))
+      (data) => (this.getPlayer(data))
     );
+    socket.emit("checkIfLifelineUsed", this.pollId);
+    socket.on("statusLifeline", (data)=> this.checkLifeline(data));
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -66,9 +68,7 @@ export default {
   methods: {
     savePlayer: function () {
       this.playerSaved = true;
-      // socket.emit("lifelineUsed",{pollId: this.pollId} )
       socket.emit("lifelineUsed", {pollId: this.pollId, uniquePlayerId: this.eliminatedPlayer[0].uniquePlayerId, userInfo:this.eliminatedPlayer[0]})
-   console.log("Någon har räddats!!! i eliminatedplayer view")
     },
     getPlayer: function (data) {
       this.eliminatedPlayer = data.pop();
@@ -78,6 +78,11 @@ export default {
     createQuestion: function () {
       this.$router.push("/createQuestion/" + this.pollId);
     },
+    checkLifeline:function(data){
+      this.availableLifeline=data;
+      console.log(data)
+
+    }
   },
 };
 </script>
