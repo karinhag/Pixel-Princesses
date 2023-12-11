@@ -67,6 +67,8 @@ export default {
     savePlayer: function () {
       this.playerSaved = true;
       // socket.emit("lifelineUsed",{pollId: this.pollId} )
+      socket.emit("lifelineUsed", {pollId: this.pollId, uniquePlayerId: this.eliminatedPlayer[0].uniquePlayerId, userInfo:this.eliminatedPlayer[0]})
+   console.log("Någon har räddats!!! i eliminatedplayer view")
     },
     getPlayer: function (data) {
       this.eliminatedPlayer = data.pop();

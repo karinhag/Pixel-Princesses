@@ -119,8 +119,7 @@ Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
 };
 
 Data.prototype.retrieveEliminatedPlayer = function (pollId) {
-  console.log("inuti data funk", this.eliminatedPlayer[pollId]); //ger undefined???!!!!
-  console.log("pollId i retrive elimi är", pollId);
+  console.log("inuti data funk", this.eliminatedPlayer[pollId]);
   if (this.eliminatedPlayer[pollId]) {
     return this.eliminatedPlayer[pollId];
   } else return [];
