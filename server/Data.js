@@ -9,6 +9,7 @@ function Data() {
   this.answers = [];
   this.eliminatedPlayer = [];
   this.availableLifeline= Boolean;
+  
 }
 
 /***********************************************
@@ -37,6 +38,7 @@ Data.prototype.createPoll = function (pollId, lang = "en") {
 
 Data.prototype.addQuestion = function (pollId, q) {
   const poll = this.polls[pollId];
+  console.log("Nu läggs det till en fråga;", q)
   if (typeof poll !== "undefined") {
     poll.questions.push(q);
   }
@@ -55,7 +57,9 @@ Data.prototype.getQuestion = function (pollId, qId = null) {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
-    return poll.questions;
+    console.log("get question;!", poll.questions)
+    console.log("OLIVIA HEJ", poll.questions[poll.questions.length - 1])
+    return poll.questions[poll.questions.length - 1];
   }
   return [];
 };

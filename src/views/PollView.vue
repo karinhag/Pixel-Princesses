@@ -29,7 +29,7 @@
       </button>
     </section>
 
-    <section
+    <!-- <section
       class="waitingForStart"
       v-if="this.userCreated && !this.showInputBox && !this.answerSubmitted"
     >
@@ -58,30 +58,18 @@
         {{ uiLabels.abandonDate }}
       </button>
     </section>
-    <section v-if="this.answerSubmitted" class="waitingForChoice">
-      <h1>{{ uiLabels.waitingForChoice }}</h1>
-      <div class="infinity"> 
-        <l-infinity
-          size="400"
-          stroke="20"
-          stroke-length="0.15"
-          bg-opacity="0.3"
-          speed="1.8"
-          color="#f5f5f5; ;"
-        ></l-infinity> 
-       </div> 
+    <section v-if="this.answerSubmitted" class="waitingForChoice"> -->
+
+     
     </section>
-  </section>
 </template>
 
 <script>
 // @ is an alias to /src
- import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
 
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io("localhost:3000");
-infinity.register();
 export default {
   name: "PollView",
   components: {
@@ -89,13 +77,13 @@ export default {
   },
   data: function () {
     return {
-      lang: localStorage.getItem("lang") || "en", //Löser språkinställning
+      lang: localStorage.getItem("lang") || "en", 
       uiLabels: {},
 
       userInfo: {
         userName: "",
         greenFlag: "",
-        uniquePlayerId: this.getPlayerId(), // playerID
+        uniquePlayerId: this.getPlayerId(), 
       },
       userCreated: false,
       question: "",
@@ -113,7 +101,7 @@ export default {
     this.id = this.$route.params.id;
     this.showInputBox = false;
 
-    socket.emit("pageLoaded", this.lang); //Löser språkinställning
+    socket.emit("pageLoaded", this.lang); 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
@@ -130,10 +118,7 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
-    socket.on(
-      "hejKomOKyssMig",
-      (data) => (this.getPlayer(data), console.log("Hello 8"))
-    );
+
     socket.on("pollsId", (pollId) => {
       this.pollId = pollId;
       console.log(this.pollId)
@@ -144,13 +129,13 @@ export default {
     getPlayerId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
-    submitAnswer: function () {
-      socket.emit("submitAnswer", {
-        pollId: this.pollId,
-        userInfo: this.userInfo,
-      });
-      this.answerSubmitted = true;
-    },
+    // submitAnswer: function () {
+    //   socket.emit("submitAnswer", {
+    //     pollId: this.pollId,
+    //     userInfo: this.userInfo,
+    //   });
+    //   this.answerSubmitted = true;
+    // },
 
     joinDate: function () {
       socket.emit("joinDate", {
@@ -169,17 +154,17 @@ export default {
         userInfo: this.userInfo,
       });
     },
-    getPlayer: function (data) {
-      this.eliminatedPlayer = data.pop();
-      if (
-        this.userInfo.uniquePlayerId == this.eliminatedPlayer[0].uniquePlayerId
-      ) {
-        console.log("eliminated");
-        this.$router.push({path:"/youAreEliminated/" + this.pollId, query: {uniquePlayerId:this.userInfo.uniquePlayerId}});
-      } else {
-        console.log("not eliminated"), window.location.reload(); // fel FIXA!!!
-      } 
-    },
+    // getPlayer: function (data) {
+    //   this.eliminatedPlayer = data.pop();
+    //   if (
+    //     this.userInfo.uniquePlayerId == this.eliminatedPlayer[0].uniquePlayerId
+    //   ) {
+    //     console.log("eliminated");
+    //     this.$router.push({path:"/youAreEliminated/" + this.pollId, query: {uniquePlayerId:this.userInfo.uniquePlayerId}});
+    //   } else {
+    //     console.log("not eliminated"), window.location.reload(); // fel FIXA!!!
+    //   } 
+    // },
   },
 };
 </script>

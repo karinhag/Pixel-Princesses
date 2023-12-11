@@ -1,9 +1,10 @@
 <template>
   <section class="CAVbody">
     <header>{{ uiLabels.waitingAnswers }}</header>
-   <h1> {{ uiLabels.chooseElimination }}</h1>
+    <h1>{{ uiLabels.chooseElimination }}</h1>
 
     <div class="button_container">
+      {{ this.userAnswers }}
       <button
         class="playerAnswerB"
         type="submit"
@@ -11,6 +12,7 @@
         :key="answerObject.playerID"
         v-on:click="choosePlayer(answerObject)"
       >
+       
         <img
           v-if="!chosenAnswer.includes(answerObject)"
           src="/pink_heart1.png"
@@ -18,11 +20,15 @@
         <img v-else src="/black_broken_heart1.png" />
 
         {{ answerObject.answer }}
-  
       </button>
 
-      <button class="eliminatingButton" v-on:click="eliminatePlayer" :disabled="chosenAnswer.length === 0" >
-        {{ uiLabels.eliminate }}  {{chosenAnswer.length > 0 ? chosenAnswer[0].answer : "..."}} 
+      <button
+        class="eliminatingButton"
+        v-on:click="eliminatePlayer"
+        :disabled="chosenAnswer.length === 0"
+      >
+        {{ uiLabels.eliminate }}
+        {{ chosenAnswer.length > 0 ? chosenAnswer[0].answer : "..." }}
         <img src="/black_broken_heart1.png" />
       </button>
     </div>
@@ -52,14 +58,13 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
-    socket.emit("pageLoaded", this.lang, console.log("Hello 1"));
-    socket.emit("joinPoll", this.pollId,console.log("Hello 2"));
-
+    socket.emit("pageLoaded", this.lang);
+    socket.emit("joinPoll", this.pollId);
 
     socket.on("init", (labels) => {
-      this.uiLabels = labels; console.log("Hello 3")
+      this.uiLabels = labels;
     });
-    socket.on("dataUpdate", (data) => (this.data = data), console.log("Hello 4"));
+    socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("incomingAnswers", (data) => this.getAnswer(data));
   },
   methods: {
@@ -87,7 +92,7 @@ export default {
       });
     },
     getAnswer: function (d) {
-      this.userAnswers.push(d.pop()); 
+      this.userAnswers.push(d.pop());
     },
 
     choosePlayer: function (answer) {
@@ -99,7 +104,19 @@ export default {
     },
     eliminatePlayer: function () {
       this.$router.push("/eliminatedPlayer/" + this.pollId);
-      socket.emit("eliminatedPlayer", {pollId: this.pollId, uniquePlayerId: this.chosenAnswer[0].playerID}) 
+      socket.emit("eliminatedPlayer", {
+        pollId: this.pollId,
+        uniquePlayerId: this.chosenAnswer[0].playerID,
+      });
+      this.resetPage();
+    },
+    resetPage: function () {
+      console.log("OLIVIA WAS HERE");
+      this.userAnswers = [];
+      this.chosenAnswer = [];
+      this.answers = "";
+      this.playersData= null;
+      console.log("userinfo;", this.userInfo)
     },
   },
 };
@@ -110,11 +127,14 @@ header {
   font-size: 50px;
   color: black;
 }
-header,h1{
+header,
+h1 {
   font-family: "Lilita One", sans-serif;
   letter-spacing: 2px;
 }
-h1{font-size:30px}
+h1 {
+  font-size: 30px;
+}
 
 .CAVbody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
