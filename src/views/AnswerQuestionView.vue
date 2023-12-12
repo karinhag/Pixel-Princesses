@@ -147,6 +147,8 @@ export default {
     },
     getPlayer: function (data) {
       this.eliminatedPlayer = data;
+      console.log("Mitt userId:", this.userInfo.uniquePlayerId)
+      console.log("Eliminerad spelare;", this.eliminatedPlayer)
       if (
         this.userInfo.uniquePlayerId == this.eliminatedPlayer.uniquePlayerId
       ) {
