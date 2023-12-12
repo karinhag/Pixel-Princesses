@@ -89,11 +89,11 @@ export default {
     addQuestion: function () {
       // this.$router.push("/chooseAnswer/" + this.pollId);
       socket.emit("addQuestion", { pollId: this.pollId, q: this.question });
-      socket.emit("addQuestion", {
-        pollId: this.pollId,
-        q: this.question,
-        a: this.answers,
-      });
+      // socket.emit("addQuestion", {
+      //   pollId: this.pollId,
+      //   q: this.question,
+      //   a: this.answers,
+      // });
       this.$router.push("/chooseAnswer/" + this.pollId);
     },
   },
