@@ -77,30 +77,40 @@ export default {
       return "" + Math.floor(Math.random() * 100000);
     },
     getRandomPosition: function () {
-      const container = document.querySelector('.activePlayers');
-  const containerRect = container.getBoundingClientRect();
+    const container = document.querySelector('.activePlayers');
+    const containerRect = container.getBoundingClientRect();
 
-  // Calculate a centered position
-  const top = Math.random() * containerRect.height; 
-  const left = Math.random() * containerRect.width; // vill lägga en gräns åt höger med eller dra av ett hjärta i bredd liksom
+    const top = Math.random() * (containerRect.height);
+    const left = Math.random() * (containerRect.width);
+
 
   return { top, left };
 },
 getActivePlayers: function (data) {
-  this.playersData = data;
+  // If playersData is not initialized, set it to an empty array
+  if (!this.playersData) {
+    this.playersData = [];
+  }
 
-  // Set centered positions for each player
-  if (this.playersData) {
-    this.playersData.forEach((player) => {
+  data.forEach((newPlayer) => {
+    // Check if the player already exists in playersData
+    const existingPlayer = this.playersData.find(
+      (player) => player.userName === newPlayer.userName
+    );
+
+    // If the player does not exist, add them with a random position
+    if (!existingPlayer) {
       const position = this.getRandomPosition();
-      player.style = {
+      newPlayer.style = {
         position: 'absolute',
         top: position.top + 'px',
         left: position.left + 'px',
       };
-    });
-
-  }
+      this.playersData.push(newPlayer);
+    } else {
+      newPlayer.style = existingPlayer.style;
+    }
+  });
 },
 
 
@@ -117,7 +127,7 @@ getActivePlayers: function (data) {
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
 header {
-  font-size: 100px;
+  font-size: 50px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
   padding: 50px;
@@ -133,9 +143,9 @@ header {
 }
 
 .onePlayer {
+  position: absolute;
   background-image: url("https://pngimg.com/d/heart_PNG51183.png");
-  
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   padding: 50px;
