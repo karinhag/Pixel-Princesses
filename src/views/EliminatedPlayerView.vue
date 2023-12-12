@@ -68,36 +68,11 @@ export default {
       });
     },
     getPlayer: function (data) {
-      const playerArrays = data;
-//chatgpt
-      // Ensure there is at least one inner array
-      if (playerArrays.length > 0) {
-        // Get the last inner array
-        const lastPlayerArray = playerArrays[playerArrays.length - 1];
-
-        // Ensure there is at least one player in the array
-        if (lastPlayerArray.length > 0) {
-          const playerInfo = lastPlayerArray[0];
-          this.eliminatedPlayer = playerInfo;
-          this.userName = playerInfo.userName;
-          this.greenFlag = playerInfo.greenFlag;
-          this.uniquePlayerId = playerInfo.uniquePlayerId;
-        } else {
-          // Handle the case when no player is present in the last array
-          // You might want to set default values or handle it as per your requirements
-          this.eliminatedPlayer = {};
-          this.userName = "";
-          this.greenFlag = "";
-          this.uniquePlayerId = "";
-        }
-      } else {
-        // Handle the case when there are no inner arrays
-        // You might want to set default values or handle it as per your requirements
-        this.eliminatedPlayer = {};
-        this.userName = "";
-        this.greenFlag = "";
-        this.uniquePlayerId = "";
-      }
+        
+          this.eliminatedPlayer = data;
+          this.userName = data.userName;
+          this.greenFlag = data.greenFlag;
+          this.uniquePlayerId = data.uniquePlayerId;
     },
 
     createQuestion: function () {
@@ -110,7 +85,6 @@ export default {
     },
     checkLifeline: function (data) {
       this.availableLifeline = data;
-      console.log(data);
     },
   },
 };

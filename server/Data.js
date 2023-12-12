@@ -31,14 +31,13 @@ Data.prototype.createPoll = function (pollId, lang = "en") {
     poll.answers = [];
     poll.currentQuestion = 0;
     this.polls[pollId] = poll;
-    console.log("poll created", pollId, poll);
+
   }
   return this.polls[pollId];
 };
 
 Data.prototype.addQuestion = function (pollId, q) {
   const poll = this.polls[pollId];
-  console.log("Nu läggs det till en fråga;", q)
   if (typeof poll !== "undefined") {
     poll.questions.push(q);
   }
@@ -57,8 +56,6 @@ Data.prototype.getQuestion = function (pollId, qId = null) {
     if (qId !== null) {
       poll.currentQuestion = qId;
     }
-    console.log("get question;!", poll.questions)
-    console.log("OLIVIA HEJ", poll.questions[poll.questions.length - 1])
     return poll.questions[poll.questions.length - 1];
   }
   return [];
@@ -95,11 +92,11 @@ Data.prototype.removeUserInfo = function (pollId, userInfo) {
     this.players[pollId].splice(userIndex, 1)
   
   }
-  console.log("removeUser ger:", this.players[pollId]);
   return this.players[pollId];
 };
 
 Data.prototype.addPlayer = function (pollId, userInfo) {
+
   if (!this.players[pollId]) {
     this.players[pollId] = [];
   }
@@ -119,14 +116,18 @@ Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
       this.players[pollId].splice(userIndex, 1)
     );
   }
-  console.log("EliminatePlayer ger", this.eliminatedPlayer[pollId]);
+  console.log("raderad spelare:", this.eliminatedPlayer[pollId])
   return this.eliminatedPlayer[pollId];
 };
 
 Data.prototype.retrieveEliminatedPlayer = function (pollId) {
-  console.log("inuti data funk", this.eliminatedPlayer[pollId]);
   if (this.eliminatedPlayer[pollId]) {
-    return this.eliminatedPlayer[pollId];
+    let eliminatedPlayerArray = this.eliminatedPlayer[pollId];
+  
+    console.log("detta är retrieve player:", eliminatedPlayerArray )
+    return   eliminatedPlayerArray[eliminatedPlayerArray.length - 1].pop(); //this.eliminatedPlayer[pollId];
+    //arrayStructure[arrayStructure.length - 1].pop();
+   
   } else return [];
 };
 

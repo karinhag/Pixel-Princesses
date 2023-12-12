@@ -29,15 +29,28 @@ export default {
       pollId: "",
       data: {},
       uiLabels: {},
-      uniquePlayerId: "",
-      saved:false
+      saved:false,
+      userInfo: {
+        userName: "",
+        greenFlag: "",
+        uniquePlayerId: "",
+      },
+      uniquePlayerId:"",
     };
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
     this.uniquePlayerId = this.$route.query.uniquePlayerId;
+    this.userInfo.userName = this.$route.query.userName;
+    this.userInfo.greenFlag = this.$route.query.greenFlag;
+    this.userInfo.uniquePlayerId=this.$route.query.uniquePlayerId;
+   
+
+
+
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.uniquePlayerId);
+    socket.emit("joinPoll", this.pollId);
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -48,18 +61,20 @@ export default {
   
     );
     socket.on("youHaveBeenSaved", () => this.savedPlayer());
+   
   },
   methods: {
     eliminatePlayer: function () {
       this.$router.push("/eliminatedPlayer/" + this.pollId);
-      socket.emit("eliminatedPlayer", {
+      socket.emit("joinDate", {
+        userInfo: this.userInfo,
         pollId: this.pollId,
-        uniquePlayerId: this.chosenAnswer[0].playerID,
       });
     },
     savedPlayer: function(){
-      console.log("Jag har räddats!!!!")
       this.saved=true
+      socket.emit("joinDate", {userInfo: this.userInfo, pollId: this.pollId,});
+      socket.on("newQuestionIncoming", ()=> this.$router.push({path:"/answerQuestion/" + this.pollId, query: {userName: this.userInfo.userName, greenFlag: this.userInfo.greenFlag, uniquePlayerId: this.userInfo.uniquePlayerId}}));
     }
   },
 };

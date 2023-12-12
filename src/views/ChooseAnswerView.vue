@@ -3,8 +3,8 @@
     <header>{{ uiLabels.waitingAnswers }}</header>
     <h1>{{ uiLabels.chooseElimination }}</h1>
 
-    <div class="button_container">
-      {{ this.userAnswers }}
+    <div class="scrollable" v-if="this.userAnswers.length!=0">
+      <div class="userButtons"></div>
       <button
         class="playerAnswerB"
         type="submit"
@@ -12,7 +12,6 @@
         :key="answerObject.playerID"
         v-on:click="choosePlayer(answerObject)"
       >
-       
         <img
           v-if="!chosenAnswer.includes(answerObject)"
           src="/pink_heart1.png"
@@ -21,8 +20,8 @@
 
         {{ answerObject.answer }}
       </button>
-
-      <button
+    </div>
+    <button
         class="eliminatingButton"
         v-on:click="eliminatePlayer"
         :disabled="chosenAnswer.length === 0"
@@ -31,7 +30,6 @@
         {{ chosenAnswer.length > 0 ? chosenAnswer[0].answer : "..." }}
         <img src="/black_broken_heart1.png" />
       </button>
-    </div>
   </section>
 </template>
 
@@ -68,12 +66,9 @@ export default {
     socket.on("incomingAnswers", (data) => this.getAnswer(data));
   },
   methods: {
-
     getAnswer: function (d) {
-      // \this.userAnswers.push(d.pop());
-      const answersCopy = [...d]; // Create a shallow copy of the array
-  this.userAnswers.push(answersCopy.pop());
-      console.log("data i getAnswer;", d)
+      const answersCopy = [...d]; // tror ej vi använder??
+      this.userAnswers.push(answersCopy.pop());
     },
 
     choosePlayer: function (answer) {
@@ -92,12 +87,10 @@ export default {
       this.resetPage();
     },
     resetPage: function () {
-      console.log("hello chosen answer", this.chosenAnswer)
       this.userAnswers = [];
       this.chosenAnswer = [];
-      console.log("hello 2 chosen answer", this.chosenAnswer)
       this.answers = "";
-      this.playersData= null;
+      this.playersData = null;
     },
   },
 };
@@ -105,21 +98,23 @@ export default {
 
 <style>
 header {
-  font-size: 50px;
-  color: black;
+  font-size: 70px;
+  color: rgb(253, 252, 253);
 }
 header,
 h1 {
   font-family: "Lilita One", sans-serif;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 h1 {
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .CAVbody {
   background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: 100vh;
 }
 
 .eliminatingButton {
@@ -127,13 +122,16 @@ h1 {
   text-align: center;
   display: inline-block;
 
-  margin-top: 20%;
+  margin-top: 3%;
   font-size: 45px;
   min-width: 45%;
   padding-right: 20px;
   padding-left: 20px;
   border-radius: 12px;
   height: 70px;
+}
+.eliminatingButton:not([disabled]){
+  background-color: rgb(253, 252, 253);
 }
 .eliminatingButton:hover:not([disabled]) {
   background: radial-gradient(
@@ -148,41 +146,78 @@ h1 {
   text-align: center;
   display: inline-block;
 
-  margin-top: 20%;
-  font-size: 45px;
-  min-width: 45%;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-radius: 12px;
-  height: 70px;
-}
 
+}
 .playerAnswerB {
   font-size: 45px;
   display: block;
   margin: 10px;
   text-align: center;
   min-width: 25%;
-  padding-right: 20px;
-  padding-left: 20px;
+  max-width: 90%;
+  padding: 20px;
   border-radius: 12px;
-  height: 70px;
+  height: auto; /* Adjust to allow variable height */
+  white-space: normal; /* Allow text to wrap to multiple lines */
+  word-wrap: break-word; /* Break long words to fit */
+  text-align: center;
+  display: inline-block;
+  background-color: rgb(253, 252, 253);
 }
+
 button:hover:not([disabled]) {
   color: rgb(244, 103, 139);
   cursor: pointer;
+  display:block;
+  text-align: center;
+  display: inline-block;
 }
-.button_container {
+
+.scrollable {
   display: flex;
   flex-direction: column;
+  max-height: 40vh; 
+  overflow-y: scroll; 
+  border: 10px solid rgb(244, 103, 139);
+  width: fit-content;
+  min-width:650px; 
+  min-height: 10vh;
+  max-width: 80%;
   align-items: center;
+  margin: auto;
+  background-color: rgb(255, 154, 179);
+  padding:20px; 
+  padding-bottom: 40px;;
+
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color:  rgb(244, 103, 139) rgb(255, 255, 255); /* For Firefox */
+
+  /* WebKit (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgb(255, 227, 234); 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(244, 103, 139);
+    
+  }
+  &::-webkit-scrollbar-thumb:hover{
+   background-color: rgb(234, 72, 112);
+   cursor:pointer;
+    
+  }
+}
+.userButtons{
+  text-align: center;
+  display: inline-block;
+
 }
 
 button > img {
-  /*this part selects the img as a direct child of the button*/
-
-  /*this part selects the span as a direct child of the button*/
-
   width: 35px;
   vertical-align: middle;
 }

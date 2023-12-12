@@ -17,8 +17,6 @@ function sockets(io, socket, data) {
     data.addQuestion(d.pollId, d.q); //, a: d.a}
     socket.emit("dataUpdate", data.getAnswers(d.pollId));
     io.to(d.pollId).emit("newQuestion", data.getQuestion(d.pollId));
-    console.log("MAXAR;",  data.getQuestion(d.pollId))
-    // console.log("SOCKET GET QUESTION", data.getQuestion(d.pollId));
   });
 
   socket.on("editQuestion", function (d) {
@@ -40,6 +38,7 @@ function sockets(io, socket, data) {
       data.addPlayer(userData.pollId, userData.userInfo)
     ); //
     io.to(userData.pollId).emit("pollsID", userData.pollId);
+    
   });
 
   socket.on("runQuestion", function (d) {
@@ -72,10 +71,10 @@ function sockets(io, socket, data) {
   });
 
   socket.on("eliminatedPlayer", function (id) {
-    io.to(id.pollId).emit(
-      "hejKomOKyssMig",
-      data.eliminateAPlayer(id.pollId, id.uniquePlayerId)
-    ); // tar endast bort en spelare
+    data.eliminateAPlayer(id.pollId, id.uniquePlayerId)
+    // io.to(id.pollId).emit(
+    //   "hejKomOKyssMig", data.retrieveEliminatedPlayer(id.pollId)
+    // ); 
   });
 
   socket.on("getEliminatedPlayer", function (pollId) {
@@ -85,13 +84,12 @@ function sockets(io, socket, data) {
 
   socket.on("lifelineUsed", function (d) {
     data.useLifeLine(d.pollId)
-    data.addPlayer(d.pollId, d.userInfo);
     io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId))
     io.to(d.uniquePlayerId).emit("youHaveBeenSaved");
+    console.log("nu räddas en spelare!")
   });
 
 socket.on("checkIfLifelineUsed", function(pollId){
-  console.log("i socket; lifeline;", data.checkLifeline(pollId))
   io.to(pollId).emit("statusLifeline", data.checkLifeline(pollId))
   
 })

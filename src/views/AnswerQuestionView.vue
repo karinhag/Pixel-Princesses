@@ -52,7 +52,7 @@
     </section>
 
     <section v-if="this.goingToNextRound">
-      YOU SURVIVED, MADE IT TO NEXT ROUND
+      <h1>YOU SURVIVED, MADE IT TO NEXT ROUND</h1>
     </section>
   </section>
 </template>
@@ -114,7 +114,6 @@ export default {
 
     socket.on("newQuestion", (q) => {
       this.question = q;
-      console.log(this.question)
       if (this.question.length > 0) {
         this.showInputBox = true;
       }
@@ -127,7 +126,6 @@ export default {
 
     socket.on("hejKomOKyssMig", (data) => {
       this.getPlayer(data);
-      console.log("Hello 8");
     });
     socket.on("newQuestionIncoming", ()=>this.resetPage());
   },
@@ -147,28 +145,20 @@ export default {
       });
     },
     getPlayer: function (data) {
-      this.eliminatedPlayer = data.pop();
+      this.eliminatedPlayer = data;
       if (
-        this.userInfo.uniquePlayerId == this.eliminatedPlayer[0].uniquePlayerId
+        this.userInfo.uniquePlayerId == this.eliminatedPlayer.uniquePlayerId
       ) {
-        console.log("eliminated");
+   
         this.eliminated = true;
         this.$router.push({
           path: "/youAreEliminated/" + this.pollId,
-          query: { uniquePlayerId: this.userInfo.uniquePlayerId },
+          query: {userName: this.userInfo.userName, greenFlag: this.userInfo.greenFlag, uniquePlayerId: this.userInfo.uniquePlayerId},
         });
         this.goingToNextRound = false;
       } else {
-        console.log("not eliminated");
         this.goingToNextRound = true;
       }
-
-      // , window.location.reload(); // fel FIXA!!!
-      //this.$router.push({path:"/answerQuestion/ this.$router.push({path:"/answerQuestion/" + this.pollId, query: {userName: this.userInfo.userName, greenFlag: this.userInfo.greenFlag, uniquePlayerId: this.userInfo.uniquePlayerId}});" + this.pollId, query: {uniquePlayerId:this.userInfo.uniquePlayerId}});
-      // men ändå inte!!
-
-      // this.userName=this.eliminatedPlayer[0].userName; /answerQuestion/:pollId"
-      // this.greenFlag=this.eliminatedPlayer[0].greenFlag;
     },
     nextQuestion: function (data) {
       this.question = data;
@@ -183,6 +173,7 @@ export default {
       this.answerSubmitted = false;
       this.question="";
       this.userInfo.answer="";
+     
     },
   },
 };
