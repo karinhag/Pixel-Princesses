@@ -68,14 +68,8 @@ export default {
       });
     },
     getPlayer: function (data) {
-      // this.eliminatedPlayer = data.pop();
-
-      // this.userName = this.eliminatedPlayer[0].userName;
-      // this.greenFlag = this.eliminatedPlayer[0].greenFlag;
-      // this.uniquePlayerId= this.eliminatedPlayer[0].uniquePlayerId
-
       const playerArrays = data;
-
+//chatgpt
       // Ensure there is at least one inner array
       if (playerArrays.length > 0) {
         // Get the last inner array
