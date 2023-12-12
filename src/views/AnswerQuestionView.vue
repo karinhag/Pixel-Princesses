@@ -18,8 +18,9 @@
         this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
       "
     >
-      {{ (this.userInformation, this.userFlag) }}
+    <p class="question">
       {{ this.question }}
+    </p>
       pollId: {{ this.pollId }}
       <p>
         {{ uiLabels.answer }}<input type="text" v-model="userInfo.answer" />
@@ -229,6 +230,10 @@ input {
 h1 {
   margin: 0px;
   padding: 20px;
+}
+.question {
+ font-size: 40px; 
+ text-align: center;
 }
 
 .purpleButton {
