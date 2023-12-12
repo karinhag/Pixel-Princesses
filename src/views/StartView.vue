@@ -233,6 +233,7 @@ header {
 #nav button {
   background-color: rgb(240, 188, 196);
   margin: 0.3rem;
+  font-family: "Lilita One", sans-serif;;
 }
 
 #nav button:hover {
@@ -267,6 +268,7 @@ header {
   width: 200px;
   padding: 10px;
   font-size: 25px;
+  font-family: "Lilita One", sans-serif;;
 }
 
 .startGameButton:hover:enabled,

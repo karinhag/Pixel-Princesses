@@ -5,7 +5,7 @@
       v-if="!this.userCreated && !this.answerSubmitted"
     >
       <div>
-        <p id="roomId">{{ uiLabels.joinedRoom }}{{ this.pollId }}</p>
+        <p id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</p>
         <header>{{ uiLabels.theHeader }}</header>
 
         <QuestionComponent v-bind:question="question" />
@@ -179,9 +179,11 @@ export default {
 #roomId {
   padding: 0%;
   margin: 0%;
-  padding: 20px;
-  text-align: left;
-  padding-top: 20px;
+  text-align: right;
+  padding-right: 1em;
+  padding-top: 1em;
+  color: rgb(202, 28, 135);
+  
 }
 header, h1 {
 letter-spacing:2.5px; 

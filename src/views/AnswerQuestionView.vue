@@ -6,8 +6,9 @@
         !this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
       "
     >
+        <div id="roomId">pollId: {{ this.pollId }} </div>
       <h1>{{ uiLabels.waitingForGame }}</h1>
-      pollId: {{ this.pollId }}
+      
       <button class="purpleButton" v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
       </button>
@@ -18,12 +19,16 @@
         this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
       "
     >
-    <p class="question">
+    <div id="roomId">
+        pollId: {{ this.pollId }}
+    </div>
+    <div class="question">
       {{ this.question }}
-    </p>
-      pollId: {{ this.pollId }}
-      <p>
-        {{ uiLabels.answer }}<input type="text" v-model="userInfo.answer" />
+    </div>
+
+      <p id="answer">
+        {{ uiLabels.answer }} <br>
+        <input type="text" v-model="userInfo.answer" /> 
       </p>
 
       <button class="purpleButton" v-on:click="submitAnswer" type="submit">
@@ -144,6 +149,7 @@ export default {
         pollId: this.pollId,
         userInfo: this.userInfo,
       });
+      this.$router.push({path:"/"})
     },
     getPlayer: function (data) {
       this.eliminatedPlayer = data;
@@ -192,9 +198,12 @@ export default {
 #roomId {
   padding: 0%;
   margin: 0%;
-  padding: 20px;
-  text-align: left;
-  padding-top: 20px;
+  text-align: right;
+  padding-right: 1em;
+  padding-top: 1em;
+  color: rgb(202, 28, 135);
+  font-size: medium;
+  
 }
 
 header,
@@ -213,6 +222,7 @@ h1 {
   /* //https://bgjar.com/simple-shiny hemsidan för att skapa! */
   min-height: 100vh;
   font-family: "Lilita One", sans-serif;
+  margin-top: 0em;
 }
 
 input {
@@ -236,6 +246,14 @@ h1 {
 .question {
  font-size: 40px; 
  text-align: center;
+ padding-top: 1em;
+ padding-left: 3em;
+ padding-right: 3em;
+ color: #f5f5f5;
+}
+#answer {
+  text-align: center;  
+
 }
 
 .purpleButton {
@@ -248,6 +266,7 @@ h1 {
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
 }
 
 button:hover:enabled {

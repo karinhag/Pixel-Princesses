@@ -191,6 +191,8 @@ header {
   font-size: 15px;
   margin: 50px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+
 }
 
 .purpleButton:hover:enabled {
