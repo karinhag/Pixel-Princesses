@@ -37,11 +37,11 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      availableLifeline:Boolean,
+      availableLifeline: Boolean,
       eliminatedPlayer: {},
       userName: "",
       greenFlag: "",
-      uniquePlayerId:""
+      uniquePlayerId: "",
     };
   },
   created: function () {
@@ -49,43 +49,75 @@ export default {
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.pollId);
     socket.emit("getEliminatedPlayer", this.pollId);
-    socket.on(
-      "hejKomOKyssMig",
-      (data) => (this.getPlayer(data))
-    );
+    socket.on("hejKomOKyssMig", (data) => this.getPlayer(data));
     socket.emit("checkIfLifelineUsed", this.pollId);
-    socket.on("statusLifeline", (data)=> this.checkLifeline(data));
+    socket.on("statusLifeline", (data) => this.checkLifeline(data));
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
-    socket.on(
-      "dataUpdate",
-      (data) => (this.data = data),
-    );
+    socket.on("dataUpdate", (data) => (this.data = data));
   },
   methods: {
     savePlayer: function () {
       this.playerSaved = true;
-  console.log( this.uniquePlayerId)
-      socket.emit("lifelineUsed", {pollId: this.pollId, uniquePlayerId: this.uniquePlayerId, userInfo:this.eliminatedPlayer[0]})
-    }, 
+      socket.emit("lifelineUsed", {
+        pollId: this.pollId,
+        uniquePlayerId: this.uniquePlayerId,
+        userInfo: this.eliminatedPlayer[0],
+      });
+    },
     getPlayer: function (data) {
-      this.eliminatedPlayer = data.pop();
-      this.userName = this.eliminatedPlayer[0].userName;
-      this.greenFlag = this.eliminatedPlayer[0].greenFlag;
-      this.uniquePlayerId= this.eliminatedPlayer[0].uniquePlayerId
+      // this.eliminatedPlayer = data.pop();
 
+      // this.userName = this.eliminatedPlayer[0].userName;
+      // this.greenFlag = this.eliminatedPlayer[0].greenFlag;
+      // this.uniquePlayerId= this.eliminatedPlayer[0].uniquePlayerId
+
+      const playerArrays = data;
+
+      // Ensure there is at least one inner array
+      if (playerArrays.length > 0) {
+        // Get the last inner array
+        const lastPlayerArray = playerArrays[playerArrays.length - 1];
+
+        // Ensure there is at least one player in the array
+        if (lastPlayerArray.length > 0) {
+          const playerInfo = lastPlayerArray[0];
+          this.eliminatedPlayer = playerInfo;
+          this.userName = playerInfo.userName;
+          this.greenFlag = playerInfo.greenFlag;
+          this.uniquePlayerId = playerInfo.uniquePlayerId;
+        } else {
+          // Handle the case when no player is present in the last array
+          // You might want to set default values or handle it as per your requirements
+          this.eliminatedPlayer = {};
+          this.userName = "";
+          this.greenFlag = "";
+          this.uniquePlayerId = "";
+        }
+      } else {
+        // Handle the case when there are no inner arrays
+        // You might want to set default values or handle it as per your requirements
+        this.eliminatedPlayer = {};
+        this.userName = "";
+        this.greenFlag = "";
+        this.uniquePlayerId = "";
+      }
     },
+
     createQuestion: function () {
+      this.eliminatedPlayer = "";
+      this.userName = "";
+      this.greenFlag = "";
+      this.uniquePlayerId = "";
       this.$router.push("/createQuestion/" + this.pollId);
-      socket.emit("newIncomingQuestion",{pollId : this.pollId})
+      socket.emit("newIncomingQuestion", { pollId: this.pollId });
     },
-    checkLifeline:function(data){
-      this.availableLifeline=data;
-      console.log(data)
-
-    }
+    checkLifeline: function (data) {
+      this.availableLifeline = data;
+      console.log(data);
+    },
   },
 };
 </script>
