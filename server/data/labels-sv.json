@@ -51,5 +51,8 @@
 	"joinedRoom":"Din spellänk:",
 	"waitingForChoice":"Vänta på ditt öde...",
 	"eliminated":"Du har blivit eliminerad",
-	"saved":"Du har blivit räddad"
+	"saved":"Du har blivit räddad",
+	"perfectMatch": "Din perfekta matchning är: ",
+	"backToStart": "Tillbaka till startsidan"
+
 }

@@ -49,6 +49,12 @@ const router = createRouter({
       name: "AnswerQuestionView",
       component: () => import("@/views/AnswerQuestionView.vue"),
     },
+    {
+      path: "/endOfGame/:pollId",
+      name: "EndOfGameView",
+      component: () => import("@/views/EndOfGameView.vue"),
+    },
+
   ],
 });
 
