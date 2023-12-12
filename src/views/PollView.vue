@@ -228,6 +228,8 @@ h1 {
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+
 }
 
 button:hover:enabled {
