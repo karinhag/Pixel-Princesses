@@ -2,6 +2,9 @@
   <section class="createViewBody">
     <header>{{ uiLabels.joinedRoom }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
+    <button class="purpleButton" v-on:click="createPoll">
+      {{ uiLabels.startGame }}
+    </button>
     <div class="playerContainer">
     <section class="activePlayers">
     <div class="onePlayer" v-for="player in playersData" :style="player.style">
@@ -10,9 +13,7 @@
   </section>
 </div>  
 
-    <button class="purpleButton" v-on:click="createPoll">
-      {{ uiLabels.startGame }}
-    </button>
+   
   </section>
 </template>
 
@@ -77,30 +78,57 @@ export default {
       return "" + Math.floor(Math.random() * 100000);
     },
     getRandomPosition: function () {
-      const container = document.querySelector('.activePlayers');
+  const container = document.querySelector('.playerContainer');
   const containerRect = container.getBoundingClientRect();
 
-  // Calculate a centered position
-  const top = Math.random() * containerRect.height; 
-  const left = Math.random() * containerRect.width; // vill lägga en gräns åt höger med eller dra av ett hjärta i bredd liksom
+  let position;
+  do {
+    position = {
+      top: Math.random() * (containerRect.height - 200),
+      left: Math.random() * (containerRect.width - 200),
+    };
+  } while (this.checkOverlap(position));
 
-  return { top, left };
+  return position;
+},
+checkOverlap: function (newPosition) {
+  return this.playersData.some((player) => {
+    const playerRect = {
+      top: parseFloat(player.style.top),
+      left: parseFloat(player.style.left),
+      width: 200, // Assuming player width
+      height: 200, // Assuming player height
+    };
+
+    const overlap =
+      newPosition.left < playerRect.left + playerRect.width &&
+      newPosition.left + 200 > playerRect.left &&
+      newPosition.top < playerRect.top + playerRect.height &&
+      newPosition.top + 200 > playerRect.top;
+
+    return overlap;
+  });
 },
 getActivePlayers: function (data) {
-  this.playersData = data;
+  this.playersData = this.playersData || [];
 
-  // Set centered positions for each player
-  if (this.playersData) {
-    this.playersData.forEach((player) => {
+  data.forEach((newPlayer) => {
+    const existingPlayer = this.playersData.find(
+      (player) => player.userName === newPlayer.userName
+    );
+
+    if (!existingPlayer) {
       const position = this.getRandomPosition();
-      player.style = {
+      newPlayer.style = {
         position: 'absolute',
         top: position.top + 'px',
         left: position.left + 'px',
       };
-    });
-
-  }
+      this.playersData.push(newPlayer);
+    } else {
+      newPlayer.style = existingPlayer.style;
+    }
+  });
 },
 
 
@@ -117,10 +145,10 @@ getActivePlayers: function (data) {
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
 header {
-  font-size: 100px;
+  font-size: 50px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
-  padding: 50px;
+  padding: 20px;
   color: rgb(255, 201, 227);
 }
 .thePollId {
@@ -128,14 +156,13 @@ header {
 
   font-size: 100px;
   color: rgb(202, 28, 135);
-  margin-bottom: 50 px;
  
 }
 
 .onePlayer {
+  position: absolute;
   background-image: url("https://pngimg.com/d/heart_PNG51183.png");
-  
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   padding: 50px;
@@ -150,9 +177,8 @@ header {
   font-family: "Lilita One", sans-serif;
   font-size: 40px;
   color: rgb(255, 195, 255);
-}
-.startGameButton {
-  margin: 50px;
+  position: relative; 
+
 }
 
 .purpleButton {
@@ -176,7 +202,6 @@ header {
 
  .playerContainer {
   position: relative; /* Ensure positioning context for absolute positioning */
-  height: 200px; /* Adjust the height as needed */
-  margin-top: 20px; /* Add margin between pollId and playerContainer */
+  height: 450px; /* Adjust the height as needed */
 }
 </style>

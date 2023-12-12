@@ -107,7 +107,7 @@ header{
 
 }
 
-button:hover:enabled {
+.purpleButton:hover {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
 }
