@@ -188,7 +188,7 @@ header {
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 15px;
+  font-size: 20px;
   margin: 50px 5px;
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;

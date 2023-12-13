@@ -9,14 +9,14 @@
         <header>{{ uiLabels.theHeader }}</header>
 
         <QuestionComponent v-bind:question="question" />
-        <p>
-          {{ uiLabels.userName
-          }}<input type="text" v-model="userInfo.userName" />
+        <p class="inputText">
+          {{ uiLabels.userName}} <br>
+          <input type="text" v-model="userInfo.userName" />
         </p>
 
-        <p>
-          {{ uiLabels.greenFlag
-          }}<input type="text" v-model="userInfo.greenFlag" />
+        <p class ="inputText">
+          {{ uiLabels.greenFlag}} <br>
+          <input type="text" v-model="userInfo.greenFlag" />
         </p>
       </div>
       <button
@@ -225,16 +225,22 @@ h1 {
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 15px;
+  font-size: 20px;
   margin: 7px 5px;
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
+  
 
 }
 
 button:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
+}
+.inputText {
+  font-size: x-large;
+  text-align: center;
+
 }
 
 </style>

@@ -1,8 +1,11 @@
 <template>
+  <section class="eliminatedBody">
   <div class="topPage">
     <h1>{{ uiLabels.theEliminatedPlayer }}{{ this.userName }}</h1>
 
     <h3>{{ uiLabels.hasGreenFlag }}{{ this.greenFlag }}</h3>
+
+    <h4>{{ uiLabels.changedMind }} </h4>
   </div>
 
   <!-- {{ namn + greenFlag skicka från choose answerView mha id }} -->
@@ -20,6 +23,7 @@
   <div class="lifeBouyUsed" v-if="!availableLifeline">
     {{ uiLabels.lifebouySpent }}
   </div>
+</section>
 </template>
 
 <script>
@@ -95,8 +99,26 @@ header {
   font-family: "Lilita One", sans-serif;
 }
 h1 {
+  padding-top: 1em;
+  font-family: "Lilita One", sans-serif;
+  font-size: 35px;
+  color: black;
+
+}
+
+h3 {
   font-family: "Lilita One", sans-serif;
   font-size: 20px;
+  
+}
+
+.eliminatedBody {
+  margin-top: 0em;
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(248, 236, 146) 0%,
+    rgb(252, 121, 158) 90%
+  );  min-height: 100vh;
 }
 
 .lifebouyButton {
@@ -109,6 +131,11 @@ h1 {
   color: black;
   width: 20%;
   border-radius: 15px;
+  text-align: center;
+  font-family: "Lilita One", sans-serif;
+}
+.theLifebouy {
+  width: 6em;
 }
 
 .nextQButton {
@@ -117,6 +144,8 @@ h1 {
   color: black;
   width: 20%;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+  margin-top: 1em;
 }
 
 lifebouyButton>img,
