@@ -96,8 +96,8 @@ checkOverlap: function (newPosition) {
     const playerRect = {
       top: parseFloat(player.style.top),
       left: parseFloat(player.style.left),
-      width: 200, // Assuming player width
-      height: 200, // Assuming player height
+      width: 200, 
+      height: 200, 
     };
 
     const overlap =
@@ -161,7 +161,7 @@ header {
 
 .onePlayer {
   position: absolute;
-  background-image: url("https://pngimg.com/d/heart_PNG51183.png");
+  background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -204,6 +204,7 @@ header {
 
  .playerContainer {
   position: relative; /* Ensure positioning context for absolute positioning */
-  height: 450px; /* Adjust the height as needed */
+  height: 800px; /* Adjust the height as needed */
+
 }
 </style>
