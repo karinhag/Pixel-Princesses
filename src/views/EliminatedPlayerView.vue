@@ -132,8 +132,8 @@ h2 {
   font-size: 30px;
   color:rgb(254, 221, 255);
   font-size: 20px;
-  
 }
+
 h4{
   font-size: 25px;
   margin-top: 1em;
