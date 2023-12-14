@@ -256,9 +256,6 @@ header {
   letter-spacing: normal;
 }
 
-.FAQheader {
-  font-weight: bolder;
-}
 .startGameButton,
 .joinDateButton {
   background: linear-gradient(
