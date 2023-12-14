@@ -131,7 +131,6 @@ h2 {
   font-family: "Lilita One", sans-serif;
   font-size: 30px;
   color:rgb(254, 221, 255);
-}
   font-size: 20px;
   
 }
