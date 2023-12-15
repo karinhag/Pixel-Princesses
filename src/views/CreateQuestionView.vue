@@ -153,7 +153,6 @@ header {
 
 .purpleButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
-  border: solid;
   border-color: rgb(94, 13, 87);
   padding: 15px;
   text-align: center;
