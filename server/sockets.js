@@ -38,7 +38,6 @@ function sockets(io, socket, data) {
       data.addPlayer(userData.pollId, userData.userInfo)
     ); //
     io.to(userData.pollId).emit("pollsID", userData.pollId);
-    
   });
 
   socket.on("runQuestion", function (d) {
@@ -71,10 +70,10 @@ function sockets(io, socket, data) {
   });
 
   socket.on("eliminatedPlayer", function (id) {
-    data.eliminateAPlayer(id.pollId, id.uniquePlayerId)
+    data.eliminateAPlayer(id.pollId, id.uniquePlayerId);
     // io.to(id.pollId).emit(
     //   "hejKomOKyssMig", data.retrieveEliminatedPlayer(id.pollId)
-    // ); 
+    // );
   });
 
   socket.on("getEliminatedPlayer", function (pollId) {
@@ -83,20 +82,39 @@ function sockets(io, socket, data) {
   });
 
   socket.on("lifelineUsed", function (d) {
-    data.useLifeLine(d.pollId)
-    io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId))
+    data.useLifeLine(d.pollId);
+    io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId));
     io.to(d.uniquePlayerId).emit("youHaveBeenSaved");
-    console.log("nu räddas en spelare!")
+    console.log("nu räddas en spelare!");
   });
 
-socket.on("checkIfLifelineUsed", function(pollId){
-  io.to(pollId).emit("statusLifeline", data.checkLifeline(pollId))
-  
-})
-socket.on("newIncomingQuestion", function(data){
-  io.to(data.pollId).emit("newQuestionIncoming")
-})
+  socket.on("checkIfLifelineUsed", function (pollId) {
+    io.to(pollId).emit("statusLifeline", data.checkLifeline(pollId));
+  });
+  socket.on("newIncomingQuestion", function (data) {
+    io.to(data.pollId).emit("newQuestionIncoming");
+  });
 
+  socket.on("getPlayersLeft", function (pollId) {
+    io.to(pollId).emit("thePlayersLeft", data.getPlayerArray(pollId));
+  });
+
+  // socket.on("theTrueMatchPlayer", function (d) {
+  //   console.log("id: olivia", data.pollId);
+  //   console.log("store;", data.matchedPlayer);
+  //   d.saveMatch(data.pollId, data.matchedPlayer)
+  // });
+
+  socket.on("theTrueMatchPlayer", function (userData) {
+console.log("olivial;id",  userData.pollId);
+console.log("lsida userinfo", userData.matchedPlayer)
+      console.log("MAX<#", data.saveMatch(userData.pollId, userData.matchedPlayer))
+});
+
+  socket.on("getMatchedPlayer", function (pollId) {
+    console.log("return;", data.returnMatchedPlayer(pollId));
+    io.to(pollId).emit("returnMatchedPlayer", data.returnMatchedPlayer(pollId));
+  });
 }
 
 export { sockets };
