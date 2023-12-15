@@ -47,11 +47,13 @@
 	"answer": "Write your answer",
 	"eliminate": "Eliminate",
 	"sendAnswer":"Send Answer",
-	"hasGreenFlag":"Whom has the amazing greenflag...",
+	"hasGreenFlag":"Whom has the amazing greenflag: ",
 	"joinedRoom":"Poll Link:",
 	"waitingForChoice":"Awaiting your destiny...",
 	"eliminated":"You have been eliminated!",
 	"saved":"You have been saved!",
+	"nextRound": "You made it to the next round!",
+	"waitingForQuestion": "Waiting for next question...",
 	"perfectMatch": "Your perfect match is: ",
 	"backToStart": "Back to startpage"
 }

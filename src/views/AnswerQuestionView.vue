@@ -31,13 +31,14 @@
         <input type="text" v-model="userInfo.answer" /> 
       </p>
 
+     <!--<button class="goBackButton" v-on:click="abandonDate" type="submit">
+        {{ uiLabels.abandonDate }}
+      </button>--> 
+
       <button class="purpleButton" v-on:click="submitAnswer" type="submit" :disabled="!userInfo.answer">
         {{ uiLabels.sendAnswer }}
       </button>
 
-      <button class="purpleButton" v-on:click="abandonDate" type="submit">
-        {{ uiLabels.abandonDate }}
-      </button>
     </section>
     <section
       v-if="this.answerSubmitted && !this.goingToNextRound"
@@ -58,7 +59,8 @@
     </section>
 
     <section v-if="this.goingToNextRound">
-      <h1>YOU SURVIVED, MADE IT TO NEXT ROUND</h1>
+      <h1 class="nextRound">{{uiLabels.nextRound }}</h1>
+      <p class="waitingForQuestion"> {{ uiLabels.waitingForQuestion }}</p>
     </section>
   </section>
 </template>
@@ -269,8 +271,35 @@ h1 {
   font-family: "Lilita One", sans-serif;
 }
 
-button:hover:enabled {
+.purpleButton:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
 }
+
+.nextRound{
+  padding-top: 7rem;
+}
+
+.waitingForQuestion{
+  color: white;
+  font-size: 2rem;
+
+
+}
+
+
+.goBackButton{
+  background: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  margin: 7px 5px;
+  border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+}
+
+
 </style>
