@@ -9,7 +9,10 @@
     <header>
     {{ uiLabels.perfectMatch }} 
     </header>
-    *** username of winner here (+ greenflag maybe..?) ***
+
+<h2>{{ this.userName }}</h2>
+<h1>{{ uiLabels.hasGreenFlag }}</h1>
+<h2>{{ this.greenFlag }}</h2>
   </div>
 
   <div class="buttonContainer">
@@ -36,14 +39,19 @@ export default {
       pollId: "",
       data: {},
       uiLabels: {},
-      uniquePlayerId: "",
+      userName:"",
+      greenFlag:"",
     };
   },
   created: function () {
     this.pollId = this.$route.params.pollId;
-    this.uniquePlayerId = this.$route.query.uniquePlayerId;
     socket.emit("pageLoaded", this.lang);
-    socket.emit("joinPoll", this.uniquePlayerId);
+    socket.emit("joinPoll", this.pollId);
+    // socket.on("trueMatch", 
+    //   console.log("hello"));
+
+    socket.emit("getMatchedPlayer", this.pollId);
+    socket.on("returnMatchedPlayer", (data)=> this.handleMatch(data))
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -53,15 +61,21 @@ export default {
       (data) => (this.data = data),
   
     );
-    socket.on("results", () => this.savedPlayer());  //skriv nån metod här som lyssnar på om det bara är en spelare kvar
   },
+
   methods: {
     backToStart: function(){
     this.$router.push({
           path: "/",
         })
   },
+  handleMatch: function(d){
+    console.log("hello olivia")
+    console.log(d)
+          this.userName = d[0][0].userName;
+          this.greenFlag = d[0][0].greenFlag;
   }
+  },
 
 }
 </script>

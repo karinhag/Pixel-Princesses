@@ -53,5 +53,8 @@
 	"eliminated":"You have been eliminated!",
 	"saved":"You have been saved!",
 	"perfectMatch": "Your perfect match is: ",
-	"backToStart": "Back to startpage"
+	"backToStart": "Back to startpage",
+	"congrats": "Congratulations!",
+	"winner": "you are the perfect match"
+
 }

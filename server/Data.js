@@ -9,6 +9,7 @@ function Data() {
   this.answers = [];
   this.eliminatedPlayer = [];
   this.availableLifeline= Boolean;
+  this.matchedPlayer=[];
   
 }
 
@@ -22,6 +23,7 @@ Data.prototype.getUILabels = function (lang = "en") {
   const labels = readFileSync("./server/data/labels-" + lang + ".json");
   return JSON.parse(labels);
 };
+
 
 Data.prototype.createPoll = function (pollId, lang = "en") {
   if (typeof this.polls[pollId] === "undefined") {
@@ -104,6 +106,11 @@ Data.prototype.addPlayer = function (pollId, userInfo) {
   return this.players[pollId];
 };
 
+Data.prototype.getPlayerArray = function(pollId){
+  return this.players[pollId]
+};
+
+
 Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
   const userIndex = this.players[pollId].findIndex(
     (user) => user.uniquePlayerId === uniquePlayerId
@@ -116,18 +123,13 @@ Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
       this.players[pollId].splice(userIndex, 1)
     );
   }
-  console.log("raderad spelare:", this.eliminatedPlayer[pollId])
   return this.eliminatedPlayer[pollId];
 };
 
 Data.prototype.retrieveEliminatedPlayer = function (pollId) {
   if (this.eliminatedPlayer[pollId]) {
     let eliminatedPlayerArray = this.eliminatedPlayer[pollId];
-  
-    console.log("detta är retrieve player:", eliminatedPlayerArray )
-    return   eliminatedPlayerArray[eliminatedPlayerArray.length - 1].pop(); //this.eliminatedPlayer[pollId];
-    //arrayStructure[arrayStructure.length - 1].pop();
-   
+    return   eliminatedPlayerArray[eliminatedPlayerArray.length - 1].pop(); 
   } else return [];
 };
 
@@ -137,12 +139,25 @@ if(this.availableLifeline[pollId] === undefined || this.availableLifeline[pollId
 }
 
   return this.availableLifeline[pollId]
-}
+};
 
 Data.prototype.useLifeLine=function(pollId){
   this.availableLifeline[pollId]=false;
   console.log(this.availableLifeline[pollId])
-}
+};
 
+
+Data.prototype.saveMatch = function (pollId, userInfo) {
+  if (!this.matchedPlayer[pollId]) {
+    this.matchedPlayer[pollId] = [];
+  }
+  this.matchedPlayer[pollId].push(userInfo);
+  return this.matchedPlayer[pollId];
+};
+
+
+Data.prototype.returnMatchedPlayer=function(pollId){
+  return this.matchedPlayer[pollId]
+};
 
 export { Data };

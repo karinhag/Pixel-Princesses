@@ -251,7 +251,7 @@ header {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1em;
   font-family: Arial, Helvetica, sans-serif;
   
   letter-spacing: normal;
