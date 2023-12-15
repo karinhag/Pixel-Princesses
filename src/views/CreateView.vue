@@ -110,26 +110,31 @@ checkOverlap: function (newPosition) {
   });
 },
 getActivePlayers: function (data) {
-  this.playersData = this.playersData || [];
+      this.playersData = this.playersData || [];
 
-  data.forEach((newPlayer) => {
-    const existingPlayer = this.playersData.find(
-      (player) => player.userName === newPlayer.userName
-    );
+      data.slice(0, 5).forEach((newPlayer) => { // Presenterar bara de första som går med i dejten på skärmen i ett hjärta med namnet
+        const existingPlayer = this.playersData.find(
+          (player) => player.userName === newPlayer.userName
+        );
 
-    if (!existingPlayer) {
-      const position = this.getRandomPosition();
-      newPlayer.style = {
-        position: 'absolute',
-        top: position.top + 'px',
-        left: position.left + 'px',
-      };
-      this.playersData.push(newPlayer);
-    } else {
-      newPlayer.style = existingPlayer.style;
-    }
-  });
-},
+        if (!existingPlayer) {
+          const position = this.getRandomPosition();
+          newPlayer.style = {
+            position: 'absolute',
+            top: position.top + 'px',
+            left: position.left + 'px',
+          };
+          this.playersData.push(newPlayer);
+        } else {
+          newPlayer.style = existingPlayer.style;
+        }
+      });
+
+      // Store the remaining players without presenting them on the screen
+      const remainingPlayers = data.slice(8);
+      // Optionally, you can save the remaining players for future use
+      // this.remainingPlayers = remainingPlayers;
+    },
 
 
     getName: function (playerData) {
@@ -204,7 +209,7 @@ header {
 
  .playerContainer {
   position: relative; /* Ensure positioning context for absolute positioning */
-  height: 800px; /* Adjust the height as needed */
+  height: 400px; /* Adjust the height as needed */
 
 }
 </style>
