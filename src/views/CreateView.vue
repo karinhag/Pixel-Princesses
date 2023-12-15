@@ -7,7 +7,7 @@
     </button>
     <div class="playerContainer">
     <section class="activePlayers">
-    <div class="onePlayer" v-for="(player, index) in playersData" :style="getPlayerStyle(index)">
+    <div class="onePlayer" v-for="(player) in playersData">
       {{ getName(player) }}
     </div>
   </section>
@@ -42,8 +42,8 @@ export default {
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.pollId);
 
-    socket.on("addedPlayer", (data) => this.getActivePlayers(data));
-    socket.on("removedPlayer", (data) => this.getActivePlayers(data));
+    socket.on("addedPlayer", (data) => this.playersData = data);
+    socket.on("removedPlayer", (data) => this.playersData = data);
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -57,20 +57,6 @@ export default {
     createPoll: function () {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
       this.$router.push("/createQuestion/" + this.pollId);
-    },
-    getPlayerStyle: function (index) {
-      const gridSize = 200; // You can adjust this based on your design
-      const rows = 3; // You can adjust this based on your design
-      const cols = 3; // You can adjust this based on your design
-
-      const left = (index % cols) * gridSize;
-      const top = Math.floor(index / rows) * gridSize;
-
-      return {
-        position: 'absolute',
-        top: top + 'px',
-        left: left + 'px',
-      };
     },
     addQuestion: function () {
       socket.emit("addQuestion", {
@@ -91,20 +77,20 @@ export default {
     getPollId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
-    getRandomPosition: function () {
-  const container = document.querySelector('.playerContainer');
-  const containerRect = container.getBoundingClientRect();
+//     getRandomPosition: function () {
+//   const container = document.querySelector('.playerContainer');
+//   const containerRect = container.getBoundingClientRect();
 
-  let position;
-  do {
-    position = {
-      top: Math.random() * (containerRect.height - 200),
-      left: Math.random() * (containerRect.width - 200),
-    };
-  } while (this.checkOverlap(position));
+//   let position;
+//   do {
+//     position = {
+//       top: Math.random() * (containerRect.height - 200),
+//       left: Math.random() * (containerRect.width - 200),
+//     };
+//   } while (this.checkOverlap(position));
 
-  return position;
-},
+//   return position;
+// },
 checkOverlap: function (newPosition) {
   return this.playersData.some((player) => {
     const playerRect = {
@@ -123,32 +109,48 @@ checkOverlap: function (newPosition) {
     return overlap;
   });
 },
-getActivePlayers: function (data) {
-  this.playersData = this.playersData || [];
+// getActivePlayers: function (data) {
+//   this.playersData = this.playersData || [];
 
+<<<<<<< HEAD
+//   data.forEach((newPlayer) => {
+//     const existingPlayer = this.playersData.find(
+//       (player) => player.userName === newPlayer.userName
+//     );
+=======
   data.forEach((newPlayer) => {
     const existingPlayer = this.playersData.find(
       (player) => player.userName === newPlayer.userName
     );
+>>>>>>> b96a41a7fa8ae1ecb1ba6d69475da42a3341bd1a
 
-    if (!existingPlayer) {
-      const position = this.getRandomPosition();
-      newPlayer.style = {
-        position: 'absolute',
-        top: position.top + 'px',
-        left: position.left + 'px',
-      };
-      this.playersData.push(newPlayer);
-    } else {
-      newPlayer.style = existingPlayer.style;
-    }
-  });
+//     if (!existingPlayer) {
+//       const position = this.getRandomPosition();
+//       newPlayer.style = {
+//         position: 'absolute',
+//         top: position.top + 'px',
+//         left: position.left + 'px',
+//       };
+//       this.playersData.push(newPlayer);
+//     } else {
+//       newPlayer.style = existingPlayer.style;
+//     }
+//   });
 
-  // Remove players that are not in the updated data
-  const playersToRemove = this.playersData.filter(
-    (player) => !data.some((newPlayer) => newPlayer.userName === player.userName)
-  );
+//   // Remove players that are not in the updated data
+//   const playersToRemove = this.playersData.filter(
+//     (player) => !data.some((newPlayer) => newPlayer.userName === player.userName)
+//   );
 
+<<<<<<< HEAD
+//   playersToRemove.forEach((playerToRemove) => {
+//     const index = this.playersData.indexOf(playerToRemove);
+//     if (index !== -1) {
+//       this.playersData.splice(index, 1);
+//     }
+//   });
+// },
+=======
   playersToRemove.forEach((playerToRemove) => {
     const index = this.playersData.indexOf(playerToRemove);
     if (index !== -1) {
@@ -157,6 +159,7 @@ getActivePlayers: function (data) {
   });
 
 },
+>>>>>>> b96a41a7fa8ae1ecb1ba6d69475da42a3341bd1a
 
 
     getName: function (playerData) {
@@ -187,12 +190,12 @@ header {
 }
 
 .onePlayer {
-  position: absolute;
   background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   padding: 50px;
+  margin-bottom: 10px; /* Add margin to separate players */
 }
 
 .createViewBody {
@@ -205,7 +208,8 @@ header {
   font-family: "Lilita One", sans-serif;
   font-size: 40px;
   color: rgb(255, 195, 255);
-  position: relative; 
+  overflow-y: auto;
+  max-height: 400px;
 
 }
 

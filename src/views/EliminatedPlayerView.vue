@@ -3,12 +3,12 @@
 
   <div class="topPage">
     <h1>{{ uiLabels.theEliminatedPlayer }}</h1><h2>{{ this.userName }}</h2>
+    <h3>{{ uiLabels.hasGreenFlag }}{{ this.greenFlag }}</h3>
 
     <h1>{{ uiLabels.hasGreenFlag }}</h1><h2>{{ this.greenFlag }} </h2>
 
     <h4 v-if="availableLifeline">{{ uiLabels.changedMind }} </h4>
   </div>
-
 
   <div class="saveButton" v-on:click="savePlayer" v-if="availableLifeline">
     <button class="lifebouyButton">
@@ -16,13 +16,14 @@
       {{ uiLabels.savePlayer }}
     </button>
   </div>
-  <button class="nextQButton" v-on:click="createQuestion">
+  <button class="nextQButton" v-on:click="createQuestion" v-if="(!onePlayerLeft || (onePlayerLeft && lifeButtonPressed))">
     {{ uiLabels.nextQuestion }}
   </button>
 
-  <div class="lifeBouyUsed" v-if="!availableLifeline">
+  <div class="lifeBouyUsed" v-if="!availableLifeline && !onePlayerLeft">
     {{ uiLabels.lifebouySpent }}
   </div>
+  <button class="lastPlayer" v-if="onePlayerLeft && !lifeButtonPressed" v-on:click="getTrueMatch"> SE DIN TRUE MATCH</button>
 </section>
 </template>
 
@@ -46,6 +47,9 @@ export default {
       userName: "",
       greenFlag: "",
       uniquePlayerId: "",
+      playerArray:[],
+      onePlayerLeft:false,
+      lifeButtonPressed:false,
     };
   },
   created: function () {
@@ -53,6 +57,8 @@ export default {
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.pollId);
     socket.emit("getEliminatedPlayer", this.pollId);
+    socket.emit("getPlayersLeft", this.pollId);
+    socket.on("thePlayersLeft", (data) => this.checkPlayerArray(data))
     socket.on("hejKomOKyssMig", (data) => this.getPlayer(data));
     socket.emit("checkIfLifelineUsed", this.pollId);
     socket.on("statusLifeline", (data) => this.checkLifeline(data));
@@ -65,6 +71,7 @@ export default {
   methods: {
     savePlayer: function () {
       this.playerSaved = true;
+      this.lifeButtonPressed=true;
       socket.emit("lifelineUsed", {
         pollId: this.pollId,
         uniquePlayerId: this.uniquePlayerId,
@@ -78,6 +85,14 @@ export default {
           this.greenFlag = data.greenFlag;
           this.uniquePlayerId = data.uniquePlayerId;
     },
+    checkPlayerArray: function(data){
+        if(data.length==1){
+        console.log(data)
+         this.onePlayerLeft=true;
+
+      }
+      this.playerArray=data;  
+    },
 
     createQuestion: function () {
       this.eliminatedPlayer = "";
@@ -90,6 +105,11 @@ export default {
     checkLifeline: function (data) {
       this.availableLifeline = data;
     },
+    getTrueMatch: function(){
+      this.$router.push("/endOfGame/" + this.pollId);
+      socket.emit("theTrueMatchPlayer", {pollId: this.pollId, matchedPlayer: this.playerArray})
+
+    }
   },
 };
 </script>
