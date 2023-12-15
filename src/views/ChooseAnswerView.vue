@@ -165,7 +165,7 @@ h1 {
   background-color: rgb(253, 252, 253);
 }
 
-button:hover:not([disabled]) {
+.playerAnswerB:hover:not([disabled]) {
   color: rgb(244, 103, 139);
   cursor: pointer;
   display:block;

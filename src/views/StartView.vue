@@ -127,6 +127,7 @@ body {
   font-weight: lighter;
   font-family: "Lilita One", sans-serif;
   letter-spacing: 2.5px;
+  height: 100vh;
 
 }
 
@@ -155,14 +156,12 @@ h1{padding-top: 25px;}
   justify-content: space-between;
 }
 .bodywrapper {
-  min-height: 100vh;
+  height: 79%;
   background: linear-gradient(
     179.4deg,
     rgb(253, 240, 233) 2.2%,
     rgb(255, 194, 203) 96.2%
   );
-
-
 }
 
 .box-a,
