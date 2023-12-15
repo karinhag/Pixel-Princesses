@@ -126,6 +126,7 @@ header {
   background-size: contain; /* Ensure the entire image fits within the box */
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 48%;
 }
 .saved {
   padding: 15%;
