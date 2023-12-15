@@ -7,7 +7,7 @@
     </button>
     <div class="playerContainer">
     <section class="activePlayers">
-    <div class="onePlayer" v-for="player in playersData" :style="player.style">
+    <div class="onePlayer" v-for="(player, index) in playersData" :style="getPlayerStyle(index)">
       {{ getName(player) }}
     </div>
   </section>
@@ -57,6 +57,20 @@ export default {
     createPoll: function () {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
       this.$router.push("/createQuestion/" + this.pollId);
+    },
+    getPlayerStyle: function (index) {
+      const gridSize = 200; // You can adjust this based on your design
+      const rows = 3; // You can adjust this based on your design
+      const cols = 3; // You can adjust this based on your design
+
+      const left = (index % cols) * gridSize;
+      const top = Math.floor(index / rows) * gridSize;
+
+      return {
+        position: 'absolute',
+        top: top + 'px',
+        left: left + 'px',
+      };
     },
     addQuestion: function () {
       socket.emit("addQuestion", {
