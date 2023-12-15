@@ -54,6 +54,8 @@
 	"eliminated":"Du har blivit eliminerad",
 	"saved":"Du har blivit räddad",
 	"perfectMatch": "Din perfekta matchning är: ",
-	"backToStart": "Tillbaka till startsidan"
+	"backToStart": "Tillbaka till startsidan",
+	"congrats": "Grattis!",
+	"winner": "du är den perfekta dejten"
 
 }
