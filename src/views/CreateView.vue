@@ -96,8 +96,8 @@ checkOverlap: function (newPosition) {
     const playerRect = {
       top: parseFloat(player.style.top),
       left: parseFloat(player.style.left),
-      width: 200, // Assuming player width
-      height: 200, // Assuming player height
+      width: 200, 
+      height: 200, 
     };
 
     const overlap =
@@ -110,26 +110,31 @@ checkOverlap: function (newPosition) {
   });
 },
 getActivePlayers: function (data) {
-  this.playersData = this.playersData || [];
+      this.playersData = this.playersData || [];
 
-  data.forEach((newPlayer) => {
-    const existingPlayer = this.playersData.find(
-      (player) => player.userName === newPlayer.userName
-    );
+      data.slice(0, 5).forEach((newPlayer) => { // Presenterar bara de första som går med i dejten på skärmen i ett hjärta med namnet
+        const existingPlayer = this.playersData.find(
+          (player) => player.userName === newPlayer.userName
+        );
 
-    if (!existingPlayer) {
-      const position = this.getRandomPosition();
-      newPlayer.style = {
-        position: 'absolute',
-        top: position.top + 'px',
-        left: position.left + 'px',
-      };
-      this.playersData.push(newPlayer);
-    } else {
-      newPlayer.style = existingPlayer.style;
-    }
-  });
-},
+        if (!existingPlayer) {
+          const position = this.getRandomPosition();
+          newPlayer.style = {
+            position: 'absolute',
+            top: position.top + 'px',
+            left: position.left + 'px',
+          };
+          this.playersData.push(newPlayer);
+        } else {
+          newPlayer.style = existingPlayer.style;
+        }
+      });
+
+      // Store the remaining players without presenting them on the screen
+      const remainingPlayers = data.slice(8);
+      // Optionally, you can save the remaining players for future use
+      // this.remainingPlayers = remainingPlayers;
+    },
 
 
     getName: function (playerData) {
@@ -161,7 +166,7 @@ header {
 
 .onePlayer {
   position: absolute;
-  background-image: url("https://pngimg.com/d/heart_PNG51183.png");
+  background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -188,9 +193,11 @@ header {
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 15px;
+  font-size: 20px;
   margin: 50px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+
 }
 
 .purpleButton:hover:enabled {
@@ -202,6 +209,7 @@ header {
 
  .playerContainer {
   position: relative; /* Ensure positioning context for absolute positioning */
-  height: 450px; /* Adjust the height as needed */
+  height: 400px; /* Adjust the height as needed */
+
 }
 </style>

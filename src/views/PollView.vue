@@ -5,18 +5,18 @@
       v-if="!this.userCreated && !this.answerSubmitted"
     >
       <div>
-        <p id="roomId">{{ uiLabels.joinedRoom }}{{ this.pollId }}</p>
+        <p id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</p>
         <header>{{ uiLabels.theHeader }}</header>
 
         <QuestionComponent v-bind:question="question" />
-        <p>
-          {{ uiLabels.userName
-          }}<input type="text" v-model="userInfo.userName" />
+        <p class="inputText">
+          {{ uiLabels.userName}} <br>
+          <input type="text" v-model="userInfo.userName" />
         </p>
 
-        <p>
-          {{ uiLabels.greenFlag
-          }}<input type="text" v-model="userInfo.greenFlag" />
+        <p class ="inputText">
+          {{ uiLabels.greenFlag}} <br>
+          <input type="text" v-model="userInfo.greenFlag" />
         </p>
       </div>
       <button
@@ -179,9 +179,11 @@ export default {
 #roomId {
   padding: 0%;
   margin: 0%;
-  padding: 20px;
-  text-align: left;
-  padding-top: 20px;
+  text-align: right;
+  padding-right: 1em;
+  padding-top: 1em;
+  color: rgb(202, 28, 135);
+  
 }
 header, h1 {
 letter-spacing:2.5px; 
@@ -223,14 +225,22 @@ h1 {
   padding: 15px;
   text-align: center;
   display: inline-block;
-  font-size: 15px;
+  font-size: 20px;
   margin: 7px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+  
+
 }
 
 button:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
+}
+.inputText {
+  font-size: x-large;
+  text-align: center;
+
 }
 
 </style>

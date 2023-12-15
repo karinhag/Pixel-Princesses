@@ -20,12 +20,12 @@
       <button v-on:click="about">{{ uiLabels.about }}</button>
       <button v-on:click="FAQ">FAQ</button>
     </ResponsiveNav>
-    <div v-if="showAbout" class="aboutText">
-      <b>{{ uiLabels.aboutText }}</b>
+    <div v-if="showAbout" class="FAQtext">
+      <b class="FAQheader">{{ uiLabels.aboutText }}</b>
       <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
     </div>
     <div v-if="showFAQ" class="FAQtext">
-      <b> {{ uiLabels.FAQ }} </b>
+      <b class="FAQheader"> {{ uiLabels.FAQ }} </b>
       <br />{{ uiLabels.FAQ1 }} <br />{{ uiLabels.FAQ2 }} <br />{{
         uiLabels.FAQ3
       }}
@@ -234,6 +234,7 @@ header {
 #nav button {
   background-color: rgb(240, 188, 196);
   margin: 0.3rem;
+  font-family: "Lilita One", sans-serif;;
 }
 
 #nav button:hover {
@@ -250,6 +251,10 @@ header {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
+  font-size: 1.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  
+  letter-spacing: normal;
 }
 
 .startGameButton,
@@ -268,6 +273,7 @@ header {
   width: 200px;
   padding: 10px;
   font-size: 25px;
+  font-family: "Lilita One", sans-serif;;
 }
 
 .startGameButton:hover:enabled,

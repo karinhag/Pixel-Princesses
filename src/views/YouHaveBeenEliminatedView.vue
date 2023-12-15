@@ -108,9 +108,9 @@ export default {
 .savedScreen {
   height: 1080px;
   background: radial-gradient(
-    rgb(255, 187, 226),
-    rgb(252, 132, 216),
-    rgb(187, 90, 144)
+    rgb(255, 187, 211),
+    rgb(252, 132, 190),
+    rgb(187, 90, 129)
   );
   color: rgb(254, 240, 252);
   font-size: 30px;
