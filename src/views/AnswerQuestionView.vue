@@ -31,7 +31,7 @@
         <input type="text" v-model="userInfo.answer" /> 
       </p>
 
-      <button class="purpleButton" v-on:click="submitAnswer" type="submit">
+      <button class="purpleButton" v-on:click="submitAnswer" type="submit" :disabled="!userInfo.answer">
         {{ uiLabels.sendAnswer }}
       </button>
 
