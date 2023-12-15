@@ -84,6 +84,7 @@ header{
   min-height: 100vh;
 }
 
+/* gifen */
 .perfectMatch img{
   height: 10rem;
   margin-bottom: 0.4rem;
@@ -101,6 +102,7 @@ header{
   border-color: rgb(94, 13, 87);
   padding: 15px;
   text-align: center;
+  font-family: "Lilita One", sans-serif;
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
