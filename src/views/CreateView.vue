@@ -124,31 +124,42 @@ checkOverlap: function (newPosition) {
   });
 },
 getActivePlayers: function (data) {
-      this.playersData = this.playersData || [];
+  this.playersData = this.playersData || [];
 
-      data.slice(0, 5).forEach((newPlayer) => { // Presenterar bara de första som går med i dejten på skärmen i ett hjärta med namnet
-        const existingPlayer = this.playersData.find(
-          (player) => player.userName === newPlayer.userName
-        );
+  data.slice(0, 5).forEach((newPlayer) => {
+    const existingPlayer = this.playersData.find(
+      (player) => player.userName === newPlayer.userName
+    );
 
-        if (!existingPlayer) {
-          const position = this.getRandomPosition();
-          newPlayer.style = {
-            position: 'absolute',
-            top: position.top + 'px',
-            left: position.left + 'px',
-          };
-          this.playersData.push(newPlayer);
-        } else {
-          newPlayer.style = existingPlayer.style;
-        }
-      });
+    if (!existingPlayer) {
+      const position = this.getRandomPosition();
+      newPlayer.style = {
+        position: 'absolute',
+        top: position.top + 'px',
+        left: position.left + 'px',
+      };
+      this.playersData.push(newPlayer);
+    } else {
+      newPlayer.style = existingPlayer.style;
+    }
+  });
 
-      // Store the remaining players without presenting them on the screen
-      const remainingPlayers = data.slice(8);
-      // Optionally, you can save the remaining players for future use
-      // this.remainingPlayers = remainingPlayers;
-    },
+  // Remove players that are not in the updated data
+  const playersToRemove = this.playersData.filter(
+    (player) => !data.some((newPlayer) => newPlayer.userName === player.userName)
+  );
+
+  playersToRemove.forEach((playerToRemove) => {
+    const index = this.playersData.indexOf(playerToRemove);
+    if (index !== -1) {
+      this.playersData.splice(index, 1);
+    }
+  });
+
+  // Optionally, you can save the remaining players for future use
+  const remainingPlayers = data.slice(8);
+  // this.remainingPlayers = remainingPlayers;
+},
 
 
     getName: function (playerData) {
