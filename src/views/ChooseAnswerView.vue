@@ -38,7 +38,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: "CreateView",
+  name: "ChooseAnswerView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",

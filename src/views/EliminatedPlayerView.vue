@@ -4,7 +4,7 @@
   <div class="topPage">
     <h1>{{ uiLabels.theEliminatedPlayer }}</h1><h2>{{ this.userName }}</h2>
 
-    <h1>{{ uiLabels.hasGreenFlag }}</h1><h2>{{ this.greenFlag }} </h2>
+    <h1>{{ uiLabels.hasGreenFlag }}</h1><h3>{{ this.greenFlag }} </h3>
 
     <h4 v-if="availableLifeline">{{ uiLabels.changedMind }} </h4>
   </div>
@@ -22,7 +22,7 @@
   <div class="lifeBouyUsed" v-if="!availableLifeline && !onePlayerLeft">
     {{ uiLabels.lifebouySpent }}
   </div>
-  <button class="lastPlayer" v-if="onePlayerLeft && !lifeButtonPressed" v-on:click="getTrueMatch"> SE DIN TRUE MATCH</button>
+  <button class="lastPlayer" v-if="onePlayerLeft && !lifeButtonPressed" v-on:click="getTrueMatch">  {{ uiLabels.showTrueMatch }}</button>
 </section>
 </template>
 
@@ -31,7 +31,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: "CreateView",
+  name: "EliminatedPlayerView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -136,7 +136,14 @@ h1 {
 h2 {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
-  color:rgb(129, 0, 19)
+  color:red;
+
+}
+
+h3 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color:rgb(116, 196, 116);
 
 }
 

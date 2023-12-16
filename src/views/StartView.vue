@@ -158,14 +158,14 @@ h1{padding-top: 25px;}
 }
 .bodywrapper {
   height: 79%;
-  
   background: rgba(255,152,190,255);
-
+  color:rgba(255,41,118,255);
 
 }
 
 .box-a,
 .box-b {
+  color:black;
   margin-top: 50px;
   font-size: 20px;
   display: flex;
@@ -173,10 +173,10 @@ h1{padding-top: 25px;}
   justify-content: center;
   align-items: center;
   padding: 20px;
-  width: 48%; /* Adjust the width as needed */
+  width: 48%; 
   height: 350px;
   background-image: url("https://pngimg.com/d/heart_PNG51183.png");
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain; 
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -197,9 +197,8 @@ header {
   letter-spacing: 0.1em;
   font-weight: bolder;
   font-size: 5rem;
-  color: white;
+  color: rgb(255, 213, 230);
   padding: 0.2em;
-  /* font-family: "Brush Script MT";  */
   font-family: "Rochester", cursive;
   text-align: center;
 }
@@ -210,7 +209,7 @@ header {
   margin-bottom: 0.4rem;
 }
 .hamburger {
-  color: white;
+  color: rgb(255, 213, 230);
   width: 1em;
   display: flex;
   align-items: center;
@@ -226,28 +225,27 @@ header {
   background: rgba(255, 96, 154, 1);
 }
 #nav button {
-  background-color: rgb(240, 188, 196);
+  background-color: rgb(255, 213, 230);
   margin: 0.3rem;
   font-family: "Lilita One", sans-serif;;
 }
 
 #nav button:hover {
   cursor: pointer;
-  background-color: rgb(236, 159, 170);
+  background-color: rgb(255, 213, 230);
 }
 
 .langButton:hover
 
 .aboutText,
 .FAQtext {
-  background-color: lightpink;
+  background-color: rgb(255, 213, 230);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
   font-size: 1em;
-  font-family: Arial, Helvetica, sans-serif;
-  
+  font-family: 'Quicksand', sans-serif;
   letter-spacing: normal;
 }
 
@@ -255,8 +253,8 @@ header {
 .joinDateButton {
   background: linear-gradient(
     0deg,
-    rgb(247, 247, 247) 23.8%,
-    rgb(252, 221, 221) 92%
+    rgb(255, 213, 230) 23.8%,
+    rgb(252, 221, 234) 92%
   );
   padding: 6px;
   text-align: center;
@@ -275,8 +273,8 @@ header {
   cursor: pointer;
   background: linear-gradient(
     0deg,
-    rgb(239, 209, 209) 23.8%,
-    rgb(252, 175, 175) 92%
+    rgb(255, 213, 230) 23.8%,
+    rgb(252, 175, 211) 92%
   );
 }
 

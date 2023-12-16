@@ -21,7 +21,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: "CreateView",
+  name: "YouHaveBeenEliminatedView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -108,6 +108,8 @@ header {
   font-size: 100px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
+  color:rgba(255,152,194,255);
+
 }
 .eliminated {
   padding: 15%;

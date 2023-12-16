@@ -167,7 +167,7 @@ header {
   font-family: "Lilita One", sans-serif;
 
   font-size: 100px;
-  color: rgb(202, 28, 135);
+  color: black;
  
 }
 

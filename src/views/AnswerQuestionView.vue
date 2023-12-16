@@ -6,7 +6,7 @@
         !this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
       "
     >
-        <div id="roomId">pollId: {{ this.pollId }} </div>
+        <div id="roomId">{{uiLabels.joinedRoom}} {{ this.pollId }} </div>
       <h1>{{ uiLabels.waitingForGame }}</h1>
       
       <button class="purpleButton" v-on:click="abandonDate" type="submit">
@@ -20,7 +20,7 @@
       "
     >
     <div id="roomId">
-        pollId: {{ this.pollId }}
+        {{uiLabels.joinedRoom}} {{ this.pollId }}
     </div>
     <div class="question">
       {{ this.question }}
@@ -30,10 +30,6 @@
         {{ uiLabels.answer }} <br>
         <input type="text" v-model="userInfo.answer" /> 
       </p>
-
-     <!--<button class="goBackButton" v-on:click="abandonDate" type="submit">
-        {{ uiLabels.abandonDate }}
-      </button>--> 
 
       <button class="purpleButton" v-on:click="submitAnswer" type="submit" :disabled="!userInfo.answer">
         {{ uiLabels.sendAnswer }}
@@ -74,7 +70,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 infinity.register();
 export default {
-  name: "PollView",
+  name: "AnswerQuestionView",
   components: {
     QuestionComponent,
   },
@@ -193,17 +189,14 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-/* .infinity{
-    padding-top:10%;
-  
-  } */
+
 #roomId {
   padding: 0%;
   margin: 0%;
   text-align: right;
   padding-right: 1em;
   padding-top: 1em;
-  color: rgb(202, 28, 135);
+  color: black;
   font-size: medium;
   
 }
@@ -213,7 +206,7 @@ h1 {
   letter-spacing: 2.5px;
   margin: 50px;
   font-size: 60px;
-  color: #f5f5f5;
+  color:black;
 }
 
 .pollBody {
@@ -230,7 +223,6 @@ input {
   caret-color: #f06af0;
   font-size: 40px;
   color: #ff81bee8;
-  /* padding:10px;  */
 }
 
 .waitingForStart {

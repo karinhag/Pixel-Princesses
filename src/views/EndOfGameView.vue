@@ -12,7 +12,7 @@
 
 <h2>{{ this.userName }}</h2>
 <h1>{{ uiLabels.hasGreenFlag }}</h1>
-<h2>{{ this.greenFlag }}</h2>
+<h3>{{ this.greenFlag }}</h3>
   </div>
 
   <div class="buttonContainer">
@@ -89,7 +89,7 @@ header{
     font-size: 65px;
     font-family: "Lilita One", sans-serif;
     vertical-align: center;
-    color:rgb(99, 15, 92);
+    color:rgb(254, 221, 255);
 }
 
 .endOfGameBody{
@@ -126,6 +126,32 @@ header{
 .purpleButton:hover {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
+}
+h1 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 25px;
+  color:rgb(254, 221, 255);
+
+}
+
+h2 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color: rgb(255, 195, 255);
+  background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 50px;
+  margin-bottom: 10px;
+
+}
+
+h3 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color:rgb(116, 196, 116);
+
 }
 
 </style>
