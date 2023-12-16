@@ -136,7 +136,7 @@ h1 {
 h2 {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
-  color:red;
+  color:black;
 
 }
 

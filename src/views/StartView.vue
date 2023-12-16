@@ -157,7 +157,7 @@ h1{padding-top: 25px;}
   justify-content: space-between;
 }
 .bodywrapper {
-  height: 79%;
+  height: 100%;
   background: rgba(255,152,190,255);
   color:rgba(255,41,118,255);
 
