@@ -1,5 +1,11 @@
 <template>
   <body>
+    
+    <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
+      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
+      <button v-on:click="about">{{ uiLabels.about }}</button>
+      <button v-on:click="FAQ">FAQ</button>
+    </ResponsiveNav>
     <header>
       <div
         v-bind:class="['hamburger', { close: !hideNav }]"
@@ -15,11 +21,6 @@
         />
       </div>
     </header>
-    <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
-      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
-      <button v-on:click="about">{{ uiLabels.about }}</button>
-      <button v-on:click="FAQ">FAQ</button>
-    </ResponsiveNav>
     <div v-if="showAbout" class="FAQtext">
       <b class="FAQheader">{{ uiLabels.aboutText }}</b>
       <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
@@ -157,11 +158,10 @@ h1{padding-top: 25px;}
 }
 .bodywrapper {
   height: 79%;
-  background: linear-gradient(
-    179.4deg,
-    rgb(253, 240, 233) 2.2%,
-    rgb(255, 194, 203) 96.2%
-  );
+  
+  background: rgba(255,152,190,255);
+
+
 }
 
 .box-a,
@@ -188,11 +188,7 @@ h1{padding-top: 25px;}
 }
 
 header {
-  background: linear-gradient(
-    106.5deg,
-    rgba(253, 141, 196, 0.91) 23%,
-    rgba(245, 81, 125, 0.8) 93%
-  );
+  background: rgba(255, 96, 154, 1);
   width: 100%;
   display: grid;
   grid-template-columns: 2em auto;
@@ -227,7 +223,7 @@ header {
   font-size: 1.5rem;
 }
 #nav {
-  background-color: palevioletred;
+  background: rgba(255, 96, 154, 1);
 }
 #nav button {
   background-color: rgb(240, 188, 196);
@@ -249,7 +245,7 @@ header {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1em;
   font-family: Arial, Helvetica, sans-serif;
   
   letter-spacing: normal;

@@ -64,11 +64,9 @@ export default {
     },
 
     savedPlayer: function () {
-      console.log("SAVE PLAYER ENBART EN G¨NG");
       this.saved = true;
       socket.emit("joinDate", { userInfo: this.userInfo, pollId: this.pollId });
 
-      // Define a function to handle the newQuestionIncoming event
       const handleNewQuestion = () => {
         this.$router.push({
           path: "/answerQuestion/" + this.pollId,
@@ -79,20 +77,11 @@ export default {
           },
         });
 
-        // Remove the event listener after it has been triggered once
         socket.off("newQuestionIncoming", handleNewQuestion);
       };
 
-      // Add the event listener
       socket.on("newQuestionIncoming", handleNewQuestion);
     },
-    // savedPlayer: function(){
-
-    //   // console.log("SAVE PLAYER ENBART EN G¨NG")
-    //   // this.saved=true
-    //   // socket.emit("joinDate", {userInfo: this.userInfo, pollId: this.pollId,});
-    //   // socket.on("newQuestionIncoming", ()=> this.$router.push({path:"/answerQuestion/" + this.pollId, query: {userName: this.userInfo.userName, greenFlag: this.userInfo.greenFlag, uniquePlayerId: this.userInfo.uniquePlayerId}}));
-    // }
   },
 };
 </script>

@@ -8,7 +8,7 @@
 	"changeLanguage": "Change to English",
 	"writePollId": "Skriv in spelkod:",
 	"about": "Om oss",
-	"aboutText": "Romance Roulette är ett roligt blind dating spel!",
+	"aboutText": "Romance Roulette är ett roligt blinddating spel!",
 	"aboutText1": "Det är ett perfekt spel för både fester och seriös dejting. Varje runda får skaparen av dejten ställa frågor till deltagarna och baserat på svaren kommmer en person att elimineras. Till slut är endast din perfekta match kvar! ",
 	"aboutText2": "Endast fantasin sätter gränser, så hitta gärna på dina egna spelregler. Kanske att alla som blir eliminerade måste göra något speciellt, som att ta en klunk av sin drink om du är på en fest.",
 	"FAQ": "Vanliga frågor",
@@ -54,6 +54,10 @@
 	"eliminated":"Du har blivit eliminerad",
 	"saved":"Du har blivit räddad",
 	"perfectMatch": "Din perfekta matchning är: ",
-	"backToStart": "Tillbaka till startsidan"
+	"backToStart": "Tillbaka till startsidan",
+	"congrats": "Grattis!",
+	"winner": "Du är den perfekta dejten",
+	"nextRound": "Du klarade dig till nästa runda!",
+	"waitingForQuestion": "Väntar på nästa fråga..."
 
 }
