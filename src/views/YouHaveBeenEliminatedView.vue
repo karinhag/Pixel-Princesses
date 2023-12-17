@@ -1,16 +1,17 @@
 <template>
   <section class="savedScreen" v-if="saved">
-    <!--Ta emot denna information från andra views-->
-    <div class="box">
-      <header>{{ uiLabels.saved }}</header>
-      <div class="saved"></div>
-    </div>
+ 
+      <div class="saved">
+      
+      <header class="savedHeader">{{ uiLabels.saved }}</header>
+    </div> 
+      
   </section>
 
   <section class="eliScreen" v-if="!saved">
     <div class="box">
       <div class="eliminated">
-        <header>{{ uiLabels.eliminated }}</header>
+        <header class="eliHeader">{{ uiLabels.eliminated }}</header>
       </div>
     </div>
   </section>
@@ -101,10 +102,16 @@ export default {
     rgb(252, 132, 190),
     rgb(187, 90, 129)
   );
-  color: rgb(254, 240, 252);
   font-size: 30px;
 }
-header {
+.savedHeader {
+  font-size: 100px;
+  font-family: "Lilita One", sans-serif;
+  vertical-align: center;
+  color:black;
+
+}
+.eliHeader {
   font-size: 100px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
@@ -114,7 +121,7 @@ header {
 .eliminated {
   padding: 15%;
   background-image: url("/black_broken_heart1.png");
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain; 
   background-position: center;
   background-repeat: no-repeat;
   background-size: 48%;
@@ -122,7 +129,7 @@ header {
 .saved {
   padding: 15%;
   background-image: url("/heart_bandaid_png.png");
-  background-size: contain;
+  background-size: 48%;
   background-position: center;
   background-repeat: no-repeat;
 }

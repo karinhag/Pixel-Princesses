@@ -1,11 +1,7 @@
 <template>
   <body>
     
-    <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
-      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
-      <button v-on:click="about">{{ uiLabels.about }}</button>
-      <button v-on:click="FAQ">FAQ</button>
-    </ResponsiveNav>
+    
     <header>
       <div
         v-bind:class="['hamburger', { close: !hideNav }]"
@@ -21,6 +17,13 @@
         />
       </div>
     </header>
+
+    <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
+      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
+      <button v-on:click="about">{{ uiLabels.about }}</button>
+      <button v-on:click="FAQ">FAQ</button>
+    </ResponsiveNav>
+    
     <div v-if="showAbout" class="FAQtext">
       <b class="FAQheader">{{ uiLabels.aboutText }}</b>
       <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
@@ -223,11 +226,16 @@ header {
 }
 #nav {
   background: rgba(255, 96, 154, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #nav button {
   background-color: rgb(255, 213, 230);
   margin: 0.3rem;
-  font-family: "Lilita One", sans-serif;;
+  font-family: "Lilita One", sans-serif;
+  height:30px;
+  width:150px;
 }
 
 #nav button:hover {
@@ -295,7 +303,6 @@ header {
     left: -12em;
   }
 }
-
 
 
 
