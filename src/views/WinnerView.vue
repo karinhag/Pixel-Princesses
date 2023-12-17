@@ -32,7 +32,7 @@
       this.uniquePlayerId = this.$route.query.uniquePlayerId;
       socket.emit("pageLoaded", this.lang);
       socket.emit("joinPoll", this.uniquePlayerId);
-  
+
       socket.on("init", (labels) => {
         this.uiLabels = labels;
       });
@@ -41,7 +41,7 @@
         (data) => (this.data = data),
     
       );
-      socket.on("results", () => this.savedPlayer());  //skriv nån metod här som lyssnar på om det bara är en spelare kvar
+      socket.on("results", () => this.savedPlayer()); 
     },
     methods: {
       backToStart: function(){
@@ -87,9 +87,8 @@
   background: radial-gradient(
     rgb(245, 193, 211),
     rgb(255, 163, 187),
-    rgb(244, 90, 143)  );
+    rgb(243, 108, 155)  );
   color: rgb(254, 240, 252);
-  font-size: 30px;
     
 
   }
@@ -97,7 +96,7 @@
   .winnerBox {
     height:820px;
     background-image: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/34216/heart-arrow-clipart-xl.png");
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -125,5 +124,15 @@
     background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
     cursor: pointer;
   }
+  @media screen and (max-width: 89em) {
+  .congratsHeader{
+    font-size:60px;
+  }
+  .winnerHeader {
+    font-size:30px;
+    
+  }
+  
+}
   
   </style>

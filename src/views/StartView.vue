@@ -36,7 +36,7 @@
     </div>
 
     <section class="bodywrapper">
-      <h1>{{ uiLabels["sales-pitch"] }}</h1>
+      <h1>{{ uiLabels.salespitch }}</h1>
       <h2>{{ uiLabels.subHeading }}</h2>
 
       <div class="boxes-container">
@@ -260,6 +260,11 @@ header {
   font-family: 'Quicksand', sans-serif;
   letter-spacing: normal;
 }
+.FAQheader{
+  font-size: 20px;
+  font-family: "Lilita One", sans-serif;;
+}
+
 
 .startGameButton,
 .joinDateButton {
@@ -271,7 +276,6 @@ header {
   padding: 6px;
   text-align: center;
   display: inline-block;
-  font-size: 25px;
   margin: 7px 5px;
   border-radius: 10px;
   width: 200px;
@@ -291,6 +295,9 @@ header {
 }
 
 @media screen and (max-width: 50em) {
+  #nav button {
+    height: 55px; 
+  }
   .logo {
     font-size: 5vw;
     display: flex;
@@ -306,6 +313,20 @@ header {
   .hide {
     left: -12em;
   }
+  .startGameButton,
+  .joinDateButton {
+    width:45%;
+  }
+  .box-a,
+  .box-b{
+    width:40%;
+  }
+  
+h1,
+h2{
+  font-size: 140%;
+}
+
 }
 
 

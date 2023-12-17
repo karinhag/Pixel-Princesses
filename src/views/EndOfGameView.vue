@@ -102,6 +102,7 @@ header{
 .perfectMatch img{
   height: 10rem;
   margin-bottom: 0.4rem;
+  background-repeat: no-repeat;
 }
 
 .buttonContainer{
@@ -153,5 +154,12 @@ h3 {
   color:rgb(116, 196, 116);
 
 }
+@media screen and (max-width: 89.8em) {
+  .perfectMatch img{
+    width:0;
+    height:0;
+/* tar bort gifen vid små skärmar - skulle kke kunna lösa det på annat sätt om vi vill */
 
+  }
+}
 </style>

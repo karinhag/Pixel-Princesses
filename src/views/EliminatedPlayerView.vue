@@ -196,7 +196,7 @@ h4{
   
 
 }
-
+.lastPlayer,
 .nextQButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   font-size: 20pt;
@@ -226,9 +226,19 @@ lifebouyButton>span {
   );
   cursor: pointer;
 }
-
+.lastPlayer:hover:enabled {
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+  cursor: pointer;
+}
 .nextQButton:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
+}
+@media screen and (max-width: 50em) {
+  .lastPlayer,
+  .nextQButton,
+  .lifebouyButton {
+    width: 50%; 
+  }
 }
 </style>

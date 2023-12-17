@@ -132,6 +132,11 @@ export default {
       this.getPlayer(data);
     });
     socket.on("newQuestionIncoming", ()=>this.resetPage());
+
+    socket.on("theTrueMatchPlayer", (matchedPlayer) => {
+    this.$router.push("/winnerView/" + this.pollId);
+  });
+
   },
   methods: {
     submitAnswer: function () {

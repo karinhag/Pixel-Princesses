@@ -221,4 +221,14 @@ button > img {
   width: 35px;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 50em) {
+  .scrollable {
+    min-width: auto; /* Allow the container to shrink as needed */
+  }
+
+  .playerAnswerB {
+    min-width: 100%; /* Use full width for smaller screens */
+  }
+}
 </style>

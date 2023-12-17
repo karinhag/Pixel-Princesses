@@ -93,7 +93,6 @@ export default {
   height: 1080px;
   background: radial-gradient(#ff2d30ff, #cb0505ff, rgb(98, 4, 4));
   color: rgb(254, 240, 252);
-  font-size: 30px;
 }
 .savedScreen {
   height: 1080px;
@@ -102,7 +101,6 @@ export default {
     rgb(252, 132, 190),
     rgb(187, 90, 129)
   );
-  font-size: 30px;
 }
 .savedHeader {
   font-size: 100px;
@@ -128,7 +126,9 @@ export default {
 }
 .saved {
   padding: 15%;
+  padding-top:20%;
   background-image: url("/heart_bandaid_png.png");
+  background-size: contain; 
   background-size: 48%;
   background-position: center;
   background-repeat: no-repeat;
@@ -136,5 +136,16 @@ export default {
 
 .box {
   padding-top: 100px;
+}
+@media screen and (max-width: 50em) {
+  .eliHeader,
+  .savedHeader{
+    font-size:50px;
+    text-align:center;
+  }
+  .eliminated ,
+  .saved {
+    background-size: contain; 
+  }
 }
 </style>

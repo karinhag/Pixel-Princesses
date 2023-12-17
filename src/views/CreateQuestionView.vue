@@ -3,8 +3,10 @@
     <header>{{ uiLabels.writeQuestion }}</header>
     <div><textarea v-model="question" rows="3" cols="40"></textarea><br /></div>
     <div>
-      {{ uiLabels.hardToDecide
-      }}<button class="randomQuestionButton" @click="generateRandomQuestion">
+      {{ uiLabels.hardToDecide}}
+      <div class="arrowImg"></div>
+
+      <button class="randomQuestionButton" @click="generateRandomQuestion">
         {{ uiLabels.randomQuestion }}
       </button>
     </div>
@@ -144,7 +146,6 @@ min-height: 100vh;
   );
   border: solid;
   border-color: rgb(94, 13, 87);
-  padding: 15px;
   text-align: center;
   display: inline-block;
   /* font-size: 15px; */
@@ -183,5 +184,23 @@ button{
   font-family: "Lilita One", sans-serif;
   text-transform: uppercase;
   font-size: 30px;
+}
+.arrowImg {
+  background-image: url("https://media1.giphy.com/media/3cnI4Mx8T8yCbTW4r1/giphy.gif?cid=ecf05e4728af6szxy69nnokhwhhpsuhsho6ov6j0i8cb02y9&ep=v1_stickers_search&rid=giphy.gif&ct=s");
+  background-size: contain; 
+  width:100px;
+  height:50px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin: 0 auto; /* Center horizontally */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+@media screen and (max-width: 50em) {
+  textarea {
+    width: 80%; /* Use full width for smaller screens */
+  }
+  
 }
 </style>
