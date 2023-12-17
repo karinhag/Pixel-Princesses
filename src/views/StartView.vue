@@ -240,7 +240,11 @@ header {
 
 #nav button:hover {
   cursor: pointer;
-  background-color: rgb(255, 213, 230);
+  background: linear-gradient(
+    0deg,
+    rgb(255, 213, 230) 23.8%,
+    rgb(252, 175, 211) 92%
+  );
 }
 
 .langButton:hover
