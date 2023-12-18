@@ -10,9 +10,9 @@
     {{ uiLabels.perfectMatch }} 
     </header>
 
-<h2>{{ this.userName }}</h2>
-<h1>{{ uiLabels.hasGreenFlag }}</h1>
-<h3>{{ this.greenFlag }}</h3>
+<h2 id="userName">{{ this.userName }}</h2>
+<h1 id="hasGreenFlag">{{ uiLabels.hasGreenFlag }}</h1>
+<h3 id="GreenFlag">{{ this.greenFlag }}</h3>
   </div>
 
   <div class="buttonContainer">
@@ -128,14 +128,14 @@ header{
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
 }
-h1 {
+#hasGreenFlag {
   font-family: "Lilita One", sans-serif;
   font-size: 25px;
   color:rgb(254, 221, 255);
 
 }
 
-h2 {
+#userName {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
   color: rgb(255, 195, 255);
@@ -148,7 +148,7 @@ h2 {
 
 }
 
-h3 {
+#greenFlag {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
   color:rgb(116, 196, 116);

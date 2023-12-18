@@ -196,7 +196,6 @@ h4{
   
 
 }
-.lastPlayer,
 .nextQButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   font-size: 20pt;
@@ -206,6 +205,19 @@ h4{
   font-family: "Lilita One", sans-serif;
   margin-top: 1em;
   display: inline-block;
+}
+
+.lastPlayer{
+  background: linear-gradient(180.8deg, rgb(140, 247, 177) -0.8%, rgb(147, 219, 250) 99%);
+  font-size: 20pt;
+  color: black;
+  width: 20%;
+  border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+  margin-top: 1em;
+  display: inline-block;
+  padding:2rem;
+
 }
 
 lifebouyButton>img,
@@ -227,7 +239,7 @@ lifebouyButton>span {
   cursor: pointer;
 }
 .lastPlayer:hover:enabled {
-  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+  background: linear-gradient(180.8deg, rgb(70, 234, 127) -0.8%, rgb(101, 194, 233) 99%);
   cursor: pointer;
 }
 .nextQButton:hover:enabled {
