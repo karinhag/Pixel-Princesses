@@ -2,7 +2,7 @@
   <body>
     
     
-    <header>
+    <header id="startPageStyle">
       <div
         v-bind:class="['hamburger', { close: !hideNav }]"
         v-on:click="toggleNav"
