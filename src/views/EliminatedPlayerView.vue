@@ -143,7 +143,7 @@ h2 {
 h3 {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
-  color:rgb(116, 196, 116);
+  color:rgb(20, 150, 20);
 
 }
 
