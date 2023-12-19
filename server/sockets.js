@@ -37,7 +37,7 @@ function sockets(io, socket, data) {
       "addedPlayer",
       data.addPlayer(userData.pollId, userData.userInfo)
     ); //
-    io.to(userData.pollId).emit("pollsID", userData.pollId);
+    // io.to(userData.pollId).emit("pollsID", userData.pollId);
   });
 
   socket.on("runQuestion", function (d) {
@@ -104,9 +104,11 @@ function sockets(io, socket, data) {
 });
 
   socket.on("getMatchedPlayer", function (pollId) {
-   
     io.to(pollId).emit("returnMatchedPlayer", data.returnMatchedPlayer(pollId));
+    io.to((data.returnMatchedPlayer(pollId)[0][0].uniquePlayerId)).emit("youAreTrueMatch"); 
+   
   });
+
 }
 
 export { sockets };

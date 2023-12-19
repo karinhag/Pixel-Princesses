@@ -3,9 +3,8 @@
 
   <div class="topPage">
     <h1>{{ uiLabels.theEliminatedPlayer }}</h1><h2>{{ this.userName }}</h2>
-    <h3>{{ uiLabels.hasGreenFlag }}{{ this.greenFlag }}</h3>
 
-    <h1>{{ uiLabels.hasGreenFlag }}</h1><h2>{{ this.greenFlag }} </h2>
+    <h1>{{ uiLabels.hasGreenFlag }}</h1><h3>{{ this.greenFlag }} </h3>
 
     <h4 v-if="availableLifeline">{{ uiLabels.changedMind }} </h4>
   </div>
@@ -23,7 +22,7 @@
   <div class="lifeBouyUsed" v-if="!availableLifeline && !onePlayerLeft">
     {{ uiLabels.lifebouySpent }}
   </div>
-  <button class="lastPlayer" v-if="onePlayerLeft && !lifeButtonPressed" v-on:click="getTrueMatch"> SE DIN TRUE MATCH</button>
+  <button class="lastPlayer" v-if="onePlayerLeft && !lifeButtonPressed" v-on:click="getTrueMatch">  {{ uiLabels.showTrueMatch }}</button>
 </section>
 </template>
 
@@ -32,7 +31,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: "CreateView",
+  name: "EliminatedPlayerView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -137,7 +136,14 @@ h1 {
 h2 {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
-  color:rgb(129, 0, 19)
+  color:#252422;
+
+}
+
+h3 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color:rgb(20, 150, 20);
 
 }
 
@@ -177,7 +183,7 @@ h4{
     rgb(252, 251, 121) 90%
   );
   font-size: 20pt;
-  color: black;
+  color: #252422;
   width: 20%;
   border-radius: 15px;
   text-align: center;
@@ -190,16 +196,28 @@ h4{
   
 
 }
-
 .nextQButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   font-size: 20pt;
-  color: black;
+  color: #252422;
   width: 20%;
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
   margin-top: 1em;
   display: inline-block;
+}
+
+.lastPlayer{
+  background: linear-gradient(180.8deg, rgb(140, 247, 177) -0.8%, rgb(147, 219, 250) 99%);
+  font-size: 20pt;
+  color: #252422;
+  width: 20%;
+  border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+  margin-top: 1em;
+  display: inline-block;
+  padding:2rem;
+
 }
 
 lifebouyButton>img,
@@ -220,9 +238,19 @@ lifebouyButton>span {
   );
   cursor: pointer;
 }
-
+.lastPlayer:hover:enabled {
+  background: linear-gradient(180.8deg, rgb(70, 234, 127) -0.8%, rgb(101, 194, 233) 99%);
+  cursor: pointer;
+}
 .nextQButton:hover:enabled {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
+}
+@media screen and (max-width: 50em) {
+  .lastPlayer,
+  .nextQButton,
+  .lifebouyButton {
+    width: 50%; 
+  }
 }
 </style>

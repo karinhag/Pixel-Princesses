@@ -143,7 +143,6 @@ if(this.availableLifeline[pollId] === undefined || this.availableLifeline[pollId
 
 Data.prototype.useLifeLine=function(pollId){
   this.availableLifeline[pollId]=false;
-  console.log(this.availableLifeline[pollId])
 };
 
 

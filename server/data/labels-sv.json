@@ -1,5 +1,5 @@
 {	"romanceRoulette": "Romance Roulette",
-	"sales-pitch": "Lekfullt dejtande, seriös romans",
+	"salespitch": "Lekfullt dejtande, seriös romans",
 	"subHeading": "Din själsfrände kommer aldrig elimineras",
 	"invite": "Bjud in deltagare med den här länken:",
 	"createPoll": "Skapa dejt",
@@ -22,7 +22,7 @@
 	"theHeader": "SKAPA DIN DATINGPROFIL",
 	"writeQuestion": "Skriv din fråga här: ",
 	"randomQuestion": "Slumpa fråga",
-	"hardToDecide": "Svårt att bestämma dig? ⇨",
+	"hardToDecide": "Svårt att bestämma dig?",
 	"Q1": "Vilken är din favoritlåt?",
 	"Q2": "Beskriv din drömdejt",
 	"Q3": "Beskriv dig själv med 3 ord",
@@ -56,6 +56,9 @@
 	"perfectMatch": "Din perfekta matchning är: ",
 	"backToStart": "Tillbaka till startsidan",
 	"congrats": "Grattis!",
-	"winner": "du är den perfekta dejten"
+	"winner": "Du är den perfekta dejten",
+	"nextRound": "Du klarade dig till nästa runda!",
+	"waitingForQuestion": "Väntar på nästa fråga...",
+	"showTrueMatch": "SE DIN TRUE MATCH"
 
 }

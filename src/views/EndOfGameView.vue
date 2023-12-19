@@ -12,10 +12,10 @@
         {{ uiLabels.perfectMatch }}
       </header>
 
-      <h2>{{ this.userName }}</h2>
-      <h1>{{ uiLabels.hasGreenFlag }}</h1>
-      <h2>{{ this.greenFlag }}</h2>
-    </div>
+<h2 id="userName">{{ this.userName }}</h2>
+<h1 id="hasGreenFlag">{{ uiLabels.hasGreenFlag }}</h1>
+<h3 id="GreenFlag">{{ this.greenFlag }}</h3>
+  </div>
 
     <div class="buttonContainer">
       <button class="purpleButton" v-on:click="backToStart">
@@ -69,25 +69,29 @@ export default {
 };
 </script>
 
-<style>
+
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-header {
-  font-size: 65px;
-  font-family: "Lilita One", sans-serif;
-  vertical-align: center;
-  color: rgb(99, 15, 92);
+
+header{
+    font-size: 65px;
+    font-family: "Lilita One", sans-serif;
+    vertical-align: center;
+    color:rgb(254, 221, 255);
 }
 
-.endOfGameBody {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1007' height='560' preserveAspectRatio='none' viewBox='0 0 1007 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1409%26quot%3b)' fill='none'%3e%3crect width='1007' height='560' x='0' y='0' fill='rgba(255%2c 181%2c 236%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c346.142C84.274%2c344.369%2c173.63%2c426.07%2c245.213%2c381.559C316.545%2c337.204%2c284.982%2c222.481%2c320.947%2c146.572C357.689%2c69.024%2c460.607%2c20.016%2c457.131%2c-65.726C453.684%2c-150.741%2c363.661%2c-202.719%2c304.314%2c-263.69C248.42%2c-321.114%2c195.281%2c-381.811%2c120.767%2c-411.294C41.847%2c-442.52%2c-44.567%2c-452.135%2c-127.605%2c-434.584C-214.742%2c-416.167%2c-300.804%2c-378.475%2c-357.9%2c-310.122C-414.567%2c-242.284%2c-424.977%2c-150.402%2c-438.016%2c-62.977C-451.118%2c24.874%2c-467.316%2c115.847%2c-433.692%2c198.06C-399.458%2c281.765%2c-337.517%2c362.793%2c-251.933%2c392.015C-169.484%2c420.167%2c-87.104%2c347.974%2c0%2c346.142' fill='%23ff8ee2'%3e%3c/path%3e%3cpath d='M1007 1026.942C1097.585 1032.783 1191.068 1014.25 1266.05 963.0889999999999 1340.071 912.5830000000001 1377.85 827.847 1416.958 747.221 1456.934 664.8050000000001 1524.133 576.801 1495.6480000000001 489.743 1466.798 401.572 1344.56 389.903 1278.674 324.59299999999996 1220.038 266.47 1213.089 151.01299999999998 1133.14 130.406 1052.687 109.668 990.674 209.80599999999998 909.973 229.558 823.225 250.79000000000002 712.344 186.95499999999998 648.2 249.098 585.387 309.951 624.857 417.696 625.5070000000001 505.15 626.06 579.548 628.023 651.726 651.7149999999999 722.2529999999999 677.634 799.41 706.779 878.027 768.564 931.014 834.939 987.937 919.74 1021.316 1007 1026.942' fill='%23ffdcf6'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1409'%3e%3crect width='1007' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+.endOfGameBody{
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='2560' height='1660' preserveAspectRatio='none' viewBox='0 0 2560 1660'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1017%26quot%3b)' fill='none'%3e%3crect width='2560' height='1660' x='0' y='0' fill='rgba(255%2c 96%2c 154%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c795.774C147.627%2c793.579%2c203.177%2c588.894%2c331.237%2c515.415C469.956%2c435.82%2c675.82%2c480.267%2c772.245%2c352.672C868.724%2c225.006%2c845.708%2c39.4%2c808.6%2c-116.259C773.351%2c-264.12%2c670.786%2c-380.114%2c570.353%2c-494.214C470.651%2c-607.484%2c375.925%2c-746.91%2c227.862%2c-776.026C81.854%2c-804.738%2c-46.376%2c-686.113%2c-188.957%2c-643.53C-330.67%2c-601.206%2c-497.976%2c-625.764%2c-607.617%2c-526.503C-720.588%2c-424.228%2c-745.345%2c-260.817%2c-776.471%2c-111.64C-809.417%2c46.259%2c-884.551%2c229.34%2c-793.042%2c362.17C-699.666%2c497.709%2c-482.041%2c446.4%2c-337.628%2c525.36C-208.498%2c595.963%2c-147.155%2c797.962%2c0%2c795.774' fill='%23ff2876'%3e%3c/path%3e%3cpath d='M2560 2645.255C2735.898 2598.831 2844.145 2435.69 2982.876 2318.008 3101.32 2217.534 3234.212 2137.451 3315.006 2004.8 3402.9719999999998 1860.375 3461.634 1699.313 3462.703 1530.211 3463.883 1343.616 3436.0969999999998 1147.433 3321.359 1000.278 3204.3469999999998 850.206 3013.317 790.149 2834.632 724.689 2644.561 655.057 2446.403 554.749 2251.169 608.22 2055.116 661.915 1937.488 851.633 1805.786 1006.47 1675.274 1159.908 1476.363 1304.7060000000001 1487.682 1505.824 1499.205 1710.576 1777.799 1791.789 1860.5430000000001 1979.431 1945.1309999999999 2171.255 1812.52 2442.275 1964.368 2586.821 2111.852 2727.2129999999997 2363.121 2697.217 2560 2645.255' fill='%23ff98be'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1017'%3e%3crect width='2560' height='1660' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
   background-size: cover;
   min-height: 100vh;
 }
 
-.perfectMatch img {
+/* gifen */
+.perfectMatch img{
   height: 10rem;
   margin-bottom: 0.4rem;
+  background-repeat: no-repeat;
 }
 
 .buttonContainer {
@@ -102,6 +106,7 @@ header {
   border-color: rgb(94, 13, 87);
   padding: 15px;
   text-align: center;
+  font-family: "Lilita One", sans-serif;
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
@@ -110,5 +115,39 @@ header {
 .purpleButton:hover {
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
+}
+#hasGreenFlag {
+  font-family: "Lilita One", sans-serif;
+  font-size: 25px;
+  color:rgb(254, 221, 255);
+
+}
+
+#userName {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color: rgb(255, 195, 255);
+  background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 50px;
+  margin-bottom: 10px;
+
+}
+
+#greenFlag {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color:rgb(116, 196, 116);
+
+}
+@media screen and (max-width: 89.8em) {
+  .perfectMatch img{
+    width:0;
+    height:0;
+/* tar bort gifen vid små skärmar - skulle kke kunna lösa det på annat sätt om vi vill */
+
+  }
 }
 </style>
