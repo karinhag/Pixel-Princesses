@@ -6,7 +6,7 @@
         !this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
       "
     >
-        <div id="roomId">pollId: {{ this.pollId }} </div>
+        <div id="roomId">{{uiLabels.joinedRoom}} {{ this.pollId }} </div>
       <h1>{{ uiLabels.waitingForGame }}</h1>
       
       <button class="purpleButton" v-on:click="abandonDate" type="submit">
@@ -20,7 +20,7 @@
       "
     >
     <div id="roomId">
-        pollId: {{ this.pollId }}
+        {{uiLabels.joinedRoom}} {{ this.pollId }}
     </div>
     <div class="question">
       {{ this.question }}
@@ -31,13 +31,10 @@
         <input type="text" v-model="userInfo.answer" /> 
       </p>
 
-      <button class="purpleButton" v-on:click="submitAnswer" type="submit">
+      <button class="purpleButton" v-on:click="submitAnswer" type="submit" :disabled="!userInfo.answer">
         {{ uiLabels.sendAnswer }}
       </button>
 
-      <button class="purpleButton" v-on:click="abandonDate" type="submit">
-        {{ uiLabels.abandonDate }}
-      </button>
     </section>
     <section
       v-if="this.answerSubmitted && !this.goingToNextRound"
@@ -58,7 +55,8 @@
     </section>
 
     <section v-if="this.goingToNextRound">
-      <h1>YOU SURVIVED, MADE IT TO NEXT ROUND</h1>
+      <h1 class="nextRound">{{uiLabels.nextRound }}</h1>
+      <p class="waitingForQuestion"> {{ uiLabels.waitingForQuestion }}</p>
     </section>
   </section>
 </template>
@@ -72,7 +70,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 infinity.register();
 export default {
-  name: "PollView",
+  name: "AnswerQuestionView",
   components: {
     QuestionComponent,
   },
@@ -134,6 +132,11 @@ export default {
       this.getPlayer(data);
     });
     socket.on("newQuestionIncoming", ()=>this.resetPage());
+
+    socket.on("theTrueMatchPlayer", (matchedPlayer) => {
+    this.$router.push("/winnerView/" + this.pollId);
+  });
+
   },
   methods: {
     submitAnswer: function () {
@@ -191,17 +194,14 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-/* .infinity{
-    padding-top:10%;
-  
-  } */
+
 #roomId {
   padding: 0%;
   margin: 0%;
   text-align: right;
   padding-right: 1em;
   padding-top: 1em;
-  color: rgb(202, 28, 135);
+  color: black;
   font-size: medium;
   
 }
@@ -211,7 +211,7 @@ h1 {
   letter-spacing: 2.5px;
   margin: 50px;
   font-size: 60px;
-  color: #f5f5f5;
+  color:black;
 }
 
 .pollBody {
@@ -228,7 +228,6 @@ input {
   caret-color: #f06af0;
   font-size: 40px;
   color: #ff81bee8;
-  /* padding:10px;  */
 }
 
 .waitingForStart {
@@ -256,6 +255,35 @@ h1 {
 
 .purpleButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  margin: 7px 5px;
+  border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+}
+
+.purpleButton:hover:enabled {
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+  cursor: pointer;
+}
+
+.nextRound{
+  padding-top: 7rem;
+}
+
+.waitingForQuestion{
+  color: white;
+  font-size: 2rem;
+
+
+}
+
+
+.goBackButton{
+  background: linear-gradient(to top, #dfe9f3 0%, white 100%);
   border: solid;
   border-color: rgb(94, 13, 87);
   padding: 15px;
@@ -267,8 +295,5 @@ h1 {
   font-family: "Lilita One", sans-serif;
 }
 
-button:hover:enabled {
-  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
-  cursor: pointer;
-}
+
 </style>

@@ -10,9 +10,9 @@
     {{ uiLabels.perfectMatch }} 
     </header>
 
-<h2>{{ this.userName }}</h2>
-<h1>{{ uiLabels.hasGreenFlag }}</h1>
-<h2>{{ this.greenFlag }}</h2>
+<h2 id="userName">{{ this.userName }}</h2>
+<h1 id="hasGreenFlag">{{ uiLabels.hasGreenFlag }}</h1>
+<h3 id="GreenFlag">{{ this.greenFlag }}</h3>
   </div>
 
   <div class="buttonContainer">
@@ -89,7 +89,7 @@ header{
     font-size: 65px;
     font-family: "Lilita One", sans-serif;
     vertical-align: center;
-    color:rgb(99, 15, 92);
+    color:rgb(254, 221, 255);
 }
 
 .endOfGameBody{
@@ -98,9 +98,11 @@ header{
   min-height: 100vh;
 }
 
+/* gifen */
 .perfectMatch img{
   height: 10rem;
   margin-bottom: 0.4rem;
+  background-repeat: no-repeat;
 }
 
 .buttonContainer{
@@ -115,6 +117,7 @@ header{
   border-color: rgb(94, 13, 87);
   padding: 15px;
   text-align: center;
+  font-family: "Lilita One", sans-serif;
   font-size: 15px;
   margin: 7px 5px;
   border-radius: 15px;
@@ -125,5 +128,38 @@ header{
   background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
   cursor: pointer;
 }
+#hasGreenFlag {
+  font-family: "Lilita One", sans-serif;
+  font-size: 25px;
+  color:rgb(254, 221, 255);
 
+}
+
+#userName {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color: rgb(255, 195, 255);
+  background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 50px;
+  margin-bottom: 10px;
+
+}
+
+#greenFlag {
+  font-family: "Lilita One", sans-serif;
+  font-size: 50px;
+  color:rgb(116, 196, 116);
+
+}
+@media screen and (max-width: 89.8em) {
+  .perfectMatch img{
+    width:0;
+    height:0;
+/* tar bort gifen vid små skärmar - skulle kke kunna lösa det på annat sätt om vi vill */
+
+  }
+}
 </style>

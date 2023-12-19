@@ -97,6 +97,15 @@ checkOverlap: function (newPosition) {
 },
 
 
+//   playersToRemove.forEach((playerToRemove) => {
+//     const index = this.playersData.indexOf(playerToRemove);
+//     if (index !== -1) {
+//       this.playersData.splice(index, 1);
+//     }
+//   }),
+// },
+
+
     getName: function (playerData) {
       return playerData.userName;
     },
@@ -104,7 +113,8 @@ checkOverlap: function (newPosition) {
       return playerData.greenFlag;
     },
   },
-};
+  };
+
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
@@ -120,13 +130,13 @@ header {
   font-family: "Lilita One", sans-serif;
 
   font-size: 100px;
-  color: rgb(202, 28, 135);
+  color: black;
  
 }
 
 .onePlayer {
   padding: 5px;
-  margin-bottom: 10px; /* Add margin to separate players */
+  margin-bottom: 10px;
 
   @media screen and (min-width: 960px) {
     background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");

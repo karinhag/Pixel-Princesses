@@ -1,12 +1,8 @@
 <template>
   <body>
     
-    <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
-      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
-      <button v-on:click="about">{{ uiLabels.about }}</button>
-      <button v-on:click="FAQ">FAQ</button>
-    </ResponsiveNav>
-    <header>
+    
+    <header id="startPageStyle">
       <div
         v-bind:class="['hamburger', { close: !hideNav }]"
         v-on:click="toggleNav"
@@ -21,6 +17,13 @@
         />
       </div>
     </header>
+
+    <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
+      <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
+      <button v-on:click="about">{{ uiLabels.about }}</button>
+      <button v-on:click="FAQ">FAQ</button>
+    </ResponsiveNav>
+    
     <div v-if="showAbout" class="FAQtext">
       <b class="FAQheader">{{ uiLabels.aboutText }}</b>
       <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
@@ -33,7 +36,7 @@
     </div>
 
     <section class="bodywrapper">
-      <h1>{{ uiLabels["sales-pitch"] }}</h1>
+      <h1>{{ uiLabels.salespitch }}</h1>
       <h2>{{ uiLabels.subHeading }}</h2>
 
       <div class="boxes-container">
@@ -157,15 +160,15 @@ h1{padding-top: 25px;}
   justify-content: space-between;
 }
 .bodywrapper {
-  height: 79%;
-  
+  height: 100%;
   background: rgba(255,152,190,255);
-
+  color:rgba(255,41,118,255);
 
 }
 
 .box-a,
 .box-b {
+  color:black;
   margin-top: 50px;
   font-size: 20px;
   display: flex;
@@ -173,10 +176,10 @@ h1{padding-top: 25px;}
   justify-content: center;
   align-items: center;
   padding: 20px;
-  width: 48%; /* Adjust the width as needed */
+  width: 48%; 
   height: 350px;
   background-image: url("https://pngimg.com/d/heart_PNG51183.png");
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain; 
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -197,9 +200,8 @@ header {
   letter-spacing: 0.1em;
   font-weight: bolder;
   font-size: 5rem;
-  color: white;
+  color: rgb(255, 213, 230);
   padding: 0.2em;
-  /* font-family: "Brush Script MT";  */
   font-family: "Rochester", cursive;
   text-align: center;
 }
@@ -210,7 +212,7 @@ header {
   margin-bottom: 0.4rem;
 }
 .hamburger {
-  color: white;
+  color: rgb(255, 213, 230);
   width: 1em;
   display: flex;
   align-items: center;
@@ -224,44 +226,56 @@ header {
 }
 #nav {
   background: rgba(255, 96, 154, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #nav button {
-  background-color: rgb(240, 188, 196);
+  background-color: rgb(255, 213, 230);
   margin: 0.3rem;
-  font-family: "Lilita One", sans-serif;;
+  font-family: "Lilita One", sans-serif;
+  height:30px;
+  width:150px;
 }
 
 #nav button:hover {
   cursor: pointer;
-  background-color: rgb(236, 159, 170);
+  background: linear-gradient(
+    0deg,
+    rgb(255, 213, 230) 23.8%,
+    rgb(252, 175, 211) 92%
+  );
 }
 
 .langButton:hover
 
 .aboutText,
 .FAQtext {
-  background-color: lightpink;
+  background-color: rgb(255, 213, 230);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
   font-size: 1em;
-  font-family: Arial, Helvetica, sans-serif;
-  
+  font-family: 'Quicksand', sans-serif;
   letter-spacing: normal;
 }
+.FAQheader{
+  font-size: 20px;
+  font-family: "Lilita One", sans-serif;;
+}
+
 
 .startGameButton,
 .joinDateButton {
   background: linear-gradient(
     0deg,
-    rgb(247, 247, 247) 23.8%,
-    rgb(252, 221, 221) 92%
+    rgb(255, 213, 230) 23.8%,
+    rgb(252, 221, 234) 92%
   );
   padding: 6px;
   text-align: center;
   display: inline-block;
-  font-size: 25px;
   margin: 7px 5px;
   border-radius: 10px;
   width: 200px;
@@ -275,12 +289,15 @@ header {
   cursor: pointer;
   background: linear-gradient(
     0deg,
-    rgb(239, 209, 209) 23.8%,
-    rgb(252, 175, 175) 92%
+    rgb(255, 213, 230) 23.8%,
+    rgb(252, 175, 211) 92%
   );
 }
 
 @media screen and (max-width: 50em) {
+  #nav button {
+    height: 55px; 
+  }
   .logo {
     font-size: 5vw;
     display: flex;
@@ -296,8 +313,21 @@ header {
   .hide {
     left: -12em;
   }
+  .startGameButton,
+  .joinDateButton {
+    width:45%;
+  }
+  .box-a,
+  .box-b{
+    width:40%;
+  }
+  
+h1,
+h2{
+  font-size: 140%;
 }
 
+}
 
 
 

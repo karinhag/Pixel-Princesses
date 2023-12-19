@@ -38,7 +38,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: "CreateView",
+  name: "ChooseAnswerView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -165,7 +165,7 @@ background-size: cover;
   background-color: rgb(253, 252, 253);
 }
 
-button:hover:not([disabled]) {
+.playerAnswerB:hover:not([disabled]) {
   color: rgb(244, 103, 139);
   cursor: pointer;
   display:block;
@@ -220,5 +220,15 @@ button:hover:not([disabled]) {
 button > img {
   width: 35px;
   vertical-align: middle;
+}
+
+@media screen and (max-width: 50em) {
+  .scrollable {
+    min-width: auto; /* Allow the container to shrink as needed */
+  }
+
+  .playerAnswerB {
+    min-width: 100%; /* Use full width for smaller screens */
+  }
 }
 </style>

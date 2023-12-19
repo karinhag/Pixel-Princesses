@@ -1,16 +1,17 @@
 <template>
   <section class="savedScreen" v-if="saved">
-    <!--Ta emot denna information från andra views-->
-    <div class="box">
-      <header>{{ uiLabels.saved }}</header>
-      <div class="saved"></div>
-    </div>
+ 
+      <div class="saved">
+      
+      <header class="savedHeader">{{ uiLabels.saved }}</header>
+    </div> 
+      
   </section>
 
   <section class="eliScreen" v-if="!saved">
     <div class="box">
       <div class="eliminated">
-        <header>{{ uiLabels.eliminated }}</header>
+        <header class="eliHeader">{{ uiLabels.eliminated }}</header>
       </div>
     </div>
   </section>
@@ -21,7 +22,7 @@ import io from "socket.io-client";
 const socket = io("localhost:3000");
 
 export default {
-  name: "CreateView",
+  name: "YouHaveBeenEliminatedView",
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en",
@@ -92,7 +93,6 @@ export default {
   height: 1080px;
   background: radial-gradient(#ff2d30ff, #cb0505ff, rgb(98, 4, 4));
   color: rgb(254, 240, 252);
-  font-size: 30px;
 }
 .savedScreen {
   height: 1080px;
@@ -101,30 +101,51 @@ export default {
     rgb(252, 132, 190),
     rgb(187, 90, 129)
   );
-  color: rgb(254, 240, 252);
-  font-size: 30px;
 }
-header {
+.savedHeader {
   font-size: 100px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
+  color:black;
+
+}
+.eliHeader {
+  font-size: 100px;
+  font-family: "Lilita One", sans-serif;
+  vertical-align: center;
+  color:rgba(255,152,194,255);
+
 }
 .eliminated {
   padding: 15%;
   background-image: url("/black_broken_heart1.png");
-  background-size: contain; /* Ensure the entire image fits within the box */
+  background-size: contain; 
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 48%;
 }
 .saved {
   padding: 15%;
+  padding-top:20%;
   background-image: url("/heart_bandaid_png.png");
-  background-size: contain;
+  background-size: contain; 
+  background-size: 48%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .box {
   padding-top: 100px;
+}
+@media screen and (max-width: 50em) {
+  .eliHeader,
+  .savedHeader{
+    font-size:50px;
+    text-align:center;
+  }
+  .eliminated ,
+  .saved {
+    background-size: contain; 
+  }
 }
 </style>
