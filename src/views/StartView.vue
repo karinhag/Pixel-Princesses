@@ -2,7 +2,7 @@
   <body>
     
     
-    <header id="startPageStyle">
+    <header>
       <div
         v-bind:class="['hamburger', { close: !hideNav }]"
         v-on:click="toggleNav"
@@ -295,9 +295,7 @@ header {
 }
 
 @media screen and (max-width: 50em) {
-  #nav button {
-    height: 55px; 
-  }
+  
   .logo {
     font-size: 5vw;
     display: flex;
@@ -326,7 +324,9 @@ h1,
 h2{
   font-size: 140%;
 }
-
+#nav{
+  flex-direction: column; /* Updated to column for small screens */
+}
 }
 
 

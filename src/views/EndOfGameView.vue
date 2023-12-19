@@ -81,7 +81,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
 
