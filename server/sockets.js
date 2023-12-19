@@ -85,7 +85,6 @@ function sockets(io, socket, data) {
     data.useLifeLine(d.pollId);
     io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId));
     io.to(d.uniquePlayerId).emit("youHaveBeenSaved");
-    console.log("nu räddas en spelare!");
   });
 
   socket.on("checkIfLifelineUsed", function (pollId) {
@@ -99,20 +98,13 @@ function sockets(io, socket, data) {
     io.to(pollId).emit("thePlayersLeft", data.getPlayerArray(pollId));
   });
 
-  // socket.on("theTrueMatchPlayer", function (d) {
-  //   console.log("id: olivia", data.pollId);
-  //   console.log("store;", data.matchedPlayer);
-  //   d.saveMatch(data.pollId, data.matchedPlayer)
-  // });
 
   socket.on("theTrueMatchPlayer", function (userData) {
-console.log("olivial;id",  userData.pollId);
-console.log("lsida userinfo", userData.matchedPlayer)
-      console.log("MAX<#", data.saveMatch(userData.pollId, userData.matchedPlayer))
+       data.saveMatch(userData.pollId, userData.matchedPlayer)
 });
 
   socket.on("getMatchedPlayer", function (pollId) {
-    console.log("return;", data.returnMatchedPlayer(pollId));
+   
     io.to(pollId).emit("returnMatchedPlayer", data.returnMatchedPlayer(pollId));
   });
 }
