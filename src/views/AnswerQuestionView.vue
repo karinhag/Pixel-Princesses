@@ -3,7 +3,7 @@
     <section
       class="waitingForStart"
       v-if="
-        !this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
+        !this.showInputBox && !this.answerSubmitted && !this.goingToNextRound && !this.waitForQ && !userInfo.saved
       "
     >
         <div id="roomId">{{uiLabels.joinedRoom}} {{ this.pollId }} </div>
@@ -54,9 +54,10 @@
       </div>
     </section>
 
-    <section v-if="this.goingToNextRound">
+    <section v-if="this.goingToNextRound || this.waitForQ && !this.showInputBox|| userInfo.saved && !this.showInputBox">
       <h1 class="nextRound">{{uiLabels.nextRound }}</h1>
-      <p class="waitingForQuestion"> {{ uiLabels.waitingForQuestion }}</p>
+      <p class="waitingForQuestion"> {{ uiLabels.waitingForQuestion }}
+      </p>
     </section>
   </section>
 </template>
@@ -83,6 +84,7 @@ export default {
         userName: "",
         greenFlag: "",
         uniquePlayerId: "",
+        saved: false,
       },
       userInformation: {},
       userFlag: "",
@@ -95,6 +97,7 @@ export default {
       answerSubmitted: false,
       eliminatedPlayer: {},
       goingToNextRound: false,
+      waitForQ: false,
     };
   },
   created: function () {
@@ -106,6 +109,7 @@ export default {
     this.userInfo.userName = this.$route.query.userName;
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
+    this.userInfo.saved = this.$route.query.saved;
     socket.emit("joinPoll", this.userInfo.uniquePlayerId)
 
     this.showInputBox = false;
@@ -124,6 +128,7 @@ export default {
       if (this.question.length > 0) {
         this.showInputBox = true;
       }
+      
     });
 
     socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
@@ -168,7 +173,7 @@ export default {
           path: "/youAreEliminated/" + this.pollId,
           query: {userName: this.userInfo.userName, greenFlag: this.userInfo.greenFlag, uniquePlayerId: this.userInfo.uniquePlayerId},
         });
-        this.goingToNextRound = false;
+        //this.goingToNextRound = false;
       } else {
         this.goingToNextRound = true;
       }
@@ -184,6 +189,8 @@ export default {
       this.answerSubmitted = false;
       this.goingToNextRound = false;
       this.answerSubmitted = false;
+      this.showInputBox = false;
+      this.waitForQ = true;
       this.question="";
       this.userInfo.answer="";
      
