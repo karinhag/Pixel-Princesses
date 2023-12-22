@@ -106,6 +106,8 @@ export default {
     this.userInfo.userName = this.$route.query.userName;
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
+    this.checkIfSaved();
+    
     socket.emit("joinPoll", this.userInfo.uniquePlayerId)
 
     this.showInputBox = false;
@@ -123,6 +125,7 @@ export default {
       this.question = q;
       if (this.question.length > 0) {
         this.showInputBox = true;
+      
       }
     });
 
@@ -142,6 +145,19 @@ export default {
 
   },
   methods: {
+    checkIfSaved: function(){
+      const savedPlayerQueryParam = this.$route.query.savedPlayer;
+
+if (savedPlayerQueryParam && savedPlayerQueryParam.toLowerCase() === 'true') {
+  console.log("Player is saved");
+  this.resetPage();
+}
+      // if(this.$route.query.savedPlayer.length>0){
+      //   console.log("räddad")
+      //   this.resetPage();
+      // }
+
+    },
     submitAnswer: function () {
       socket.emit("submitAnswer", {
         pollId: this.pollId,
@@ -202,7 +218,7 @@ export default {
   text-align: right;
   padding-right: 1em;
   padding-top: 1em;
-  color: #252422;
+  color:rgb(202, 28, 135);
   font-size: medium;
   
 }
