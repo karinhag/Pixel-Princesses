@@ -58,7 +58,8 @@
 	"congrats": "Congratulations!",
 	"winner": "you are the perfect match",
 	"nextRound": "You made it to the next round!",
-	"showTrueMatch": "SHOW YOUR TRUE MATCH"
+	"showTrueMatch": "SHOW YOUR TRUE MATCH",
+	"minimumPlayers": "You need a minimum of three players to start the game"
 
 	
 

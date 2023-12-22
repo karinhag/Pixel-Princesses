@@ -7,7 +7,7 @@
         :key="index"
         src="https://media0.giphy.com/media/nR8frZBepl4VW/giphy.gif?cid=ecf05e47k7wzswsfziaaor2m2rrvq3jh21i1yhtc5nvou67d&ep=v1_gifs_related&rid=giphy.gif&ct=s"
       />
-
+<section class="winner">
       <header>
         {{ uiLabels.perfectMatch }}
       </header>
@@ -15,7 +15,9 @@
 <h2 id="userName">{{ this.userName }}</h2>
 <h1 id="hasGreenFlag">{{ uiLabels.hasGreenFlag }}</h1>
 <h3 id="GreenFlag">{{ this.greenFlag }}</h3>
+</section>
   </div>
+
 
     <div class="buttonContainer">
       <button class="purpleButton" v-on:click="backToStart">
@@ -149,5 +151,10 @@ header{
 /* tar bort gifen vid små skärmar - skulle kke kunna lösa det på annat sätt om vi vill */
 
   }
+}
+
+.winner{
+  text-transform:uppercase;
+  letter-spacing: 5px;
 }
 </style>

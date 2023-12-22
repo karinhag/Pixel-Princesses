@@ -84,23 +84,11 @@ export default {
       this.uiLabels = labels;
     });
 
-    // socket.on("pollsId", (pollId) => {
-    //   this.pollId = pollId; // vi får detta från rad 67 ????? why?
-
-    // });
-
   },
   methods: {
     getPlayerId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
-    // submitAnswer: function () {
-    //   socket.emit("submitAnswer", {
-    //     pollId: this.pollId,
-    //     userInfo: this.userInfo,
-    //   });
-    //   this.answerSubmitted = true;
-    // },
 
     joinDate: function () {
       socket.emit("joinDate", {

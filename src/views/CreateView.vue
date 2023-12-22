@@ -1,10 +1,19 @@
 <template>
   <section class="createViewBody">
+
+    <div class="theButton">
+    <button v-on:click="getInfo" class="buttonInfo" v-if="!info">i</button>
+    <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
+    <section v-if="info"> {{uiLabels.minimumPlayers }}</section>
+  </div>
     <header>{{ uiLabels.joinedRoom }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
     <button class="purpleButton" v-on:click="createPoll" :disabled="!moreThanThreePlayers">
       {{ uiLabels.startGame }}
     </button>
+    
+
+
     <div class="playerContainer">
       <section class="activePlayers">
         <div class="onePlayer" v-for="player in playersData">
@@ -13,9 +22,8 @@
       </section>
     </div>
     <div class="information">
-      <button v-on:click="getInfo" class="gg-info" v-if="!info"></button>
-      <button v-on:click="closeInfo" class="gg-close" v-if="info"></button>
-      <section v-if="info">You need a minimum of 3 players before you can start the game</section>
+      
+      
     </div>
   </section>
 
@@ -174,6 +182,40 @@ header {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
 }
+.buttonInfo, .buttonClose{
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+
+  width:40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 50px;
+  font-family: "Lilita One", sans-serif;
+  cursor: pointer;
+  font-size: 20px;;
+
+}
+
+
+.theButton{
+  padding: 0%;
+  margin: 0% 20px 0% 0%;
+  text-align: right;
+  padding-right: 1em;
+  padding-top: 1em;
+  color:rgb(202, 28, 135);
+  font-size: medium;
+  
+}
+.theButton section{
+  font-family: "Lilita One", sans-serif;
+  font-size: 20px;
+  color:rgb(255, 201, 227);
+
+
+
+}
 
 .purpleButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
@@ -193,6 +235,7 @@ header {
   cursor: pointer;
   vertical-align: middle;
   cursor: pointer;
+  font-family: "Lilita One", sans-serif;
 }
 
 .purpleButton:disabled{
@@ -204,63 +247,4 @@ header {
   position: relative; /* Ensure positioning context for absolute positioning */
   height: 400px; /* Adjust the height as needed */
 }
-
-.gg-info {
-  color: black;
-  box-sizing: border-box;
-  position: relative;
-  display: block;
-  transform: scale(var(--ggs, 1));
-  width: 40px;
-  height: 40px;
-  border: 4px solid;
-  border-radius: 80px;
-}
-.gg-info::after,
-.gg-info::before {
-  content: "";
-  display: block;
-  box-sizing: border-box;
-  position: absolute;
-  border-radius: 6px;
-  width: 4px;
-  background: currentColor;
-  left: 14px;
-}
-.gg-info::after {
-  bottom: 4px;
-  height: 16px;
-}
-.gg-info::before {
-  height: 4px;
-  top: 4px;
-}
-.gg-close {
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    transform: scale(var(--ggs,1));
-    width: 40px;
-    height: 40px;
-    border: 4px solid;
-    border-radius: 80px
-}
-.gg-close::after,
-.gg-close::before {
-    content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 24px;
-    height: 4px;
-    background: currentColor;
-    transform: rotate(45deg);
-    border-radius: 6px;
-    top: 14px;
-    left: 4px
-}
-.gg-close::after {
-    transform: rotate(-45deg)
-}
-
 </style>

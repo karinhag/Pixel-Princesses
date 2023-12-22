@@ -253,4 +253,9 @@ lifebouyButton>span {
     width: 50%; 
   }
 }
+
+h2, h3{
+  text-transform:uppercase;
+  letter-spacing: 5px;
+}
 </style>

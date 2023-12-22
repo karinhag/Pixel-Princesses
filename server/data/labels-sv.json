@@ -59,6 +59,7 @@
 	"winner": "Du är den perfekta dejten",
 	"nextRound": "Du klarade dig till nästa runda!",
 	"waitingForQuestion": "Väntar på nästa fråga...",
-	"showTrueMatch": "SE DIN TRUE MATCH"
+	"showTrueMatch": "SE DIN TRUE MATCH",
+	"minimumPlayers": "Du behöver minst tre spelare för att börja spelet"
 
 }

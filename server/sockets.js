@@ -95,17 +95,16 @@ function sockets(io, socket, data) {
     io.to(pollId).emit("thePlayersLeft", data.getPlayerArray(pollId));
   });
 
-
   socket.on("theTrueMatchPlayer", function (userData) {
-       data.saveMatch(userData.pollId, userData.matchedPlayer)
-});
+    data.saveMatch(userData.pollId, userData.matchedPlayer);
+  });
 
   socket.on("getMatchedPlayer", function (pollId) {
     io.to(pollId).emit("returnMatchedPlayer", data.returnMatchedPlayer(pollId));
-    io.to((data.returnMatchedPlayer(pollId)[0][0].uniquePlayerId)).emit("youAreTrueMatch"); 
-   
+    io.to(data.returnMatchedPlayer(pollId)[0].uniquePlayerId).emit(
+      "youAreTrueMatch"
+    );
   });
-
 }
 
 export { sockets };
