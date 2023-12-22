@@ -71,9 +71,6 @@ function sockets(io, socket, data) {
 
   socket.on("eliminatedPlayer", function (id) {
     data.eliminateAPlayer(id.pollId, id.uniquePlayerId);
-    // io.to(id.pollId).emit(
-    //   "hejKomOKyssMig", data.retrieveEliminatedPlayer(id.pollId)
-    // );
   });
 
   socket.on("getEliminatedPlayer", function (pollId) {

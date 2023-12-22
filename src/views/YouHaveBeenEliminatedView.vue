@@ -75,6 +75,7 @@ export default {
             userName: this.userInfo.userName,
             greenFlag: this.userInfo.greenFlag,
             uniquePlayerId: this.userInfo.uniquePlayerId,
+            saved: this.saved,
           },
         });
 
