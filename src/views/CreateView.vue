@@ -1,18 +1,19 @@
 <template>
   <section class="createViewBody">
-
     <div class="theButton">
-    <button v-on:click="getInfo" class="buttonInfo" v-if="!info">i</button>
-    <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
-    <section v-if="info"> {{uiLabels.minimumPlayers }}</section>
-  </div>
+      <button v-on:click="getInfo" class="buttonInfo" v-if="!info">i</button>
+      <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
+      <section v-if="info">{{ uiLabels.minimumPlayers }}</section>
+    </div>
     <header>{{ uiLabels.joinedRoom }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
-    <button class="purpleButton" v-on:click="createPoll" :disabled="!moreThanThreePlayers">
+    <button
+      class="purpleButton"
+      v-on:click="createPoll"
+      :disabled="!moreThanThreePlayers"
+    >
       {{ uiLabels.startGame }}
     </button>
-    
-
 
     <div class="playerContainer">
       <section class="activePlayers">
@@ -21,14 +22,8 @@
         </div>
       </section>
     </div>
-    <div class="information">
-      
-      
-    </div>
+    <div class="information"></div>
   </section>
-
-
-  {{ this.moreThanThreePlayers }}
 </template>
 
 <script>
@@ -58,7 +53,10 @@ export default {
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.pollId);
 
-    socket.on("addedPlayer", (data) => (this.playersData = data, this.checkNumberOfPlayers()));
+    socket.on(
+      "addedPlayer",
+      (data) => ((this.playersData = data), this.checkNumberOfPlayers())
+    );
     socket.on("removedPlayer", (data) => (this.playersData = data));
 
     socket.on("init", (labels) => {
@@ -112,11 +110,10 @@ export default {
       });
     },
 
-    checkNumberOfPlayers: function(){
-      if(this.playersData.length>=3){
-        this.moreThanThreePlayers=true;
+    checkNumberOfPlayers: function () {
+      if (this.playersData.length >= 3) {
+        this.moreThanThreePlayers = true;
       }
-
     },
 
     getName: function (playerData) {
@@ -129,16 +126,16 @@ export default {
     getInfo: function () {
       this.info = true;
     },
-    closeInfo:function(){
+    closeInfo: function () {
       this.info = false;
-    }
+    },
   },
 };
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 @import url("https://unpkg.com/css.gg@2.0.0/icons/css/info.css");
-@import url('https://unpkg.com/css.gg@2.0.0/icons/css/close.css');
+@import url("https://unpkg.com/css.gg@2.0.0/icons/css/close.css");
 
 header {
   font-size: 50px;
@@ -151,11 +148,11 @@ header {
   font-family: "Lilita One", sans-serif;
 
   font-size: 100px;
-  color: black;
+  color: #252422;
 }
 
 .onePlayer {
-  padding: 5px;
+  padding: 100px;
   margin-bottom: 10px;
 
   @media screen and (min-width: 960px) {
@@ -164,6 +161,25 @@ header {
     background-position: center center;
     background-repeat: no-repeat;
     padding: 50px;
+    animation: spin 4s infinite linear;
+  }
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: 18deg;
+  }
+  50% {
+    rotate: 0deg;
+  }
+  75% {
+    rotate: -18deg;
+  }
+  100% {
+    rotate: 0deg;
   }
 }
 
@@ -181,40 +197,36 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
+  padding: 20px;
 }
-.buttonInfo, .buttonClose{
+.buttonInfo,
+.buttonClose {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   border: solid;
   border-color: rgb(94, 13, 87);
 
-  width:40px;
+  width: 40px;
   height: 40px;
   text-align: center;
   border-radius: 50px;
   font-family: "Lilita One", sans-serif;
   cursor: pointer;
-  font-size: 20px;;
-
+  font-size: 20px;
 }
 
-
-.theButton{
+.theButton {
   padding: 0%;
   margin: 0% 20px 0% 0%;
   text-align: right;
   padding-right: 1em;
   padding-top: 1em;
-  color:rgb(202, 28, 135);
+  color: rgb(202, 28, 135);
   font-size: medium;
-  
 }
-.theButton section{
+.theButton section {
   font-family: "Lilita One", sans-serif;
   font-size: 20px;
-  color:rgb(255, 201, 227);
-
-
-
+  color: rgb(255, 201, 227);
 }
 
 .purpleButton {
@@ -238,9 +250,8 @@ header {
   font-family: "Lilita One", sans-serif;
 }
 
-.purpleButton:disabled{
-  cursor:not-allowed;
-
+.purpleButton:disabled {
+  cursor: not-allowed;
 }
 
 .playerContainer {

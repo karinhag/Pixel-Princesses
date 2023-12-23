@@ -320,5 +320,11 @@ h1 {
   font-family: "Lilita One", sans-serif;
 }
 
+button:hover{
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
 
 </style>

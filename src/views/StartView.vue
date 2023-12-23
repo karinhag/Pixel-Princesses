@@ -330,6 +330,15 @@ h2{
 #nav{
   flex-direction: column; /* Updated to column for small screens */
 }
+
+
+button:hover:enabled{
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
 }
 
 

@@ -101,7 +101,7 @@ function sockets(io, socket, data) {
 
   socket.on("getMatchedPlayer", function (pollId) {
     io.to(pollId).emit("returnMatchedPlayer", data.returnMatchedPlayer(pollId));
-    io.to(data.returnMatchedPlayer(pollId)[0].uniquePlayerId).emit(
+    io.to(data.returnMatchedPlayer(pollId)[0][0].uniquePlayerId).emit(
       "youAreTrueMatch"
     );
   });

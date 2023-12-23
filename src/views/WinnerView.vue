@@ -5,9 +5,10 @@
           <header class="congratsHeader">{{ uiLabels.congrats }}</header>
           <header class="winnerHeader">{{ uiLabels.winner }}</header>
         </div>
+      </div>
         <div class="buttonContainer">
         <button class="purpleButton" v-on:click="backToStart">{{ uiLabels.backToStart }}</button>
-      </div>
+      
       </div>
       
     </section>
@@ -135,5 +136,38 @@
   }
   
 }
-  
+
+
+@keyframes pulsate { /** w help from chatgpt  */
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.headerContainer{
+  animation: pulsate 2.2s infinite; 
+}
+.winnerBox {
+  animation: spin 3s infinite;
+  transform-origin: center center; /* Set the rotation origin to the center of the element */
+  backface-visibility: hidden; /* Ensure the backface is hidden during the rotation */
+}  
   </style>

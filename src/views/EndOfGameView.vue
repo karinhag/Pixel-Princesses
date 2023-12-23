@@ -13,8 +13,9 @@
       </header>
 
 <h2 id="userName">{{ this.userName }}</h2>
+<div class="greenFlagDiv">
 <h1 id="hasGreenFlag">{{ uiLabels.hasGreenFlag }}</h1>
-<h3 id="GreenFlag">{{ this.greenFlag }}</h3>
+<h3 id="GreenFlag">{{ this.greenFlag }}</h3></div>
 </section>
   </div>
 
@@ -132,7 +133,7 @@ header{
   background-image: url("https://www.freeiconspng.com/thumbs/heart-png/heart-png-15.png");
   background-size: contain;
   background-position: center center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;  
   padding: 50px;
   margin-bottom: 10px;
 
@@ -142,7 +143,10 @@ header{
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
   color:rgb(116, 196, 116);
+}
 
+.greenFlagDiv{
+  margin-top: 80px;
 }
 @media screen and (max-width: 89.8em) {
   .perfectMatch img{
@@ -157,4 +161,24 @@ header{
   text-transform:uppercase;
   letter-spacing: 5px;
 }
+
+
+@keyframes pulsate { /** w help from chatgpt  */
+  0% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.6);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+#userName {
+
+  animation: pulsate 2.2s infinite; /**w help from chatgpt */
+}
+
+
 </style>

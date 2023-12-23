@@ -1,12 +1,13 @@
 <template>
   <section class="CAVbody">
-    <header>{{ uiLabels.waitingAnswers }}</header>
+    <header v-if="this.userAnswers.length != this.numbPlayers">{{ uiLabels.waitingAnswers }}</header>
+    <header v-if="this.userAnswers.length === this.numbPlayers">{{ uiLabels.chooseElimination }}</header>
+
 
     <div class="numbAnswers">
       {{ this.userAnswers.length }} / {{ this.numbPlayers }}
     </div>
 
-    <h1>{{ uiLabels.chooseElimination }}</h1>
 
     <div class="scrollable" v-if="this.userAnswers.length != 0">
       <div class="userButtons"></div>
@@ -173,7 +174,7 @@ h1 {
   display: block;
   margin: 10px;
   text-align: center;
-  min-width: 25%;
+  min-width: 65%;
   max-width: 90%;
   padding: 20px;
   border-radius: 12px;
@@ -197,15 +198,22 @@ h1 {
   display: flex;
   flex-direction: column;
   max-height: 40vh;
-  overflow-y: scroll;
-  border: 10px solid rgb(244, 103, 139);
+  overflow-y: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 60px 15px rgb(252, 48, 123); 
   width: fit-content;
-  min-width: 650px;
+  min-width: 50vh;
   min-height: 10vh;
-  max-width: 80%;
+  width: 90vh;
   align-items: center;
-  margin: auto;
-  background-color: rgb(255, 154, 179);
+  margin:auto;
+  margin-top: 2.5em;
+  /* background-color: rgb(255, 154, 179); */
+  background: radial-gradient(
+    rgb(243, 225, 231),
+    rgb(253, 162, 199),
+    rgb(253, 122, 172)
+  );
   padding: 20px;
   padding-bottom: 40px;
 
@@ -241,11 +249,17 @@ button > img {
 
 @media screen and (max-width: 50em) {
   .scrollable {
-    min-width: auto; /* Allow the container to shrink as needed */
+    min-width: auto; 
   }
 
   .playerAnswerB {
-    min-width: 100%; /* Use full width for smaller screens */
+    min-width: 100%; 
   }
+}
+.eliminatingButton:hover:not([disabled]){
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
 }
 </style>

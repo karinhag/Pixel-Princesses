@@ -37,7 +37,7 @@
 	"Q12": "Om du fick äta middag med en person, död eller levande, vem skulle det vara?",
 	"submitQuestion": "Välj fråga",
 	"waitingAnswers": "Väntar på svar",
-	"chooseElimination": "Välj vem du vill eliminera:",
+	"chooseElimination": "Välj vem du vill eliminera",
 	"waitingForGame":"Väntar på spelstart...",
 	"abandonDate":"Gå tillbaka",
 	"savePlayer":"Använd livboj",
@@ -60,6 +60,7 @@
 	"nextRound": "Du klarade dig till nästa runda!",
 	"waitingForQuestion": "Väntar på nästa fråga...",
 	"showTrueMatch": "SE DIN TRUE MATCH",
-	"minimumPlayers": "Du behöver minst tre spelare för att börja spelet"
+	"minimumPlayers": "Du behöver minst tre spelare för att börja spelet",
+	"youHaveSaved": "Du har räddat"
 
 }

@@ -1,18 +1,13 @@
 <template>
   <section class="savedScreen" v-if="saved">
- 
-      <div class="saved">
-      
+    <div class="saved">
       <header class="savedHeader">{{ uiLabels.saved }}</header>
-    </div> 
-      
+    </div>
   </section>
 
   <section class="eliScreen" v-if="!saved">
-    <div class="box">
-      <div class="eliminated">
-        <header class="eliHeader">{{ uiLabels.eliminated }}</header>
-      </div>
+    <div class="eliminated">
+      <header class="eliHeader">{{ uiLabels.eliminated }}</header>
     </div>
   </section>
 </template>
@@ -91,12 +86,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
 .eliScreen {
-  height: 1080px;
   background: radial-gradient(#ff2d30ff, #cb0505ff, rgb(98, 4, 4));
   color: rgb(254, 240, 252);
 }
 .savedScreen {
-  height: 1080px;
   background: radial-gradient(
     rgb(255, 187, 211),
     rgb(252, 132, 190),
@@ -107,46 +100,85 @@ export default {
   font-size: 100px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
-  color:#252422;
-
+  color: #252422;
 }
 .eliHeader {
   font-size: 100px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
-  color:rgba(255,152,194,255);
-
+  color: rgba(255, 152, 194, 255);
 }
 .eliminated {
-  padding: 15%;
-  background-image: url("/black_broken_heart1.png");
-  background-size: contain; 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 48%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/black_broken_heart1.png") center/contain no-repeat;
 }
 .saved {
-  padding: 15%;
-  padding-top:20%;
-  background-image: url("/heart_bandaid_png.png");
-  background-size: contain; 
-  background-size: 48%;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("/heart_bandaid_png.png") center/contain no-repeat;
 }
 
-.box {
+/* .box {
   padding-top: 100px;
-}
+} */
 @media screen and (max-width: 50em) {
   .eliHeader,
-  .savedHeader{
-    font-size:50px;
-    text-align:center;
+  .savedHeader {
+    font-size: 50px;
+    text-align: center;
   }
-  .eliminated ,
+  .eliminated,
   .saved {
-    background-size: contain; 
+    background-size: contain;
   }
 }
+
+@keyframes pulsate { 
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.08);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.15);
+  }
+  40% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.15);
+  }
+  90% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.eliScreen, .savedScreen {
+
+  animation: pulsate 3s infinite;
+}
+
+
 </style>
