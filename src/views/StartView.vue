@@ -3,10 +3,7 @@
     
     
     <header>
-      <div
-        v-bind:class="['hamburger', { close: !hideNav }]"
-        v-on:click="toggleNav"
-      ></div>
+      
       <div class="logo">
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
@@ -190,8 +187,8 @@ h1{padding-top: 25px;}
 header {
   background: rgba(255, 96, 154, 1);
   width: 100%;
-  display: grid;
-  grid-template-columns: 2em auto;
+  /* display: grid;
+  grid-template-columns: 2em auto; */
 }
 .logo {
 

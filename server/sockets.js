@@ -19,6 +19,10 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit("newQuestion", data.getQuestion(d.pollId));
   });
 
+  socket.on("retrieveQ", function (pollId) {
+    io.to(pollId).emit("newQuestion", data.getQuestion(pollId));
+  });
+
   socket.on("editQuestion", function (d) {
     data.editQuestion(d.pollId, d.index, { q: d.q }); //, a: d.a}
     socket.emit("questionEdited", data.getAllQuestions(d.pollId));

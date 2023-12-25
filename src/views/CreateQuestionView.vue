@@ -125,7 +125,7 @@ textarea {
 
 header {
   font-size: 50px;
-  color: black;
+  color:#252422;
 }
 
 .CQVbody {
