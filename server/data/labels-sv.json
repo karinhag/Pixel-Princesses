@@ -62,6 +62,7 @@
 	"showTrueMatch": "SE DIN TRUE MATCH",
 	"minimumPlayers": "Du behöver minst tre spelare för att börja spelet",
 	"youHaveSaved": "Du har räddat",
-	"yourQuestion":"Din fråga:"
+	"yourQuestion":"Din fråga:",
+	"greenFlagInfo":"En green flag är..."
 
 }

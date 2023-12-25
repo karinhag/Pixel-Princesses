@@ -13,11 +13,19 @@
           {{ uiLabels.userName }} <br />
           <input type="text" v-model="userInfo.userName" />
         </p>
-
+<section class="greenFlag">
         <p class="inputText">
           {{ uiLabels.greenFlag }} <br />
           <input type="text" v-model="userInfo.greenFlag" />
         </p>
+
+        <button v-on:click="getInfo" class="buttonInfo" v-if="!info">?</button>
+      <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
+      <section v-if="info"> {{ uiLabels.greenFlagInfo }}</section>
+      
+      
+      
+      </section>
       </div>
       <button
         class="purpleButton"
@@ -59,6 +67,7 @@ export default {
       submittedAnswers: {},
       answerSubmitted: false,
       eliminatedPlayer: {},
+      info: false,
     };
   },
   created: function () {
@@ -112,6 +121,12 @@ export default {
         pollId: this.pollId,
         userInfo: this.userInfo,
       });
+    },
+    getInfo: function () {
+      this.info = true;
+    },
+    closeInfo: function () {
+      this.info = false;
     },
 
   },
@@ -167,7 +182,7 @@ h1 {
   margin: 0px;
   padding: 20px;
 }
-.purpleButton {
+.purpleButton, .gFInfo {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   border-color: rgb(94, 13, 87);
   padding: 15px;
@@ -178,6 +193,8 @@ h1 {
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
 }
+
+
 
 .purpleButton:disabled {
   cursor: not-allowed;
@@ -196,6 +213,20 @@ button:hover:enabled{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform: scale(1.01);
   transition: all 0.3s ease;
+}
+.buttonInfo,
+.buttonClose {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 50px;
+  font-family: "Lilita One", sans-serif;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 </style>
