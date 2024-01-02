@@ -1,11 +1,11 @@
 <template>
   <section class="eliminatedPlayerViewBody">
     <div class="topPage">
-      <h1 v-if="!lifeButtonPressed">{{ uiLabels.theEliminatedPlayer }}</h1>
-      <h1 v-if="lifeButtonPressed">{{ uiLabels.youHaveSaved }}</h1>
-      <h2>{{ this.userName }}</h2>
+      <h1 id="h1" v-if="!lifeButtonPressed">{{ uiLabels.theEliminatedPlayer }}</h1>
+      <h1 id="h1" v-if="lifeButtonPressed">{{ uiLabels.youHaveSaved }}</h1>
+      <h2 id="h2">{{ this.userName }}</h2>
 
-      <h1>{{ uiLabels.hasGreenFlag }}</h1>
+      <h1 id="h1">{{ uiLabels.hasGreenFlag }}</h1>
       <h3>{{ this.greenFlag }}</h3>
 
       <h4 v-if="availableLifeline">{{ uiLabels.changedMind }}</h4>
@@ -132,18 +132,13 @@ export default {
   min-height: 100vh;
 }
 
-header {
-  font-size: 60px;
-  font-family: "Lilita One", sans-serif;
-  font-variant: small-caps;
-}
-h1 {
+#h1 {
   font-family: "Lilita One", sans-serif;
   font-size: 25px;
   color: rgb(254, 221, 255);
 }
 
-h2 {
+#h2 {
   font-family: "Lilita One", sans-serif;
   font-size: 50px;
   color: #252422;
@@ -272,7 +267,7 @@ h4 {
   }
 }
 
-h2,
+#h2,
 h3 {
   text-transform: uppercase;
   letter-spacing: 5px;

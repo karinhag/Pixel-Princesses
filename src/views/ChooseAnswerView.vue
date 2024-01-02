@@ -1,9 +1,9 @@
 <template>
   <section class="CAVbody">
-    <header v-if="this.userAnswers.length != this.numbPlayers">
+    <header id="header" v-if="this.userAnswers.length != this.numbPlayers">
       {{ uiLabels.waitingAnswers }}
     </header>
-    <header v-if="this.userAnswers.length === this.numbPlayers">
+    <header id="header" v-if="this.userAnswers.length === this.numbPlayers">
       {{ uiLabels.chooseElimination }}
     </header>
     <div class="numbAnswers">
@@ -11,8 +11,8 @@
     </div>
 
     <section class="yourQ">
-      <h1>{{ uiLabels.yourQuestion }}</h1>
-      <p>{{ this.question }}</p>
+      <h1 id="h1YourQ">{{ uiLabels.yourQuestion }}</h1>
+      <p id="thisQ">{{ this.question }}</p>
     </section>
 
     <div class="scrollable" v-if="this.userAnswers.length != 0">
@@ -125,25 +125,25 @@ export default {
 </script>
 
 <style>
-header,
+#header,
 .numbAnswers {
   font-family: "Lilita One", sans-serif;
   font-size: 70px;
   color: rgb(253, 252, 253);
   text-transform: uppercase;
 }
-header,
-h1,
-p {
+#header,
+#h1YourQ,
+#thisQ {
   font-family: "Lilita One", sans-serif;
   letter-spacing: 3px;
 }
-h1 {
+#h1YourQ {
   font-size: 35px;
   text-transform: uppercase;
   color:#252422;
 }
-p {
+#thisQ {
   margin-top: -10px;
   font-size: 40px;
   color: rgb(246, 178, 246);
@@ -153,6 +153,8 @@ p {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='2560' height='1660' preserveAspectRatio='none' viewBox='0 0 2560 1660'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1010%26quot%3b)' fill='none'%3e%3crect width='2560' height='1660' x='0' y='0' fill='rgba(255%2c 96%2c 154%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c1013.585C208.941%2c1032.63%2c434.221%2c1063.573%2c613.908%2c955.26C794.984%2c846.11%2c912.763%2c643.72%2c956.687%2c436.904C996.947%2c247.341%2c863.746%2c71.489%2c842.516%2c-121.136C820.241%2c-323.239%2c956.782%2c-560.196%2c829.329%2c-718.618C702.63%2c-876.103%2c453.015%2c-842.575%2c251.335%2c-855.967C85.794%2c-866.959%2c-68.273%2c-817.684%2c-231.693%2c-789.073C-419.199%2c-756.245%2c-625.408%2c-787.183%2c-779.549%2c-675.483C-947.414%2c-553.838%2c-1090.118%2c-365.405%2c-1101.943%2c-158.436C-1113.627%2c46.053%2c-938.989%2c204.295%2c-840.063%2c383.644C-749.529%2c547.779%2c-695.931%2c737.079%2c-545.963%2c849.536C-390.79%2c965.896%2c-193.153%2c995.979%2c0%2c1013.585' fill='%23ff2876'%3e%3c/path%3e%3cpath d='M2560 2779.9449999999997C2780.266 2770.749 3003.287 2757.089 3194.139 2646.739 3390.249 2533.349 3545.893 2359.264 3642.1949999999997 2154.2219999999998 3739.1310000000003 1947.8319999999999 3770.1530000000002 1716.371 3737.068 1490.763 3704.042 1265.559 3607.471 1053.5030000000002 3455.876 883.719 3305.665 715.485 3106.295 599.864 2888.689 540.588 2673.87 482.0719999999999 2451.098 500.02099999999996 2234.362 550.98 2007.6599999999999 604.2819999999999 1752.598 653.137 1614.007 840.293 1476.983 1025.3319999999999 1516.56 1280.825 1523.479 1510.971 1529.392 1707.654 1593.088 1887.05 1651.13 2075.067 1718.411 2293.0119999999997 1710.653 2561.3630000000003 1890.894 2701.149 2072.024 2841.625 2330.9809999999998 2789.5060000000003 2560 2779.9449999999997' fill='%23ff98be'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1010'%3e%3crect width='2560' height='1660' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
   background-size: cover;
   min-height: 100vh;
+  font-family: "Lilita One", sans-serif;
+
 }
 .yourQ {
   white-space: normal;
@@ -226,6 +228,7 @@ p {
 
 .scrollable {
   display: flex;
+  font-family: "Lilita One", sans-serif;
   flex-direction: column;
   max-height: 40vh;
   overflow-y: auto;

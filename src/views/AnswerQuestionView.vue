@@ -7,7 +7,7 @@
       "
     >
         <div id="roomId">{{uiLabels.joinedRoom}} {{ this.pollId }} </div>
-      <h1>{{ uiLabels.waitingForGame }}</h1>
+      <h1 id="h1">{{ uiLabels.waitingForGame }}</h1>
       
       <button class="purpleButton" v-on:click="abandonDate" type="submit">
         {{ uiLabels.abandonDate }}
@@ -40,7 +40,7 @@
       v-if="this.answerSubmitted && !this.goingToNextRound"
       class="waitingForChoice"
     >
-      <h1>{{ uiLabels.waitingForChoice }}</h1>
+      <h1 id="h1">{{ uiLabels.waitingForChoice }}</h1>
 
       <div class="infinity">
         <l-infinity
@@ -55,7 +55,7 @@
     </section>
 
     <section v-if="this.goingToNextRound || this.waitForQ && !this.showInputBox|| userInfo.saved && !this.showInputBox">
-      <h1 class="nextRound">{{uiLabels.nextRound }}</h1>
+      <h1 class="nextRound" id="h1">{{uiLabels.nextRound }}</h1>
       <p class="waitingForQuestion"> {{ uiLabels.waitingForQuestion }}
       </p>
     </section>
@@ -229,7 +229,7 @@ if (savedPlayerQueryParam && savedPlayerQueryParam.toLowerCase() === 'true') {
 }
 
 header,
-h1 {
+#h1 {
   letter-spacing: 2.5px;
   margin: 50px;
   font-size: 60px;
@@ -258,7 +258,7 @@ input {
   margin: 0px;
 }
 
-h1 {
+#h1 {
   margin: 0px;
   padding: 20px;
 }

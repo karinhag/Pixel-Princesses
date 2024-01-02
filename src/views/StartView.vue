@@ -2,7 +2,7 @@
   <body>
     
     
-    <header>
+    <header id="startHeader">
       
       <div class="logo">
         <img
@@ -33,8 +33,8 @@
     </div>
 
     <section class="bodywrapper">
-      <h1>{{ uiLabels.salespitch }}</h1>
-      <h2>{{ uiLabels.subHeading }}</h2>
+      <h1 id="salesPitch"> {{ uiLabels.salespitch }} </h1> 
+       <h2 id="subHeading"> {{ uiLabels.subHeading }}</h2>
 
       <div class="boxes-container">
         <div class="box-a">
@@ -135,20 +135,18 @@ input {
   font-size: 20px;
   color: #fd8dc4e8;
 }
-
-h1,
-h2,
-h3,
-h4,
-header,
-p,
+#salesPitch,
+#subHeading,
+#startHeader, 
 div {
   font-family: "Lilita One", sans-serif;
   font-size: 38px;
   margin: 0px;
   padding: 5px;
 }
-h1{padding-top: 25px;}
+#salesPitch{
+  padding-top: 25px;
+color: white}
 .boxes-container {
   display: flex;
   justify-content: space-between;
@@ -184,7 +182,7 @@ h1{padding-top: 25px;}
   text-align: center;
 }
 
-header {
+#startHeader {
   background: rgba(255, 96, 154, 1);
   width: 100%;
   /* display: grid;
@@ -320,8 +318,8 @@ header {
     width:40%;
   }
   
-h1,
-h2{
+#salesPitch,
+#subHeading{
   font-size: 140%;
 }
 #nav{

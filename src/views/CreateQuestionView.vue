@@ -1,6 +1,6 @@
 <template>
   <section class="CQVbody">
-    <header>{{ uiLabels.writeQuestion }}</header>
+    <header id="writeQuestion">{{ uiLabels.writeQuestion }}</header>
     <div><textarea v-model="question" rows="3" cols="40"></textarea><br /></div>
     <div>
       {{ uiLabels.hardToDecide}}
@@ -123,7 +123,7 @@ textarea {
   color:#ff81bee8;
 }
 
-header {
+#writeQuestion {
   font-size: 50px;
   color:#252422;
 }
@@ -151,6 +151,9 @@ min-height: 100vh;
   /* font-size: 15px; */
   margin: 7px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
 }
 
 .purpleButton {
@@ -162,6 +165,9 @@ min-height: 100vh;
   /* font-size: 15px; */
   margin: 7px 5px;
   border-radius: 15px;
+  font-family: "Lilita One", sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
 }
 
 .purpleButton:hover:enabled {
@@ -180,11 +186,7 @@ min-height: 100vh;
   );
   cursor: pointer;
 }
-button{
-  font-family: "Lilita One", sans-serif;
-  text-transform: uppercase;
-  font-size: 30px;
-}
+
 .arrowImg {
   background-image: url("https://media1.giphy.com/media/3cnI4Mx8T8yCbTW4r1/giphy.gif?cid=ecf05e4728af6szxy69nnokhwhhpsuhsho6ov6j0i8cb02y9&ep=v1_stickers_search&rid=giphy.gif&ct=s");
   background-size: contain; 
