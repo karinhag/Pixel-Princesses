@@ -1,8 +1,11 @@
 <template>
   <body>
-    
-    
+  
     <header id="startHeader">
+
+      <div v-bind:class="['hamburger', {'close': !hideNav}]" 
+         v-on:click="toggleNav">
+    </div>
       
       <div class="logo">
         <img
