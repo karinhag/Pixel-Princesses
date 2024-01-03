@@ -42,7 +42,7 @@
       <div class="boxes-container">
         <div class="box-a">
           <button class="startGameButton" v-on:click="beginGame">
-            {{ uiLabels.createPoll }} !
+            <p id="buttonText">{{ uiLabels.createPoll }} !</p>
           </button>
         </div>
 
@@ -52,7 +52,7 @@
             <input type="text" v-model="id" /> <br />
           </label>
           <button class="joinDateButton" v-on:click="joinDate" :disabled="!id">
-            {{ uiLabels.participatePoll }} !
+            <p id="buttonText">{{ uiLabels.participatePoll }} ! </p>
           </button>
         
         </div>
@@ -178,6 +178,9 @@ color: white}
   background-position: center;
   background-repeat: no-repeat;
 }
+#buttonText{
+  margin:1px;
+}
 
 .box-a router-link,
 .box-b router-link {
@@ -270,7 +273,7 @@ color: white}
     rgb(255, 213, 230) 23.8%,
     rgb(252, 221, 234) 92%
   );
-  padding: 6px;
+  padding: 3px;
   text-align: center;
   display: inline-block;
   margin: 7px 5px;
@@ -303,6 +306,9 @@ color: white}
     align-items: center;
     justify-content: center;
   }
+  .logo img{
+    size:0.5em;   /**måste hitta rätt storlek här... */
+  }
   .hamburger::before {
     content: "☰";
   }
@@ -316,6 +322,10 @@ color: white}
   .joinDateButton {
     width:45%;
   }
+  #buttonText{
+    font-size:0.6em;
+  }
+
   .box-a,
   .box-b{
     width:40%;
@@ -328,6 +338,10 @@ color: white}
 #nav{
   flex-direction: column; /* Updated to column for small screens */
 }
+
+input {  /* Gör inputfältet mindre för små skärmar */
+    width: 80%; 
+  }
 
 
 button:hover:enabled{

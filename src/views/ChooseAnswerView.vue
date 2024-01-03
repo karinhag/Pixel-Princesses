@@ -172,7 +172,8 @@ export default {
   font-family: "Lilita One", sans-serif;
   text-align: center;
   display: inline-block;
-
+  text-transform: uppercase;
+  margin-bottom: 3%;
   margin-top: 3%;
   font-size: 45px;
   min-width: 45%;
@@ -202,6 +203,8 @@ export default {
   cursor: not-allowed;
 }
 .playerAnswerB {
+  font-family: "Lilita One", sans-serif;
+  text-transform: uppercase;
   font-size: 45px;
   display: block;
   margin: 10px;
@@ -282,6 +285,7 @@ button > img {
 @media screen and (max-width: 50em) {
   .scrollable {
     min-width: auto;
+    width: 80%; 
   }
 
   .playerAnswerB {
