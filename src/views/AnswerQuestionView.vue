@@ -1,4 +1,5 @@
 <template>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <section class="pollBody">
     <section
       class="waitingForStart"
@@ -28,7 +29,7 @@
 
       <p id="answer">
         {{ uiLabels.answer }} <br>
-        <input type="text" v-model="userInfo.answer" /> 
+        <input class="answerField" type="text" v-model="userInfo.answer" /> 
       </p>
 
       <button class="purpleButton" v-on:click="submitAnswer" type="submit" :disabled="!userInfo.answer">
@@ -43,7 +44,7 @@
       <h1 id="h1">{{ uiLabels.waitingForChoice }}</h1>
 
       <div class="infinity">
-        <l-infinity
+        <l-infinity 
           size="400"
           stroke="20"
           stroke-length="0.15"
@@ -243,6 +244,8 @@ background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/s
   min-height: 100vh;
   font-family: "Lilita One", sans-serif;
   margin-top: 0em;
+  max-width: 100%;
+    overflow-x: hidden;
 }
 
 input {
@@ -326,5 +329,21 @@ button:hover{
   transform: scale(1.01);
   transition: all 0.3s ease;
 }
+
+@media screen and (max-width: 50em) {
+ 
+
+  #h1 {
+    font-size: 150%;
+  }
+  .answerField {
+    max-width: 90%;
+  }
+  .question {
+    font-size: 180%;
+  }
+
+}
+
 
 </style>

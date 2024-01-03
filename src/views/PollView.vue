@@ -6,17 +6,17 @@
     >
       <div>
         <p id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</p>
-        <header>{{ uiLabels.theHeader }}</header>
+        <header class="createHeader">{{ uiLabels.theHeader }}</header>
 
         <QuestionComponent v-bind:question="question" />
         <p class="inputText">
           {{ uiLabels.userName }} <br />
-          <input type="text" v-model="userInfo.userName" />
+          <input class="inputField" type="text" v-model="userInfo.userName" />
         </p>
 <section class="greenFlag">
         <p class="inputText">
           {{ uiLabels.greenFlag }} <br />
-          <input type="text" v-model="userInfo.greenFlag" />
+          <input class="inputField" type="text" v-model="userInfo.greenFlag" />
         </p>
 
         <button v-on:click="getInfo" class="buttonInfo" v-if="!info">?</button>
@@ -227,6 +227,20 @@ button:hover:enabled{
   font-family: "Lilita One", sans-serif;
   cursor: pointer;
   font-size: 20px;
+}
+
+
+@media screen and (max-width: 50em) {
+ 
+
+ .createHeader {
+  font-size: 250%;
+   
+ }
+
+ .inputField {
+ max-width: 90%;
+ }
 }
 
 </style>
