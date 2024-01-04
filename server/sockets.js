@@ -1,3 +1,5 @@
+const connectedPlayers = {};
+
 function sockets(io, socket, data) {
   socket.emit("init", data.getUILabels());
 
@@ -20,7 +22,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on("retrieveQ", function (pollId) {
-    io.to(pollId).emit("newQuestion", data.getQuestion(pollId));
+    io.to(pollId).emit("theQuestion", data.getQuestion(pollId));
   });
 
   socket.on("editQuestion", function (d) {
@@ -30,7 +32,6 @@ function sockets(io, socket, data) {
 
   socket.on("joinPoll", function (pollId) {
     socket.join("" + pollId);
-    // socket.emit("newQuestion", data.getQuestion(pollId));
     socket.emit("dataUpdate", data.getAnswers(pollId));
   });
 
@@ -40,15 +41,29 @@ function sockets(io, socket, data) {
     io.to(userData.pollId).emit(
       "addedPlayer",
       data.addPlayer(userData.pollId, userData.userInfo)
-    ); //
-    // io.to(userData.pollId).emit("pollsID", userData.pollId);
+    );
+   
+    connectedPlayers[socket.id] = { // mha chatgpt
+      pollId: userData.pollId,
+      uniquePlayerId: userData.userInfo.uniquePlayerId,
+    };
+  });
+
+  socket.on("disconnect", () => { // mha chatgpt
+    const playerData = connectedPlayers[socket.id];
+
+    if (playerData) {
+      const { pollId, uniquePlayerId } = playerData;
+      io.to(pollId).emit("abandonedPlayer", uniquePlayerId);
+      io.to(pollId).emit(
+        "removedPlayer",
+        data.removeUserInfo(pollId, { uniquePlayerId })
+      );
+      delete connectedPlayers[socket.id];
+    }
   });
 
   socket.on("runQuestion", function (d) {
-    // io.to(d.pollId).emit(
-    //   "newQuestion",
-    //   data.getQuestion(d.pollId, d.questionNumber)
-    // );
     io.to(d.pollId).emit("dataUpdate", data.getAnswers(d.pollId));
   });
 
@@ -65,7 +80,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on("removePlayer", function (d) {
-    //lagt till
     socket.join("" + d.pollId);
     io.to(d.pollId).emit(
       "removedPlayer",

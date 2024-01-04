@@ -85,6 +85,7 @@ Data.prototype.getAnswers = function (pollId) {
 };
 
 Data.prototype.removeUserInfo = function (pollId, userInfo) {
+ 
 
   const userIndex = this.players[pollId].findIndex(
     (user) => user.uniquePlayerId === userInfo.uniquePlayerId
@@ -93,7 +94,7 @@ Data.prototype.removeUserInfo = function (pollId, userInfo) {
   if (userIndex !== -1) {
     this.players[pollId].splice(userIndex, 1)
   
-  }
+  } 
   return this.players[pollId];
 };
 
@@ -157,6 +158,7 @@ Data.prototype.saveMatch = function (pollId, userInfo) {
 
 Data.prototype.returnMatchedPlayer=function(pollId){
   return this.matchedPlayer[pollId]
+  
 };
 
 export { Data };

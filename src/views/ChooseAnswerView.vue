@@ -81,6 +81,9 @@ export default {
     socket.on("thePlayersLeft", (data) => {
       this.numbPlayers = data.length;
     });
+    socket.on("abandonedPlayer", (eliminatedPlayerId) =>
+      this.playerAbandoned(eliminatedPlayerId)
+    );
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -88,7 +91,7 @@ export default {
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("incomingAnswers", (data) => this.getAnswer(data));
     socket.on(
-      "newQuestion",
+      "theQuestion",
       (data) => (this.question = data),
       console.log(this.question)
     );
@@ -107,10 +110,14 @@ export default {
       this.chosenAnswer;
     },
     eliminatePlayer: function () {
+      const eliminatedPlayerId = this.chosenAnswer[0].playerID;
+      this.userAnswers = this.userAnswers.filter(
+        (answer) => answer.playerID !== eliminatedPlayerId
+      );
       this.$router.push("/eliminatedPlayer/" + this.pollId);
       socket.emit("eliminatedPlayer", {
         pollId: this.pollId,
-        uniquePlayerId: this.chosenAnswer[0].playerID,
+        uniquePlayerId: eliminatedPlayerId,
       });
       this.resetPage();
     },
@@ -119,6 +126,30 @@ export default {
       this.chosenAnswer = [];
       this.answers = "";
       this.playersData = null;
+    },
+
+    playerAbandoned: function (pId) {
+      this.numbPlayers -= 1;
+      this.userAnswers = this.userAnswers.filter(
+        (answer) => answer.playerID !== pId
+      );
+      socket.emit("getPlayersLeft", this.pollId);
+
+      if (this.numbPlayers === 1) {
+        socket.emit("getPlayersLeft", this.pollId);
+
+
+        socket.on("thePlayersLeft", (player) => {
+          console.log("SPlear", player);
+        
+
+        socket.emit("theTrueMatchPlayer", {
+          pollId: this.pollId,
+          matchedPlayer: player,
+        });
+      });
+        this.$router.push("/endOfGame/" + this.pollId);
+      }
     },
   },
 };
@@ -142,11 +173,15 @@ export default {
   font-size: 35px;
   text-transform: uppercase;
   color:#252422;
+  text-align: center;
+
 }
 #thisQ {
   margin-top: -10px;
   font-size: 40px;
   color: rgb(246, 178, 246);
+  text-align: center;
+
 }
 
 .CAVbody {
@@ -154,14 +189,13 @@ export default {
   background-size: cover;
   min-height: 100vh;
   font-family: "Lilita One", sans-serif;
-
 }
 .yourQ {
   white-space: normal;
   word-wrap: break-word;
   width: 70vh;
   text-align: center;
-  margin: 0 auto; 
+  margin: 0 auto;
   display: block;
   /* display: flex; Add this line to use flexbox for vertical alignment */
   align-items: center;
@@ -238,8 +272,8 @@ export default {
   border-radius: 12px;
   box-shadow: 0 0 60px 15px rgb(252, 48, 123);
   width: fit-content;
-  min-width: 50vh;
   min-height: 10vh;
+  max-width:80vh;
   width: 90vh;
   align-items: center;
   margin: auto;
@@ -249,7 +283,6 @@ export default {
     rgb(253, 162, 199),
     rgb(253, 122, 172)
   );
-  padding: 20px;
   padding-bottom: 40px;
 
   scrollbar-width: thin; /* For Firefox */
@@ -283,19 +316,47 @@ button > img {
 }
 
 @media screen and (max-width: 50em) {
-  .scrollable {
-    min-width: auto;
-    width: 80%; 
-  }
 
-  .playerAnswerB {
-    min-width: 100%;
-  }
+.CQVbody{
+  min-height:100vh;
+  background-size: cover;
+}
+
+.yourQ{
+  width: 80%
+}
+
+#header, 
+#h1YourQ,
+.eliminatingButton {
+  font-size: 2rem;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#thisQ{
+  font-size: 1.2rem;
+  text-align: center;
+
+}
+.scrollable {
+display: flex;
+width:40vh;
+padding:1rem;
+max-width:80vh;
+
+}
+
+.playerAnswerB, .userButtons {
+  width: 100%; 
+  font-size: 1.2rem;
+
 }
 .eliminatingButton:hover:not([disabled]) {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform: scale(1.01);
   transition: all 0.3s ease;
+}
 }
 </style>

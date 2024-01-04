@@ -114,8 +114,8 @@ export default {
       this.$router.push("/create/");
     },
     joinDate: function () {
-      socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
-      this.$router.push("/poll/" + this.id);
+      // socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
+     this.$router.push("/poll/" + this.id);
     },
   },
 };
@@ -191,6 +191,7 @@ color: white}
 #startHeader {
   background: rgba(255, 96, 154, 1);
   width: 100%;
+  box-sizing: border-box; 
   /* display: grid;
   grid-template-columns: 2em auto; */
 }
@@ -325,7 +326,6 @@ color: white}
   #buttonText{
     font-size:0.6em;
   }
-
   .box-a,
   .box-b{
     width:40%;

@@ -175,8 +175,7 @@ export default {
   }
 }
 
-.eliScreen, .savedScreen {
-
+.eliminated, .saved {
   animation: pulsate 3s infinite;
 }
 
