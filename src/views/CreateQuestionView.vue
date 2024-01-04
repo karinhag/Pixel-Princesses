@@ -189,19 +189,19 @@ min-height: 100vh;
 
 .arrowImg {
   background-image: url("https://media1.giphy.com/media/3cnI4Mx8T8yCbTW4r1/giphy.gif?cid=ecf05e4728af6szxy69nnokhwhhpsuhsho6ov6j0i8cb02y9&ep=v1_stickers_search&rid=giphy.gif&ct=s");
-  background-size: contain; 
   width:100px;
   height:50px;
-  background-repeat: no-repeat;
   background-size: 100%;
-  margin: 0 auto; /* Center horizontally */
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  margin: 0 auto;
 }
 @media screen and (max-width: 50em) {
   textarea {
-    width: 80%; /* Use full width for smaller screens */
+    width: 60%;
+  }
+  #writeQuestion{
+    font-size: 250%;
+
+
   }
   
 }

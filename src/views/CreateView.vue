@@ -258,4 +258,9 @@ header {
   position: relative; /* Ensure positioning context for absolute positioning */
   height: 400px; /* Adjust the height as needed */
 }
+
+@media screen and (max-width: 50em) {
+  
+}
+
 </style>

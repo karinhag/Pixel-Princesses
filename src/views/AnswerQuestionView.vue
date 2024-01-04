@@ -1,4 +1,5 @@
 <template>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <section class="pollBody">
     <section
       class="waitingForStart"
@@ -85,7 +86,7 @@
 
       <div class="infinity">
         <l-infinity
-          size="400"
+          size="250"
           stroke="20"
           stroke-length="0.15"
           bg-opacity="0.3"
@@ -435,7 +436,7 @@ header,
   letter-spacing: 2.5px;
   margin: 50px;
   font-size: 60px;
-  color: #252422;
+  color:#ffffff;
 }
 
 .pollBody {
@@ -493,8 +494,8 @@ input {
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
 }
-.purpleButton:disabled {
-  cursor: not-allowed;
+.purpleButton:disabled{
+  cursor:not-allowed
 }
 
 .purpleButton:hover:enabled {
@@ -509,6 +510,8 @@ input {
 .waitingForQuestion {
   color: white;
   font-size: 2rem;
+
+
 }
 
 .goBackButton {
@@ -530,4 +533,28 @@ button:hover {
   transform: scale(1.01);
   transition: all 0.3s ease;
 }
+
+@media screen and (max-width: 50em) {
+ 
+
+  #h1 {
+    font-size: 150%;
+  }
+  .answerField {
+    max-width: 90%;
+  }
+  .question {
+    font-size: 200%;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  #h1 {
+    font-size: 250%;
+    padding-top: 2em;
+  }
+  
+
+}
+
+
 </style>
