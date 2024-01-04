@@ -22,7 +22,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on("retrieveQ", function (pollId) {
-    io.to(pollId).emit("newQuestion", data.getQuestion(pollId));
+    io.to(pollId).emit("theQuestion", data.getQuestion(pollId));
   });
 
   socket.on("editQuestion", function (d) {
@@ -32,7 +32,6 @@ function sockets(io, socket, data) {
 
   socket.on("joinPoll", function (pollId) {
     socket.join("" + pollId);
-    // socket.emit("newQuestion", data.getQuestion(pollId));
     socket.emit("dataUpdate", data.getAnswers(pollId));
   });
 
@@ -43,14 +42,14 @@ function sockets(io, socket, data) {
       "addedPlayer",
       data.addPlayer(userData.pollId, userData.userInfo)
     );
-    // Store connected player information
-    connectedPlayers[socket.id] = {
+   
+    connectedPlayers[socket.id] = { // mha chatgpt
       pollId: userData.pollId,
       uniquePlayerId: userData.userInfo.uniquePlayerId,
     };
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", () => { // mha chatgpt
     const playerData = connectedPlayers[socket.id];
 
     if (playerData) {
@@ -65,10 +64,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on("runQuestion", function (d) {
-    // io.to(d.pollId).emit(
-    //   "newQuestion",
-    //   data.getQuestion(d.pollId, d.questionNumber)
-    // );
     io.to(d.pollId).emit("dataUpdate", data.getAnswers(d.pollId));
   });
 
@@ -85,7 +80,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on("removePlayer", function (d) {
-    //lagt till
     socket.join("" + d.pollId);
     io.to(d.pollId).emit(
       "removedPlayer",
@@ -121,7 +115,6 @@ function sockets(io, socket, data) {
 
   socket.on("theTrueMatchPlayer", function (userData) {
     data.saveMatch(userData.pollId, userData.matchedPlayer);
-    console.log("Olivia the TrueMatchPaleyr i socket", userData.matchedPlayer)
   });
 
   socket.on("getMatchedPlayer", function (pollId) {
