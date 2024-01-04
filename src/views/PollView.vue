@@ -11,12 +11,12 @@
         <QuestionComponent v-bind:question="question" />
         <p class="inputText">
           {{ uiLabels.userName }} <br />
-          <input type="text" v-model="userInfo.userName" />
+          <input type="text" v-model="userInfo.userName" class="textInput"/>
         </p>
 <section class="greenFlag">
         <p class="inputText">
           {{ uiLabels.greenFlag }} <br />
-          <input type="text" v-model="userInfo.greenFlag" />
+          <input type="text" v-model="userInfo.greenFlag" class="textInput" />
         </p>
 
         <button v-on:click="getInfo" class="buttonInfo" v-if="!info">?</button>
@@ -229,5 +229,10 @@ button:hover:enabled{
   cursor: pointer;
   font-size: 20px;
 }
-
+@media screen and (max-width: 50em) {
+  
+  .textInput{
+    width:250px;
+  }
+  }
 </style>

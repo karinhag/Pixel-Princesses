@@ -28,7 +28,7 @@
 
       <p id="answer">
         {{ uiLabels.answer }} <br>
-        <input type="text" v-model="userInfo.answer" /> 
+        <input type="text" v-model="userInfo.answer" class="textInput"/> 
       </p>
 
       <button class="purpleButton" v-on:click="submitAnswer" type="submit" :disabled="!userInfo.answer">
@@ -44,7 +44,7 @@
 
       <div class="infinity">
         <l-infinity
-          size="400"
+          size="250"
           stroke="20"
           stroke-length="0.15"
           bg-opacity="0.3"
@@ -233,7 +233,7 @@ header,
   letter-spacing: 2.5px;
   margin: 50px;
   font-size: 60px;
-  color:#252422;
+  color:#ffffff;
 }
 
 .pollBody {
@@ -286,6 +286,7 @@ input {
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
 }
+
 .purpleButton:disabled{
   cursor:not-allowed
 }
@@ -307,24 +308,21 @@ input {
 }
 
 
-.goBackButton{
-  background: linear-gradient(to top, #dfe9f3 0%, white 100%);
-  border: solid;
-  border-color: rgb(94, 13, 87);
-  padding: 15px;
-  text-align: center;
-  display: inline-block;
-  font-size: 15px;
-  margin: 7px 5px;
-  border-radius: 15px;
-  font-family: "Lilita One", sans-serif;
-}
-
 button:hover{
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform: scale(1.01);
   transition: all 0.3s ease;
 }
+@media screen and (max-width: 50em) {
 
+.textInput{
+  width:250px;
+}
+.question{
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+}
 </style>
