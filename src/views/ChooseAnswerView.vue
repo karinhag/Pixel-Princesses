@@ -91,7 +91,7 @@ export default {
     socket.on("dataUpdate", (data) => (this.data = data));
     socket.on("incomingAnswers", (data) => this.getAnswer(data));
     socket.on(
-      "newQuestion",
+      "theQuestion",
       (data) => (this.question = data),
       console.log(this.question)
     );
