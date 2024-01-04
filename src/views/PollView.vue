@@ -241,6 +241,9 @@ button:hover:enabled{
  .inputField {
  max-width: 90%;
  }
+ .pollBody {
+  margin-bottom: 0%;
+ }
 }
 
 </style>

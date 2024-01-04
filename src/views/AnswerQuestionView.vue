@@ -340,7 +340,9 @@ button:hover{
     max-width: 90%;
   }
   .question {
-    font-size: 180%;
+    font-size: 200%;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 
 }
