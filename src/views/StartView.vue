@@ -114,8 +114,8 @@ export default {
       this.$router.push("/create/");
     },
     joinDate: function () {
-      socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
-      this.$router.push("/poll/" + this.id);
+      // socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
+     this.$router.push("/poll/" + this.id);
     },
   },
 };

@@ -81,6 +81,9 @@ export default {
     socket.on("thePlayersLeft", (data) => {
       this.numbPlayers = data.length;
     });
+    socket.on("abandonedPlayer", (eliminatedPlayerId) =>
+      this.playerAbandoned(eliminatedPlayerId)
+    );
 
     socket.on("init", (labels) => {
       this.uiLabels = labels;
@@ -107,10 +110,14 @@ export default {
       this.chosenAnswer;
     },
     eliminatePlayer: function () {
+      const eliminatedPlayerId = this.chosenAnswer[0].playerID;
+      this.userAnswers = this.userAnswers.filter(
+        (answer) => answer.playerID !== eliminatedPlayerId
+      );
       this.$router.push("/eliminatedPlayer/" + this.pollId);
       socket.emit("eliminatedPlayer", {
         pollId: this.pollId,
-        uniquePlayerId: this.chosenAnswer[0].playerID,
+        uniquePlayerId: eliminatedPlayerId,
       });
       this.resetPage();
     },
@@ -119,6 +126,30 @@ export default {
       this.chosenAnswer = [];
       this.answers = "";
       this.playersData = null;
+    },
+
+    playerAbandoned: function (pId) {
+      this.numbPlayers -= 1;
+      this.userAnswers = this.userAnswers.filter(
+        (answer) => answer.playerID !== pId
+      );
+      socket.emit("getPlayersLeft", this.pollId);
+
+      if (this.numbPlayers === 1) {
+        socket.emit("getPlayersLeft", this.pollId);
+
+
+        socket.on("thePlayersLeft", (player) => {
+          console.log("SPlear", player);
+        
+
+        socket.emit("theTrueMatchPlayer", {
+          pollId: this.pollId,
+          matchedPlayer: player,
+        });
+      });
+        this.$router.push("/endOfGame/" + this.pollId);
+      }
     },
   },
 };
@@ -141,7 +172,7 @@ export default {
 #h1YourQ {
   font-size: 35px;
   text-transform: uppercase;
-  color:#252422;
+  color: #252422;
 }
 #thisQ {
   margin-top: -10px;
@@ -154,14 +185,13 @@ export default {
   background-size: cover;
   min-height: 100vh;
   font-family: "Lilita One", sans-serif;
-
 }
 .yourQ {
   white-space: normal;
   word-wrap: break-word;
   width: 70vh;
   text-align: center;
-  margin: 0 auto; 
+  margin: 0 auto;
   display: block;
   /* display: flex; Add this line to use flexbox for vertical alignment */
   align-items: center;
@@ -285,7 +315,7 @@ button > img {
 @media screen and (max-width: 50em) {
   .scrollable {
     min-width: auto;
-    width: 80%; 
+    width: 80%;
   }
 
   .playerAnswerB {

@@ -1,3 +1,5 @@
+const connectedPlayers = {};
+
 function sockets(io, socket, data) {
   socket.emit("init", data.getUILabels());
 
@@ -40,8 +42,26 @@ function sockets(io, socket, data) {
     io.to(userData.pollId).emit(
       "addedPlayer",
       data.addPlayer(userData.pollId, userData.userInfo)
-    ); //
-    // io.to(userData.pollId).emit("pollsID", userData.pollId);
+    );
+    // Store connected player information
+    connectedPlayers[socket.id] = {
+      pollId: userData.pollId,
+      uniquePlayerId: userData.userInfo.uniquePlayerId,
+    };
+  });
+
+  socket.on("disconnect", () => {
+    const playerData = connectedPlayers[socket.id];
+
+    if (playerData) {
+      const { pollId, uniquePlayerId } = playerData;
+      io.to(pollId).emit("abandonedPlayer", uniquePlayerId);
+      io.to(pollId).emit(
+        "removedPlayer",
+        data.removeUserInfo(pollId, { uniquePlayerId })
+      );
+      delete connectedPlayers[socket.id];
+    }
   });
 
   socket.on("runQuestion", function (d) {
@@ -101,6 +121,7 @@ function sockets(io, socket, data) {
 
   socket.on("theTrueMatchPlayer", function (userData) {
     data.saveMatch(userData.pollId, userData.matchedPlayer);
+    console.log("Olivia the TrueMatchPaleyr i socket", userData.matchedPlayer)
   });
 
   socket.on("getMatchedPlayer", function (pollId) {

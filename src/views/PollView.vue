@@ -103,6 +103,7 @@ export default {
       socket.emit("joinDate", {
         userInfo: this.userInfo,
         pollId: this.pollId,
+        uniquePlayerId:this.uniquePlayerId,
       });
       this.userCreated = true;
       this.$router.push({

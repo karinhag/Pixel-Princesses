@@ -85,6 +85,7 @@ Data.prototype.getAnswers = function (pollId) {
 };
 
 Data.prototype.removeUserInfo = function (pollId, userInfo) {
+ 
 
   const userIndex = this.players[pollId].findIndex(
     (user) => user.uniquePlayerId === userInfo.uniquePlayerId
@@ -93,7 +94,7 @@ Data.prototype.removeUserInfo = function (pollId, userInfo) {
   if (userIndex !== -1) {
     this.players[pollId].splice(userIndex, 1)
   
-  }
+  } 
   return this.players[pollId];
 };
 
@@ -151,12 +152,15 @@ Data.prototype.saveMatch = function (pollId, userInfo) {
     this.matchedPlayer[pollId] = [];
   }
   this.matchedPlayer[pollId].push(userInfo);
+  console.log("Max saveMatch i data", this.matchedPlayer[pollId])
   return this.matchedPlayer[pollId];
 };
 
 
 Data.prototype.returnMatchedPlayer=function(pollId){
+  console.log("nova return match player",this.matchedPlayer[pollId])
   return this.matchedPlayer[pollId]
+  
 };
 
 export { Data };
