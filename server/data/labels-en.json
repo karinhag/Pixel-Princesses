@@ -62,7 +62,8 @@
 	"minimumPlayers": "You need a minimum of three players to start the game",
 	"youHaveSaved": "You have saved",
 	"yourQuestion":"Your question:",
-	"greenFlagInfo":"A green flag is something good about yourself. Something you think a partner would like."
+	"greenFlagInfo":"A green flag is something good about yourself. Something you think a partner would like.",
+	"timeIsUp":"Time is Up!"
 
 	
 

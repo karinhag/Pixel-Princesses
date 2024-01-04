@@ -89,6 +89,7 @@ function sockets(io, socket, data) {
 
   socket.on("eliminatedPlayer", function (id) {
     data.eliminateAPlayer(id.pollId, id.uniquePlayerId);
+    io.to(id.pollId).emit("abandonedPlayer", id.uniquePlayerId);
   });
 
   socket.on("getEliminatedPlayer", function (pollId) {
