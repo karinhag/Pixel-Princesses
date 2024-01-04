@@ -172,12 +172,16 @@ export default {
 #h1YourQ {
   font-size: 35px;
   text-transform: uppercase;
-  color: #252422;
+  color:#252422;
+  text-align: center;
+
 }
 #thisQ {
   margin-top: -10px;
   font-size: 40px;
   color: rgb(246, 178, 246);
+  text-align: center;
+
 }
 
 .CAVbody {
@@ -268,8 +272,8 @@ export default {
   border-radius: 12px;
   box-shadow: 0 0 60px 15px rgb(252, 48, 123);
   width: fit-content;
-  min-width: 50vh;
   min-height: 10vh;
+  max-width:80vh;
   width: 90vh;
   align-items: center;
   margin: auto;
@@ -279,7 +283,6 @@ export default {
     rgb(253, 162, 199),
     rgb(253, 122, 172)
   );
-  padding: 20px;
   padding-bottom: 40px;
 
   scrollbar-width: thin; /* For Firefox */
@@ -313,19 +316,47 @@ button > img {
 }
 
 @media screen and (max-width: 50em) {
-  .scrollable {
-    min-width: auto;
-    width: 80%;
-  }
 
-  .playerAnswerB {
-    min-width: 100%;
-  }
+.CQVbody{
+  min-height:100vh;
+  background-size: cover;
+}
+
+.yourQ{
+  width: 80%
+}
+
+#header, 
+#h1YourQ,
+.eliminatingButton {
+  font-size: 2rem;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#thisQ{
+  font-size: 1.2rem;
+  text-align: center;
+
+}
+.scrollable {
+display: flex;
+width:40vh;
+padding:1rem;
+max-width:80vh;
+
+}
+
+.playerAnswerB, .userButtons {
+  width: 100%; 
+  font-size: 1.2rem;
+
 }
 .eliminatingButton:hover:not([disabled]) {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform: scale(1.01);
   transition: all 0.3s ease;
+}
 }
 </style>
