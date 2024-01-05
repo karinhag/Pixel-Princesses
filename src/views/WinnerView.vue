@@ -58,7 +58,10 @@
   
   <style>
   @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
-  
+  .winnerBody {
+  overflow: hidden;
+}
+
 .headerContainer {
   display: flex;
   flex-direction: column;
@@ -84,9 +87,8 @@
 
   }
   .winnerBody{
-    height: 100vh;
- 
-  background: radial-gradient(
+    background-size: contain;
+    background: radial-gradient(
     rgb(245, 193, 211),
     rgb(255, 163, 187),
     rgb(243, 108, 155)  );
@@ -96,12 +98,11 @@
   }
   
   .winnerBox {
-    height:820px;
+    height:100vh;
     background-image: url("https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/34216/heart-arrow-clipart-xl.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
   
   .buttonContainer{
@@ -127,18 +128,21 @@
     cursor: pointer;
   }
   @media screen and (max-width: 89em) {
+  .winnerBody {
+  overflow: hidden; 
+}
   .congratsHeader{
-    font-size:60px;
+    font-size:35px;
   }
   .winnerHeader {
-    font-size:30px;
+    font-size:20px;
     
   }
   
 }
 
 
-@keyframes pulsate { /** w help from chatgpt  */
+@keyframes pulsate { 
   0% {
     transform: scale(1);
   }
@@ -167,8 +171,8 @@
 }
 .winnerBox {
   animation: spin 3s infinite;
-  transform-origin: center center; /* Set the rotation origin to the center of the element */
-  backface-visibility: hidden; /* Ensure the backface is hidden during the rotation */
+  transform-origin: center center;
+  backface-visibility: hidden;
 }  
 
 
