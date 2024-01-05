@@ -339,6 +339,7 @@ color: white}
   font-size: 140%;
 }
 #nav{
+  opacity:85%;
   flex-direction: column; /* Updated to column for small screens */
 }
 
