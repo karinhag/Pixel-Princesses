@@ -299,18 +299,27 @@ color: white}
   cursor:not-allowed
 }
 
+@media screen and (max-width: 849px) {
+  .logo {
+    font-size: 170%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo img{
+    size:1em;   /**måste hitta rätt storlek här... */
+  }
+}
+
+
 @media screen and (max-width: 50em) {
-  
   .logo {
     font-size: 83%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .logo img{
-    width: 17%;
-    size:0.1em;   /**måste hitta rätt storlek här... */
-  }
+
   .hamburger::before {
     content: "☰";
   }
