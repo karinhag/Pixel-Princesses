@@ -548,10 +548,7 @@ button:hover {
     padding-left: 1em;
     padding-right: 1em;
   }
-  #h1 {
-    font-size: 250%;
-    padding-top: 2em;
-  }
+  
   
 
 }

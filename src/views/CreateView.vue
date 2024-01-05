@@ -261,6 +261,12 @@ header {
 
 @media screen and (max-width: 50em) {
   
+.onePlayer {
+  padding: 10px;
+  margin-bottom: 10px;
 }
-
+.activePlayers {
+  max-height: 350px;
+}
+}
 </style>
