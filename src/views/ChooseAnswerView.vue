@@ -214,6 +214,7 @@ export default {
   padding-right: 20px;
   padding-left: 20px;
   border-radius: 12px;
+  background-color: rgb(253, 252, 253);
   height: 70px;
 }
 .eliminatingButton:not([disabled]) {
