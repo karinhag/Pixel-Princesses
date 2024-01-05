@@ -26,7 +26,7 @@
     >
       <div v-if="!this.timeOver" id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</div>
       <div v-if="!this.timeOver" class="question">
-        {{ this.question }}
+        {{ this.question }} 
       </div>
 
       <!-- <div class="base-timer">
@@ -65,7 +65,7 @@
 
       <p v-if="!this.timeOver" id="answer">
         {{ uiLabels.answer }} <br />
-        <input type="text" v-model="userInfo.answer" />
+        <input class="inputField" type="text" v-model="userInfo.answer" />
       </p>
 
       <button
@@ -146,9 +146,9 @@ export default {
       eliminatedPlayer: {},
       goingToNextRound: false,
       waitForQ: false,
-      TIME_LIMIT: 20,
+      TIME_LIMIT: 30,
       timePassed: 0,
-      timeLeft: 20,
+      timeLeft: 30,
       timerInterval: null,
       remainingPathColor: "green", // Initialize with the default color, 
       timeOver:false,
