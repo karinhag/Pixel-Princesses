@@ -431,7 +431,6 @@ export default {
   font-size: medium;
 }
 
-header,
 #h1 {
   letter-spacing: 2.5px;
   margin: 50px;
