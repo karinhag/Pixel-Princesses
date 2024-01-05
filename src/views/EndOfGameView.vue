@@ -4,7 +4,7 @@
     <div class="perfectMatch">
       <!-- loopar över gifen-->
       <img
-        v-for="index in 5"
+        v-for="index in 3"
         :key="index"
         src="https://media0.giphy.com/media/nR8frZBepl4VW/giphy.gif?cid=ecf05e47k7wzswsfziaaor2m2rrvq3jh21i1yhtc5nvou67d&ep=v1_gifs_related&rid=giphy.gif&ct=s"
       />
@@ -90,7 +90,7 @@ header{
   background-size: cover;
   min-height: 100vh;
   overflow-x: hidden;
-}
+}ç
 
 /* gifen */
 .perfectMatch img{
