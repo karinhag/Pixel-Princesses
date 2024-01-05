@@ -302,6 +302,10 @@ color: white}
     rgb(252, 175, 211) 92%
   );
 }
+.closeButton:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
 
 .langButton:hover
 
