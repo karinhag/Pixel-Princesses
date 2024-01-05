@@ -28,8 +28,8 @@
       <div v-if="!this.timeOver" class="question">
         {{ this.question }} 
       </div>
-<!--
-       <div class="base-timer"> 
+
+      <!-- <div class="base-timer">
         <svg
           class="base-timer__svg"
           viewBox="0 0 100 100"
@@ -61,8 +61,8 @@
         <span id="base-timer-label" class="base-timer__label">
           {{ this.formatTimeLeft(timeLeft) }}
         </span>
-      </div> 
-    -->
+      </div> -->
+
       <p v-if="!this.timeOver" id="answer">
         {{ uiLabels.answer }} <br />
         <input class="inputField" type="text" v-model="userInfo.answer" />
@@ -175,8 +175,8 @@ export default {
       this.uiLabels = labels;
     });
 
-    socket.on("newQuestion", (q) => { 
-     /* this.startTimer(); */
+    socket.on("newQuestion", (q) => {
+      //this.startTimer();
       this.question = q;
       if (this.question.length > 0) {
         this.showInputBox = true;
