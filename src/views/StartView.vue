@@ -16,7 +16,9 @@
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
         />
       </div>
+      <hr>
     </header>
+   
 
     <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
       <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
@@ -131,7 +133,15 @@ body {
   height: 100vh;
 
 }
+hr {
+  border: 0;
+  height: 8px;
+  width: 50%;
+  position: relative;
+  margin: 5px auto;
+ background:  radial-gradient(#FED5E5ff,#FFB4CF, #FF95BB, #FF6099,  #FF6099ff);
 
+}
 input {
   font-family: "Lilita One", sans-serif;
   caret-color: #f06af0;
@@ -165,7 +175,7 @@ color: white}
 .box-b {
   color:#252422;
   margin-top: 50px;
-  font-size: 20px;
+  font-size: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -197,9 +207,9 @@ color: white}
 }
 .logo {
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   font-weight: bolder;
-  font-size: 5rem;
+  font-size: 5.5rem;
   color: rgb(255, 213, 230);
   padding: 0.2em;
   font-family: "Rochester", cursive;
@@ -232,11 +242,12 @@ color: white}
   justify-content: center;
 }
 #nav button {
-  background-color: rgb(255, 213, 230);
+  /* background-color: rgb(255, 213, 230); */
   margin: 0.3rem;
   font-family: "Lilita One", sans-serif;
-  height:30px;
-  width:150px;
+  height:45px;
+  width:200px;
+  font-size: larger;
 }
 
 #nav button:hover {
@@ -293,10 +304,12 @@ color: white}
     rgb(255, 213, 230) 23.8%,
     rgb(252, 175, 211) 92%
   );
+  color:#252422;
 }
 
 .joinDateButton:disabled{
   cursor:not-allowed
+
 }
 
 @media screen and (max-width: 849px) {
@@ -309,10 +322,20 @@ color: white}
   .logo img{
     size:1em;   /**måste hitta rätt storlek här... */
   }
+
+
 }
 
 
 @media screen and (max-width: 50em) {
+
+  #nav button {
+  /* background-color: rgb(255, 213, 230); */
+  margin: 0.3rem;
+  font-family: "Lilita One", sans-serif;
+  height:35px;
+  width:80%;
+  font-size: large;}
   .logo {
     font-size: 83%;
     display: flex;
