@@ -90,7 +90,7 @@
     >
       <h1 id="h1">{{ uiLabels.waitingForChoice }}</h1>
 
-      <div class="infinity">
+      <!-- <div class="infinity">
         <l-infinity
           size="250"
           stroke="20"
@@ -99,7 +99,7 @@
           speed="1.8"
           color="#f5f5f5; ;"
         ></l-infinity>
-      </div>
+      </div> -->
     </section>
 
     <section
@@ -117,18 +117,18 @@
 
 <script>
 // @ is an alias to /src
-import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
+// import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
 
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io("localhost:3000");
-infinity.register();
+// infinity.register();
 
 export default {
   name: "AnswerQuestionView",
   components: {
     QuestionComponent,
-    infinity,
+    // infinity,
   },
   data: function () {
     return {
