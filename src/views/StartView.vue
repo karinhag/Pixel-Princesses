@@ -42,7 +42,7 @@
       <div class="boxes-container">
         <div class="box-a">
           <button class="startGameButton" v-on:click="beginGame">
-            <p id="buttonText">{{ uiLabels.createPoll }} !</p>
+            <p id="buttonText">{{ uiLabels.createPoll }}!</p>
           </button>
         </div>
 
@@ -52,7 +52,7 @@
             <input type="text" v-model="id" /> <br />
           </label>
           <button class="joinDateButton" v-on:click="joinDate" :disabled="!id">
-            <p id="buttonText">{{ uiLabels.participatePoll }} ! </p>
+            <p id="buttonText">{{ uiLabels.participatePoll }}! </p>
           </button>
         
         </div>
@@ -310,7 +310,6 @@ color: white}
     size:1em;   /**måste hitta rätt storlek här... */
   }
 }
-
 
 @media screen and (max-width: 50em) {
   .logo {
