@@ -1,5 +1,8 @@
 <template>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  />
   <section class="pollBody">
     <section
       class="waitingForStart"
@@ -24,44 +27,47 @@
         this.showInputBox && !this.answerSubmitted && !this.goingToNextRound
       "
     >
-      <div v-if="!this.timeOver" id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</div>
+      <div v-if="!this.timeOver" id="roomId">
+        {{ uiLabels.joinedRoom }} {{ this.pollId }}
+      </div>
       <div v-if="!this.timeOver" class="question">
         {{ this.question }} 
       </div>
-
-      <!-- <div class="base-timer">
-        <svg
-          class="base-timer__svg"
-          viewBox="0 0 100 100"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g class="base-timer__circle">
-            <circle
-              class="base-timer__path-elapsed"
-              cx="50"
-              cy="50"
-              r="45"
-            ></circle>
-            <path
-              id="base-timer-path-remaining"
-              stroke-dasharray="283"
-              :class="{
-                'base-timer__path-remaining': true,
-                [remainingPathColor]: true,
-              }"
-              d="
+      <div class="timer-container">
+        <div class="base-timer">
+          <svg
+            class="base-timer__svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g class="base-timer__circle">
+              <circle
+                class="base-timer__path-elapsed"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
+              <path
+                id="base-timer-path-remaining"
+                stroke-dasharray="283"
+                :class="{
+                  'base-timer__path-remaining': true,
+                  [remainingPathColor]: true,
+                }"
+                d="
           M 50, 50
           m -45, 0
           a 45,45 0 1,0 90,0
           a 45,45 0 1,0 -90,0
         "
-            ></path>
-          </g>
-        </svg>
-        <span id="base-timer-label" class="base-timer__label">
-          {{ this.formatTimeLeft(timeLeft) }}
-        </span>
-      </div> -->
+              ></path>
+            </g>
+          </svg>
+          <span id="base-timer-label" class="base-timer__label">
+            {{ this.formatTimeLeft(timeLeft) }}
+          </span>
+        </div>
+      </div>
 
       <p v-if="!this.timeOver" id="answer">
         {{ uiLabels.answer }} <br />
@@ -69,7 +75,7 @@
       </p>
 
       <button
-      v-if="!this.timeOver"
+        v-if="!this.timeOver"
         class="purpleButton"
         v-on:click="submitAnswer"
         type="submit"
@@ -146,12 +152,12 @@ export default {
       eliminatedPlayer: {},
       goingToNextRound: false,
       waitForQ: false,
-      TIME_LIMIT: 30,
+      TIME_LIMIT: 60,
       timePassed: 0,
-      timeLeft: 30,
+      timeLeft: 60,
       timerInterval: null,
-      remainingPathColor: "green", // Initialize with the default color, 
-      timeOver:false,
+      remainingPathColor: "green", // Initialize with the default color,
+      timeOver: false,
     };
   },
   created: function () {
@@ -176,7 +182,7 @@ export default {
     });
 
     socket.on("newQuestion", (q) => {
-      //this.startTimer();
+      this.startTimer();
       this.question = q;
       if (this.question.length > 0) {
         this.showInputBox = true;
@@ -239,6 +245,7 @@ export default {
             uniquePlayerId: this.userInfo.uniquePlayerId,
           },
         });
+        
       } else {
         this.goingToNextRound = true;
       }
@@ -258,9 +265,9 @@ export default {
       this.waitForQ = true;
       this.question = "";
       this.userInfo.answer = "";
-      this.TIME_LIMIT = 20;
+      this.TIME_LIMIT = 60;
       this.timePassed = 0;
-      this.timeLeft = 20;
+      this.timeLeft = 60;
       this.timerInterval = null;
     },
 
@@ -283,21 +290,21 @@ export default {
         this.timeLeft = this.TIME_LIMIT - this.timePassed;
         console.log("Tid kvar!", this.timeLeft);
         if (this.timeLeft <= 0) {
-          this.timeOver=true;
-           setTimeout(() => {
-             this.$router.push({
-               path: "/youAreEliminated/" + this.pollId,
-               query: {
-                 userName: this.userInfo.userName,
-                 greenFlag: this.userInfo.greenFlag,
-                 uniquePlayerId: this.userInfo.uniquePlayerId,
-               },
-             });
-             socket.emit("eliminatedPlayer", {
-               pollId: this.pollId,
-               uniquePlayerId: this.userInfo.uniquePlayerId,
-             });
-           }, 2000);
+          this.timeOver = true;
+          setTimeout(() => {
+            this.$router.push({
+              path: "/youAreEliminated/" + this.pollId,
+              query: {
+                userName: this.userInfo.userName,
+                greenFlag: this.userInfo.greenFlag,
+                uniquePlayerId: this.userInfo.uniquePlayerId,
+              },
+            });
+            socket.emit("eliminatedPlayer", {
+              pollId: this.pollId,
+              uniquePlayerId: this.userInfo.uniquePlayerId,
+            });
+          }, 2000);
           this.timeLeft = this.uiLabels.timeIsUp;
           this.stopTimer();
         }
@@ -345,13 +352,19 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-.base-timer {
-  position: absolute;
+.timer-container {
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 300px;
-  width: 300px;
+  height: 250px;
+  width: 250px;
+  margin-top: 22vh;
+}
+
+.base-timer {
+  height: 100%;
+  width: 100%;
 }
 
 /* Removes SVG styling that would hide the time label */
@@ -371,8 +384,8 @@ export default {
   position: absolute;
 
   /* Size should match the parent container */
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
 
   /* Keep the label aligned to the top */
   top: 0;
@@ -431,21 +444,20 @@ export default {
   font-size: medium;
 }
 
-#h1 {
+h1,
+.question {
+  text-align: center;
   letter-spacing: 2.5px;
-  margin: 50px;
-  font-size: 60px;
-  color:#ffffff;
+  padding-top: 0.5em;
+  padding-left: 3em;
+  padding-right: 3em;
+  margin: 30px;
+  font-size: 70px;
+  color: #ffffff;
 }
 
 .pollBody {
-  /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='2560' height='1660' preserveAspectRatio='none' viewBox='0 0 2560 1660'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1047%26quot%3b)' fill='none'%3e%3crect width='2560' height='1660' x='0' y='0' fill='rgba(255%2c 152%2c 194%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c955.486C176.431%2c930.366%2c338.98%2c856.208%2c481.45%2c749.151C616.427%2c647.724%2c705.408%2c506.787%2c790.887%2c361.186C885.583%2c199.885%2c982.116%2c40.819%2c1006.192%2c-144.669C1035.801%2c-372.789%2c1081.058%2c-633.227%2c943.931%2c-817.921C806.257%2c-1003.352%2c541.456%2c-1026.589%2c315.596%2c-1074.82C104.283%2c-1119.944%2c-109.392%2c-1138.644%2c-319.375%2c-1087.691C-536.659%2c-1034.966%2c-780.656%2c-968.927%2c-899.998%2c-779.852C-1017.607%2c-593.522%2c-902.901%2c-352.089%2c-922.219%2c-132.595C-940.111%2c70.693%2c-1073.66%2c267.26%2c-1009.199%2c460.886C-943.088%2c659.465%2c-766.369%2c807.95%2c-578.431%2c900.057C-400.907%2c987.06%2c-195.724%2c983.353%2c0%2c955.486' fill='%23ff5fa0'%3e%3c/path%3e%3cpath d='M2560 2907.648C2791.1 2911.79 2908.6639999999998 2625.846 3083.702 2474.8959999999997 3230.551 2348.255 3422.832 2267.2 3505.8540000000003 2091.957 3589.3379999999997 1915.74 3557.406 1713.477 3536.2619999999997 1519.635 3514.428 1319.464 3481.453 1123.075 3381.126 948.491 3264.812 746.087 3146.068 489.80999999999995 2917.417 442.75 2686.872 395.30099999999993 2504.924 639.425 2284.83 722.858 2087.1549999999997 797.793 1815.9009999999998 736.519 1691.524 907.461 1565.8229999999999 1080.222 1714.902 1322.843 1693.6019999999999 1535.431 1673.617 1734.898 1498.827 1924.647 1570.866 2111.7219999999998 1642.848 2298.649 1892.167 2330.7619999999997 2048.225 2456.337 2229.091 2601.874 2327.887 2903.4880000000003 2560 2907.648' fill='%23ffd1e4'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1047'%3e%3crect width='2560' height='1660' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
-  background-size: cover;
-  /* //https://bgjar.com/simple-shiny hemsidan för att skapa! */
-  /* min-height: 100vh;
-  font-family: "Lilita One", sans-serif;
-  margin-top: 0; */ 
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='2560' height='1660' preserveAspectRatio='none' viewBox='0 0 2560 1660'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1047%26quot%3b)' fill='none'%3e%3crect width='2560' height='1660' x='0' y='0' fill='rgba(255%2c 152%2c 194%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c955.486C176.431%2c930.366%2c338.98%2c856.208%2c481.45%2c749.151C616.427%2c647.724%2c705.408%2c506.787%2c790.887%2c361.186C885.583%2c199.885%2c982.116%2c40.819%2c1006.192%2c-144.669C1035.801%2c-372.789%2c1081.058%2c-633.227%2c943.931%2c-817.921C806.257%2c-1003.352%2c541.456%2c-1026.589%2c315.596%2c-1074.82C104.283%2c-1119.944%2c-109.392%2c-1138.644%2c-319.375%2c-1087.691C-536.659%2c-1034.966%2c-780.656%2c-968.927%2c-899.998%2c-779.852C-1017.607%2c-593.522%2c-902.901%2c-352.089%2c-922.219%2c-132.595C-940.111%2c70.693%2c-1073.66%2c267.26%2c-1009.199%2c460.886C-943.088%2c659.465%2c-766.369%2c807.95%2c-578.431%2c900.057C-400.907%2c987.06%2c-195.724%2c983.353%2c0%2c955.486' fill='%23ff5fa0'%3e%3c/path%3e%3cpath d='M2560 2907.648C2791.1 2911.79 2908.6639999999998 2625.846 3083.702 2474.8959999999997 3230.551 2348.255 3422.832 2267.2 3505.8540000000003 2091.957 3589.3379999999997 1915.74 3557.406 1713.477 3536.2619999999997 1519.635 3514.428 1319.464 3481.453 1123.075 3381.126 948.491 3264.812 746.087 3146.068 489.80999999999995 2917.417 442.75 2686.872 395.30099999999993 2504.924 639.425 2284.83 722.858 2087.1549999999997 797.793 1815.9009999999998 736.519 1691.524 907.461 1565.8229999999999 1080.222 1714.902 1322.843 1693.6019999999999 1535.431 1673.617 1734.898 1498.827 1924.647 1570.866 2111.7219999999998 1642.848 2298.649 1892.167 2330.7619999999997 2048.225 2456.337 2229.091 2601.874 2327.887 2903.4880000000003 2560 2907.648' fill='%23ffd1e4'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1047'%3e%3crect width='2560' height='1660' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='2560' height='1660' preserveAspectRatio='none' viewBox='0 0 2560 1660'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1047%26quot%3b)' fill='none'%3e%3crect width='2560' height='1660' x='0' y='0' fill='rgba(255%2c 152%2c 194%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c955.486C176.431%2c930.366%2c338.98%2c856.208%2c481.45%2c749.151C616.427%2c647.724%2c705.408%2c506.787%2c790.887%2c361.186C885.583%2c199.885%2c982.116%2c40.819%2c1006.192%2c-144.669C1035.801%2c-372.789%2c1081.058%2c-633.227%2c943.931%2c-817.921C806.257%2c-1003.352%2c541.456%2c-1026.589%2c315.596%2c-1074.82C104.283%2c-1119.944%2c-109.392%2c-1138.644%2c-319.375%2c-1087.691C-536.659%2c-1034.966%2c-780.656%2c-968.927%2c-899.998%2c-779.852C-1017.607%2c-593.522%2c-902.901%2c-352.089%2c-922.219%2c-132.595C-940.111%2c70.693%2c-1073.66%2c267.26%2c-1009.199%2c460.886C-943.088%2c659.465%2c-766.369%2c807.95%2c-578.431%2c900.057C-400.907%2c987.06%2c-195.724%2c983.353%2c0%2c955.486' fill='%23ff5fa0'%3e%3c/path%3e%3cpath d='M2560 2907.648C2791.1 2911.79 2908.6639999999998 2625.846 3083.702 2474.8959999999997 3230.551 2348.255 3422.832 2267.2 3505.8540000000003 2091.957 3589.3379999999997 1915.74 3557.406 1713.477 3536.2619999999997 1519.635 3514.428 1319.464 3481.453 1123.075 3381.126 948.491 3264.812 746.087 3146.068 489.80999999999995 2917.417 442.75 2686.872 395.30099999999993 2504.924 639.425 2284.83 722.858 2087.1549999999997 797.793 1815.9009999999998 736.519 1691.524 907.461 1565.8229999999999 1080.222 1714.902 1322.843 1693.6019999999999 1535.431 1673.617 1734.898 1498.827 1924.647 1570.866 2111.7219999999998 1642.848 2298.649 1892.167 2330.7619999999997 2048.225 2456.337 2229.091 2601.874 2327.887 2903.4880000000003 2560 2907.648' fill='%23ffd1e4'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1047'%3e%3crect width='2560' height='1660' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
   background-size: cover;
   min-height: 100vh;
   font-family: "Lilita One", sans-serif;
@@ -470,15 +482,9 @@ input {
   margin: 0px;
   padding: 20px;
 }
-.question {
-  font-size: 40px;
-  text-align: center;
-  padding-top: 1em;
-  padding-left: 3em;
-  padding-right: 3em;
-  color: #f5f5f5;
-}
+
 #answer {
+  margin-top: -10vh;
   text-align: center;
 }
 
@@ -493,8 +499,8 @@ input {
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
 }
-.purpleButton:disabled{
-  cursor:not-allowed
+.purpleButton:disabled {
+  cursor: not-allowed;
 }
 
 .purpleButton:hover:enabled {
@@ -509,8 +515,6 @@ input {
 .waitingForQuestion {
   color: white;
   font-size: 2rem;
-
-
 }
 
 .goBackButton {
@@ -535,22 +539,96 @@ button:hover {
 
 @media screen and (max-width: 50em) {
  
-
-  #h1 {
-    font-size: 150%;
-  }
-  .answerField {
-    max-width: 90%;
-  }
   .question {
-    font-size: 200%;
-    padding-left: 1em;
-    padding-right: 1em;
+    font-size: 50px;
+    padding-left: 0.2vw;
+    padding-right: 0.2vw;
+    margin: 5px;
+  }
+  #h1 {
+    font-size: 100%;
+    padding-top: 2em;
+  }
+
+  .timer-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 150px;
+    width: 150px;
+    margin-top: 18vh;
+    margin-bottom:8vh;
+  }
+
+  .base-timer {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* The SVG path that displays the timer's progress */
+  .base-timer__path-elapsed {
+    stroke-width: 6px;
+    stroke: #ced4da;
+    opacity: 0.3;
+  }
+
+  .base-timer__label {
+    position: absolute;
+
+    /* Size should match the parent container */
+    width: 150px;
+    height: 150px;
+
+    /* Keep the label aligned to the top */
+    top: 0;
+
+    /* Create a flexible box that centers content vertically and horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Sort of an arbitrary number; adjust to your liking */
+    font-size: 50px;
+    left: 50%; /* Add this line */
+    transform: translateX(-50%); /* Add this line */
+  }
+
+  .base-timer__path-remaining {
+    /* Just as thick as the original ring */
+    stroke-width: 6px;
+
+    /* Rounds the line endings to create a seamless circle */
+    stroke-linecap: round;
+
+    /* Makes sure the animation starts at the top of the circle */
+    transform: rotate(90deg);
+    transform-origin: center;
+
+    /* One second aligns with the speed of the countdown timer */
+    transition: 1s linear all;
+
+    /* Allows the ring to change color when the color value updates */
+  }
+  input {
+    width: 80vw;
+    text-align: left;
+     margin-left: auto;
+    margin-right: auto;
   }
   
-  
-
+  #answer {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width:80vw;
+  }
+  #inputDiv{
+     align-items: left;
+  }
+  #inputField{
+    width:2000px;
+  }
 }
-
-
 </style>

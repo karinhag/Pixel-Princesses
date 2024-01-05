@@ -10,13 +10,15 @@
       <div class="logo">
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
-        /> 
+        id="img1"/> 
         Romance Roulette
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
-        />
+        id="img2"/>
       </div>
+      <hr>
     </header>
+   
 
     <ResponsiveNav id="nav" v-bind:hideNav="hideNav">
       <button class="langButton" v-on:click="switchLanguage">{{ uiLabels.changeLanguage }}</button>
@@ -25,15 +27,15 @@
     </ResponsiveNav>
     
     <div v-if="showAbout" class="FAQtext">
-      <b class="FAQheader">{{ uiLabels.aboutText }}</b>
-      <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
-    </div>
-    <div v-if="showFAQ" class="FAQtext">
-      <b class="FAQheader"> {{ uiLabels.FAQ }} </b>
-      <br />{{ uiLabels.FAQ1 }} <br />{{ uiLabels.FAQ2 }} <br />{{
-        uiLabels.FAQ3
-      }}
-    </div>
+  <button class="closeButton" v-on:click="showAbout=false">x</button>
+  <b class="FAQheader">{{ uiLabels.aboutText }}</b>
+  <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
+</div>
+<div v-if="showFAQ" class="FAQtext">
+  <button class="closeButton" v-on:click="showFAQ=false">x</button>
+  <b class="FAQheader"> {{ uiLabels.FAQ }} </b>
+  <br />{{ uiLabels.FAQ1 }} <br />{{ uiLabels.FAQ2 }} <br />{{ uiLabels.FAQ3 }}
+</div>
 
     <section class="bodywrapper">
       <h1 id="salesPitch"> {{ uiLabels.salespitch }} </h1> 
@@ -131,7 +133,15 @@ body {
   height: 100vh;
 
 }
+hr {
+  border: 0;
+  height: 8px;
+  width: 50%;
+  position: relative;
+  margin: 5px auto;
+ background:  radial-gradient(#FED5E5ff,#FFB4CF, #FF95BB, #FF6099,  #FF6099ff);
 
+}
 input {
   font-family: "Lilita One", sans-serif;
   caret-color: #f06af0;
@@ -165,7 +175,7 @@ color: white}
 .box-b {
   color:#252422;
   margin-top: 50px;
-  font-size: 20px;
+  font-size: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -197,21 +207,65 @@ color: white}
 }
 .logo {
 
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   font-weight: bolder;
-  font-size: 5rem;
+  font-size: 5.5rem;
   color: rgb(255, 213, 230);
   padding: 0.2em;
   font-family: "Rochester", cursive;
   text-align: center;
   
 }
-.logo img {
+#img1 {
   height: 4.2rem;
   vertical-align: bottom;
   margin-right: 0.5rem;
   margin-bottom: 0.4rem;
+  animation: spinAndPulsateClockwise 2s infinite linear;
 }
+#img2 {
+  height: 4.2rem;
+  vertical-align: bottom;
+  margin-right: 0.5rem;
+  margin-bottom: 0.4rem;
+  animation: spinAndPulsateCounterClockwise 2s infinite linear;
+}
+
+@keyframes spinAndPulsateClockwise {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(18deg);
+  }
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(-18deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+@keyframes spinAndPulsateCounterClockwise {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(-18deg);
+  }
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(18deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 .hamburger {
   color: rgb(255, 213, 230);
   width: 1em;
@@ -232,11 +286,12 @@ color: white}
   justify-content: center;
 }
 #nav button {
-  background-color: rgb(255, 213, 230);
+  /* background-color: rgb(255, 213, 230); */
   margin: 0.3rem;
   font-family: "Lilita One", sans-serif;
-  height:30px;
-  width:150px;
+  height:45px;
+  width:200px;
+  font-size: larger;
 }
 
 #nav button:hover {
@@ -246,6 +301,10 @@ color: white}
     rgb(255, 213, 230) 23.8%,
     rgb(252, 175, 211) 92%
   );
+}
+.closeButton:hover {
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .langButton:hover
@@ -293,10 +352,21 @@ color: white}
     rgb(255, 213, 230) 23.8%,
     rgb(252, 175, 211) 92%
   );
+  color:#252422;
 }
 
 .joinDateButton:disabled{
   cursor:not-allowed
+
+}
+.closeButton {
+  position: absolute;
+  top: center;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: #000000; 
 }
 
 @media screen and (max-width: 849px) {
@@ -309,9 +379,19 @@ color: white}
   .logo img{
     size:1em;   /**måste hitta rätt storlek här... */
   }
+
+
 }
 
 @media screen and (max-width: 50em) {
+
+  #nav button {
+  /* background-color: rgb(255, 213, 230); */
+  margin: 0.3rem;
+  font-family: "Lilita One", sans-serif;
+  height:35px;
+  width:80%;
+  font-size: large;}
   .logo {
     font-size: 83%;
     display: flex;
@@ -347,6 +427,7 @@ color: white}
   font-size: 140%;
 }
 #nav{
+  opacity:85%;
   flex-direction: column; /* Updated to column for small screens */
 }
 
