@@ -302,13 +302,14 @@ color: white}
 @media screen and (max-width: 50em) {
   
   .logo {
-    font-size: 5vw;
+    font-size: 83%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .logo img{
-    size:0.5em;   /**måste hitta rätt storlek här... */
+    width: 17%;
+    size:0.1em;   /**måste hitta rätt storlek här... */
   }
   .hamburger::before {
     content: "☰";
@@ -321,7 +322,8 @@ color: white}
   }
   .startGameButton,
   .joinDateButton {
-    width:45%;
+    width:60%;
+    font-size: 140%;
   }
   #buttonText{
     font-size:0.6em;
@@ -329,6 +331,7 @@ color: white}
   .box-a,
   .box-b{
     width:40%;
+    font-size: 43%;
   }
   
 #salesPitch,
