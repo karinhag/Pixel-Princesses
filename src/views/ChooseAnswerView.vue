@@ -129,7 +129,11 @@ export default {
     },
 
     playerAbandoned: function (pId) {
-      this.numbPlayers -= 1;
+      if (this.userAnswers.some((answer) => answer.playerID === pId)) {
+        this.numbPlayers -= 1;
+        console.log("nu försvann någon som redan svarat")
+      }
+
       this.userAnswers = this.userAnswers.filter(
         (answer) => answer.playerID !== pId
       );
@@ -138,16 +142,14 @@ export default {
       if (this.numbPlayers === 1) {
         socket.emit("getPlayersLeft", this.pollId);
 
-
         socket.on("thePlayersLeft", (player) => {
           console.log("SPlear", player);
-        
 
-        socket.emit("theTrueMatchPlayer", {
-          pollId: this.pollId,
-          matchedPlayer: player,
+          socket.emit("theTrueMatchPlayer", {
+            pollId: this.pollId,
+            matchedPlayer: player,
+          });
         });
-      });
         this.$router.push("/endOfGame/" + this.pollId);
       }
     },
@@ -172,16 +174,14 @@ export default {
 #h1YourQ {
   font-size: 35px;
   text-transform: uppercase;
-  color:#252422;
+  color: #252422;
   text-align: center;
-
 }
 #thisQ {
   margin-top: -10px;
   font-size: 40px;
   color: rgb(246, 178, 246);
   text-align: center;
-
 }
 
 .CAVbody {
@@ -274,7 +274,7 @@ export default {
   box-shadow: 0 0 60px 15px rgb(252, 48, 123);
   width: fit-content;
   min-height: 10vh;
-  max-width:80vh;
+  max-width: 80vh;
   width: 90vh;
   align-items: center;
   margin: auto;
@@ -317,47 +317,44 @@ button > img {
 }
 
 @media screen and (max-width: 50em) {
+  .CQVbody {
+    min-height: 100vh;
+    background-size: cover;
+  }
 
-.CQVbody{
-  min-height:100vh;
-  background-size: cover;
-}
+  .yourQ {
+    width: 80%;
+  }
 
-.yourQ{
-  width: 80%
-}
+  #header,
+  #h1YourQ,
+  .eliminatingButton {
+    font-size: 2rem;
+    vertical-align: middle;
+    text-align: center;
+  }
 
-#header, 
-#h1YourQ,
-.eliminatingButton {
-  font-size: 2rem;
-  vertical-align: middle;
-  text-align: center;
-}
+  #thisQ {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .scrollable {
+    display: flex;
+    width: 40vh;
+    padding: 1rem;
+    max-width: 80vh;
+  }
 
-#thisQ{
-  font-size: 1.2rem;
-  text-align: center;
-
-}
-.scrollable {
-display: flex;
-width:40vh;
-padding:1rem;
-max-width:80vh;
-
-}
-
-.playerAnswerB, .userButtons {
-  width: 100%; 
-  font-size: 1.2rem;
-
-}
-.eliminatingButton:hover:not([disabled]) {
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transform: scale(1.01);
-  transition: all 0.3s ease;
-}
+  .playerAnswerB,
+  .userButtons {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+  .eliminatingButton:hover:not([disabled]) {
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+  }
 }
 </style>

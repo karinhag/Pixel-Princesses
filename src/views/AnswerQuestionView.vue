@@ -31,7 +31,7 @@
         {{ uiLabels.joinedRoom }} {{ this.pollId }}
       </div>
       <div v-if="!this.timeOver" class="question">
-        {{ this.question }} 
+        {{ this.question }}
       </div>
       <div class="timer-container">
         <div class="base-timer">
@@ -128,6 +128,7 @@ export default {
   name: "AnswerQuestionView",
   components: {
     QuestionComponent,
+    infinity,
   },
   data: function () {
     return {
@@ -144,7 +145,6 @@ export default {
       userFlag: "",
       userCreated: false,
       question: "",
-
       pollId: "inactive poll",
       showInputBox: false,
       submittedAnswers: {},
@@ -152,12 +152,15 @@ export default {
       eliminatedPlayer: {},
       goingToNextRound: false,
       waitForQ: false,
-      TIME_LIMIT: 60,
+      TIME_LIMIT: 30,
       timePassed: 0,
-      timeLeft: 60,
+      timeLeft: 30,
       timerInterval: null,
       remainingPathColor: "green", // Initialize with the default color,
       timeOver: false,
+      timerRunning: false,
+      questionBoolean: false,
+      timerStopped: false,
     };
   },
   created: function () {
@@ -169,19 +172,20 @@ export default {
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
     this.userInfo.saved = this.$route.query.saved;
-    socket.emit("joinPoll", this.userInfo.uniquePlayerId);
+
+    socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
 
     this.showInputBox = false;
-    socket.on("pollsId", (pollId) => {
-      this.pollId = pollId;
-    });
+    // socket.on("pollsId", (pollId) => {
+    //   this.pollId = pollId;
+    // });
 
-    socket.emit("pageLoaded", this.lang); //Löser språkinställning
+    socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
 
-    socket.on("newQuestion", (q) => {
+    socket.on("newQuestion", (q) => { //tar emot en ny fråga--> startar timern!
       this.startTimer();
       this.question = q;
       if (this.question.length > 0) {
@@ -190,16 +194,16 @@ export default {
     });
 
     socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
-    socket.on("init", (labels) => {
-      this.uiLabels = labels;
-    });
+    // socket.on("init", (labels) => {
+    //   this.uiLabels = labels;
+    // });
 
-    socket.on("hejKomOKyssMig", (data) => {
+    socket.on("hejKomOKyssMig", (data) => {  //tar  emot id på spelare som blivit eliminerad
       this.getPlayer(data);
     });
-    socket.on("newQuestionIncoming", () => this.resetPage());
+    socket.on("newQuestionIncoming", () => this.resetPage()); //et kommer en ny fr¨ga--> reset
 
-    socket.on("youAreTrueMatch", () =>
+    socket.on("youAreTrueMatch", () =>    //om sann match 
       this.$router.push("/winnerView/" + this.pollId)
     );
   },
@@ -211,12 +215,12 @@ export default {
         savedPlayerQueryParam &&
         savedPlayerQueryParam.toLowerCase() === "true"
       ) {
-        console.log("Player is saved");
         this.resetPage();
       }
     },
     submitAnswer: function () {
-      this.stopTimer();
+      this.resetTime();
+      this.timerStopped=false;
       socket.emit("submitAnswer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
@@ -236,6 +240,7 @@ export default {
       if (
         this.userInfo.uniquePlayerId == this.eliminatedPlayer.uniquePlayerId
       ) {
+        this.resetTime();
         this.eliminated = true;
         this.$router.push({
           path: "/youAreEliminated/" + this.pollId,
@@ -245,7 +250,7 @@ export default {
             uniquePlayerId: this.userInfo.uniquePlayerId,
           },
         });
-        
+        this.resetPage();
       } else {
         this.goingToNextRound = true;
       }
@@ -257,6 +262,7 @@ export default {
         this.resetPage();
       }
     },
+
     resetPage: function () {
       this.answerSubmitted = false;
       this.goingToNextRound = false;
@@ -265,59 +271,86 @@ export default {
       this.waitForQ = true;
       this.question = "";
       this.userInfo.answer = "";
-      this.TIME_LIMIT = 60;
+      this.TIME_LIMIT = 30;
       this.timePassed = 0;
-      this.timeLeft = 60;
+      this.timeLeft = 30;
+      this.questionBoolean = false;
+      this.stopTimer();
+      this.eliminatedPlayer={};
       this.timerInterval = null;
+      // this.timerStopped=false;
+      console.log("I resepAGe nu, timePass är;", this.timerStopped)
     },
 
     formatTimeLeft: function (time) {
       //https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
       if (time === this.uiLabels.timeIsUp) {
-        return this.uiLabels.timeIsUp;
-      } else {
-        let seconds = time % 60;
-        if (seconds < 10) {
-          seconds = `0${seconds}`;
-        }
-        return `${seconds}`;
+         return this.uiLabels.timeIsUp;
+       } else {
+      let seconds = time % 60;
+      if (seconds < 10) {
+        seconds = `0${seconds}`;
       }
+      return `${seconds}`;
+       }
     },
 
     startTimer: function () {
+      this.timerRunning = true;
+  
       this.timerInterval = setInterval(() => {
         this.timePassed = this.timePassed += 1;
         this.timeLeft = this.TIME_LIMIT - this.timePassed;
-        console.log("Tid kvar!", this.timeLeft);
-        if (this.timeLeft <= 0) {
-          this.timeOver = true;
-          setTimeout(() => {
-            this.$router.push({
-              path: "/youAreEliminated/" + this.pollId,
-              query: {
-                userName: this.userInfo.userName,
-                greenFlag: this.userInfo.greenFlag,
-                uniquePlayerId: this.userInfo.uniquePlayerId,
-              },
-            });
-            socket.emit("eliminatedPlayer", {
-              pollId: this.pollId,
-              uniquePlayerId: this.userInfo.uniquePlayerId,
-            });
-          }, 2000);
-          this.timeLeft = this.uiLabels.timeIsUp;
-          this.stopTimer();
-        }
-        this.updateColor(this.timeLeft);
-        document.getElementById("base-timer-label").innerHTML =
-          this.formatTimeLeft(this.timeLeft);
+        console.log("timerstopped;", this.timerStopped);
+        if (!this.timerStopped) {
+          if (this.timeLeft <= 0) {
+            this.timeLeft=this.uiLabels.timeIsUp
+            this.timeIsUp();
+          }
 
-        this.setCircleDasharray();
+          this.updateColor(this.timeLeft);
+          document.getElementById("base-timer-label").innerHTML =
+            this.formatTimeLeft(this.timeLeft);
+          this.setCircleDasharray();
+        }
       }, 1000);
     },
 
+    timeIsUp: function () {
+      this.timeOver = true;
+      this.stopTimer();
+      setTimeout(() => {
+        this.$router.push({
+          path: "/youAreEliminated/" + this.pollId,
+          query: {
+            userName: this.userInfo.userName,
+            greenFlag: this.userInfo.greenFlag,
+            uniquePlayerId: this.userInfo.uniquePlayerId,
+          },
+        });
+        socket.emit("eliminatedPlayer", {
+          pollId: this.pollId,
+          uniquePlayerId: this.userInfo.uniquePlayerId,
+        });
+        this.resetTime();
+      }, 2000);
+    },
+
     stopTimer: function () {
+      console.log("Stop timer;", this.timerStopped)
+      this.timerStopped = true;
       clearInterval(this.timerInterval);
+    },
+
+    resetTime: function () {
+      this.stopTimer();
+      this.TIME_LIMIT = 30;
+      this.timePassed = 0;
+      this.timeLeft = 30;
+      this.timerInterval = null;
+      this.timeOver = false;
+      this.timerStopped = false;
+     console.log("I resetTime nu, timerStopped är;", this.timerStopped)
     },
 
     calculateTimeFraction: function () {
@@ -539,7 +572,6 @@ button:hover {
 }
 
 @media screen and (max-width: 50em) {
- 
   .question {
     font-size: 50px;
     padding-left: 0.2vw;
@@ -559,7 +591,7 @@ button:hover {
     height: 150px;
     width: 150px;
     margin-top: 18vh;
-    margin-bottom:8vh;
+    margin-bottom: 8vh;
   }
 
   .base-timer {
@@ -614,22 +646,22 @@ button:hover {
   input {
     width: 80vw;
     text-align: left;
-     margin-left: auto;
+    margin-left: auto;
     margin-right: auto;
   }
-  
+
   #answer {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    width:80vw;
+    width: 80vw;
   }
-  #inputDiv{
-     align-items: left;
+  #inputDiv {
+    align-items: left;
   }
-  #inputField{
-    width:2000px;
+  #inputField {
+    width: 2000px;
   }
 }
 </style>
