@@ -10,11 +10,11 @@
       <div class="logo">
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
-        /> 
+        id="img1"/> 
         Romance Roulette
         <img
           src="https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/1024px/1fa77.png"
-        />
+        id="img2"/>
       </div>
     </header>
 
@@ -25,15 +25,15 @@
     </ResponsiveNav>
     
     <div v-if="showAbout" class="FAQtext">
-      <b class="FAQheader">{{ uiLabels.aboutText }}</b>
-      <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
-    </div>
-    <div v-if="showFAQ" class="FAQtext">
-      <b class="FAQheader"> {{ uiLabels.FAQ }} </b>
-      <br />{{ uiLabels.FAQ1 }} <br />{{ uiLabels.FAQ2 }} <br />{{
-        uiLabels.FAQ3
-      }}
-    </div>
+  <button class="closeButton" v-on:click="showAbout=false">x</button>
+  <b class="FAQheader">{{ uiLabels.aboutText }}</b>
+  <br />{{ uiLabels.aboutText1 }} <br />{{ uiLabels.aboutText2 }}
+</div>
+<div v-if="showFAQ" class="FAQtext">
+  <button class="closeButton" v-on:click="showFAQ=false">x</button>
+  <b class="FAQheader"> {{ uiLabels.FAQ }} </b>
+  <br />{{ uiLabels.FAQ1 }} <br />{{ uiLabels.FAQ2 }} <br />{{ uiLabels.FAQ3 }}
+</div>
 
     <section class="bodywrapper">
       <h1 id="salesPitch"> {{ uiLabels.salespitch }} </h1> 
@@ -206,12 +206,56 @@ color: white}
   text-align: center;
   
 }
-.logo img {
+#img1 {
   height: 4.2rem;
   vertical-align: bottom;
   margin-right: 0.5rem;
   margin-bottom: 0.4rem;
+  animation: spinAndPulsateClockwise 2s infinite linear;
 }
+#img2 {
+  height: 4.2rem;
+  vertical-align: bottom;
+  margin-right: 0.5rem;
+  margin-bottom: 0.4rem;
+  animation: spinAndPulsateCounterClockwise 2s infinite linear;
+}
+
+@keyframes spinAndPulsateClockwise {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(18deg);
+  }
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(-18deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+@keyframes spinAndPulsateCounterClockwise {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(-18deg);
+  }
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(18deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 .hamburger {
   color: rgb(255, 213, 230);
   width: 1em;
@@ -297,6 +341,15 @@ color: white}
 
 .joinDateButton:disabled{
   cursor:not-allowed
+}
+.closeButton {
+  position: absolute;
+  top: center;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: #000000; 
 }
 
 @media screen and (max-width: 849px) {

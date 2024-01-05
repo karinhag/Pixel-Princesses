@@ -443,7 +443,6 @@ export default {
   font-size: medium;
 }
 
-header,
 h1,
 .question {
   text-align: center;
