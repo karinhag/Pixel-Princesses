@@ -149,7 +149,7 @@ export default {
   padding-top: 1em;
   color: rgb(202, 28, 135);
 }
-header,
+.createHeader,
 h1 {
   letter-spacing: 2.5px;
   margin: 50px;
@@ -245,6 +245,7 @@ button:hover:enabled{
  .pollBody {
   margin-bottom: 0%;
  }
+ 
 }
 
 </style>

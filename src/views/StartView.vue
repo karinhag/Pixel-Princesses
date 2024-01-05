@@ -299,17 +299,27 @@ color: white}
   cursor:not-allowed
 }
 
-@media screen and (max-width: 50em) {
-  
+@media screen and (max-width: 849px) {
   .logo {
-    font-size: 5vw;
+    font-size: 170%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .logo img{
-    size:0.5em;   /**måste hitta rätt storlek här... */
+    size:1em;   /**måste hitta rätt storlek här... */
   }
+}
+
+
+@media screen and (max-width: 50em) {
+  .logo {
+    font-size: 83%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .hamburger::before {
     content: "☰";
   }
@@ -321,7 +331,8 @@ color: white}
   }
   .startGameButton,
   .joinDateButton {
-    width:45%;
+    width:60%;
+    font-size: 140%;
   }
   #buttonText{
     font-size:0.6em;
@@ -329,6 +340,7 @@ color: white}
   .box-a,
   .box-b{
     width:40%;
+    font-size: 43%;
   }
   
 #salesPitch,
@@ -336,6 +348,7 @@ color: white}
   font-size: 140%;
 }
 #nav{
+  opacity:85%;
   flex-direction: column; /* Updated to column for small screens */
 }
 

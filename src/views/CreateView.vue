@@ -5,7 +5,7 @@
       <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
       <section v-if="info">{{ uiLabels.minimumPlayers }}</section>
     </div>
-    <header>{{ uiLabels.joinedRoom }}</header>
+    <header class="roomHeader">{{ uiLabels.joinedRoom }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
     <button
       class="purpleButton"
@@ -137,7 +137,7 @@ export default {
 @import url("https://unpkg.com/css.gg@2.0.0/icons/css/info.css");
 @import url("https://unpkg.com/css.gg@2.0.0/icons/css/close.css");
 
-header {
+.roomHeader {
   font-size: 50px;
   font-family: "Lilita One", sans-serif;
   vertical-align: center;
@@ -261,6 +261,12 @@ header {
 
 @media screen and (max-width: 50em) {
   
+.onePlayer {
+  padding: 10px;
+  margin-bottom: 10px;
 }
-
+.activePlayers {
+  max-height: 350px;
+}
+}
 </style>
