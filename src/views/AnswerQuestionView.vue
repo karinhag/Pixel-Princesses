@@ -26,10 +26,10 @@
     >
       <div v-if="!this.timeOver" id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</div>
       <div v-if="!this.timeOver" class="question">
-        {{ this.question }}
+        {{ this.question }} 
       </div>
-
-      <div class="base-timer">
+<!--
+       <div class="base-timer"> 
         <svg
           class="base-timer__svg"
           viewBox="0 0 100 100"
@@ -61,11 +61,11 @@
         <span id="base-timer-label" class="base-timer__label">
           {{ this.formatTimeLeft(timeLeft) }}
         </span>
-      </div>
-
+      </div> 
+    -->
       <p v-if="!this.timeOver" id="answer">
         {{ uiLabels.answer }} <br />
-        <input type="text" v-model="userInfo.answer" />
+        <input class="inputField" type="text" v-model="userInfo.answer" />
       </p>
 
       <button
@@ -146,9 +146,9 @@ export default {
       eliminatedPlayer: {},
       goingToNextRound: false,
       waitForQ: false,
-      TIME_LIMIT: 20,
+      TIME_LIMIT: 30,
       timePassed: 0,
-      timeLeft: 20,
+      timeLeft: 30,
       timerInterval: null,
       remainingPathColor: "green", // Initialize with the default color, 
       timeOver:false,
@@ -175,8 +175,8 @@ export default {
       this.uiLabels = labels;
     });
 
-    socket.on("newQuestion", (q) => {
-      this.startTimer();
+    socket.on("newQuestion", (q) => { 
+     /* this.startTimer(); */
       this.question = q;
       if (this.question.length > 0) {
         this.showInputBox = true;

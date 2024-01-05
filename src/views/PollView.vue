@@ -245,6 +245,7 @@ button:hover:enabled{
  .pollBody {
   margin-bottom: 0%;
  }
+ 
 }
 
 </style>
