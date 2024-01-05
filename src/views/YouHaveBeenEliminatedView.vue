@@ -9,6 +9,12 @@
     <div class="eliminated">
       <header class="eliHeader">{{ uiLabels.eliminated }}</header>
     </div>
+
+    <div class="buttonContainer" v-if="!saved">
+      <button class="purpleButton" v-on:click="backToStart">
+        {{ uiLabels.backToStart }}
+      </button>
+    </div>
   </section>
 </template>
 
@@ -51,6 +57,11 @@ export default {
     socket.on("youHaveBeenSaved", () => this.savedPlayer());
   },
   methods: {
+    backToStart: function () {
+      this.$router.push({
+        path: "/",
+      });
+    },
     eliminatePlayer: function () {
       this.$router.push("/eliminatedPlayer/" + this.pollId);
       socket.emit("joinDate", {
@@ -88,6 +99,7 @@ export default {
 .eliScreen {
   background: radial-gradient(#ff2d30ff, #cb0505ff, rgb(98, 4, 4));
   color: rgb(254, 240, 252);
+  overflow: hidden;
 }
 .savedScreen {
   background: radial-gradient(
@@ -95,6 +107,7 @@ export default {
     rgb(252, 132, 190),
     rgb(187, 90, 129)
   );
+  overflow: hidden;
 }
 .savedHeader {
   font-size: 100px;
@@ -123,11 +136,31 @@ export default {
   align-items: center;
   background: url("/heart_bandaid_png.png") center/contain no-repeat;
 }
-
+.buttonContainer {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+.purpleButton {
+  background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
+  border: solid;
+  border-color: rgb(94, 13, 87);
+  padding: 15px;
+  text-align: center;
+  font-family: "Lilita One", sans-serif;
+  font-size: 15px;
+  margin: 7px 5px;
+  border-radius: 15px;
+}
+.purpleButton:hover {
+  background: linear-gradient(to top, #b66af0 0%, #c3b0ff 100%);
+  cursor: pointer;
+}
 /* .box {
   padding-top: 100px;
 } */
 @media screen and (max-width: 50em) {
+ 
   .eliHeader,
   .savedHeader {
     font-size: 50px;
