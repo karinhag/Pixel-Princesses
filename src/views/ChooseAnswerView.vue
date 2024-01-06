@@ -93,7 +93,6 @@ export default {
     socket.on(
       "theQuestion",
       (data) => (this.question = data),
-      console.log(this.question)
     );
   },
   methods: {
@@ -131,7 +130,6 @@ export default {
     playerAbandoned: function (pId) {
       if (this.userAnswers.some((answer) => answer.playerID === pId)) {
         this.numbPlayers -= 1;
-        console.log("nu försvann någon som redan svarat")
       }
 
       this.userAnswers = this.userAnswers.filter(
@@ -139,19 +137,19 @@ export default {
       );
       socket.emit("getPlayersLeft", this.pollId);
 
-      if (this.numbPlayers === 1) {
-        socket.emit("getPlayersLeft", this.pollId);
+      // if (this.numbPlayers === 1) { Gör så det laggar när det är tvä kvar då man eliminerar en spelare--> det triggar funktionen!! oavsett om lämnar frivilligt eller inte
+      //   socket.emit("getPlayersLeft", this.pollId);
 
-        socket.on("thePlayersLeft", (player) => {
-          console.log("SPlear", player);
+      //   socket.on("thePlayersLeft", (player) => {
 
-          socket.emit("theTrueMatchPlayer", {
-            pollId: this.pollId,
-            matchedPlayer: player,
-          });
-        });
-        this.$router.push("/endOfGame/" + this.pollId);
-      }
+
+      //     socket.emit("theTrueMatchPlayer", {
+      //       pollId: this.pollId,
+      //       matchedPlayer: player,
+      //     });
+      //   });
+      //   this.$router.push("/endOfGame/" + this.pollId);
+      // }
     },
   },
 };

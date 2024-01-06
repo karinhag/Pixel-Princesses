@@ -86,7 +86,6 @@ export default {
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
     this.userInfo.saved = this.$route.query.saved;
     this.userInfo.eliminated=this.$route.query.eliminated;
-    console.log("WaitingView, eliminated: ", this.userInfo.eliminated )
 
     socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
 
@@ -393,6 +392,8 @@ button:hover {
 }
 
 @media screen and (max-width: 50em) {
+  
+
   .question {
     font-size: 50px;
     padding-left: 0.2vw;

@@ -73,8 +73,6 @@ export default {
       socket.emit("joinDate", { userInfo: this.userInfo, pollId: this.pollId });
 
       const handleNewQuestion = () => {
-        console.log("Nu skickas jag från att vara eliminerad tillbaks till waitingview")
-        console.log("You have been eliminated men nu har jag blivit räddad, eliminated: ", this.userInfo.eliminated )
         this.$router.push({
           path: "/waitingView/" + this.pollId,
           query: {

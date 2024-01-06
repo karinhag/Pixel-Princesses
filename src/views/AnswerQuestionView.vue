@@ -3,12 +3,8 @@
     name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
   />
-  <section class="pollBody">
-    
-    <section
-      class="answerQuestion">
-      
-
+  <section class="pollBody" v-if="!this.timeOver">
+    <section class="answerQuestion">
       <div v-if="!this.timeOver" id="roomId">
         {{ uiLabels.joinedRoom }} {{ this.pollId }}
       </div>
@@ -66,25 +62,27 @@
         {{ uiLabels.sendAnswer }}
       </button>
     </section>
+  </section>
   
-   
+  <section class="timeOverScreen" v-if="this.timeOver">
+     
+  <section class ="timeText">{{ uiLabels.timeIsUp }}</section>
+      
+
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
-// import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
 
 import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io("localhost:3000");
-// infinity.register();
 
 export default {
   name: "AnswerQuestionView",
   components: {
     QuestionComponent,
-    // infinity,
   },
   data: function () {
     return {
@@ -96,19 +94,11 @@ export default {
         greenFlag: "",
         uniquePlayerId: "",
         saved: false,
-        eliminated:false,
+        eliminated: false,
       },
-      userInformation: {},
-      userFlag: "",
-      userCreated: false,
+
       question: "",
       pollId: "",
-      showInputBox: false,
-      submittedAnswers: {},
-      answerSubmitted: false,
-      eliminatedPlayer: {},
-      goingToNextRound: false,
-      waitForQ: false,
       TIME_LIMIT: 30,
       timePassed: 0,
       timeLeft: 30,
@@ -129,43 +119,22 @@ export default {
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
     this.userInfo.saved = this.$route.query.saved;
-    this.userInfo.eliminated=this.$route.query.eliminated;
-    console.log("YAnswerQV, eliminated: ", this.userInfo.eliminated )
+    this.userInfo.eliminated = this.$route.query.eliminated;
 
     socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
-    
-    this.showInputBox = false;
-    // socket.on("pollsId", (pollId) => {
-    //   this.pollId = pollId;
-    // });
 
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
+    socket.emit("retrieveQ", this.pollId);
+    socket.on("theQuestion", (data) => (this.question = data));
 
-    socket.on("newQuestion", (q) => { //tar emot en ny fråga--> startar timern!
-      // this.startTimer();
-
-      this.question = q;
-      if (this.question.length > 0) {
-        this.showInputBox = true;
-      }
-    });
-
-    socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
-    // socket.on("init", (labels) => {
-    //   this.uiLabels = labels;
-    // });
-
-    // socket.on("hejKomOKyssMig", (data) => {  //tar  emot id på spelare som blivit eliminerad
-    //   this.getPlayer(data);
-    // });
-    socket.on("newQuestionIncoming", () => this.resetPage()); //et kommer en ny fr¨ga--> reset
-
-    socket.on("youAreTrueMatch", () =>    //om sann match 
-      this.$router.push("/winnerView/" + this.pollId)
-    );
+    this.startTimer();
+    // socket.on("youAreTrueMatch", () =>
+    //   //om sann match
+    //   this.$router.push("/winnerView/" + this.pollId)
+    // );
   },
   methods: {
     checkIfSaved: function () {
@@ -180,72 +149,37 @@ export default {
     },
     submitAnswer: function () {
       this.resetTime();
-      this.timerStopped=false;
+      this.timerStopped = false;
       this.$router.push({
         path: "/waitingView/" + this.pollId,
         query: {
           userName: this.userInfo.userName,
           greenFlag: this.userInfo.greenFlag,
           uniquePlayerId: this.userInfo.uniquePlayerId,
-          eliminated:this.userInfo.eliminated,
-    }})
+          eliminated: this.userInfo.eliminated,
+        },
+      });
       socket.emit("submitAnswer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
       });
-      this.answerSubmitted = true;
     },
     abandonDate: function () {
-      this.userCreated = false;
       socket.emit("removePlayer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
       });
       this.$router.push({ path: "/" });
     },
-    // getPlayer: function (data) {
-    //   this.eliminatedPlayer = data;
-    //   if (
-    //     this.userInfo.uniquePlayerId == this.eliminatedPlayer.uniquePlayerId
-    //   ) {
-    //     this.resetTime();
-    //     this.eliminated = true;
-    //     this.$router.push({
-    //       path: "/youAreEliminated/" + this.pollId,
-    //       query: {
-    //         userName: this.userInfo.userName,
-    //         greenFlag: this.userInfo.greenFlag,
-    //         uniquePlayerId: this.userInfo.uniquePlayerId,
-    //       },
-    //     });
-    //     this.resetPage();
-    //   } else {
-    //     this.resetPage();
-    //     this.$router.push({
-    //       path: "/waitingView/" + this.pollId,
-    //       query: {
-    //         userName: this.userInfo.userName,
-    //         greenFlag: this.userInfo.greenFlag,
-    //         uniquePlayerId: this.userInfo.uniquePlayerId,
-    //       },
-    //     });
 
-    //   }
-    // },
     nextQuestion: function (data) {
       this.question = data;
       if (this.question.length > 0) {
-        this.showInputBox = true;
         this.resetPage();
       }
     },
 
     resetPage: function () {
-      this.answerSubmitted = false;
-      this.goingToNextRound = false;
-      this.answerSubmitted = false;
-      this.showInputBox = false;
-      this.waitForQ = true;
       this.question = "";
       this.userInfo.answer = "";
       this.TIME_LIMIT = 30;
@@ -253,35 +187,33 @@ export default {
       this.timeLeft = 30;
       this.questionBoolean = false;
       this.stopTimer();
-      this.eliminatedPlayer={};
       this.timerInterval = null;
       // this.timerStopped=false;
-  
     },
 
     formatTimeLeft: function (time) {
       //https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
       if (time === this.uiLabels.timeIsUp) {
-         return this.uiLabels.timeIsUp;
-       } else {
-      let seconds = time % 60;
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
+        return this.uiLabels.timeIsUp;
+      } else {
+        let seconds = time % 60;
+        if (seconds < 10) {
+          seconds = `0${seconds}`;
+        }
+        return `${seconds}`;
       }
-      return `${seconds}`;
-       }
     },
 
     startTimer: function () {
       this.timerRunning = true;
-  
+
       this.timerInterval = setInterval(() => {
         this.timePassed = this.timePassed += 1;
         this.timeLeft = this.TIME_LIMIT - this.timePassed;
 
         if (!this.timerStopped) {
           if (this.timeLeft <= 0) {
-            this.timeLeft=this.uiLabels.timeIsUp
+            this.timeLeft = this.uiLabels.timeIsUp;
             this.timeIsUp();
           }
 
@@ -314,7 +246,6 @@ export default {
     },
 
     stopTimer: function () {
-
       this.timerStopped = true;
       clearInterval(this.timerInterval);
     },
@@ -327,7 +258,6 @@ export default {
       this.timerInterval = null;
       this.timeOver = false;
       this.timerStopped = false;
-  
     },
 
     calculateTimeFraction: function () {
@@ -347,9 +277,15 @@ export default {
     },
 
     updateColor: function (timeLeft) {
-      if (timeLeft > 10) {
+      if (timeLeft > 22) {
         this.remainingPathColor = "green";
-      } else if (timeLeft > 5) {
+      } else if (timeLeft > 18) {
+        this.remainingPathColor = "green2";
+      } else if (timeLeft > 10) {
+        this.remainingPathColor = "green3";
+      } else if (timeLeft > 8) {
+        this.remainingPathColor = "green4";
+      } else if (timeLeft > 6) {
         this.remainingPathColor = "warning";
       } else if (timeLeft > 0) {
         this.remainingPathColor = "alert";
@@ -361,6 +297,18 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
+
+
+.timeText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+  font-family: "Lilita One", sans-serif;
+  vertical-align: center;
+  color: rgba(255, 152, 194, 255);
+}
 
 .timer-container {
   position: relative;
@@ -429,14 +377,24 @@ export default {
 }
 
 .green {
-  stroke: #8fb935;
+  stroke: #55a630;
+}
+
+.green2 {
+  stroke: #55a630;
+}
+.green3 {
+  stroke: #80b918;
+}
+.green4 {
+  stroke: #bfd200;
 }
 
 .alert {
-  stroke: #e64647;
+  stroke: #ff0000;
 }
 .warning {
-  stroke: #e5e22d;
+  stroke: #ffee32;
 }
 
 .base-timer__svg {
@@ -473,6 +431,12 @@ h1,
   font-family: "Lilita One", sans-serif;
   margin: 0; /* Set margin to 0 */
   padding: 0; /* Set padding to 0 */
+}
+
+.timeOverScreen{ 
+  background: radial-gradient(#ff2d30ff, #cb0505ff, rgb(98, 4, 4));
+  height:100vh;
+
 }
 
 input {
@@ -548,6 +512,11 @@ button:hover {
 }
 
 @media screen and (max-width: 50em) {
+
+  .timeText{
+    font-size:50px;
+  }
+
   .question {
     font-size: 50px;
     padding-left: 0.2vw;

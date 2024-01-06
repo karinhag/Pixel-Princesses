@@ -96,7 +96,6 @@ export default {
     },
     checkPlayerArray: function (data) {
       if (data.length == 1) {
-        console.log(data);
         this.onePlayerLeft = true;
       }
       this.playerArray = data;
