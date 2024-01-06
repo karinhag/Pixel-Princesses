@@ -16,7 +16,9 @@ function sockets(io, socket, data) {
   });
 
   socket.on("addQuestion", function (d) {
+    console.log("add question innuti socket")
     data.addQuestion(d.pollId, d.q); //, a: d.a}
+    io.to(d.pollId).emit("changeToChooseAnswerView")
     socket.emit("dataUpdate", data.getAnswers(d.pollId));
     io.to(d.pollId).emit("newQuestion", data.getQuestion(d.pollId));
   });
@@ -100,6 +102,7 @@ function sockets(io, socket, data) {
   socket.on("lifelineUsed", function (d) {
     data.useLifeLine(d.pollId);
     io.to(d.pollId).emit("statusLifeline", data.checkLifeline(d.pollId));
+    console.log("Nu räddas spelare id:", d.uniquePlayerId);
     io.to(d.uniquePlayerId).emit("youHaveBeenSaved");
   });
 

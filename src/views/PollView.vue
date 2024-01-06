@@ -1,9 +1,7 @@
 <template>
   <section class="pollBody">
-    <section
-      class="enteringDetails"
-      v-if="!this.userCreated && !this.answerSubmitted"
-    >
+    <section class="enteringDetails" v-if="!this.userCreated">
+      <!-- "&& !this.answerSubmitted"-->
       <div>
         <p id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</p>
         <header class="createHeader">{{ uiLabels.theHeader }}</header>
@@ -13,19 +11,24 @@
           {{ uiLabels.userName }} <br />
           <input class="inputField" type="text" v-model="userInfo.userName" />
         </p>
-<section class="greenFlag">
-        <p class="inputText">
-          {{ uiLabels.greenFlag }} <br />
-          <input class="inputField" type="text" v-model="userInfo.greenFlag" />
-        </p>
+        <section class="greenFlag">
+          <p class="inputText">
+            {{ uiLabels.greenFlag }} <br />
+            <input
+              class="inputField"
+              type="text"
+              v-model="userInfo.greenFlag"
+            />
+          </p>
 
-        <button v-on:click="getInfo" class="buttonInfo" v-if="!info">?</button>
-      <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
-      <section v-if="info"> {{ uiLabels.greenFlagInfo }}</section>
-      
-      
-      
-      </section>
+          <button v-on:click="getInfo" class="buttonInfo" v-if="!info">
+            ?
+          </button>
+          <button v-on:click="closeInfo" class="buttonClose" v-if="info">
+            x
+          </button>
+          <section v-if="info">{{ uiLabels.greenFlagInfo }}</section>
+        </section>
       </div>
       <button
         class="purpleButton"
@@ -36,8 +39,15 @@
         {{ uiLabels.participatePoll }}
       </button>
     </section>
-  </section>
+    <section class="waitingForStart" v-if="this.userCreated">
+      <div id="roomId">{{ uiLabels.joinedRoom }} {{ this.pollId }}</div>
+      <h1 id="h1">{{ uiLabels.waitingForGame }}</h1>
 
+      <button class="purpleButton" v-on:click="abandonDate" type="submit">
+        {{ uiLabels.abandonDate }}
+      </button>
+    </section>
+  </section>
 </template>
 
 <script>
@@ -81,18 +91,22 @@ export default {
     });
     socket.emit("joinPoll", this.pollId);
 
-    socket.on("newQuestion", (q) => {
-      this.question = q;
-      if (this.question.length > 0) {
-        this.showInputBox = true;
-      }
+    socket.on("newQuestion", () => {
+
+      this.$router.push({
+        path: "/answerQuestion/" + this.pollId,
+        query: {
+          userName: this.userInfo.userName,
+          greenFlag: this.userInfo.greenFlag,
+          uniquePlayerId: this.userInfo.uniquePlayerId,
+    }})
+    socket.off("newQuestion")
     });
 
     socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
-
   },
   methods: {
     getPlayerId: function () {
@@ -103,18 +117,10 @@ export default {
       socket.emit("joinDate", {
         userInfo: this.userInfo,
         pollId: this.pollId,
-        uniquePlayerId:this.uniquePlayerId,
+        uniquePlayerId: this.uniquePlayerId,
       });
       this.userCreated = true;
-      this.$router.push({
-        path: "/answerQuestion/" + this.pollId,
-        query: {
-          userName: this.userInfo.userName,
-          greenFlag: this.userInfo.greenFlag,
-          uniquePlayerId: this.userInfo.uniquePlayerId,
-        },
-      });
-    },
+      },
 
     abandonDate: function () {
       this.userCreated = false;
@@ -129,13 +135,11 @@ export default {
     closeInfo: function () {
       this.info = false;
     },
-
   },
 };
 </script>
 
 <style>
-
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
 .infinity {
@@ -183,7 +187,8 @@ h1 {
   margin: 0px;
   padding: 20px;
 }
-.purpleButton, .gFInfo {
+.purpleButton,
+.gFInfo {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   border-color: rgb(94, 13, 87);
   padding: 15px;
@@ -194,8 +199,6 @@ h1 {
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
 }
-
-
 
 .purpleButton:disabled {
   cursor: not-allowed;
@@ -209,7 +212,7 @@ button:hover:enabled {
   font-size: x-large;
   text-align: center;
 }
-button:hover:enabled{
+button:hover:enabled {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transform: scale(1.01);
@@ -230,22 +233,16 @@ button:hover:enabled{
   font-size: 20px;
 }
 
-
 @media screen and (max-width: 50em) {
- 
+  .createHeader {
+    font-size: 250%;
+  }
 
- .createHeader {
-  font-size: 250%;
-   
- }
-
- .inputField {
- max-width: 90%;
- }
- .pollBody {
-  margin-bottom: 0%;
- }
- 
+  .inputField {
+    max-width: 90%;
+  }
+  .pollBody {
+    margin-bottom: 0%;
+  }
 }
-
 </style>

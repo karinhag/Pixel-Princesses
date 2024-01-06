@@ -89,13 +89,8 @@ export default {
     },
 
     addQuestion: function () {
-      // this.$router.push("/chooseAnswer/" + this.pollId);
+      console.log("Innuti createQuestionview, skickar ut addQuestion")
       socket.emit("addQuestion", { pollId: this.pollId, q: this.question });
-      // socket.emit("addQuestion", {
-      //   pollId: this.pollId,
-      //   q: this.question,
-      //   a: this.answers,
-      // });
       this.$router.push("/chooseAnswer/" + this.pollId);
     },
   },

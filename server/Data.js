@@ -113,12 +113,13 @@ Data.prototype.getPlayerArray = function(pollId){
 
 
 Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
+
   const userIndex = this.players[pollId].findIndex(
     (user) => user.uniquePlayerId === uniquePlayerId
   );
   if (!this.eliminatedPlayer[pollId]) {
     this.eliminatedPlayer[pollId] = [];
-  }
+  } 
   if (userIndex !== -1) {
       this.eliminatedPlayer[pollId].push(
       this.players[pollId].splice(userIndex, 1)
@@ -129,7 +130,7 @@ Data.prototype.eliminateAPlayer = function (pollId, uniquePlayerId) {
 
 Data.prototype.retrieveEliminatedPlayer = function (pollId) {
   if (this.eliminatedPlayer[pollId]) {
-    let eliminatedPlayerArray = this.eliminatedPlayer[pollId];
+    let eliminatedPlayerArray = this.eliminatedPlayer[pollId]; 
     return   eliminatedPlayerArray[eliminatedPlayerArray.length - 1].pop(); 
   } else return [];
 };

@@ -59,6 +59,11 @@ const router = createRouter({
       name: "WinnerView",
       component: () => import("@/views/WinnerView.vue"),
     },
+    {
+      path: "/waitingView/:pollId",
+      name: "WaitingView",
+      component: () => import("@/views/WaitingView.vue"),
+    },
   ],
 });
 

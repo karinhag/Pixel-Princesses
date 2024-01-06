@@ -35,6 +35,8 @@ export default {
         userName: "",
         greenFlag: "",
         uniquePlayerId: "",
+        saved: false,
+        eliminated:false,
       },
       uniquePlayerId: "",
     };
@@ -45,6 +47,7 @@ export default {
     this.userInfo.userName = this.$route.query.userName;
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
+    this.userInfo.eliminated=true;
 
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.uniquePlayerId);
@@ -54,7 +57,8 @@ export default {
       this.uiLabels = labels;
     });
     socket.on("dataUpdate", (data) => (this.data = data));
-    socket.on("youHaveBeenSaved", () => this.savedPlayer());
+    console.log("You have been eliminated, eliminated: ", this.userInfo.eliminated )
+    socket.on("youHaveBeenSaved", () =>{this.savedPlayer()});
   },
   methods: {
     backToStart: function () {
@@ -62,26 +66,23 @@ export default {
         path: "/",
       });
     },
-    eliminatePlayer: function () {
-      this.$router.push("/eliminatedPlayer/" + this.pollId);
-      socket.emit("joinDate", {
-        userInfo: this.userInfo,
-        pollId: this.pollId,
-      });
-    },
 
     savedPlayer: function () {
       this.saved = true;
+      this.userInfo.eliminated=false;
       socket.emit("joinDate", { userInfo: this.userInfo, pollId: this.pollId });
 
       const handleNewQuestion = () => {
+        console.log("Nu skickas jag från att vara eliminerad tillbaks till waitingview")
+        console.log("You have been eliminated men nu har jag blivit räddad, eliminated: ", this.userInfo.eliminated )
         this.$router.push({
-          path: "/answerQuestion/" + this.pollId,
+          path: "/waitingView/" + this.pollId,
           query: {
             userName: this.userInfo.userName,
             greenFlag: this.userInfo.greenFlag,
             uniquePlayerId: this.userInfo.uniquePlayerId,
             saved: this.saved,
+            eliminated:this.userInfo.eliminated,
           },
         });
 

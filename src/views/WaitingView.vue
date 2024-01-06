@@ -4,70 +4,34 @@
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
   />
   <section class="pollBody">
-    
     <section
-      class="answerQuestion">
-      
+      v-if="this.answerSubmitted"
+      class="waitingForChoice">
+    <!--  && !this.goingToNextRound -->
+      <h1 id="h1">{{ uiLabels.waitingForChoice }}</h1>
 
-      <div v-if="!this.timeOver" id="roomId">
-        {{ uiLabels.joinedRoom }} {{ this.pollId }}
-      </div>
-      <div v-if="!this.timeOver" class="question">
-        {{ this.question }}
-      </div>
-      <div class="timer-container">
-        <div class="base-timer">
-          <svg
-            class="base-timer__svg"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g class="base-timer__circle">
-              <circle
-                class="base-timer__path-elapsed"
-                cx="50"
-                cy="50"
-                r="45"
-              ></circle>
-              <path
-                id="base-timer-path-remaining"
-                stroke-dasharray="283"
-                :class="{
-                  'base-timer__path-remaining': true,
-                  [remainingPathColor]: true,
-                }"
-                d="
-          M 50, 50
-          m -45, 0
-          a 45,45 0 1,0 90,0
-          a 45,45 0 1,0 -90,0
-        "
-              ></path>
-            </g>
-          </svg>
-          <span id="base-timer-label" class="base-timer__label">
-            {{ this.formatTimeLeft(timeLeft) }}
-          </span>
-        </div>
-      </div>
-
-      <p v-if="!this.timeOver" id="answer">
-        {{ uiLabels.answer }} <br />
-        <input class="inputField" type="text" v-model="userInfo.answer" />
-      </p>
-
-      <button
-        v-if="!this.timeOver"
-        class="purpleButton"
-        v-on:click="submitAnswer"
-        type="submit"
-        :disabled="!userInfo.answer"
-      >
-        {{ uiLabels.sendAnswer }}
-      </button>
+      <!-- <div class="infinity">
+        <l-infinity
+          size="250"
+          stroke="20"
+          stroke-length="0.15"
+          bg-opacity="0.3"
+          speed="1.8"
+          color="#f5f5f5; ;"
+        ></l-infinity>
+      </div> -->
     </section>
-  
-   
+
+     <section
+      v-if="
+        this.goingToNextRound ||
+        (this.waitForQ && !this.showInputBox) ||
+        (userInfo.saved && !this.showInputBox)
+      "
+    >
+      <h1 class="nextRound" id="h1">{{ uiLabels.nextRound }}</h1>
+      <p class="waitingForQuestion">{{ uiLabels.waitingForQuestion }}</p>
+    </section> 
   </section>
 </template>
 
@@ -96,7 +60,7 @@ export default {
         greenFlag: "",
         uniquePlayerId: "",
         saved: false,
-        eliminated:false,
+        eliminated:Boolean,
       },
       userInformation: {},
       userFlag: "",
@@ -105,19 +69,11 @@ export default {
       pollId: "",
       showInputBox: false,
       submittedAnswers: {},
-      answerSubmitted: false,
+      answerSubmitted: true,
       eliminatedPlayer: {},
       goingToNextRound: false,
       waitForQ: false,
-      TIME_LIMIT: 30,
-      timePassed: 0,
-      timeLeft: 30,
-      timerInterval: null,
-      remainingPathColor: "green", // Initialize with the default color,
-      timeOver: false,
-      timerRunning: false,
-      questionBoolean: false,
-      timerStopped: false,
+      
     };
   },
   created: function () {
@@ -130,10 +86,10 @@ export default {
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
     this.userInfo.saved = this.$route.query.saved;
     this.userInfo.eliminated=this.$route.query.eliminated;
-    console.log("YAnswerQV, eliminated: ", this.userInfo.eliminated )
+    console.log("WaitingView, eliminated: ", this.userInfo.eliminated )
 
     socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
-    
+
     this.showInputBox = false;
     // socket.on("pollsId", (pollId) => {
     //   this.pollId = pollId;
@@ -147,10 +103,14 @@ export default {
     socket.on("newQuestion", (q) => { //tar emot en ny fråga--> startar timern!
       // this.startTimer();
 
-      this.question = q;
-      if (this.question.length > 0) {
-        this.showInputBox = true;
-      }
+      this.$router.push({
+        path: "/answerQuestion/" + this.pollId,
+        query: {
+          userName: this.userInfo.userName,
+          greenFlag: this.userInfo.greenFlag,
+          uniquePlayerId: this.userInfo.uniquePlayerId,
+          eliminated:this.eliminated,
+    }})
     });
 
     socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
@@ -158,9 +118,9 @@ export default {
     //   this.uiLabels = labels;
     // });
 
-    // socket.on("hejKomOKyssMig", (data) => {  //tar  emot id på spelare som blivit eliminerad
-    //   this.getPlayer(data);
-    // });
+    socket.on("hejKomOKyssMig", (data) => {  //tar  emot id på spelare som blivit eliminerad
+      this.getPlayer(data);
+    });
     socket.on("newQuestionIncoming", () => this.resetPage()); //et kommer en ny fr¨ga--> reset
 
     socket.on("youAreTrueMatch", () =>    //om sann match 
@@ -179,16 +139,7 @@ export default {
       }
     },
     submitAnswer: function () {
-      this.resetTime();
       this.timerStopped=false;
-      this.$router.push({
-        path: "/waitingView/" + this.pollId,
-        query: {
-          userName: this.userInfo.userName,
-          greenFlag: this.userInfo.greenFlag,
-          uniquePlayerId: this.userInfo.uniquePlayerId,
-          eliminated:this.userInfo.eliminated,
-    }})
       socket.emit("submitAnswer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
@@ -203,35 +154,34 @@ export default {
       });
       this.$router.push({ path: "/" });
     },
-    // getPlayer: function (data) {
-    //   this.eliminatedPlayer = data;
-    //   if (
-    //     this.userInfo.uniquePlayerId == this.eliminatedPlayer.uniquePlayerId
-    //   ) {
-    //     this.resetTime();
-    //     this.eliminated = true;
-    //     this.$router.push({
-    //       path: "/youAreEliminated/" + this.pollId,
-    //       query: {
-    //         userName: this.userInfo.userName,
-    //         greenFlag: this.userInfo.greenFlag,
-    //         uniquePlayerId: this.userInfo.uniquePlayerId,
-    //       },
-    //     });
-    //     this.resetPage();
-    //   } else {
-    //     this.resetPage();
-    //     this.$router.push({
-    //       path: "/waitingView/" + this.pollId,
-    //       query: {
-    //         userName: this.userInfo.userName,
-    //         greenFlag: this.userInfo.greenFlag,
-    //         uniquePlayerId: this.userInfo.uniquePlayerId,
-    //       },
-    //     });
-
-    //   }
-    // },
+    getPlayer: function (data) {
+      this.eliminatedPlayer = data;
+      if (
+        this.userInfo.uniquePlayerId == this.eliminatedPlayer.uniquePlayerId
+      ) {
+        socket.off();
+        this.eliminated = true;
+        this.$router.push({
+          path: "/youAreEliminated/" + this.pollId,
+          query: {
+            userName: this.userInfo.userName,
+            greenFlag: this.userInfo.greenFlag,
+            uniquePlayerId: this.userInfo.uniquePlayerId,
+          },
+        });
+        this.resetPage();
+      } else if (!this.userInfo.eliminated) {
+        this.resetPage();
+        this.$router.push({
+          path: "/waitingView/" + this.pollId,
+          query: {
+            userName: this.userInfo.userName,
+            greenFlag: this.userInfo.greenFlag,
+            uniquePlayerId: this.userInfo.uniquePlayerId,
+          },
+        });
+      }
+    },
     nextQuestion: function (data) {
       this.question = data;
       if (this.question.length > 0) {
@@ -248,112 +198,7 @@ export default {
       this.waitForQ = true;
       this.question = "";
       this.userInfo.answer = "";
-      this.TIME_LIMIT = 30;
-      this.timePassed = 0;
-      this.timeLeft = 30;
-      this.questionBoolean = false;
-      this.stopTimer();
       this.eliminatedPlayer={};
-      this.timerInterval = null;
-      // this.timerStopped=false;
-  
-    },
-
-    formatTimeLeft: function (time) {
-      //https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
-      if (time === this.uiLabels.timeIsUp) {
-         return this.uiLabels.timeIsUp;
-       } else {
-      let seconds = time % 60;
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-      return `${seconds}`;
-       }
-    },
-
-    startTimer: function () {
-      this.timerRunning = true;
-  
-      this.timerInterval = setInterval(() => {
-        this.timePassed = this.timePassed += 1;
-        this.timeLeft = this.TIME_LIMIT - this.timePassed;
-
-        if (!this.timerStopped) {
-          if (this.timeLeft <= 0) {
-            this.timeLeft=this.uiLabels.timeIsUp
-            this.timeIsUp();
-          }
-
-          this.updateColor(this.timeLeft);
-          document.getElementById("base-timer-label").innerHTML =
-            this.formatTimeLeft(this.timeLeft);
-          this.setCircleDasharray();
-        }
-      }, 1000);
-    },
-
-    timeIsUp: function () {
-      this.timeOver = true;
-      this.stopTimer();
-      setTimeout(() => {
-        this.$router.push({
-          path: "/youAreEliminated/" + this.pollId,
-          query: {
-            userName: this.userInfo.userName,
-            greenFlag: this.userInfo.greenFlag,
-            uniquePlayerId: this.userInfo.uniquePlayerId,
-          },
-        });
-        socket.emit("eliminatedPlayer", {
-          pollId: this.pollId,
-          uniquePlayerId: this.userInfo.uniquePlayerId,
-        });
-        this.resetTime();
-      }, 2000);
-    },
-
-    stopTimer: function () {
-
-      this.timerStopped = true;
-      clearInterval(this.timerInterval);
-    },
-
-    resetTime: function () {
-      this.stopTimer();
-      this.TIME_LIMIT = 30;
-      this.timePassed = 0;
-      this.timeLeft = 30;
-      this.timerInterval = null;
-      this.timeOver = false;
-      this.timerStopped = false;
-  
-    },
-
-    calculateTimeFraction: function () {
-      const rawTimeFraction = this.timeLeft / this.TIME_LIMIT;
-      return rawTimeFraction - (1 / this.TIME_LIMIT) * (1 - rawTimeFraction);
-    },
-
-    setCircleDasharray: function () {
-      const FULL_DASH_ARRAY = 283;
-      const circleDasharray = `${(
-        this.calculateTimeFraction() * FULL_DASH_ARRAY
-      ).toFixed(0)} 283`;
-
-      document
-        .getElementById("base-timer-path-remaining")
-        .setAttribute("stroke-dasharray", circleDasharray);
-    },
-
-    updateColor: function (timeLeft) {
-      if (timeLeft > 10) {
-        this.remainingPathColor = "green";
-      } else if (timeLeft > 5) {
-        this.remainingPathColor = "warning";
-      } else if (timeLeft > 0) {
-        this.remainingPathColor = "alert";
-      }
     },
   },
 };

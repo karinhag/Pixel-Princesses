@@ -72,13 +72,7 @@ export default {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
       this.$router.push("/createQuestion/" + this.pollId);
     },
-    addQuestion: function () {
-      socket.emit("addQuestion", {
-        pollId: this.pollId,
-        q: this.question,
-        a: this.answers,
-      });
-    },
+    
     addAnswer: function () {
       this.answers.push("");
     },
