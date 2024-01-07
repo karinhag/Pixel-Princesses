@@ -13,21 +13,20 @@
         </p>
         <section class="greenFlag">
           <p class="inputText">
-            {{ uiLabels.greenFlag }} <br />
+            {{ uiLabels.greenFlag }} <button v-on:click="getInfo" class="buttonInfo" v-if="!info">
+            ?
+          </button>
+          <button v-on:click="closeInfo" class="buttonClose" v-if="info">
+            X
+          </button>
+          <section v-if="info">{{ uiLabels.greenFlagInfo }}</section><br />
             <input
               class="inputField"
               type="text"
               v-model="userInfo.greenFlag"
             />
-          </p>
 
-          <button v-on:click="getInfo" class="buttonInfo" v-if="!info">
-            ?
-          </button>
-          <button v-on:click="closeInfo" class="buttonClose" v-if="info">
-            x
-          </button>
-          <section v-if="info">{{ uiLabels.greenFlagInfo }}</section>
+        </p>
         </section>
       </div>
       <button

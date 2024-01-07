@@ -1,10 +1,5 @@
 <template>
   <section class="createViewBody">
-    <div class="theButton">
-      <button v-on:click="getInfo" class="buttonInfo" v-if="!info">i</button>
-      <button v-on:click="closeInfo" class="buttonClose" v-if="info">x</button>
-      <section v-if="info">{{ uiLabels.minimumPlayers }}</section>
-    </div>
     <header class="roomHeader">{{ uiLabels.joinedRoom }}</header>
     <div class="thePollId">{{ this.pollId }}</div>
     <button
@@ -14,6 +9,8 @@
     >
       {{ uiLabels.startGame }}
     </button>
+
+    <section class="infoText" :hidden="moreThanThreePlayers">{{ uiLabels.minimumPlayers }}</section>
 
     <div class="playerContainer">
       <section class="activePlayers">
@@ -125,6 +122,8 @@ export default {
     },
   },
 };
+
+
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
@@ -208,7 +207,13 @@ export default {
   font-size: 20px;
 }
 
-.theButton {
+.infoText {
+  font-family: "Lilita One", sans-serif;
+  font-size: 20px;
+  color: rgb(255, 201, 227);
+}
+
+/* .theButton {
   padding: 0%;
   margin: 0% 20px 0% 0%;
   text-align: right;
@@ -221,7 +226,7 @@ export default {
   font-family: "Lilita One", sans-serif;
   font-size: 20px;
   color: rgb(255, 201, 227);
-}
+} */
 
 .purpleButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
@@ -231,7 +236,7 @@ export default {
   text-align: center;
   display: inline-block;
   font-size: 20px;
-  margin: 50px 5px;
+  margin: 50px 5px 10px 5px;
   border-radius: 15px;
   font-family: "Lilita One", sans-serif;
 }
