@@ -58,9 +58,7 @@
   
   <style>
   @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
-  .winnerBody {
-  overflow: hidden;
-}
+
 
 .headerContainer {
   display: flex;
@@ -73,26 +71,26 @@
     font-size: 100px;
     font-family: "Lilita One", sans-serif;
     vertical-align: center;
-      color:rgb(99, 15, 92);
-      text-align: center;
+    color:rgb(99, 15, 92);
+    text-align: center;
 
   }
   .winnerHeader{
     font-size: 50px;
     font-family: "Lilita One", sans-serif;
     vertical-align: center;
-      color:rgb(99, 15, 92);
-      text-align: center;
+    color:rgb(99, 15, 92);
+    text-align: center;
 
 
   }
   .winnerBody{
+    overflow: hidden;
     background-size: contain;
     background: radial-gradient(
     rgb(245, 193, 211),
     rgb(255, 163, 187),
     rgb(243, 108, 155)  );
-  color: rgb(254, 240, 252);
     
 
   }
@@ -128,15 +126,11 @@
     cursor: pointer;
   }
   @media screen and (max-width: 89em) {
-  .winnerBody {
-  overflow: hidden; 
-}
   .congratsHeader{
-    font-size:35px;
+    font-size:2em;
   }
   .winnerHeader {
-    font-size:20px;
-    
+    font-size:1em;
   }
   
 }

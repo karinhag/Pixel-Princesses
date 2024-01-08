@@ -144,6 +144,8 @@ export default {
   padding-top: 10%;
 }
 #roomId {
+  font-size:30px;
+  font-weight: bold;
   padding: 0%;
   margin: 0%;
   text-align: right;
