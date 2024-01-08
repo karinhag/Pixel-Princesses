@@ -45,7 +45,7 @@ const socket = io("localhost:3000");
 // infinity.register();
 
 export default {
-  name: "AnswerQuestionView",
+  name: "WaitingView",
   components: {
     QuestionComponent,
     // infinity,
