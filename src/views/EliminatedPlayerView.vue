@@ -133,7 +133,7 @@ export default {
 
 #h1 {
   font-family: "Lilita One", sans-serif;
-  font-size: 25px;
+  font-size: 35px;
   color: rgb(254, 221, 255);
 }
 
@@ -156,7 +156,7 @@ h3 {
 }
 
 h4 {
-  font-size: 25px;
+  font-size: 35px;
   color: rgb(254, 221, 255);
   font-family: "Lilita One", sans-serif;
 
@@ -164,7 +164,7 @@ h4 {
 }
 
 .lifeBouyUsed {
-  font-size: 25px;
+  font-size: 35px;
 }
 
 .eliminatedBody {
