@@ -66,7 +66,9 @@
 <script>
 import ResponsiveNav from "@/components/ResponsiveNav.vue";
 import io from "socket.io-client";
-const socket = io("localhost:3000");
+sessionStorage.setItem("dataServer", "localhost:3000");
+// sessionStorage.setItem("dataServer", "192.168.0.31:3000"); Hannas IP
+const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: "StartView",
