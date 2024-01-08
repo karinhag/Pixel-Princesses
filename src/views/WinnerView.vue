@@ -67,7 +67,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%; /* Ensure the container takes the full height of the parent */
+  height: 100%; 
 }
   .congratsHeader{
     font-size: 100px;

@@ -25,11 +25,6 @@ const router = createRouter({
       component: () => import("@/views/CreateQuestionView.vue"),
     },
     {
-      path: "/result/:id",
-      name: "ResultView",
-      component: () => import("../views/ResultView.vue"),
-    },
-    {
       path: "/chooseAnswer/:pollId",
       name: "chooseAnswerView",
       component: () => import("@/views/chooseAnswerView.vue"),

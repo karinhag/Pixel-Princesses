@@ -62,11 +62,8 @@ export default {
       pollId: "",
       question: "",
       answers: "",
-      questionNumber: 0,
       data: {},
       uiLabels: {},
-      predefinedQuestions: ["Q1", "Q2", "Q3", "Q4"],
-      playersData: null,
       userAnswers: [],
       chosenAnswer: [],
       numbPlayers: 0,
@@ -124,7 +121,6 @@ export default {
       this.userAnswers = [];
       this.chosenAnswer = [];
       this.answers = "";
-      this.playersData = null;
     },
 
     playerAbandoned: function (pId) {
@@ -136,20 +132,6 @@ export default {
         (answer) => answer.playerID !== pId
       );
       socket.emit("getPlayersLeft", this.pollId);
-
-      // if (this.numbPlayers === 1) { Gör så det laggar när det är tvä kvar då man eliminerar en spelare--> det triggar funktionen!! oavsett om lämnar frivilligt eller inte
-      //   socket.emit("getPlayersLeft", this.pollId);
-
-      //   socket.on("thePlayersLeft", (player) => {
-
-
-      //     socket.emit("theTrueMatchPlayer", {
-      //       pollId: this.pollId,
-      //       matchedPlayer: player,
-      //     });
-      //   });
-      //   this.$router.push("/endOfGame/" + this.pollId);
-      // }
     },
   },
 };
@@ -195,10 +177,8 @@ export default {
   text-align: center;
   margin: 0 auto;
   display: block;
-  /* display: flex; Add this line to use flexbox for vertical alignment */
   align-items: center;
-  justify-content: center; /* Add this line to center the element vertically */
-}
+  justify-content: center;}
 
 .eliminatingButton {
   font-family: "Lilita One", sans-serif;

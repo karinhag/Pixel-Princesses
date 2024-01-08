@@ -92,7 +92,6 @@ header{
   overflow-x: hidden;
 }ç
 
-/* gifen */
 .perfectMatch img{
   height: 10rem;
   margin-bottom: 0.4rem;
@@ -154,7 +153,6 @@ header{
   .perfectMatch img{
     width:0;
     height:0;
-/* tar bort gifen vid små skärmar - skulle kke kunna lösa det på annat sätt om vi vill */
   }
     .winnerHeader {
       font-size: 250%;

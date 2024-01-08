@@ -118,7 +118,6 @@ export default {
       this.$router.push("/create/");
     },
     joinDate: function () {
-      // socket.emit("joinDate", { pollId: this.pollId, lang: this.lang });
      this.$router.push("/poll/" + this.id);
     },
   },
@@ -204,8 +203,6 @@ color: white}
   background: rgba(255, 96, 154, 1);
   width: 100%;
   box-sizing: border-box; 
-  /* display: grid;
-  grid-template-columns: 2em auto; */
 }
 .logo {
 
@@ -288,7 +285,6 @@ color: white}
   justify-content: center;
 }
 #nav button {
-  /* background-color: rgb(255, 213, 230); */
   margin: 0.3rem;
   font-family: "Lilita One", sans-serif;
   height:45px;
@@ -379,7 +375,7 @@ color: white}
     justify-content: center;
   }
   .logo img{
-    size:1em;   /**måste hitta rätt storlek här... */
+    size:1em;  
   }
 
 
@@ -388,7 +384,6 @@ color: white}
 @media screen and (max-width: 50em) {
 
   #nav button {
-  /* background-color: rgb(255, 213, 230); */
   margin: 0.3rem;
   font-family: "Lilita One", sans-serif;
   height:35px;
@@ -430,10 +425,10 @@ color: white}
 }
 #nav{
   opacity:85%;
-  flex-direction: column; /* Updated to column for small screens */
+  flex-direction: column; 
 }
 
-input {  /* Gör inputfältet mindre för små skärmar */
+input { 
     width: 80%; 
   }
 

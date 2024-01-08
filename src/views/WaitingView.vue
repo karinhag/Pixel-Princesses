@@ -6,8 +6,9 @@
   <section class="pollBody">
     <section
       v-if="this.answerSubmitted && !this.userInfo.saved"
-      class="waitingForChoice">
-    <!--  && !this.goingToNextRound -->
+      class="waitingForChoice"
+    >
+      <!--  && !this.goingToNextRound -->
       <h1 id="h1">{{ uiLabels.waitingForChoice }}</h1>
 
       <div class="infinity">
@@ -19,10 +20,10 @@
           speed="1.8"
           color="#f5f5f5; ;"
         ></l-infinity>
-      </div> 
+      </div>
     </section>
 
-     <section
+    <section
       v-if="
         this.goingToNextRound ||
         (this.waitForQ && !this.showInputBox) ||
@@ -31,28 +32,26 @@
     >
       <h1 class="nextRound" id="h1">{{ uiLabels.nextRound }}</h1>
       <p class="waitingForQuestion">{{ uiLabels.waitingForQuestion }}</p>
-    </section> 
+    </section>
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
-import { infinity } from "ldrs"; //måste importera package för att använda i think; koden; npm install ldrs
+import { infinity } from "ldrs"; //För att funka: npm install ldrs, cred: https://uiball.com/ldrs/
 
-import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io(sessionStorage.getItem("dataServer"));
- infinity.register();
+infinity.register();
 
 export default {
   name: "WaitingView",
   components: {
-    QuestionComponent,
     infinity,
   },
   data: function () {
     return {
-      lang: localStorage.getItem("lang") || "en", //Löser språkinställning
+      lang: localStorage.getItem("lang") || "en",
       uiLabels: {},
 
       userInfo: {
@@ -60,20 +59,15 @@ export default {
         greenFlag: "",
         uniquePlayerId: "",
         saved: false,
-        eliminated:Boolean,
+        eliminated: Boolean,
       },
-      userInformation: {},
-      userFlag: "",
-      userCreated: false,
       question: "",
       pollId: "",
       showInputBox: false,
-      submittedAnswers: {},
       answerSubmitted: true,
       eliminatedPlayer: {},
       goingToNextRound: false,
       waitForQ: false,
-      
     };
   },
   created: function () {
@@ -85,40 +79,36 @@ export default {
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
     this.userInfo.saved = this.$route.query.saved;
-    console.log("Jag har blivit räddad är; ",this.userInfo.saved )
-    this.userInfo.eliminated=this.$route.query.eliminated;
+    console.log("Jag har blivit räddad är; ", this.userInfo.saved);
+    this.userInfo.eliminated = this.$route.query.eliminated;
 
-    socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
+    socket.emit("joinPoll", this.userInfo.uniquePlayerId);
 
     this.showInputBox = false;
-  
+
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
 
-    socket.on("newQuestion", (q) => {
-
-
+    socket.on("newQuestion", () => {
       this.$router.push({
         path: "/answerQuestion/" + this.pollId,
         query: {
           userName: this.userInfo.userName,
           greenFlag: this.userInfo.greenFlag,
           uniquePlayerId: this.userInfo.uniquePlayerId,
-          eliminated:this.eliminated,
-    }})
+          eliminated: this.eliminated,
+        },
+      });
     });
 
-    socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
-
-
-    socket.on("hejKomOKyssMig", (data) => {  //tar  emot id på spelare som blivit eliminerad
+    socket.on("theEliminatedPlayerId", (data) => {
       this.getPlayer(data);
     });
-    socket.on("newQuestionIncoming", () => this.resetPage()); //et kommer en ny fr¨ga--> reset
+    socket.on("newQuestionIncoming", () => this.resetPage());
 
-    socket.on("youAreTrueMatch", () =>    //om sann match 
+    socket.on("youAreTrueMatch", () =>
       this.$router.push("/winnerView/" + this.pollId)
     );
   },
@@ -134,7 +124,7 @@ export default {
       }
     },
     submitAnswer: function () {
-      this.timerStopped=false;
+      this.timerStopped = false;
       socket.emit("submitAnswer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
@@ -142,7 +132,6 @@ export default {
       this.answerSubmitted = true;
     },
     abandonDate: function () {
-      this.userCreated = false;
       socket.emit("removePlayer", {
         pollId: this.pollId,
         userInfo: this.userInfo,
@@ -193,7 +182,7 @@ export default {
       this.waitForQ = true;
       this.question = "";
       this.userInfo.answer = "";
-      this.eliminatedPlayer={};
+      this.eliminatedPlayer = {};
     },
   },
 };
@@ -201,88 +190,6 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
-
-.timer-container {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 250px;
-  width: 250px;
-  margin-top: 22vh;
-}
-
-.base-timer {
-  height: 100%;
-  width: 100%;
-}
-
-/* Removes SVG styling that would hide the time label */
-.base-timer__circle {
-  fill: none;
-  stroke: none;
-}
-
-/* The SVG path that displays the timer's progress */
-.base-timer__path-elapsed {
-  stroke-width: 10px;
-  stroke: #ced4da;
-  opacity: 0.3;
-}
-
-.base-timer__label {
-  position: absolute;
-
-  /* Size should match the parent container */
-  width: 250px;
-  height: 250px;
-
-  /* Keep the label aligned to the top */
-  top: 0;
-
-  /* Create a flexible box that centers content vertically and horizontally */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Sort of an arbitrary number; adjust to your liking */
-  font-size: 80px;
-  left: 50%; /* Add this line */
-  transform: translateX(-50%); /* Add this line */
-}
-
-.base-timer__path-remaining {
-  /* Just as thick as the original ring */
-  stroke-width: 10px;
-
-  /* Rounds the line endings to create a seamless circle */
-  stroke-linecap: round;
-
-  /* Makes sure the animation starts at the top of the circle */
-  transform: rotate(90deg);
-  transform-origin: center;
-
-  /* One second aligns with the speed of the countdown timer */
-  transition: 1s linear all;
-
-  /* Allows the ring to change color when the color value updates */
-}
-
-.green {
-  stroke: #8fb935;
-}
-
-.alert {
-  stroke: #e64647;
-}
-.warning {
-  stroke: #e5e22d;
-}
-
-.base-timer__svg {
-  /* Flips the svg and makes the animation to move left-to-right */
-  transform: scaleX(-1);
-}
 
 #roomId {
   padding: 0%;
@@ -311,8 +218,8 @@ h1,
   background-size: cover;
   min-height: 100vh;
   font-family: "Lilita One", sans-serif;
-  margin: 0; /* Set margin to 0 */
-  padding: 0; /* Set padding to 0 */
+  margin: 0;
+  padding: 0;
 }
 
 input {
@@ -388,8 +295,6 @@ button:hover {
 }
 
 @media screen and (max-width: 50em) {
-  
-
   .question {
     font-size: 50px;
     padding-left: 0.2vw;
@@ -401,66 +306,6 @@ button:hover {
     padding-top: 2em;
   }
 
-  .timer-container {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 150px;
-    width: 150px;
-    margin-top: 18vh;
-    margin-bottom: 8vh;
-  }
-
-  .base-timer {
-    height: 100%;
-    width: 100%;
-  }
-
-  /* The SVG path that displays the timer's progress */
-  .base-timer__path-elapsed {
-    stroke-width: 6px;
-    stroke: #ced4da;
-    opacity: 0.3;
-  }
-
-  .base-timer__label {
-    position: absolute;
-
-    /* Size should match the parent container */
-    width: 150px;
-    height: 150px;
-
-    /* Keep the label aligned to the top */
-    top: 0;
-
-    /* Create a flexible box that centers content vertically and horizontally */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* Sort of an arbitrary number; adjust to your liking */
-    font-size: 50px;
-    left: 50%; /* Add this line */
-    transform: translateX(-50%); /* Add this line */
-  }
-
-  .base-timer__path-remaining {
-    /* Just as thick as the original ring */
-    stroke-width: 6px;
-
-    /* Rounds the line endings to create a seamless circle */
-    stroke-linecap: round;
-
-    /* Makes sure the animation starts at the top of the circle */
-    transform: rotate(90deg);
-    transform-origin: center;
-
-    /* One second aligns with the speed of the countdown timer */
-    transition: 1s linear all;
-
-    /* Allows the ring to change color when the color value updates */
-  }
   input {
     width: 80vw;
     text-align: left;

@@ -47,9 +47,6 @@ export default {
     return {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
-      question: "",
-      answers: ["", ""],
-      questionNumber: 0,
       data: {},
       uiLabels: {},
       availableLifeline: Boolean,
@@ -69,7 +66,7 @@ export default {
     socket.emit("getEliminatedPlayer", this.pollId);
     socket.emit("getPlayersLeft", this.pollId);
     socket.on("thePlayersLeft", (data) => this.checkPlayerArray(data));
-    socket.on("hejKomOKyssMig", (data) => this.getPlayer(data));
+    socket.on("theEliminatedPlayerId", (data) => this.getPlayer(data));
     socket.emit("checkIfLifelineUsed", this.pollId);
     socket.on("statusLifeline", (data) => this.checkLifeline(data));
 

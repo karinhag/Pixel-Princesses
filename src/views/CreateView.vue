@@ -34,11 +34,8 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       question: "",
-      answers: ["", ""],
-      questionNumber: 0,
       data: {},
       uiLabels: {},
-      clients: {},
       playersData: null,
       info: false,
       moreThanThreePlayers: false,
@@ -46,7 +43,7 @@ export default {
   },
 
   created: function () {
-    this.pollId = this.getPollId(); //detta är det pollID som ska skickas till alla views för denna!
+    this.pollId = this.getPollId();
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.pollId);
 
@@ -69,16 +66,7 @@ export default {
       socket.emit("createPoll", { pollId: this.pollId, lang: this.lang });
       this.$router.push("/createQuestion/" + this.pollId);
     },
-    
-    addAnswer: function () {
-      this.answers.push("");
-    },
-    runQuestion: function () {
-      socket.emit("runQuestion", {
-        pollId: this.pollId,
-        questionNumber: this.questionNumber,
-      });
-    },
+  
     getPollId: function () {
       return "" + Math.floor(Math.random() * 100000);
     },
@@ -213,21 +201,6 @@ export default {
   color: rgb(255, 201, 227);
 }
 
-/* .theButton {
-  padding: 0%;
-  margin: 0% 20px 0% 0%;
-  text-align: right;
-  padding-right: 1em;
-  padding-top: 1em;
-  color: rgb(202, 28, 135);
-  font-size: medium;
-}
-.theButton section {
-  font-family: "Lilita One", sans-serif;
-  font-size: 20px;
-  color: rgb(255, 201, 227);
-} */
-
 .purpleButton {
   background: linear-gradient(to top, #cd9cf2 0%, #f6f3ff 100%);
   border: solid;
@@ -254,8 +227,8 @@ export default {
 }
 
 .playerContainer {
-  position: relative; /* Ensure positioning context for absolute positioning */
-  height: 400px; /* Adjust the height as needed */
+  position: relative; 
+  height: 400px;
 }
 
 @media screen and (max-width: 50em) {

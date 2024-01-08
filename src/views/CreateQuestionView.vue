@@ -34,7 +34,6 @@ export default {
       lang: localStorage.getItem("lang") || "en",
       pollId: "",
       question: "",
-      answers: ["", ""],
       questionNumber: 0,
       data: {},
       uiLabels: {},
@@ -93,15 +92,6 @@ export default {
       socket.emit("addQuestion", { pollId: this.pollId, q: this.question });
       this.$router.push("/chooseAnswer/" + this.pollId);
     },
-  },
-  addAnswer: function () {
-    this.answers.push("");
-  },
-  runQuestion: function () {
-    socket.emit("runQuestion", {
-      pollId: this.pollId,
-      questionNumber: this.questionNumber,
-    });
   },
 };
 </script>

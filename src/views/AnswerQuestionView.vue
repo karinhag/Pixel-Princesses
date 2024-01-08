@@ -63,27 +63,19 @@
       </button>
     </section>
   </section>
-  
-  <section class="timeOverScreen" v-if="this.timeOver">
-     
-  <section class ="timeText">{{ uiLabels.timeIsUp }}</section>
-      
 
+  <section class="timeOverScreen" v-if="this.timeOver">
+    <section class="timeText">{{ uiLabels.timeIsUp }}</section>
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
 
-import QuestionComponent from "@/components/QuestionComponent.vue";
 import io from "socket.io-client";
 const socket = io(sessionStorage.getItem("dataServer"));
 
 export default {
   name: "AnswerQuestionView",
-  components: {
-    QuestionComponent,
-  },
   data: function () {
     return {
       lang: localStorage.getItem("lang") || "en", //Löser språkinställning
@@ -103,10 +95,8 @@ export default {
       timePassed: 0,
       timeLeft: 30,
       timerInterval: null,
-      remainingPathColor: "green", // Initialize with the default color,
+      remainingPathColor: "green",
       timeOver: false,
-      timerRunning: false,
-      questionBoolean: false,
       timerStopped: false,
     };
   },
@@ -121,7 +111,7 @@ export default {
     this.userInfo.saved = this.$route.query.saved;
     this.userInfo.eliminated = this.$route.query.eliminated;
 
-    socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
+    socket.emit("joinPoll", this.userInfo.uniquePlayerId);
 
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
@@ -131,10 +121,6 @@ export default {
     socket.on("theQuestion", (data) => (this.question = data));
 
     this.startTimer();
-    // socket.on("youAreTrueMatch", () =>
-    //   //om sann match
-    //   this.$router.push("/winnerView/" + this.pollId)
-    // );
   },
   methods: {
     checkIfSaved: function () {
@@ -185,14 +171,12 @@ export default {
       this.TIME_LIMIT = 30;
       this.timePassed = 0;
       this.timeLeft = 30;
-      this.questionBoolean = false;
       this.stopTimer();
       this.timerInterval = null;
-      // this.timerStopped=false;
     },
 
     formatTimeLeft: function (time) {
-      //https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
+      // cred för timern till instruktionen: https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
       if (time === this.uiLabels.timeIsUp) {
         return this.uiLabels.timeIsUp;
       } else {
@@ -203,10 +187,7 @@ export default {
         return `${seconds}`;
       }
     },
-
     startTimer: function () {
-      this.timerRunning = true;
-
       this.timerInterval = setInterval(() => {
         this.timePassed = this.timePassed += 1;
         this.timeLeft = this.TIME_LIMIT - this.timePassed;
@@ -298,7 +279,6 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Lilita+One&family=Rochester&family=Satisfy&display=swap");
 
-
 .timeText {
   position: absolute;
   top: 50%;
@@ -325,13 +305,11 @@ export default {
   width: 100%;
 }
 
-/* Removes SVG styling that would hide the time label */
 .base-timer__circle {
   fill: none;
   stroke: none;
 }
 
-/* The SVG path that displays the timer's progress */
 .base-timer__path-elapsed {
   stroke-width: 10px;
   stroke: #ced4da;
@@ -341,39 +319,29 @@ export default {
 .base-timer__label {
   position: absolute;
 
-  /* Size should match the parent container */
   width: 250px;
   height: 250px;
 
-  /* Keep the label aligned to the top */
   top: 0;
 
-  /* Create a flexible box that centers content vertically and horizontally */
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* Sort of an arbitrary number; adjust to your liking */
   font-size: 80px;
-  left: 50%; /* Add this line */
-  transform: translateX(-50%); /* Add this line */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .base-timer__path-remaining {
-  /* Just as thick as the original ring */
   stroke-width: 10px;
 
-  /* Rounds the line endings to create a seamless circle */
   stroke-linecap: round;
 
-  /* Makes sure the animation starts at the top of the circle */
   transform: rotate(90deg);
   transform-origin: center;
 
-  /* One second aligns with the speed of the countdown timer */
   transition: 1s linear all;
-
-  /* Allows the ring to change color when the color value updates */
 }
 
 .green {
@@ -398,7 +366,6 @@ export default {
 }
 
 .base-timer__svg {
-  /* Flips the svg and makes the animation to move left-to-right */
   transform: scaleX(-1);
 }
 
@@ -433,10 +400,9 @@ h1,
   padding: 0; /* Set padding to 0 */
 }
 
-.timeOverScreen{ 
+.timeOverScreen {
   background: radial-gradient(#ff2d30ff, #cb0505ff, rgb(98, 4, 4));
-  height:100vh;
-
+  height: 100vh;
 }
 
 input {
@@ -512,9 +478,8 @@ button:hover {
 }
 
 @media screen and (max-width: 50em) {
-
-  .timeText{
-    font-size:50px;
+  .timeText {
+    font-size: 50px;
   }
 
   .question {
@@ -544,7 +509,6 @@ button:hover {
     width: 100%;
   }
 
-  /* The SVG path that displays the timer's progress */
   .base-timer__path-elapsed {
     stroke-width: 6px;
     stroke: #ced4da;
@@ -554,39 +518,28 @@ button:hover {
   .base-timer__label {
     position: absolute;
 
-    /* Size should match the parent container */
     width: 150px;
     height: 150px;
 
-    /* Keep the label aligned to the top */
     top: 0;
 
-    /* Create a flexible box that centers content vertically and horizontally */
     display: flex;
     align-items: center;
     justify-content: center;
 
-    /* Sort of an arbitrary number; adjust to your liking */
     font-size: 50px;
-    left: 50%; /* Add this line */
-    transform: translateX(-50%); /* Add this line */
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .base-timer__path-remaining {
-    /* Just as thick as the original ring */
     stroke-width: 6px;
 
-    /* Rounds the line endings to create a seamless circle */
     stroke-linecap: round;
 
-    /* Makes sure the animation starts at the top of the circle */
     transform: rotate(90deg);
     transform-origin: center;
-
-    /* One second aligns with the speed of the countdown timer */
     transition: 1s linear all;
-
-    /* Allows the ring to change color when the color value updates */
   }
   input {
     width: 80vw;

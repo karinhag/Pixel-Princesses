@@ -75,7 +75,6 @@ export default {
       showInputBox: false,
       submittedAnswers: {},
       answerSubmitted: false,
-      eliminatedPlayer: {},
       info: false,
     };
   },

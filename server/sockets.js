@@ -95,7 +95,7 @@ function sockets(io, socket, data) {
 
   socket.on("getEliminatedPlayer", function (pollId) {
     socket.join("" + pollId);
-    io.to(pollId).emit("hejKomOKyssMig", data.retrieveEliminatedPlayer(pollId));
+    io.to(pollId).emit("theEliminatedPlayerId", data.retrieveEliminatedPlayer(pollId));
   });
 
   socket.on("lifelineUsed", function (d) {
