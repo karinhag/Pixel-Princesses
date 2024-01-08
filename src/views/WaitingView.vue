@@ -45,7 +45,7 @@ const socket = io(sessionStorage.getItem("dataServer"));
  infinity.register();
 
 export default {
-  name: "AnswerQuestionView",
+  name: "WaitingView",
   components: {
     QuestionComponent,
     infinity,
