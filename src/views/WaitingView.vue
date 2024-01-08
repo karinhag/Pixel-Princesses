@@ -5,7 +5,7 @@
   />
   <section class="pollBody">
     <section
-      v-if="this.answerSubmitted"
+      v-if="this.answerSubmitted && !this.userInfo.saved"
       class="waitingForChoice">
     <!--  && !this.goingToNextRound -->
       <h1 id="h1">{{ uiLabels.waitingForChoice }}</h1>
@@ -85,22 +85,20 @@ export default {
     this.userInfo.greenFlag = this.$route.query.greenFlag;
     this.userInfo.uniquePlayerId = this.$route.query.uniquePlayerId;
     this.userInfo.saved = this.$route.query.saved;
+    console.log("Jag har blivit räddad är; ",this.userInfo.saved )
     this.userInfo.eliminated=this.$route.query.eliminated;
 
     socket.emit("joinPoll", this.userInfo.uniquePlayerId); //joinar poll med vårt id
 
     this.showInputBox = false;
-    // socket.on("pollsId", (pollId) => {
-    //   this.pollId = pollId;
-    // });
-
+  
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels;
     });
 
-    socket.on("newQuestion", (q) => { //tar emot en ny fråga--> startar timern!
-      // this.startTimer();
+    socket.on("newQuestion", (q) => {
+
 
       this.$router.push({
         path: "/answerQuestion/" + this.pollId,
@@ -113,9 +111,7 @@ export default {
     });
 
     socket.on("dataUpdate", (answers) => (this.submittedAnswers = answers));
-    // socket.on("init", (labels) => {
-    //   this.uiLabels = labels;
-    // });
+
 
     socket.on("hejKomOKyssMig", (data) => {  //tar  emot id på spelare som blivit eliminerad
       this.getPlayer(data);
